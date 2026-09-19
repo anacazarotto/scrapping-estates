@@ -1,0 +1,338 @@
+{
+    "success": true,
+    "result": [
+        {
+            "id": 6109,
+            "codigo": "1767",
+            "nome": "1767 - RUA QUATORZE DE AGOSTO E - 1733 - AP. 330 BLOCO 4 - PASSO DOS FORTES",
+            "descricao": "",
+            "titulo": null,
+            "dataPublicacao": null,
+            "observacao": "PODE SER FINANCIADO \r\nSALDO DEVEDOR DE +\/- R$ 40.000,00\r\nPROPRIETARIO MORA NO LOCAL",
+            "imagens": [
+                {
+                    "baseNomeImagem": "650fc463a6d2a087785209896377c597460f4603",
+                    "descricao": "",
+                    "extensao": "jpg",
+                    "id": 3020,
+                    "nome": "650fc463a6d2a087785209896377c597460f4603.jpg",
+                    "posicao": 1,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/650fc463a6d2a087785209896377c597460f4603.jpg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/650fc463a6d2a087785209896377c597460f4603.jpg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                },
+                {
+                    "baseNomeImagem": "5676d412cb6179d3a95c047c13f9eb30",
+                    "descricao": "",
+                    "extensao": "jpeg",
+                    "id": 95293,
+                    "nome": "5676d412cb6179d3a95c047c13f9eb30.jpeg",
+                    "posicao": 2,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/5676d412cb6179d3a95c047c13f9eb30.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/5676d412cb6179d3a95c047c13f9eb30.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                },
+                {
+                    "baseNomeImagem": "baf211eff5a5faa202c61f0eff5647d2",
+                    "descricao": "",
+                    "extensao": "jpeg",
+                    "id": 95294,
+                    "nome": "baf211eff5a5faa202c61f0eff5647d2.jpeg",
+                    "posicao": 3,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/baf211eff5a5faa202c61f0eff5647d2.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/baf211eff5a5faa202c61f0eff5647d2.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                },
+                {
+                    "baseNomeImagem": "0be89bfad691a93e13dc3ee5ed36eb28",
+                    "descricao": "",
+                    "extensao": "jpeg",
+                    "id": 95295,
+                    "nome": "0be89bfad691a93e13dc3ee5ed36eb28.jpeg",
+                    "posicao": 4,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/0be89bfad691a93e13dc3ee5ed36eb28.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/0be89bfad691a93e13dc3ee5ed36eb28.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                },
+                {
+                    "baseNomeImagem": "003cbbb9179f70844e64d9587f4cce74",
+                    "descricao": "",
+                    "extensao": "jpeg",
+                    "id": 95296,
+                    "nome": "003cbbb9179f70844e64d9587f4cce74.jpeg",
+                    "posicao": 5,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/003cbbb9179f70844e64d9587f4cce74.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/003cbbb9179f70844e64d9587f4cce74.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                },
+                {
+                    "baseNomeImagem": "98c695ea1009d3b070c959f0c81c2e2d",
+                    "descricao": "",
+                    "extensao": "jpeg",
+                    "id": 95297,
+                    "nome": "98c695ea1009d3b070c959f0c81c2e2d.jpeg",
+                    "posicao": 6,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/98c695ea1009d3b070c959f0c81c2e2d.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/98c695ea1009d3b070c959f0c81c2e2d.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                },
+                {
+                    "baseNomeImagem": "e3c97a84d95c210769e84d22663ce193",
+                    "descricao": "",
+                    "extensao": "jpeg",
+                    "id": 95298,
+                    "nome": "e3c97a84d95c210769e84d22663ce193.jpeg",
+                    "posicao": 7,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/e3c97a84d95c210769e84d22663ce193.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/e3c97a84d95c210769e84d22663ce193.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                },
+                {
+                    "baseNomeImagem": "f238d4ff41059f72276df45382a6829d",
+                    "descricao": "",
+                    "extensao": "jpeg",
+                    "id": 95299,
+                    "nome": "f238d4ff41059f72276df45382a6829d.jpeg",
+                    "posicao": 8,
+                    "sitouch": 1,
+                    "publicarSite": 1,
+                    "url": "\/cdn\/imovelImages\/6109\/f238d4ff41059f72276df45382a6829d.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+                    "urlCDN": "\/cdn\/imovelImages\/6109\/f238d4ff41059f72276df45382a6829d.jpeg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1"
+                }
+            ],
+            "videos": [],
+            "imagem": "\/arquivos_imobiliaria\/imobiliaria_138\/imovel_6109\/650fc463a6d2a087785209896377c597460f4603_miniatura_480x360.jpg",
+            "imagemCDN": "\/cdn\/imovelImages\/6109\/650fc463a6d2a087785209896377c597460f4603_miniatura_480x360.jpg?idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+            "categoria": {
+                "id": 491,
+                "descricao": "Apartamento"
+            },
+            "configVenda": {
+                "disponibilizarPortal": true,
+                "inativo": false,
+                "appvendas": true,
+                "valor": "275000.00",
+                "validade": {
+                    "date": "2030-01-03 00:00:00.000000",
+                    "timezone_type": 3,
+                    "timezone": "America\/Sao_Paulo"
+                },
+                "destacarPortal": true,
+                "exclusividade": false
+            },
+            "configLocacao": {
+                "disponibilizarPortal": null,
+                "inativo": false,
+                "valor": "0",
+                "applocacao": false,
+                "valorAbono": 0,
+                "destacarPortal": null,
+                "exclusividade": null,
+                "contrato": {
+                    "ativo": false,
+                    "dataInicio": null,
+                    "dataPrevisaoSaida": null,
+                    "dataDesocupacao": null
+                }
+            },
+            "caracteristicas": [
+                {
+                    "id": 4646,
+                    "idCaracteristica": 3,
+                    "ordem": 1,
+                    "descricao": "Dormit\u00f3rio(s)",
+                    "valor": "2",
+                    "publicar": true,
+                    "tipo": 3,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4649,
+                    "idCaracteristica": 6,
+                    "ordem": 5,
+                    "descricao": "Banheiro(s)",
+                    "valor": "1",
+                    "publicar": true,
+                    "tipo": 3,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4647,
+                    "idCaracteristica": 19,
+                    "ordem": 8,
+                    "descricao": "Sala(s)",
+                    "valor": "1",
+                    "publicar": true,
+                    "tipo": 3,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4660,
+                    "idCaracteristica": 14,
+                    "ordem": 11,
+                    "descricao": "Sacada",
+                    "valor": "Sim",
+                    "publicar": true,
+                    "tipo": 1,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4648,
+                    "idCaracteristica": 28,
+                    "ordem": 15,
+                    "descricao": "Cozinha(s)",
+                    "valor": "1",
+                    "publicar": true,
+                    "tipo": 3,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4650,
+                    "idCaracteristica": 30,
+                    "ordem": 17,
+                    "descricao": "\u00c1rea de Servi\u00e7os",
+                    "valor": "1",
+                    "publicar": true,
+                    "tipo": 3,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4659,
+                    "idCaracteristica": 15,
+                    "ordem": 24,
+                    "descricao": "Vaga(s) Estacionamento",
+                    "valor": "1",
+                    "publicar": true,
+                    "tipo": 3,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4654,
+                    "idCaracteristica": 9,
+                    "ordem": 27,
+                    "descricao": "\u00c1rea \u00datil (Aprox.)",
+                    "valor": "47",
+                    "publicar": true,
+                    "tipo": 3,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4655,
+                    "idCaracteristica": 27,
+                    "ordem": 29,
+                    "descricao": "\u00c1rea Total (Aprox.)",
+                    "valor": "53",
+                    "publicar": true,
+                    "tipo": 4,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4652,
+                    "idCaracteristica": 26,
+                    "ordem": 30,
+                    "descricao": "Elevador",
+                    "valor": "Sim",
+                    "publicar": true,
+                    "tipo": 1,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                },
+                {
+                    "id": 4658,
+                    "idCaracteristica": 34,
+                    "ordem": 39,
+                    "descricao": "Piso",
+                    "valor": "Cer\u00e2mica",
+                    "publicar": true,
+                    "tipo": 2,
+                    "grupo": {
+                        "id": 1,
+                        "descricao": "F\u00edsicas"
+                    },
+                    "icon": ""
+                }
+            ],
+            "bairro": "PASSO DOS FORTES",
+            "endereco": "RUA QUATORZE DE AGOSTO E",
+            "numero": "1733",
+            "complemento": "AP. 330 BLOCO 4",
+            "uf": "SC",
+            "cidade": "CHAPEC\u00d3",
+            "edificio": "CONDOM\u00cdNIO DOLCE VITTA",
+            "cep": "89805700",
+            "semCep": 0,
+            "reservado": "",
+            "locado": false,
+            "iptu": {
+                "ValorTotal": 0,
+                "valorMensal": 0
+            },
+            "dataPrevSaida": "",
+            "empreendimento": [],
+            "baseUrlImagem": "\/cdn\/imovelImages\/6109",
+            "parametrosImagem": "idImobiliaria=138\u0026utilizarMarcaDagua=false\u0026posicao=center\u0026opacidade=100\u0026tamanhoMarcadagua=1",
+            "idImobiliaria": 138,
+            "linkFicha": "",
+            "latitude": "",
+            "longitude": "",
+            "tipoImovel": {
+                "id": 2,
+                "descricao": "Residencial"
+            },
+            "ativoModuloLocacao": false,
+            "ativoModuloVendas": true,
+            "grupoCaracteristicaIcon": "1",
+            "chave": 0,
+            "linkGoogleMaps": "https:\/\/www.google.com.br\/maps\/place\/RUA QUATORZE DE AGOSTO E 1733 PASSO DOS FORTES CHAPEC\u00d3, 89805700",
+            "responsaveis": [],
+            "key": null
+        }
+    ],
+    "requestId": "request_f6834e4c748a509acfbd6c39ad75c85b8c2596773af447ede39fbdfc3b6b8d171773023555.1722"
+}

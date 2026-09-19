@@ -1,0 +1,1554 @@
+{
+    "quantidade": 596,
+    "menorvalor": 0,
+    "maiorvalor": 0,
+    "menorarea": 0,
+    "maiorarea": 0,
+    "lista": [
+        {
+            "codigo": 10484,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Cobertura Residencial com 4 su\u00edtes, varanda gourmet e lazer completo \u2014 Centro de Chapec\u00f3",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 18,
+            "tipo": "Cobertura",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 4.800.000,00",
+            "valorminimo": "R$ 4.800.000,00",
+            "valormaximo": "R$ 4.800.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 1.200,00",
+            "codigobairro": 7,
+            "bairro": "Centro",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-140",
+            "endereco": "Rua Sete de Setembro ",
+            "numero": "****",
+            "complemento": "********",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "4",
+            "numerosalas": "2",
+            "numerobanhos": "1",
+            "numerovagas": "2",
+            "tipovagas": "Coberta",
+            "numerosuites": "4",
+            "areaprincipal": "560,00",
+            "areainterna": "560,00",
+            "areaexterna": "0,00",
+            "arealote": "0,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10484\/cie4f-whatsapp-image-2025-11-06-at-082959-6-1762433536.jpeg?1770300289",
+            "descricaoFotoPrincipal": "Cobertura \u00e0 venda no Centro: ",
+            "urlpublica": "",
+            "datahoracadastro": "06\/11\/2025 10:04:04",
+            "fotos": [
+                {
+                    "descricao": "Cobertura \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10484\/cie4f-whatsapp-image-2025-11-06-at-082959-6-1762433536.jpeg?1770300289"
+                },
+                {
+                    "descricao": "Cobertura \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10484\/mzcuzk-whatsapp-image-2025-11-06-at-082959-4-1762433534.jpeg?1770300289"
+                },
+                {
+                    "descricao": "Cobertura \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10484\/beces-whatsapp-image-2025-11-06-at-082958-1-1762433534.jpeg?1770300289"
+                },
+                {
+                    "descricao": "Cobertura \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10484\/maag5-whatsapp-image-2025-11-06-at-082958-1762433534.jpeg?1770300289"
+                },
+                {
+                    "descricao": "Cobertura \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10484\/s82mt-whatsapp-image-2025-11-06-at-082958-2-1762433534.jpeg?1770300289"
+                },
+                {
+                    "descricao": "Cobertura \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10484\/r9ifq-whatsapp-image-2025-11-06-at-082959-7-1762433535.jpeg?1770300289"
+                }
+            ],
+            "tempoCadastro": 121,
+            "url_amigavel": "cobertura-residencial-com-4-suites-varanda-gourmet-e-lazer-completo-centro-de-chapeco"
+        },
+        {
+            "codigo": 12155,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Terreno no Belvedere \/ Excelente para uso residencial\/comercial",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 3,
+            "tipo": "Lote",
+            "codigotipo2": 29,
+            "tipo2": "Terreno ",
+            "valor": "R$ 4.493.000,00",
+            "valorminimo": "R$ 4.493.000,00",
+            "valormaximo": "R$ 4.493.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 32,
+            "bairro": "Belvedere",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89810-450",
+            "endereco": "Rua Jo\u00e3o Batista Dal Piva",
+            "numero": "***",
+            "complemento": "************",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "0",
+            "numerosalas": "0",
+            "numerobanhos": "0",
+            "numerovagas": "0",
+            "tipovagas": "",
+            "numerosuites": "0",
+            "areaprincipal": "6050,00",
+            "areainterna": "0,00",
+            "areaexterna": "0,00",
+            "arealote": "6050,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12155\/0moty-whatsapp-image-2026-03-06-at-095506-1-1772806887.jpeg?1772806887",
+            "descricaoFotoPrincipal": "Lote \u00e0 venda no Belvedere: ",
+            "urlpublica": "",
+            "datahoracadastro": "06\/03\/2026 11:20:30",
+            "fotos": [
+                {
+                    "descricao": "Lote \u00e0 venda no Belvedere: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12155\/0moty-whatsapp-image-2026-03-06-at-095506-1-1772806887.jpeg?1772806887"
+                },
+                {
+                    "descricao": "Lote \u00e0 venda no Belvedere: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12155\/04nnq-whatsapp-image-2026-03-06-at-095506-2-1772806887.jpeg?1772806887"
+                },
+                {
+                    "descricao": "Lote \u00e0 venda no Belvedere: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12155\/9yfi1-whatsapp-image-2026-03-06-at-095506-3-1772806887.jpeg?1772806887"
+                },
+                {
+                    "descricao": "Lote \u00e0 venda no Belvedere: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12155\/eeni2-whatsapp-image-2026-03-06-at-095507-1772806887.jpeg?1772806887"
+                },
+                {
+                    "descricao": "Lote \u00e0 venda no Belvedere: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12155\/dgp7f-whatsapp-image-2026-03-06-at-095507-1-1772806887.jpeg?1772806887"
+                },
+                {
+                    "descricao": "Lote \u00e0 venda no Belvedere: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12155\/8m72k-whatsapp-image-2026-03-06-at-095507-2-1772806887.jpeg?1772806887"
+                }
+            ],
+            "tempoCadastro": 1,
+            "url_amigavel": "terreno-no-belvedere-excelente-para-uso-residencial-comercial"
+        },
+        {
+            "codigo": 12139,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Venda: Casa dev Alto Padr\u00e3o \/Maria Goretti. ",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 3.830.000,00",
+            "valorminimo": "R$ 3.830.000,00",
+            "valormaximo": "R$ 3.830.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 8,
+            "bairro": "Maria Goretti",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-440",
+            "endereco": "Rua Austr\u00e1lia  E",
+            "numero": "**",
+            "complemento": "",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "5",
+            "numerosalas": "2",
+            "numerobanhos": "5",
+            "numerovagas": "0",
+            "tipovagas": "",
+            "numerosuites": "2",
+            "areaprincipal": "525,00",
+            "areainterna": "525,00",
+            "areaexterna": "0,00",
+            "arealote": "412,50",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12139\/slus1-minha-casa-7-1772636861.png?1772636863",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Maria Goretti: ",
+            "urlpublica": "",
+            "datahoracadastro": "04\/03\/2026 12:03:44",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12139\/slus1-minha-casa-7-1772636861.png?1772636863"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12139\/rpuyw-minha-casa-2-copia-copia-1772636861.png?1772636863"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12139\/78767-minha-casa-1772636861.png?1772636863"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12139\/l9r9l-minha-casa-28-1772636861.png?1772636863"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12139\/tu4fz-minha-casa-27-1772636861.png?1772636863"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12139\/r972b-minha-casa-26-1772636861.png?1772636863"
+                }
+            ],
+            "tempoCadastro": 3,
+            "url_amigavel": "venda-casa-dev-alto-padrao-maria-goretti"
+        },
+        {
+            "codigo": 10864,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa residencial de 488 m\u00b2 com 3 su\u00edtes, piscina e 4 vagas no Jardim Europa, Chapec\u00f3 ",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 3.800.000,00",
+            "valorminimo": "R$ 3.800.000,00",
+            "valormaximo": "R$ 3.800.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 123,
+            "bairro": "Jardim Europa",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89805-540",
+            "endereco": "Rua Francisco Dias Velho",
+            "numero": "*****",
+            "complemento": "****************",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "2",
+            "numerobanhos": "1",
+            "numerovagas": "4",
+            "tipovagas": "Coberta",
+            "numerosuites": "3",
+            "areaprincipal": "488,23",
+            "areainterna": "488,23",
+            "areaexterna": "0,00",
+            "arealote": "0,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10864\/ewuznl-chatgpt-image-24-de-jan-de-2026-10-08-36-1769260306.png?1769260307",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Jardim Europa: ",
+            "urlpublica": "",
+            "datahoracadastro": "21\/01\/2026 15:12:39",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10864\/ewuznl-chatgpt-image-24-de-jan-de-2026-10-08-36-1769260306.png?1769260307"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10864\/qd9g1-whatsapp-image-2026-01-21-at-135946-1769019372.jpeg?1769260307"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10864\/mwkr9-whatsapp-image-2026-01-21-at-135944-5-1769019372.jpeg?1769260307"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10864\/sltn7-whatsapp-image-2026-01-21-at-135945-4-1769019372.jpeg?1769260307"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10864\/f65x5-whatsapp-image-2026-01-21-at-135946-1-1769019373.jpeg?1769260307"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10864\/t09o4-whatsapp-image-2026-01-21-at-135944-3-1769019373.jpeg?1769260307"
+                }
+            ],
+            "tempoCadastro": 45,
+            "url_amigavel": "casa-residencial-de-488-m-com-3-suites-piscina-e-4-vagas-no-jardim-europa-chapeco"
+        },
+        {
+            "codigo": 10914,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa \u00e0 venda em Chapec\u00f3, Bairro \u00c1gua Santa \u2014 4 Quartos, 4 Vagas, Piscina, Frontal",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 3.600.000,00",
+            "valorminimo": "R$ 3.600.000,00",
+            "valormaximo": "R$ 3.600.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 242,
+            "bairro": "\u00c1gua Santa",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89810-369",
+            "endereco": "Rua Josimar Rosado da Silva Tavares",
+            "numero": "***",
+            "complemento": "*******************",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "4",
+            "numerobanhos": "1",
+            "numerovagas": "4",
+            "tipovagas": "Coberta",
+            "numerosuites": "3",
+            "areaprincipal": "450,00",
+            "areainterna": "450,00",
+            "areaexterna": "0,00",
+            "arealote": "1000,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10914\/4crot-whatsapp-image-2026-02-02-at-113031-1770130660.jpeg?1770130661",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no \u00c1gua Santa: ",
+            "urlpublica": "",
+            "datahoracadastro": "03\/02\/2026 11:56:10",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no \u00c1gua Santa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10914\/4crot-whatsapp-image-2026-02-02-at-113031-1770130660.jpeg?1770130661"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no \u00c1gua Santa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10914\/czm3-whatsapp-image-2026-02-02-at-113032-7-1770130660.jpeg?1770130661"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no \u00c1gua Santa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10914\/cyu5y-whatsapp-image-2026-02-02-at-113032-8-1770130660.jpeg?1770130661"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no \u00c1gua Santa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10914\/46mh2g-whatsapp-image-2026-02-02-at-113031-1-1770130660.jpeg?1770130661"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no \u00c1gua Santa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10914\/t7ykf-whatsapp-image-2026-02-02-at-113032-6-1770130660.jpeg?1770130661"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no \u00c1gua Santa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10914\/rx6sm-whatsapp-image-2026-02-02-at-113031-5-1770130660.jpeg?1770130661"
+                }
+            ],
+            "tempoCadastro": 32,
+            "url_amigavel": "casa-a-venda-em-chapeco-bairro-agua-santa-4-quartos-4-vagas-piscina-frontal"
+        },
+        {
+            "codigo": 10427,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa para Venda em Maria Goretti (Chapec\u00f3) \u2013 5 Quartos, Piscina e Conforto",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 3.500.000,00",
+            "valorminimo": "R$ 3.500.000,00",
+            "valormaximo": "R$ 3.500.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 8,
+            "bairro": "Maria Goretti",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-431",
+            "endereco": "Rua das Flores",
+            "numero": "*****",
+            "complemento": "",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "5",
+            "numerosalas": "2",
+            "numerobanhos": "1",
+            "numerovagas": "2",
+            "tipovagas": "Coberta",
+            "numerosuites": "3",
+            "areaprincipal": "241,00",
+            "areainterna": "241,00",
+            "areaexterna": "0,00",
+            "arealote": "416,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10427\/5l80v-whatsapp-image-2025-10-25-at-102618-1761399509.jpeg?1767990500",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Maria Goretti: ",
+            "urlpublica": "",
+            "datahoracadastro": "25\/10\/2025 10:55:34",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10427\/5l80v-whatsapp-image-2025-10-25-at-102618-1761399509.jpeg?1767990500"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10427\/eyz6s-whatsapp-image-2025-10-25-at-102606-1761399509.jpeg?1767990500"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10427\/0ey8r-whatsapp-image-2025-10-25-at-102609-1761399509.jpeg?1767990500"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10427\/inoctg-whatsapp-image-2025-10-25-at-102611-1761399509.jpeg?1767990500"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10427\/yi4r-whatsapp-image-2025-10-25-at-102611-1-1761399509.jpeg?1767990500"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10427\/ed4vr-whatsapp-image-2025-10-25-at-102611-2-1761399509.jpeg?1767990500"
+                }
+            ],
+            "tempoCadastro": 133,
+            "url_amigavel": "casa-para-venda-em-maria-goretti-chapeco-5-quartos-piscina-e-conforto"
+        },
+        {
+            "codigo": 9819,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": " Casa \u00e0 Venda no Jardim Europa ",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.990.000,00",
+            "valorminimo": "R$ 2.990.000,00",
+            "valormaximo": "R$ 2.990.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 123,
+            "bairro": "Jardim Europa",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "",
+            "endereco": "Vilmar Venturin ",
+            "numero": "****",
+            "complemento": "******",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "1",
+            "numerobanhos": "1",
+            "numerovagas": "2",
+            "tipovagas": "",
+            "numerosuites": "3",
+            "areaprincipal": "300,00",
+            "areainterna": "300,00",
+            "areaexterna": "0,00",
+            "arealote": "360,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9819\/3wn8ef-whatsapp-image-2025-07-15-at-133628-1-1752598297.jpeg?1752598761",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Jardim Europa: ",
+            "urlpublica": "",
+            "datahoracadastro": "10\/07\/2025 14:04:29",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9819\/3wn8ef-whatsapp-image-2025-07-15-at-133628-1-1752598297.jpeg?1752598761"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9819\/ljcvg-whatsapp-image-2025-07-15-at-133627-1752598297.jpeg?1752598761"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9819\/hp20dg-whatsapp-image-2025-07-15-at-133630-1752598297.jpeg?1752598761"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9819\/5n0iu-whatsapp-image-2025-07-15-at-133621-1752598297.jpeg?1752598761"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9819\/n9h07-whatsapp-image-2025-07-15-at-133627-1-1752598297.jpeg?1752598761"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9819\/dc6umg-whatsapp-image-2025-07-15-at-133628-1752598297.jpeg?1752598761"
+                }
+            ],
+            "tempoCadastro": 240,
+            "url_amigavel": "casa-a-venda-no-jardim-europa"
+        },
+        {
+            "codigo": 10620,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa com piscina para venda",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.900.000,00",
+            "valorminimo": "R$ 2.900.000,00",
+            "valormaximo": "R$ 2.900.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 3,
+            "bairro": "Jardim It\u00e1lia",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89802-350",
+            "endereco": "Rua Chaim Welczer",
+            "numero": "***",
+            "complemento": "***************",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "0",
+            "numerobanhos": "1",
+            "numerovagas": "4",
+            "tipovagas": "",
+            "numerosuites": "1",
+            "areaprincipal": "249,00",
+            "areainterna": "249,00",
+            "areaexterna": "249,00",
+            "arealote": "360,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10620\/7ydpp-whatsapp-image-2025-11-25-at-171957-1764162656.jpeg?1764162657",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Jardim It\u00e1lia: ",
+            "urlpublica": "",
+            "datahoracadastro": "26\/11\/2025 10:09:47",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim It\u00e1lia: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10620\/7ydpp-whatsapp-image-2025-11-25-at-171957-1764162656.jpeg?1764162657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim It\u00e1lia: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10620\/mtt91h-whatsapp-image-2025-11-25-at-172032-1764162656.jpeg?1764162657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim It\u00e1lia: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10620\/nh817-whatsapp-image-2025-11-25-at-172032-2-1764162656.jpeg?1764162657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim It\u00e1lia: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10620\/yzk9h-whatsapp-image-2025-11-25-at-172032-1-1764162656.jpeg?1764162657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim It\u00e1lia: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10620\/elwxr-whatsapp-image-2025-11-25-at-172031-1764162656.jpeg?1764162657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim It\u00e1lia: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10620\/s0hyyj-whatsapp-image-2025-11-25-at-172031-3-1764162656.jpeg?1764162657"
+                }
+            ],
+            "tempoCadastro": 101,
+            "url_amigavel": "casa-com-piscina-para-venda"
+        },
+        {
+            "codigo": 12130,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Terreno de 630 m\u00b2 em Maria Goretti, Chapec\u00f3 (Venda) - R$ 2.800.000",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 29,
+            "tipo": "Terreno ",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.800.000,00",
+            "valorminimo": "R$ 2.800.000,00",
+            "valormaximo": "R$ 2.800.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 8,
+            "bairro": "Maria Goretti",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "",
+            "endereco": "RUA MARECHAL DEODORO DA FONSECA",
+            "numero": "******",
+            "complemento": "*************",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "0",
+            "numerosalas": "0",
+            "numerobanhos": "0",
+            "numerovagas": "0",
+            "tipovagas": "",
+            "numerosuites": "0",
+            "areaprincipal": "630,00",
+            "areainterna": "0,00",
+            "areaexterna": "0,00",
+            "arealote": "630,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12130\/xsdtkg-whatsapp-image-2026-03-02-at-175120-1772496477.jpeg?1772496477",
+            "descricaoFotoPrincipal": "Terreno \u00e0 venda no Maria Goretti: ",
+            "urlpublica": "",
+            "datahoracadastro": "02\/03\/2026 20:56:39",
+            "fotos": [
+                {
+                    "descricao": "Terreno \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12130\/xsdtkg-whatsapp-image-2026-03-02-at-175120-1772496477.jpeg?1772496477"
+                },
+                {
+                    "descricao": "Terreno \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12130\/als1gl-whatsapp-image-2026-03-02-at-175119-1772496477.jpeg?1772496477"
+                }
+            ],
+            "tempoCadastro": 5,
+            "url_amigavel": "terreno-de-630-m-em-maria-goretti-chapeco-venda-r-2800000"
+        },
+        {
+            "codigo": 10545,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Apartamento a Venda \/ 4 Quartos: Frente, 4 Vagas e Localiza\u00e7\u00e3o Privilegiada no Centro de Chapec\u00f3",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 2,
+            "tipo": "Apartamento",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.800.000,00",
+            "valorminimo": "R$ 2.800.000,00",
+            "valormaximo": "R$ 2.800.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 2.300,00",
+            "codigobairro": 7,
+            "bairro": "Centro",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-023",
+            "endereco": "Avenida Nereu Ramos  D",
+            "numero": "*****",
+            "complemento": "********",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "4",
+            "numerosalas": "3",
+            "numerobanhos": "3",
+            "numerovagas": "4",
+            "tipovagas": "Coberta",
+            "numerosuites": "2",
+            "areaprincipal": "400,00",
+            "areainterna": "400,00",
+            "areaexterna": "0,00",
+            "arealote": "0,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10545\/pbsfv-whatsapp-image-2025-11-14-at-100933-1763126051.jpeg?1763130517",
+            "descricaoFotoPrincipal": "Apartamento \u00e0 venda no Centro: ",
+            "urlpublica": "",
+            "datahoracadastro": "14\/11\/2025 11:28:37",
+            "fotos": [
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10545\/pbsfv-whatsapp-image-2025-11-14-at-100933-1763126051.jpeg?1763130517"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10545\/dovvs-whatsapp-image-2025-11-13-at-155402-1763126052.jpeg?1763130517"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10545\/orj7a-whatsapp-image-2025-11-13-at-155402-1-1763126052.jpeg?1763130517"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10545\/sl4ek-whatsapp-image-2025-11-13-at-155228-1-1763126052.jpeg?1763130517"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10545\/hp8s4-whatsapp-image-2025-11-13-at-155223-1763126052.jpeg?1763130517"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10545\/1sqi4-whatsapp-image-2025-11-13-at-155225-1-1763126052.jpeg?1763130517"
+                }
+            ],
+            "tempoCadastro": 113,
+            "url_amigavel": "apartamento-a-venda-4-quartos-frente-4-vagas-e-localizacao-privilegiada-no-centro-de-chapeco"
+        },
+        {
+            "codigo": 11094,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa \u00e0 venda no Jardim Europa, Chapec\u00f3 \u2013 3 dormit\u00f3rios, 1 su\u00edte, acabamento em porcelanato",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.660.000,00",
+            "valorminimo": "R$ 2.660.000,00",
+            "valormaximo": "R$ 2.660.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 123,
+            "bairro": "Jardim Europa",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89805-794",
+            "endereco": "Rua Amadeu Maggioni",
+            "numero": "***",
+            "complemento": "",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "2",
+            "numerobanhos": "2",
+            "numerovagas": "2",
+            "tipovagas": "coberta",
+            "numerosuites": "1",
+            "areaprincipal": "247,00",
+            "areainterna": "247,00",
+            "areaexterna": "0,00",
+            "arealote": "450,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/11094\/khx99-whatsapp-image-2026-02-25-at-104412-1772028795.jpeg?1772028813",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Jardim Europa: ",
+            "urlpublica": "",
+            "datahoracadastro": "25\/02\/2026 11:07:54",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/11094\/khx99-whatsapp-image-2026-02-25-at-104412-1772028795.jpeg?1772028813"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/11094\/xmlhb-whatsapp-image-2026-02-25-at-104413-2-1772028798.jpeg?1772028813"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/11094\/h8c8f-whatsapp-image-2026-02-25-at-104415-2-1772028799.jpeg?1772028813"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/11094\/p4gxw-whatsapp-image-2026-02-25-at-104415-3-1772028801.jpeg?1772028813"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/11094\/ccpr5i-whatsapp-image-2026-02-25-at-104414-2-1772028803.jpeg?1772028813"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Jardim Europa: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/11094\/67p35-whatsapp-image-2026-02-25-at-104414-1-1772028805.jpeg?1772028813"
+                }
+            ],
+            "tempoCadastro": 10,
+            "url_amigavel": "casa-a-venda-no-jardim-europa-chapeco-3-dormitorios-1-suite-acabamento-em-porcelanato"
+        },
+        {
+            "codigo": 12123,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa residencial \u00e0 venda em Chapec\u00f3 (Centro) \u2013 342 m\u00b2 internos, 795 m\u00b2 de terreno | aceita permuta",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.650.000,00",
+            "valorminimo": "R$ 2.650.000,00",
+            "valormaximo": "R$ 2.650.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 7,
+            "bairro": "Centro",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-040",
+            "endereco": "Rua Rui Barbosa ",
+            "numero": "****",
+            "complemento": "",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "0",
+            "numerobanhos": "3",
+            "numerovagas": "5",
+            "tipovagas": "",
+            "numerosuites": "3",
+            "areaprincipal": "342,00",
+            "areainterna": "342,00",
+            "areaexterna": "0,00",
+            "arealote": "795,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12123\/gk7bi-whatsapp-image-2026-03-02-at-102531-2-1772478348.jpeg?1772654936",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Centro: ",
+            "urlpublica": "",
+            "datahoracadastro": "02\/03\/2026 16:00:31",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12123\/gk7bi-whatsapp-image-2026-03-02-at-102531-2-1772478348.jpeg?1772654936"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12123\/gtjloj-whatsapp-image-2026-03-02-at-102531-1772478354.jpeg?1772654936"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12123\/cb3iq-whatsapp-image-2026-03-02-at-102531-18-1772478355.jpeg?1772654936"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12123\/f1woy-whatsapp-image-2026-03-02-at-102531-17-1772478357.jpeg?1772654936"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12123\/cv7ye-whatsapp-image-2026-03-02-at-102531-16-1772478357.jpeg?1772654936"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/12123\/8dadvj-whatsapp-image-2026-03-02-at-102531-15-1772478365.jpeg?1772654936"
+                }
+            ],
+            "tempoCadastro": 5,
+            "url_amigavel": "casa-residencial-a-venda-em-chapeco-centro-342-m-internos-795-m-de-terreno-aceita-permuta"
+        },
+        {
+            "codigo": 9838,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa residencial \u00e0 venda em Chapec\u00f3\/Paraiso (Frente) - 550 m\u00b2, 6 vagas, 3 su\u00edtes",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.590.000,00",
+            "valorminimo": "R$ 2.590.000,00",
+            "valormaximo": "R$ 2.590.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 13,
+            "bairro": "Paraiso",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89806-273",
+            "endereco": "Rua Edy Remy Aiolfi",
+            "numero": "***",
+            "complemento": "",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "1",
+            "numerosalas": "1",
+            "numerobanhos": "3",
+            "numerovagas": "6",
+            "tipovagas": "Coberta",
+            "numerosuites": "3",
+            "areaprincipal": "550,00",
+            "areainterna": "550,00",
+            "areaexterna": "0,00",
+            "arealote": "0,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9838\/ay9pc-whatsapp-image-2025-07-16-at-111433-8-1752676300.jpeg?1752684667",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Paraiso: ",
+            "urlpublica": "",
+            "datahoracadastro": "16\/07\/2025 13:51:07",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Paraiso: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9838\/ay9pc-whatsapp-image-2025-07-16-at-111433-8-1752676300.jpeg?1752684667"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Paraiso: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9838\/cq7ki-whatsapp-image-2025-07-16-at-111433-7-1752676300.jpeg?1752684667"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Paraiso: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9838\/24cpz-whatsapp-image-2025-07-16-at-111431-1752676300.jpeg?1752684667"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Paraiso: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9838\/us5x7-whatsapp-image-2025-07-16-at-111432-4-1752676300.jpeg?1752684667"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Paraiso: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9838\/xzf5v-whatsapp-image-2025-07-16-at-111432-12-1752676300.jpeg?1752684667"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Paraiso: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/9838\/te4xo-whatsapp-image-2025-07-16-at-111432-13-1752676300.jpeg?1752684667"
+                }
+            ],
+            "tempoCadastro": 234,
+            "url_amigavel": "casa-residencial-a-venda-em-chapeco-paraiso-frente-550-m-6-vagas-3-suites"
+        },
+        {
+            "codigo": 2387,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa para venda localizada no Maria Goretti em chapec\u00f3 \/ Sc",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.500.000,00",
+            "valorminimo": "R$ 2.500.000,00",
+            "valormaximo": "R$ 2.500.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 8,
+            "bairro": "Maria Goretti",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-436",
+            "endereco": "Rua Israel  D",
+            "numero": "***",
+            "complemento": "******************",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "5",
+            "numerosalas": "0",
+            "numerobanhos": "3",
+            "numerovagas": "4",
+            "tipovagas": "",
+            "numerosuites": "1",
+            "areaprincipal": "300,00",
+            "areainterna": "300,00",
+            "areaexterna": "0,00",
+            "arealote": "579,60",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/2387\/b9ea1d52d82c6a12c067f187d574268f.jpeg?1746727320",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Maria Goretti: Im\u00f3veis Chapec\u00f3",
+            "urlpublica": "",
+            "datahoracadastro": "17\/09\/2024 15:38:06",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/2387\/b9ea1d52d82c6a12c067f187d574268f.jpeg?1746727320"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/2387\/q1sf1i-whatsapp-image-2025-03-17-at-170327-1742243216.jpeg?1746727320"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/2387\/dl6d6-whatsapp-image-2025-03-17-at-170326-1742243216.jpeg?1746727320"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/2387\/630dd60855da2a6a56fab0618af37b7b.jpeg?1746727320"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/2387\/ea1e3769605e81dc4577cc41964c3af1.jpeg?1746727320"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Maria Goretti: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/2387\/74358097ffe32118a8d6084ecdc4a227.jpeg?1746727320"
+                }
+            ],
+            "tempoCadastro": 536,
+            "url_amigavel": "casa-para-venda-localizada-no-maria-goretti-em-chapeco-sc"
+        },
+        {
+            "codigo": 10878,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Apartamento residencial de 5 quartos no Centro de Chapec\u00f3 | 3 vagas, 340 m\u00b2",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 2,
+            "tipo": "Apartamento",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.440.000,00",
+            "valorminimo": "R$ 2.440.000,00",
+            "valormaximo": "R$ 2.440.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 7,
+            "bairro": "Centro",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-000",
+            "endereco": "Avenida Get\u00falio Dorneles Vargas  N",
+            "numero": "***",
+            "complemento": "********",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "5",
+            "numerosalas": "2",
+            "numerobanhos": "2",
+            "numerovagas": "3",
+            "tipovagas": "Coberta",
+            "numerosuites": "2",
+            "areaprincipal": "340,00",
+            "areainterna": "340,00",
+            "areaexterna": "0,00",
+            "arealote": "440,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10878\/rv9jr-whatsapp-image-2026-01-24-at-104118-1769268305.jpeg?1769268306",
+            "descricaoFotoPrincipal": "Apartamento \u00e0 venda no Centro: ",
+            "urlpublica": "",
+            "datahoracadastro": "24\/01\/2026 12:23:52",
+            "fotos": [
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10878\/rv9jr-whatsapp-image-2026-01-24-at-104118-1769268305.jpeg?1769268306"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10878\/b555p-whatsapp-image-2026-01-24-at-104107-1769268305.jpeg?1769268306"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10878\/ueg4b-whatsapp-image-2026-01-24-at-104107-1-1769268305.jpeg?1769268306"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10878\/v4jfhj-whatsapp-image-2026-01-24-at-104109-1769268305.jpeg?1769268306"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10878\/n3oi9-whatsapp-image-2026-01-24-at-104107-2-1769268305.jpeg?1769268306"
+                },
+                {
+                    "descricao": "Apartamento \u00e0 venda no Centro: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10878\/g2wo3-whatsapp-image-2026-01-24-at-104108-1769268305.jpeg?1769268306"
+                }
+            ],
+            "tempoCadastro": 42,
+            "url_amigavel": "apartamento-residencial-de-5-quartos-no-centro-de-chapeco-3-vagas-340-m"
+        },
+        {
+            "codigo": 10812,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa Residencial em Chapec\u00f3 - 4 Quartos, 3 Su\u00edtes, Condom\u00ednio Espelho das \u00c1guas",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.300.000,00",
+            "valorminimo": "R$ 2.300.000,00",
+            "valormaximo": "R$ 2.300.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 187,
+            "bairro": "Condom\u00ednio Espelho das \u00c1guas",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89809-971",
+            "endereco": "Rua Isidoro Domiciliano dos Santos",
+            "numero": "******",
+            "complemento": "*******************",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "4",
+            "numerosalas": "2",
+            "numerobanhos": "1",
+            "numerovagas": "2",
+            "tipovagas": "Coberta",
+            "numerosuites": "3",
+            "areaprincipal": "287,38",
+            "areainterna": "287,38",
+            "areaexterna": "0,00",
+            "arealote": "1006,55",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10812\/625nhk-whatsapp-image-2026-01-08-at-160558-1767905564.jpeg?1767905565",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Condom\u00ednio Espelho das \u00c1guas: ",
+            "urlpublica": "",
+            "datahoracadastro": "08\/01\/2026 17:52:00",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Espelho das \u00c1guas: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10812\/625nhk-whatsapp-image-2026-01-08-at-160558-1767905564.jpeg?1767905565"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Espelho das \u00c1guas: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10812\/tublh-whatsapp-image-2026-01-08-at-160547-1767905564.jpeg?1767905565"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Espelho das \u00c1guas: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10812\/bnuvy-whatsapp-image-2026-01-08-at-160529-1767905564.jpeg?1767905565"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Espelho das \u00c1guas: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10812\/r4elu-whatsapp-image-2026-01-08-at-160532-1767905564.jpeg?1767905565"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Espelho das \u00c1guas: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10812\/ig9d7-whatsapp-image-2026-01-08-at-160534-1767905564.jpeg?1767905565"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Espelho das \u00c1guas: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10812\/ly3mj-whatsapp-image-2026-01-08-at-160542-1767905564.jpeg?1767905565"
+                }
+            ],
+            "tempoCadastro": 58,
+            "url_amigavel": "casa-residencial-em-chapeco-4-quartos-3-suites-condominio-espelho-das-aguas"
+        },
+        {
+            "codigo": 5860,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "casa a venda localizada na cidade de guatambu-sc",
+            "codigoauxiliar": "EFAPI_17937",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.300.000,00",
+            "valorminimo": "R$ 2.300.000,00",
+            "valormaximo": "R$ 2.300.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 400,00",
+            "codigobairro": 5,
+            "bairro": "Efapi",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89817-000",
+            "endereco": "Guatamb\u00fa",
+            "numero": "***",
+            "complemento": "********************",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "0",
+            "numerobanhos": "2",
+            "numerovagas": "2",
+            "tipovagas": "",
+            "numerosuites": "3",
+            "areaprincipal": "320,00",
+            "areainterna": "320,00",
+            "areaexterna": "0,00",
+            "arealote": "1000,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/5860\/4dff63dd69cd56a063155715c430bf3e.jpeg?1726783899",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Efapi: Im\u00f3veis Efapi",
+            "urlpublica": "",
+            "datahoracadastro": "17\/09\/2024 18:08:37",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Efapi: Im\u00f3veis Efapi",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/5860\/4dff63dd69cd56a063155715c430bf3e.jpeg?1726783899"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Efapi: Im\u00f3veis Efapi",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/5860\/b6b7ffeee7fb07629e1248e31df708ab.jpeg?1726783899"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Efapi: Im\u00f3veis Efapi",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/5860\/c055471f534482bfce3f2be546e62852.jpeg?1726783899"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Efapi: Im\u00f3veis Efapi",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/5860\/f47d0b334b025b93bffde81e056fec9f.jpeg?1726783899"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Efapi: Im\u00f3veis Efapi",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/5860\/e64be82351c409005770a4c05ab92c11.jpeg?1726783899"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Efapi: Im\u00f3veis Efapi",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/5860\/995b6eda08f2c59e5be6f1afca22edd5.jpeg?1726783899"
+                }
+            ],
+            "tempoCadastro": 536,
+            "url_amigavel": "casa-a-venda-localizada-na-cidade-de-guatambu-sc"
+        },
+        {
+            "codigo": 3160,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa a Venda no Lider Chapeco - SC",
+            "codigoauxiliar": "15964",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.200.000,00",
+            "valorminimo": "R$ 2.200.000,00",
+            "valormaximo": "R$ 2.200.000,00",
+            "valoranterior": "R$ 1.800.000,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 21,
+            "bairro": "L\u00edder",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89805-226",
+            "endereco": "RUA CUBA",
+            "numero": "*****",
+            "complemento": "",
+            "aceitapermuta": true,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "0",
+            "numerobanhos": "2",
+            "numerovagas": "3",
+            "tipovagas": "",
+            "numerosuites": "3",
+            "areaprincipal": "400,00",
+            "areainterna": "400,00",
+            "areaexterna": "0,00",
+            "arealote": "630,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/3160\/43c7f26f224c03708f9d9eaec91ac725.jpeg?1726778374",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no L\u00edder: Im\u00f3veis Chapec\u00f3",
+            "urlpublica": "",
+            "datahoracadastro": "17\/09\/2024 15:41:10",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no L\u00edder: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/3160\/43c7f26f224c03708f9d9eaec91ac725.jpeg?1726778374"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no L\u00edder: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/3160\/2b39d21eb53383f5c69fdd1b6c7800b1.jpeg?1726778374"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no L\u00edder: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/3160\/b8e443418874b702986313c6ab170126.jpeg?1726778374"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no L\u00edder: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/3160\/adab1754f97ef16754316a3da07d1aa9.jpeg?1726778374"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no L\u00edder: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/3160\/66d61a71ee8cee6dbc4e75906c13e4cd.jpeg?1726778374"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no L\u00edder: Im\u00f3veis Chapec\u00f3",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/3160\/f54ed67eaaf21ce7d663a794148966e9.jpeg?1726778374"
+                }
+            ],
+            "tempoCadastro": 536,
+            "url_amigavel": "casa-a-venda-no-lider-chapeco-sc"
+        },
+        {
+            "codigo": 10756,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa residencial \u00e0 venda em Chapec\u00f3 (Condom\u00ednio Guatapar\u00e1) \u2013 3 quartos, 1 su\u00edte, 2 vagas",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.100.000,00",
+            "valorminimo": "R$ 2.100.000,00",
+            "valormaximo": "R$ 2.100.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 167,
+            "bairro": "Condom\u00ednio Fazenda Guatapar\u00e1",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89817-000",
+            "endereco": "Alameda saura ahlf,",
+            "numero": "**",
+            "complemento": "",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "2",
+            "numerobanhos": "1",
+            "numerovagas": "2",
+            "tipovagas": "Coberta",
+            "numerosuites": "1",
+            "areaprincipal": "234,00",
+            "areainterna": "234,00",
+            "areaexterna": "0,00",
+            "arealote": "1000,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10756\/0l7pfg-whatsapp-image-2025-12-18-at-170411-1766163657.jpeg?1766163657",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Condom\u00ednio Fazenda Guatapar\u00e1: ",
+            "urlpublica": "",
+            "datahoracadastro": "19\/12\/2025 13:58:30",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Fazenda Guatapar\u00e1: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10756\/0l7pfg-whatsapp-image-2025-12-18-at-170411-1766163657.jpeg?1766163657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Fazenda Guatapar\u00e1: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10756\/hfqko-whatsapp-image-2025-12-18-at-170414-1766163657.jpeg?1766163657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Fazenda Guatapar\u00e1: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10756\/jlw6z-whatsapp-image-2025-12-18-at-170413-1-1766163657.jpeg?1766163657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Fazenda Guatapar\u00e1: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10756\/n0xhv-whatsapp-image-2025-12-18-at-170413-1766163657.jpeg?1766163657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Fazenda Guatapar\u00e1: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10756\/hei63-whatsapp-image-2025-12-18-at-170416-1766163657.jpeg?1766163657"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Condom\u00ednio Fazenda Guatapar\u00e1: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10756\/n1lqxj-whatsapp-image-2025-12-18-at-170421-1766163657.jpeg?1766163657"
+                }
+            ],
+            "tempoCadastro": 78,
+            "url_amigavel": "casa-residencial-a-venda-em-chapeco-condominio-guatapara-3-quartos-1-suite-2-vagas"
+        },
+        {
+            "codigo": 10822,
+            "codigocondominio": 0,
+            "nomecondominio": "",
+            "nomeempreendimento": "",
+            "titulo": "Casa \u00e0 venda em Chapec\u00f3, Presidente M\u00e9dici - 3 quartos, 1 su\u00edte, 390 m\u00b2 \u00fateis",
+            "codigoauxiliar": "",
+            "finalidade": "Venda",
+            "codigotipo": 1,
+            "tipo": "Casa",
+            "codigotipo2": null,
+            "tipo2": "",
+            "valor": "R$ 2.022.000,00",
+            "valorminimo": "R$ 2.022.000,00",
+            "valormaximo": "R$ 2.022.000,00",
+            "valoranterior": "R$ 0,00",
+            "valorcondominio": "R$ 0,00",
+            "codigobairro": 10,
+            "bairro": "Presidente M\u00e9dici",
+            "codigobairro2": null,
+            "bairro2": "",
+            "codigocidade": 2,
+            "cidade": "Chapec\u00f3",
+            "estado": "SC",
+            "regiao": "",
+            "codigocidade2": null,
+            "cidade2": "",
+            "estado2": "",
+            "cep": "89801-125",
+            "endereco": "Rua Porto",
+            "numero": "***",
+            "complemento": "",
+            "aceitapermuta": false,
+            "exclusivo": false,
+            "numeroquartos": "3",
+            "numerosalas": "3",
+            "numerobanhos": "0",
+            "numerovagas": "2",
+            "tipovagas": "Coberta",
+            "numerosuites": "1",
+            "areaprincipal": "390,00",
+            "areainterna": "390,00",
+            "areaexterna": "0,00",
+            "arealote": "410,00",
+            "tipomedida": "m\u00b2",
+            "urlfotoprincipalp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10822\/ek9vn-whatsapp-image-2026-01-07-at-181738-3-1768052435.jpeg?1768052436",
+            "descricaoFotoPrincipal": "Casa \u00e0 venda no Presidente M\u00e9dici: ",
+            "urlpublica": "",
+            "datahoracadastro": "10\/01\/2026 10:38:13",
+            "fotos": [
+                {
+                    "descricao": "Casa \u00e0 venda no Presidente M\u00e9dici: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10822\/ek9vn-whatsapp-image-2026-01-07-at-181738-3-1768052435.jpeg?1768052436"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Presidente M\u00e9dici: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10822\/s0wqg-whatsapp-image-2026-01-07-at-181736-2-1768052435.jpeg?1768052436"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Presidente M\u00e9dici: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10822\/4dher-whatsapp-image-2026-01-07-at-181737-1768052435.jpeg?1768052436"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Presidente M\u00e9dici: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10822\/awwly-whatsapp-image-2026-01-07-at-181737-1-1768052435.jpeg?1768052436"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Presidente M\u00e9dici: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10822\/ehfq5-whatsapp-image-2026-01-07-at-181738-1768052435.jpeg?1768052436"
+                },
+                {
+                    "descricao": "Casa \u00e0 venda no Presidente M\u00e9dici: ",
+                    "urlp": "https:\/\/cdn.imoview.com.br\/simchapeco\/Imoveis\/10822\/5lq6t-whatsapp-image-2026-01-07-at-181737-2-1768052436.jpeg?1768052436"
+                }
+            ],
+            "tempoCadastro": 56,
+            "url_amigavel": "casa-a-venda-em-chapeco-presidente-medici-3-quartos-1-suite-390-m-uteis"
+        }
+    ],
+    "favoritos": []
+}
