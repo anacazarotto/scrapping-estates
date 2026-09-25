@@ -4,7 +4,7 @@ from time import sleep
 
 import requests
 
-from db import get_db_path
+from db import get_db_path, require_env_value
 
 conn = sqlite3.connect(get_db_path())
 cursor = conn.cursor()
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS imoveis (
 url = "https://ms-6e17af7c3fc7-10444.nyc.meilisearch.io/indexes/properties/search"
 
 headers = {
-    "Authorization": "Bearer c48309808058b7adc4de3241706108614ab9f18527399ff2d5a847affe1c87f3",
+    "Authorization": f"Bearer {require_env_value('SANTAMARIA_API_TOKEN')}",
     "Content-Type": "application/json",
 }
 
@@ -47,7 +47,7 @@ while True:
         "limit": limit,
     }
 
-    r = requests.post(url, headers=headers, json=body)
+    r = requests.post(url, headers=headers, json=body, timeout=30)
     data = r.json()
 
     hits = data["hits"]

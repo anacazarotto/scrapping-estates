@@ -6,6 +6,7 @@ import unicodedata
 import requests
 
 from base_scapper import BaseScraper
+from db.config import require_env_value
 
 
 class MarkizeScraper(BaseScraper):
@@ -19,7 +20,6 @@ class MarkizeScraper(BaseScraper):
     HEADERS = {
         "accept": "application/json, text/plain, */*",
         "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-        "authorization": "Bearer 84536ff1ec00a5c5b88465a7aa936703",
         "from": "site",
         "origin": "https://www.markize.com.br",
         "referer": "https://www.markize.com.br/",
@@ -41,6 +41,9 @@ class MarkizeScraper(BaseScraper):
         super().__init__()
         self.session = requests.Session()
         self.session.headers.update(self.HEADERS)
+        self.session.headers["authorization"] = (
+            f"Bearer {require_env_value('MARKIZE_API_TOKEN')}"
+        )
 
     @staticmethod
     def normalize_str(s):

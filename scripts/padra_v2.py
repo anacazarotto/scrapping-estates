@@ -6,6 +6,7 @@ import unicodedata
 import requests
 
 from base_scapper import BaseScraper
+from db.config import require_env_value
 
 
 class PadraScraper(BaseScraper):
@@ -19,7 +20,6 @@ class PadraScraper(BaseScraper):
     HEADERS = {
         "accept": "application/json, text/plain, */*",
         "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-        "authorization": "Bearer 324545ec5ba67f9e6fac78137631cc2b",
         "from": "site",
         "origin": "https://www.padra.com.br",
         "referer": "https://www.padra.com.br/",
@@ -43,6 +43,9 @@ class PadraScraper(BaseScraper):
         super().__init__()
         self.session = requests.Session()
         self.session.headers.update(self.HEADERS)
+        self.session.headers["authorization"] = (
+            f"Bearer {require_env_value('PADRA_API_TOKEN')}"
+        )
 
     @staticmethod
     def normalize_str(s):

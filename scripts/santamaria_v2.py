@@ -3,13 +3,13 @@ import time
 import requests
 
 from base_scapper import BaseScraper
+from db.config import require_env_value
 
 
 class SantaMariaScraper(BaseScraper):
     PREFIX = "SM-"
     URL = "https://ms-32e09cad5e12-10555.sao.meilisearch.io/indexes/properties/search"
     HEADERS = {
-        "Authorization": "Bearer c1d2b722b41ee4b0ede4be41c7d2afdbdb0a71f6707fa0dc9aff579f403a5ab2",
         "Content-Type": "application/json",
     }
     LIMIT = 100
@@ -18,6 +18,9 @@ class SantaMariaScraper(BaseScraper):
         super().__init__()
         self.session = requests.Session()
         self.session.headers.update(self.HEADERS)
+        self.session.headers["Authorization"] = (
+            f"Bearer {require_env_value('SANTAMARIA_API_TOKEN')}"
+        )
 
     @staticmethod
     def build_body(offset, limit):

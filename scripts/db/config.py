@@ -1,6 +1,10 @@
 import os
 from pathlib import Path
 
+# scripts/db/config.py -> raiz do projeto fica dois níveis acima de scripts/db
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+ENV_PATH = PROJECT_ROOT / ".env"
+
 
 def _read_env_file(env_path: Path) -> dict:
     """Parseia um arquivo .env simples (KEY=VALUE) e retorna um dict."""
@@ -18,9 +22,32 @@ def _read_env_file(env_path: Path) -> dict:
             k = k.strip()
             v = v.strip().strip('"').strip("'")
             data[k] = v
-    except Exception:
+    except (OSError, UnicodeDecodeError):
         return {}
     return data
+
+
+def get_env_value(key: str, default=None):
+    """Lê uma configuração da variável de ambiente ou, se ausente, do .env da raiz."""
+    val = os.getenv(key)
+    if val:
+        return val
+    return _read_env_file(ENV_PATH).get(key) or default
+
+
+def require_env_value(key: str) -> str:
+    """Igual a get_env_value, mas encerra com mensagem clara se a chave não existir.
+
+    Usado para tokens/credenciais, que NÃO devem ficar escritos no código-fonte.
+    """
+    val = get_env_value(key)
+    if not val:
+        raise SystemExit(
+            f"Configuração '{key}' não encontrada. Defina a variável de ambiente "
+            f"ou adicione '{key}=...' no arquivo .env na raiz do projeto "
+            f"(veja .env.example)."
+        )
+    return val
 
 
 def get_db_path() -> str:
@@ -30,27 +57,8 @@ def get_db_path() -> str:
 
     Uso: sqlite3.connect(get_db_path())
     """
-    # 1) Checa variável de ambiente
-    val = os.getenv("IMOVEIS_DB") or os.getenv("DB_NAME") or os.getenv("DATABASE")
-    if val:
-        return val
-
-    # 2) Tenta ler .env no diretório do projeto (pai da pasta scripts)
-    # Se este arquivo existir, procura chaves conhecidas
-    project_root = Path(__file__).resolve().parent
-    # se db.py estiver na raiz, project_root é a raiz; caso contrário, sobe
-    if (project_root / "scripts").exists():
-        # quando db.py for colocado na raiz, this is root
-        root = project_root
-    else:
-        # fallback: usa parent
-        root = project_root.parent
-
-    env_path = root / ".env"
-    env = _read_env_file(env_path)
     for key in ("IMOVEIS_DB", "DB_NAME", "DATABASE"):
-        if key in env and env[key]:
-            return env[key]
-
-    # 3) fallback
+        val = get_env_value(key)
+        if val:
+            return val
     return "imoveis.db"

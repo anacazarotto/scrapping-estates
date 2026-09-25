@@ -1,0 +1,5 @@
+# Dependência OPCIONAL: inclui o TabPFN v2 nos benchmarks (puxa PyTorch, ~1-2 GB).
+# Instale depois do requirements.txt:
+#   pip install -r requirements-tabpfn.txt
+# Sem GPU funciona em CPU, porém mais devagar. Para pular: DISABLE_TABPFN=1
+tabpfn==9.0.0

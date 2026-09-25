@@ -1,19 +1,19 @@
 import argparse
-import json
 import sqlite3
 import unicodedata
 from datetime import datetime
 from pathlib import Path
 
-import joblib
 import numpy as np
 import pandas as pd
+from model_io import load_model, save_model
+from tabpfn_model import TABPFN_NAME, make_tabpfn, tabpfn_enabled
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, cross_val_predict, train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -23,6 +23,7 @@ DEFAULT_NORMALIZED_DB = Path("imoveis_normalizados.db")
 DEFAULT_MODEL_PATH = Path("modelos/preco_imovel_modelo_alternativo.pkl")
 DEFAULT_REPORT_PATH = Path("docs/modelo_alternativo.md")
 
+CV_FOLDS = 5
 FEATURE_COLUMNS = [
     "area_total",
     "area_privada",
@@ -140,7 +141,7 @@ def calculate_metrics(y_true, y_pred):
 
 
 def make_model_factories(seed=42):
-    return {
+    factories = {
         "Regressão Linear Múltipla": lambda: LinearRegression(),
         "Random Forest": lambda: RandomForestRegressor(
             n_estimators=400,
@@ -172,6 +173,9 @@ def make_model_factories(seed=42):
             gamma="scale",
         ),
     }
+    if tabpfn_enabled():
+        factories[TABPFN_NAME] = lambda: make_tabpfn(NUMERIC_COLUMNS, CATEGORICAL_COLUMNS, seed=seed)
+    return factories
 
 
 def build_regressor(name, seed=42):
@@ -179,6 +183,9 @@ def build_regressor(name, seed=42):
     if name not in factories:
         raise ValueError(f"Modelo não suportado: {name}")
     model = factories[name]()
+    if name == TABPFN_NAME:
+        # TabPFN faz a própria codificação (sem one-hot/padronização).
+        return Pipeline([("model", model)])
     return Pipeline([("preprocess", make_preprocessor()), ("model", model)])
 
 
@@ -195,21 +202,30 @@ def benchmark_models(df, seed=42, test_size=0.2):
 
     results = []
     fitted = {}
+    folds = int(max(2, min(CV_FOLDS, len(X_train) // 10)))
+    cv = KFold(n_splits=folds, shuffle=True, random_state=seed)
     for name in make_model_factories(seed=seed):
+        # MAE de validação cruzada NO TREINO: é o critério de escolha do modelo.
+        cv_preds = cross_val_predict(build_regressor(name, seed=seed), X_train, y_train, cv=cv)
+        cv_mae = float(np.mean(np.abs(y_train - cv_preds)))
+
         model = build_regressor(name, seed=seed)
         model.fit(X_train, y_train)
         preds = model.predict(X_test)
         metrics = calculate_metrics(y_test, preds)
-        row = {"model": name, **metrics}
+        row = {"model": name, "cv_mae": cv_mae, **metrics}
         results.append(row)
         fitted[name] = model
 
-    results.sort(key=lambda item: (item["mae"], item["rmse"]))
+    # Ordena pela validação cruzada (não pelo teste), para o teste continuar sendo
+    # uma estimativa honesta do desempenho do modelo escolhido.
+    results.sort(key=lambda item: (item["cv_mae"], item["mae"]))
     split_info = {
         "train_rows": int(len(X_train)),
         "test_rows": int(len(X_test)),
         "seed": seed,
         "test_size": test_size,
+        "cv_folds": folds,
     }
     return results, fitted, split_info
 
@@ -219,11 +235,10 @@ def build_benchmark_markdown(results, split_info):
         "# Relatório alternativo de modelos",
         "",
         "Modelos testados:",
-        "- Regressão Linear Múltipla",
-        "- Random Forest",
-        "- Gradient Boosting",
-        "- Redes Neurais Artificiais (MLP)",
-        "- Máquinas de Vetores de Suporte (SVM)",
+        *[f"- {row['model']}" for row in results],
+        "",
+        "O ranking usa o MAE de **validação cruzada no treino**; as demais colunas são",
+        "medidas no conjunto de teste, que não participa da escolha do modelo.",
         "",
         f"- treino: {split_info['train_rows']}",
         f"- teste: {split_info['test_rows']}",
@@ -238,12 +253,13 @@ def build_benchmark_markdown(results, split_info):
         "",
         "## Resultado",
         "",
-        "| Modelo | MAE | RMSE | R² | MAPE |",
-        "|---|---:|---:|---:|---:|",
+        "| Modelo | MAE (CV treino) | MAE | RMSE | R² | MAPE |",
+        "|---|---:|---:|---:|---:|---:|",
     ]
     for row in results:
         lines.append(
-            f"| {row['model']} | {format_currency(row['mae'])} | {format_currency(row['rmse'])} | "
+            f"| {row['model']} | {format_currency(row.get('cv_mae', 0.0))} | "
+            f"{format_currency(row['mae'])} | {format_currency(row['rmse'])} | "
             f"{row['r2']:.4f} | {row['mape']:.2f}% |"
         )
 
@@ -253,7 +269,7 @@ def build_benchmark_markdown(results, split_info):
             "",
             "## Melhor candidato",
             "",
-            f"- Melhor por MAE: **{best}**",
+            f"- Melhor por MAE de validação cruzada: **{best}**",
             "- O comando `train-alt` salva esse melhor modelo como padrão alternativo.",
             "",
         ]
@@ -262,13 +278,11 @@ def build_benchmark_markdown(results, split_info):
 
 
 def save_artifact(artifact, model_path):
-    model_path = Path(model_path)
-    model_path.parent.mkdir(parents=True, exist_ok=True)
-    joblib.dump(artifact, model_path)
+    save_model(artifact, model_path)
 
 
 def load_artifact(model_path):
-    return joblib.load(model_path)
+    return load_model(model_path)
 
 
 def fit_best_model(df, seed=42, test_size=0.2):
