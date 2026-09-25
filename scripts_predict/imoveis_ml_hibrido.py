@@ -1,19 +1,20 @@
 import argparse
-import json
 import sqlite3
+import sys
 import unicodedata
 from datetime import datetime
 from pathlib import Path
 
-import joblib
 import numpy as np
 import pandas as pd
+from model_io import load_model, save_model
+from tabpfn_model import TABPFN_NAME, make_tabpfn, tabpfn_enabled
 from sklearn.compose import ColumnTransformer, TransformedTargetRegressor
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, cross_val_predict, train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -25,7 +26,7 @@ except ImportError:  # pragma: no cover - optional dependency
     XGBRegressor = None
 
 try:
-    from catboost import CatBoostRegressor
+    from sklearn_compat import CatBoostRegressor
 except ImportError:  # pragma: no cover - optional dependency
     CatBoostRegressor = None
 
@@ -36,6 +37,8 @@ SEGMENT_TYPES = ("Casa", "Apartamento")
 RARE_BAIRRO_MIN_COUNT = 10
 CLIP_QUANTILES = (0.02, 0.98)
 TOP_MODELS_PER_SEGMENT = 3
+CV_FOLDS = 5
+MIN_SEGMENT_ROWS = 30
 
 FEATURE_COLUMNS = [
     "area_total",
@@ -48,6 +51,19 @@ FEATURE_COLUMNS = [
 ]
 NUMERIC_COLUMNS = ["area_total", "area_privada", "quartos", "banheiros", "vagas"]
 CATEGORICAL_COLUMNS = ["bairro", "tipo_imovel"]
+
+
+MAX_LOG_PRICE = 21.0  # e^21 ≈ R$ 1,3 bilhão: teto para previsões em log
+
+
+def safe_expm1(values):
+    """Inverso do log1p com teto.
+
+    Modelos lineares em log(preço) extrapolam para imóveis com área muito fora do
+    padrão (ex.: terrenos/chácaras enormes) e o expm1 explode para valores
+    astronômicos, destruindo MAE/RMSE. O teto mantém a previsão num intervalo real.
+    """
+    return np.expm1(np.clip(values, 0.0, MAX_LOG_PRICE))
 
 
 def normalize_text(value):
@@ -275,6 +291,8 @@ def make_model_factories(seed=42):
             random_seed=seed,
             verbose=False,
         )
+    if tabpfn_enabled():
+        factories[TABPFN_NAME] = lambda: make_tabpfn(NUMERIC_COLUMNS, CATEGORICAL_COLUMNS, seed=seed)
     return factories
 
 
@@ -282,23 +300,70 @@ def build_regressor(name, *, seed=42, use_log=True):
     factories = make_model_factories(seed=seed)
     if name not in factories:
         raise ValueError(f"Modelo não suportado: {name}")
-    pipeline = Pipeline(
-        [
-            ("preprocess", make_preprocessor()),
-            ("model", factories[name]()),
-        ]
-    )
+    if name == TABPFN_NAME:
+        # TabPFN faz a própria codificação (sem one-hot/padronização).
+        pipeline = Pipeline([("model", factories[name]())])
+    else:
+        pipeline = Pipeline(
+            [
+                ("preprocess", make_preprocessor()),
+                ("model", factories[name]()),
+            ]
+        )
     if not use_log:
         return pipeline
     return TransformedTargetRegressor(
         regressor=pipeline,
         func=np.log1p,
-        inverse_func=np.expm1,
+        inverse_func=safe_expm1,
         check_inverse=False,
     )
 
 
+def add_price_per_m2(df):
+    work = df.copy()
+    area_ref = work["area_privada"].where(work["area_privada"] > 0, work["area_total"])
+    area_ref = area_ref.where(area_ref > 0)
+    work["preco_m2"] = work["preco"] / area_ref
+    return work
+
+
+def compute_iqr_bounds(df, columns=("preco", "preco_m2"), factor=1.5):
+    """Aprende os limites do IQR (mesma regra de remove_outliers_iqr), sem aplicá-los."""
+    bounds = {}
+    if df.empty:
+        return bounds
+    for column in columns:
+        if column not in df.columns:
+            continue
+        series = pd.to_numeric(df[column], errors="coerce").dropna()
+        series = series[series > 0]
+        if len(series) < 8:
+            continue
+        q1 = series.quantile(0.25)
+        q3 = series.quantile(0.75)
+        iqr = q3 - q1
+        if iqr <= 0:
+            continue
+        bounds[column] = (float(q1 - factor * iqr), float(q3 + factor * iqr))
+    return bounds
+
+
+def within_iqr_bounds(df, bounds):
+    """Máscara booleana: True para linhas dentro dos limites aprendidos."""
+    keep = pd.Series(True, index=df.index)
+    for column, (lower, upper) in bounds.items():
+        values = pd.to_numeric(df[column], errors="coerce")
+        keep &= values.between(lower, upper) | values.isna()
+    return keep
+
+
 def prepare_segment_frame(df, property_type):
+    """Preparo com a base INTEIRA do segmento.
+
+    Usado apenas para treinar o modelo FINAL (o que vai para produção). Não deve ser
+    usado para medir desempenho, porque aprende limites com todas as linhas.
+    """
     subset = df[df["tipo_imovel"].map(canonical_tipo) == property_type].copy()
     subset = subset[subset["preco"] > 0].copy()
     if subset.empty:
@@ -308,38 +373,74 @@ def prepare_segment_frame(df, property_type):
     clip_bounds = compute_numeric_clip_bounds(subset, columns=NUMERIC_COLUMNS, quantiles=CLIP_QUANTILES)
     subset = apply_rare_bairros(subset, rare_bairros)
     subset = apply_numeric_clip_bounds(subset, clip_bounds)
-    area_ref = subset["area_privada"].where(subset["area_privada"] > 0, subset["area_total"])
-    area_ref = area_ref.where(area_ref > 0)
-    subset["preco_m2"] = subset["preco"] / area_ref
+    subset = add_price_per_m2(subset)
     subset = remove_outliers_iqr(subset, columns=("preco", "preco_m2"), factor=1.5)
     subset = subset[subset["preco"] > 0].copy()
     return subset, rare_bairros, clip_bounds
 
 
-def evaluate_candidates(subset, seed=42, test_size=0.2):
-    X = subset[FEATURE_COLUMNS].copy()
-    y = subset["preco"].astype(float).to_numpy()
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=seed
-    )
+def split_and_prepare_segment(df, property_type, seed=42, test_size=0.2):
+    """Divide em treino/teste ANTES de qualquer pré-processamento.
+
+    Bairros raros, limites de clipagem e limites de outlier são aprendidos SOMENTE no
+    treino e depois aplicados ao teste. Outliers só são removidos do treino; o teste é
+    devolvido em duas versões:
+      - test_full:    todas as linhas do teste (cenário realista, com anúncios estranhos);
+      - test_typical: só as linhas dentro da faixa típica de preço (comparável aos
+                      relatórios antigos, que mediam apenas imóveis "sem outliers").
+    """
+    raw = df[df["tipo_imovel"].map(canonical_tipo) == property_type].copy()
+    raw = raw[raw["preco"] > 0].copy()
+    if len(raw) < MIN_SEGMENT_ROWS:
+        return None
+
+    train_raw, test_raw = train_test_split(raw, test_size=test_size, random_state=seed)
+
+    rare_bairros = compute_rare_bairros(train_raw, min_count=RARE_BAIRRO_MIN_COUNT)
+    clip_bounds = compute_numeric_clip_bounds(train_raw, columns=NUMERIC_COLUMNS, quantiles=CLIP_QUANTILES)
+
+    def transform(part):
+        part = apply_rare_bairros(part, rare_bairros)
+        part = apply_numeric_clip_bounds(part, clip_bounds)
+        return add_price_per_m2(part)
+
+    train = transform(train_raw)
+    test_full = transform(test_raw)
+
+    iqr_bounds = compute_iqr_bounds(train, columns=("preco", "preco_m2"), factor=1.5)
+    train = train[within_iqr_bounds(train, iqr_bounds)].copy()
+    train = train[train["preco"] > 0].copy()
+    test_typical = test_full[within_iqr_bounds(test_full, iqr_bounds)].copy()
+
+    return {
+        "train": train,
+        "test_full": test_full,
+        "test_typical": test_typical,
+        "iqr_bounds": iqr_bounds,
+    }
+
+
+def empty_metrics():
+    return {"mae": 0.0, "rmse": 0.0, "r2": 0.0, "mape": 0.0}
+
+
+def evaluate_candidates_cv(X_train, y_train, seed=42, cv_folds=CV_FOLDS):
+    """Ranking dos candidatos por validação cruzada DENTRO do treino.
+
+    O conjunto de teste não participa da escolha dos modelos nem dos pesos.
+    """
+    folds = int(max(2, min(cv_folds, len(X_train) // 10)))
+    cv = KFold(n_splits=folds, shuffle=True, random_state=seed)
     rows = []
     factories = make_model_factories(seed=seed)
     for use_log in (False, True):
         target_label = "log(preco)" if use_log else "preco"
         for name in factories:
             model = build_regressor(name, seed=seed, use_log=use_log)
-            model.fit(X_train, y_train)
-            preds = model.predict(X_test)
-            metrics = calculate_metrics(y_test, preds)
-            rows.append(
-                {
-                    "model": name,
-                    "target": target_label,
-                    **metrics,
-                }
-            )
+            preds = cross_val_predict(model, X_train, y_train, cv=cv)
+            rows.append({"model": name, "target": target_label, **calculate_metrics(y_train, preds)})
     rows.sort(key=lambda item: (item["mae"], item["rmse"]))
-    return rows, X, y, y_test, X_test
+    return rows, folds
 
 
 def fit_weighted_ensemble(X, y, selected_rows, seed=42):
@@ -373,26 +474,76 @@ def predict_weighted_ensemble(entries, X):
     return weighted
 
 
-def train_hybrid(df, seed=42, test_size=0.2):
+def score_on(entries, test_df):
+    """Retorna (métricas, y_verdadeiro, y_previsto) do ensemble em um conjunto de teste."""
+    if test_df.empty:
+        return empty_metrics(), np.array([]), np.array([])
+    X_test = test_df[FEATURE_COLUMNS].copy()
+    y_test = test_df["preco"].astype(float).to_numpy()
+    pred = predict_weighted_ensemble(entries, X_test)
+    return calculate_metrics(y_test, pred), y_test, np.asarray(pred, dtype=float)
+
+
+def train_hybrid(df, seed=42, test_size=0.2, cv_folds=CV_FOLDS):
+    """Treina o híbrido com avaliação sem vazamento.
+
+    Fluxo por segmento (Casa / Apartamento):
+      1. split treino/teste antes de qualquer pré-processamento;
+      2. pré-processamento aprendido só no treino;
+      3. ranking dos candidatos por validação cruzada no treino;
+      4. ensemble (top-N ponderado por 1/MAE de CV) treinado SÓ no treino;
+      5. métricas medidas no teste (nunca visto);
+      6. modelo FINAL (o que vai para produção) refeito com todos os dados.
+    """
     segments = {}
-    all_true = []
-    all_pred = []
+    typ_true, typ_pred = [], []
+    full_true, full_pred = [], []
 
     for property_type in SEGMENT_TYPES:
-        subset, rare_bairros, clip_bounds = prepare_segment_frame(df, property_type)
-        if len(subset) < 20:
+        split = split_and_prepare_segment(df, property_type, seed=seed, test_size=test_size)
+        if split is None:
+            continue
+        train, test_full, test_typical = split["train"], split["test_full"], split["test_typical"]
+        if len(train) < MIN_SEGMENT_ROWS // 2:
             continue
 
-        rows, X, y, y_test, X_test = evaluate_candidates(subset, seed=seed, test_size=test_size)
-        selected_rows = rows[:TOP_MODELS_PER_SEGMENT]
-        ensemble_entries = fit_weighted_ensemble(X, y, selected_rows, seed=seed)
-        segment_pred = predict_weighted_ensemble(ensemble_entries, X_test)
-        segment_metrics = calculate_metrics(y_test, segment_pred)
+        X_train = train[FEATURE_COLUMNS].copy()
+        y_train = train["preco"].astype(float).to_numpy()
 
-        all_true.extend(y_test.tolist())
-        all_pred.extend(segment_pred.tolist())
+        rows, folds_used = evaluate_candidates_cv(X_train, y_train, seed=seed, cv_folds=cv_folds)
+        selected_rows = rows[:TOP_MODELS_PER_SEGMENT]
+
+        # (4) ensemble treinado apenas com o treino -> usado só para medir desempenho
+        eval_entries = fit_weighted_ensemble(X_train, y_train, selected_rows, seed=seed)
+
+        # (5) métricas no teste, que o ensemble de avaliação nunca viu
+        metrics_typical, yt, pt = score_on(eval_entries, test_typical)
+        metrics_full, yf, pf = score_on(eval_entries, test_full)
+        typ_true.extend(yt.tolist())
+        typ_pred.extend(pt.tolist())
+        full_true.extend(yf.tolist())
+        full_pred.extend(pf.tolist())
+
+        individual_test = []
+        for entry in eval_entries:
+            if test_typical.empty:
+                individual_test.append(empty_metrics())
+                continue
+            preds = entry["estimator"].predict(test_typical[FEATURE_COLUMNS].copy())
+            individual_test.append(calculate_metrics(test_typical["preco"].astype(float).to_numpy(), preds))
+
+        # (6) modelo final: pré-processamento e treino com a base inteira do segmento
+        final_subset, rare_bairros, clip_bounds = prepare_segment_frame(df, property_type)
+        X_final = final_subset[FEATURE_COLUMNS].copy()
+        y_final = final_subset["preco"].astype(float).to_numpy()
+        final_entries = fit_weighted_ensemble(X_final, y_final, selected_rows, seed=seed)
+
         segments[property_type] = {
-            "rows": int(len(subset)),
+            "rows": int(len(final_subset)),
+            "train_rows": int(len(train)),
+            "test_rows": int(len(test_typical)),
+            "test_rows_full": int(len(test_full)),
+            "cv_folds": int(folds_used),
             "rare_bairros": sorted(rare_bairros),
             "clip_bounds": {k: list(v) for k, v in clip_bounds.items()},
             "leaderboard": rows,
@@ -402,35 +553,37 @@ def train_hybrid(df, seed=42, test_size=0.2):
                     "target": item["target"],
                     "weight": item["weight"],
                     "mae_validacao": item["mae_validacao"],
+                    "mae_teste": individual_test[i]["mae"],
+                    "r2_teste": individual_test[i]["r2"],
                 }
-                for item in ensemble_entries
+                for i, item in enumerate(final_entries)
             ],
-            "ensemble": ensemble_entries,
-            "metrics": segment_metrics,
+            "ensemble": final_entries,
+            "metrics": metrics_typical,
+            "metrics_full": metrics_full,
         }
 
     if not segments:
         raise RuntimeError("Dados insuficientes para treinar o modelo híbrido.")
 
-    overall = calculate_metrics(all_true, all_pred) if all_true else {
-        "mae": 0.0,
-        "rmse": 0.0,
-        "r2": 0.0,
-        "mape": 0.0,
-    }
+    overall = calculate_metrics(typ_true, typ_pred) if typ_true else empty_metrics()
+    overall_full = calculate_metrics(full_true, full_pred) if full_true else empty_metrics()
     return {
-        "kind": "hybrid_segmented_weighted_ensemble_v1",
+        "kind": "hybrid_segmented_weighted_ensemble_v2",
         "strategy": {
             "segments": list(SEGMENT_TYPES),
             "rare_bairro_min_count": RARE_BAIRRO_MIN_COUNT,
             "clip_quantiles": list(CLIP_QUANTILES),
-            "outlier_method": "IQR por segmento",
+            "outlier_method": "IQR por segmento (limites aprendidos só no treino)",
             "target_modes_tested": ["preco", "log(preco)"],
             "top_models_per_segment": TOP_MODELS_PER_SEGMENT,
-            "ensemble": "média ponderada por 1/MAE de validação",
+            "ensemble": "média ponderada por 1/MAE de validação cruzada (no treino)",
+            "cv_folds": int(cv_folds),
+            "evaluation": "split antes do pré-processamento; ensemble de avaliação treinado só no treino",
         },
         "segments": segments,
         "metrics": overall,
+        "metrics_full": overall_full,
         "seed": seed,
         "test_size": test_size,
         "trained_at": datetime.now().isoformat(),
@@ -438,6 +591,8 @@ def train_hybrid(df, seed=42, test_size=0.2):
 
 
 def build_report_markdown(artifact):
+    m = artifact["metrics"]
+    mf = artifact.get("metrics_full") or m
     lines = [
         "# Relatório do algoritmo híbrido",
         "",
@@ -445,44 +600,66 @@ def build_report_markdown(artifact):
         "- segmentação por **Casa** e **Apartamento**;",
         "- agrupamento de bairros raros;",
         "- clipagem de variáveis numéricas;",
-        "- remoção de outliers por IQR;",
+        "- remoção de outliers por IQR (somente no treino);",
         "- teste de alvo em `preco` e `log(preco)`.",
         "",
         "Depois disso, ele junta os melhores modelos em um ensemble ponderado por MAE.",
         "",
+        "## Como as métricas foram medidas",
+        "",
+        "- O conjunto de teste é separado **antes** de qualquer pré-processamento e nunca é usado",
+        "  para escolher modelos, pesos, bairros raros, limites de clipagem ou limites de outlier.",
+        "- Os candidatos são ranqueados por **validação cruzada dentro do treino**.",
+        "- O ensemble usado para medir desempenho é treinado **somente com o treino**.",
+        "  O modelo final (salvo para previsão) é retreinado depois com todos os dados.",
+        "- **Teste típico**: imóveis do teste dentro da faixa normal de preço (sem outliers).",
+        "- **Teste completo**: todos os imóveis do teste, inclusive anúncios com preço atípico.",
+        "",
         "## Resultado geral (ensemble híbrido)",
         "",
-        f"- MAE: {format_currency(artifact['metrics']['mae'])}",
-        f"- RMSE: {format_currency(artifact['metrics']['rmse'])}",
-        f"- R²: {artifact['metrics']['r2']:.4f}",
-        f"- MAPE: {artifact['metrics']['mape']:.2f}%",
+        "| Conjunto de teste | MAE | RMSE | R² | MAPE |",
+        "|---|---:|---:|---:|---:|",
+        f"| Típico (sem outliers) | {format_currency(m['mae'])} | {format_currency(m['rmse'])} | {m['r2']:.4f} | {m['mape']:.2f}% |",
+        f"| Completo (com outliers) | {format_currency(mf['mae'])} | {format_currency(mf['rmse'])} | {mf['r2']:.4f} | {mf['mape']:.2f}% |",
         "",
     ]
     for segment_name, segment in artifact["segments"].items():
+        sm = segment["metrics"]
+        sf = segment.get("metrics_full") or sm
         lines.extend(
             [
                 f"## Segmento: {segment_name}",
                 "",
-                f"- Registros usados: {segment['rows']}",
-                f"- MAE do ensemble: {format_currency(segment['metrics']['mae'])}",
-                f"- RMSE do ensemble: {format_currency(segment['metrics']['rmse'])}",
-                f"- R² do ensemble: {segment['metrics']['r2']:.4f}",
-                f"- MAPE do ensemble: {segment['metrics']['mape']:.2f}%",
+                f"- Registros no modelo final: {segment['rows']}",
+                f"- Treino (após limpeza): {segment.get('train_rows', '-')} | "
+                f"Teste típico: {segment.get('test_rows', '-')} | "
+                f"Teste completo: {segment.get('test_rows_full', '-')}",
+                f"- Validação cruzada: {segment.get('cv_folds', '-')} folds",
+                "",
+                "| Conjunto de teste | MAE | RMSE | R² | MAPE |",
+                "|---|---:|---:|---:|---:|",
+                f"| Típico (sem outliers) | {format_currency(sm['mae'])} | {format_currency(sm['rmse'])} | {sm['r2']:.4f} | {sm['mape']:.2f}% |",
+                f"| Completo (com outliers) | {format_currency(sf['mae'])} | {format_currency(sf['rmse'])} | {sf['r2']:.4f} | {sf['mape']:.2f}% |",
                 "",
                 "### Modelos escolhidos no ensemble",
                 "",
-                "| Modelo | Alvo | Peso | MAE validação |",
-                "|---|---|---:|---:|",
+                "| Modelo | Alvo | Peso | MAE validação cruzada | MAE no teste típico | R² no teste típico |",
+                "|---|---|---:|---:|---:|---:|",
             ]
         )
         for row in segment["selected"]:
+            mae_teste = row.get("mae_teste")
+            r2_teste = row.get("r2_teste")
             lines.append(
-                f"| {row['model_name']} | {row['target']} | {row['weight']:.3f} | {format_currency(row['mae_validacao'])} |"
+                f"| {row['model_name']} | {row['target']} | {row['weight']:.3f} | "
+                f"{format_currency(row['mae_validacao'])} | "
+                f"{format_currency(mae_teste) if mae_teste is not None else '-'} | "
+                f"{f'{r2_teste:.4f}' if r2_teste is not None else '-'} |"
             )
         lines.extend(
             [
                 "",
-                "### Top 10 do benchmark do segmento",
+                "### Top 10 do ranking (validação cruzada no treino)",
                 "",
                 "| Modelo | Alvo | MAE | RMSE | R² | MAPE |",
                 "|---|---|---:|---:|---:|---:|",
@@ -498,14 +675,17 @@ def build_report_markdown(artifact):
 
 
 def save_artifact(artifact, model_path):
-    model_path = Path(model_path)
-    model_path.parent.mkdir(parents=True, exist_ok=True)
-    joblib.dump(artifact, model_path)
+    save_model(artifact, model_path)
 
 
 def load_artifact(model_path):
-    artifact = joblib.load(model_path)
-    if not isinstance(artifact, dict) or artifact.get("kind") != "hybrid_segmented_weighted_ensemble_v1":
+    # Modelos treinados rodando este arquivo como script guardam `__main__.safe_expm1`.
+    # Quem carrega de outro módulo (projeção, interface) precisa encontrá-la lá.
+    main_module = sys.modules.get("__main__")
+    if main_module is not None and not hasattr(main_module, "safe_expm1"):
+        main_module.safe_expm1 = safe_expm1
+    artifact = load_model(model_path)
+    if not isinstance(artifact, dict) or artifact.get("kind") not in ("hybrid_segmented_weighted_ensemble_v1", "hybrid_segmented_weighted_ensemble_v2"):
         raise SystemExit("Arquivo de modelo híbrido inválido.")
     return artifact
 
@@ -538,33 +718,37 @@ def predict_price(artifact, area_total, area_privada, bairro, tipo_imovel, quart
 
 def cmd_benchmark(args):
     df = load_training_frame(Path(args.normalized_db or DEFAULT_NORMALIZED_DB))
-    artifact = train_hybrid(df, seed=args.seed, test_size=args.test_size)
+    artifact = train_hybrid(df, seed=args.seed, test_size=args.test_size, cv_folds=args.cv_folds)
     report_path = Path(args.report_path or DEFAULT_REPORT_PATH)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(build_report_markdown(artifact), encoding="utf-8")
 
     print(f"Relatorio salvo em {report_path}")
+    mt = artifact["metrics"]
+    mf = artifact["metrics_full"]
     print(
-        f"Ensemble híbrido | MAE={artifact['metrics']['mae']:.2f} "
-        f"RMSE={artifact['metrics']['rmse']:.2f} R2={artifact['metrics']['r2']:.4f} "
-        f"MAPE={artifact['metrics']['mape']:.2f}%"
+        f"Ensemble híbrido (teste típico)   | MAE={mt['mae']:.2f} RMSE={mt['rmse']:.2f} R2={mt['r2']:.4f}"
+    )
+    print(
+        f"Ensemble híbrido (teste completo) | MAE={mf['mae']:.2f} RMSE={mf['rmse']:.2f} R2={mf['r2']:.4f}"
     )
     for segment_name, segment in artifact["segments"].items():
         best = segment["leaderboard"][0]
         print(
-            f"[{segment_name}] melhor individual: {best['model']} ({best['target']}) "
-            f"MAE={best['mae']:.2f} | ensemble MAE={segment['metrics']['mae']:.2f}"
+            f"[{segment_name}] melhor individual (CV): {best['model']} ({best['target']}) "
+            f"MAE={best['mae']:.2f} | ensemble no teste MAE={segment['metrics']['mae']:.2f}"
         )
 
 
 def cmd_train(args):
     df = load_training_frame(Path(args.normalized_db or DEFAULT_NORMALIZED_DB))
-    artifact = train_hybrid(df, seed=args.seed, test_size=args.test_size)
+    artifact = train_hybrid(df, seed=args.seed, test_size=args.test_size, cv_folds=args.cv_folds)
     save_artifact(artifact, Path(args.model_path or DEFAULT_MODEL_PATH))
     print(f"Modelo híbrido salvo em {args.model_path or DEFAULT_MODEL_PATH}")
     print(
-        f"MAE={artifact['metrics']['mae']:.2f} RMSE={artifact['metrics']['rmse']:.2f} "
-        f"R2={artifact['metrics']['r2']:.4f} MAPE={artifact['metrics']['mape']:.2f}%"
+        f"[teste típico] MAE={artifact['metrics']['mae']:.2f} RMSE={artifact['metrics']['rmse']:.2f} "
+        f"R2={artifact['metrics']['r2']:.4f} | "
+        f"[teste completo] MAE={artifact['metrics_full']['mae']:.2f} R2={artifact['metrics_full']['r2']:.4f}"
     )
 
 
@@ -614,6 +798,7 @@ def build_parser():
     )
     p_benchmark.add_argument("--seed", type=int, default=42, help="Seed do split.")
     p_benchmark.add_argument("--test-size", type=float, default=0.2, help="Proporção de teste.")
+    p_benchmark.add_argument("--cv-folds", type=int, default=CV_FOLDS, help="Folds da validação cruzada.")
     p_benchmark.set_defaults(func=cmd_benchmark)
 
     p_train = subparsers.add_parser("train-hibrido", help="Treina o modelo híbrido.")
@@ -621,6 +806,7 @@ def build_parser():
     p_train.add_argument("--model-path", default=str(DEFAULT_MODEL_PATH), help="Arquivo do modelo.")
     p_train.add_argument("--seed", type=int, default=42, help="Seed do split.")
     p_train.add_argument("--test-size", type=float, default=0.2, help="Proporção de teste.")
+    p_train.add_argument("--cv-folds", type=int, default=CV_FOLDS, help="Folds da validação cruzada.")
     p_train.set_defaults(func=cmd_train)
 
     p_predict = subparsers.add_parser(
@@ -647,4 +833,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # Executa pelo módulo importado para que os modelos salvos referenciem
+    # `imoveis_ml_hibrido.safe_expm1` (e não `__main__`), podendo ser abertos em outros scripts.
+    import imoveis_ml_hibrido
+
+    imoveis_ml_hibrido.main()

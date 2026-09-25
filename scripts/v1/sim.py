@@ -93,7 +93,7 @@ while True:
         "&condominio%5Bcodigo%5D=0&condominio%5Bnome%5D=&condominio%5BnomeUrl%5D=todos-os-condominios"
     )
 
-    r = requests.post(URL, data=form_data, headers=HEADERS)
+    r = requests.post(URL, data=form_data, headers=HEADERS, timeout=30)
     data = r.json()
 
     results = data.get("lista", [])

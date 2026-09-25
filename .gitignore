@@ -44,3 +44,8 @@ catboost_info/
 *.log
 *.tmp
 *.swp
+
+# Configuração local / segredos
+.env
+.env.*
+!.env.example

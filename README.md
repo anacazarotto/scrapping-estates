@@ -67,7 +67,40 @@ Para o benchmark comparativo, também são necessários:
 pip install scikit-learn xgboost catboost
 ```
 
-### 4. Ferramentas de qualidade (Black, isort, Flake8)
+### 4. (Opcional) TabPFN v2
+
+O TabPFN v2 (foundation model para dados tabulares) entra automaticamente nos
+benchmarks (`benchmark`, `benchmark-alt`, `benchmark-hibrido`) quando está instalado:
+
+```bash
+pip install -r requirements-tabpfn.txt
+```
+
+Na primeira execução os pesos `Prior-Labs/TabPFN-v2-reg` são baixados do Hugging Face.
+O modelo usa no máximo 10.000 linhas de treino (acima disso, subamostra) e recebe
+bairro/tipo como categorias (sem one-hot). Para rodar sem ele: `DISABLE_TABPFN=1`.
+
+### 5. Configuração (`.env`) e tokens
+
+Tokens das APIs das imobiliárias **não ficam mais no código**. Copie o exemplo e preencha:
+
+```bash
+cp .env.example .env
+```
+
+| Chave | Usada por |
+|---|---|
+| `MARKIZE_API_TOKEN` | `scripts/markize_v2.py` |
+| `PADRA_API_TOKEN` | `scripts/padra_v2.py` |
+| `SANTAMARIA_API_TOKEN` | `scripts/santamaria_v2.py` |
+| `MODEL_SIGNING_KEY` | assinatura dos modelos `.pkl` (recomendado) |
+
+Os modelos salvos por `train-alt` e `train-hibrido` recebem um arquivo `.sig` ao lado.
+O carregamento só acontece se a assinatura conferir, evitando executar um `.pkl`
+adulterado (pickle executa código ao ser aberto). Modelos antigos sem `.sig`
+precisam ser treinados de novo.
+
+### 6. Ferramentas de qualidade (Black, isort, Flake8)
 
 As ferramentas `black`, `isort` e `flake8` ja estao no `requirements.txt`.
 
@@ -123,6 +156,75 @@ make run-all IMOVEIS_DB=imoveis2.db
 ```
 
 ## 🤖 Normalização e previsão
+
+### Histórico de preços (base para valorização)
+
+O `unify` agora grava, além da tabela `imoveis` (registro mais recente de cada imóvel),
+a tabela `historico_precos` em `imoveis_unificado.db`, com uma linha por imóvel e data de
+coleta (extraída do nome `imoveis_DD_MM_AAAA.db`). É a partir dela que se estuda a
+valorização mensal. Rode os scrapers periodicamente (`make run-all`) para acumular meses.
+
+### Modelo de valorização (`scripts_predict/imoveis_valorizacao.py`)
+
+Prevê a variação do preço anunciado de um imóvel em `h` meses (padrão 1) a partir do
+histórico. Precisa de pelo menos `h + 2` meses de coletas.
+
+1. Copie todos os bancos `imoveis_DD_MM_AAAA.db` das coletas para a raiz do projeto.
+2. Rode:
+
+```bash
+make benchmark-valorizacao                 # unify + comparação de modelos (teste temporal)
+make benchmark-valorizacao ARGS="--horizonte 2"
+make train-valorizacao
+make predict-valorizacao ARGS="--bairro Centro --tipo-imovel Apartamento --area-privada 90 --quartos 3 --banheiros 2 --vagas 1 --preco-atual 900000 --meses-anunciado 3"
+```
+
+Saídas: `docs/reports/modelo_valorizacao.md` (modelos vs. baselines "preço não muda" e
+"média do segmento", classificador de chance de redução de preço e índice acumulado por
+bairro) e `docs/reports/indice_valorizacao_bairros.csv`.
+
+Validação é temporal: o último mês é o teste e nunca entra no treino. Limitações: preço
+anunciado não é preço de venda; imóveis vendidos saem do painel (viés de sobrevivência).
+
+### Projeção ao longo dos anos e interface (`imoveis_projecao.py`, `interface/app.py`)
+
+Estima quanto um imóvel vale hoje e quanto pode valer nos próximos anos:
+
+1. **Valor hoje**: modelo de preço híbrido (`train-hibrido`), a partir de bairro, tipo,
+   áreas, quartos, banheiros e vagas.
+2. **Valorização anual**: variação do preço anunciado dos *mesmos* imóveis entre as
+   coletas, anualizada por bairro + tipo. Bairros com poucos imóveis são puxados para a
+   taxa do tipo (peso = n / (n + 30)); a faixa pessimista/otimista vem de bootstrap por
+   imóvel (percentis 10 e 90). Relatório: `docs/reports/taxas_valorizacao_anual.md`.
+3. **Referência (IPCA)**: cenário "acompanhando a inflação", com o IPCA oficial baixado da API
+   do Banco Central (SGS série 433) e guardado em `dados/ipca.json`. Padrão: média anual dos
+   últimos 10 anos; opção: acumulado de 12 meses (`--referencia ipca-12m`). Não há FipeZap
+   para Chapecó.
+
+```bash
+python scripts_predict/imoveis_ml.py normalize --source-db imoveis_unificado.db --output-db imoveis_normalizados.db
+DISABLE_TABPFN=1 python scripts_predict/imoveis_ml_hibrido.py train-hibrido --normalized-db imoveis_normalizados.db --model-path modelos/preco_imovel_modelo_hibrido_rapido.pkl
+python scripts_predict/imoveis_projecao.py train-projecao
+python scripts_predict/imoveis_projecao.py projetar --bairro Centro --tipo-imovel Apartamento --area-privada 90 --area-total 120 --quartos 3 --banheiros 2 --vagas 2 --anos 10
+streamlit run interface/app.py
+```
+
+O modelo usado na interface e no `projetar` é treinado **sem TabPFN** (`_rapido.pkl`):
+na CPU o TabPFN leva ~2 min por previsão, e na mesma base a diferença de erro foi < 1%
+(MAE R$ 200,7 mil sem TabPFN contra R$ 199,4 mil com TabPFN). O modelo com TabPFN fica
+como resultado do benchmark.
+
+Grafias diferentes do mesmo bairro são unificadas no `unify` (`BAIRRO_ALIASES` em
+`scripts_predict/imoveis_ml.py`, ex.: "Presidente Medice" → "Presidente Medici").
+
+A interface abre no navegador (http://localhost:8501) com três abas: estimativa
+(formulário + gráfico ano a ano), valorização por bairro e desempenho dos modelos.
+
+### Como as métricas são medidas
+
+Em todos os scripts o teste é separado **antes** de qualquer pré-processamento: bairros
+raros, clipagem e limites de outlier (IQR) são aprendidos só no treino. A escolha de
+modelos/hiperparâmetros usa validação cruzada no treino; o teste é usado uma única vez.
 
 ```bash
 make unify-db

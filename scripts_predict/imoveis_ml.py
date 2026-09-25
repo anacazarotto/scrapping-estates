@@ -2,7 +2,6 @@ import argparse
 import hashlib
 import json
 import re
-import pickle
 import sqlite3
 import statistics
 import unicodedata
@@ -10,16 +9,18 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from io import BytesIO
 from pathlib import Path
+from urllib.parse import urlparse
 
 import numpy as np
 import pandas as pd
 import requests
+from tabpfn_model import TABPFN_NAME, make_tabpfn, tabpfn_enabled
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, cross_val_predict, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import TransformedTargetRegressor
@@ -30,7 +31,7 @@ except ImportError:  # pragma: no cover - optional dependency
     XGBRegressor = None
 
 try:
-    from catboost import CatBoostRegressor
+    from sklearn_compat import CatBoostRegressor
 except ImportError:  # pragma: no cover - optional dependency
     CatBoostRegressor = None
 
@@ -220,6 +221,19 @@ NUMERIC_COLUMNS = ["area_total", "area_privada", "quartos", "banheiros", "vagas"
 CATEGORICAL_COLUMNS = ["bairro", "tipo_imovel"]
 
 
+MAX_LOG_PRICE = 21.0  # e^21 ≈ R$ 1,3 bilhão: teto para previsões em log
+
+
+def safe_expm1(values):
+    """Inverso do log1p com teto.
+
+    Modelos lineares em log(preço) extrapolam para imóveis com área muito fora do
+    padrão (ex.: terrenos/chácaras enormes) e o expm1 explode para valores
+    astronômicos, destruindo MAE/RMSE. O teto mantém a previsão num intervalo real.
+    """
+    return np.expm1(np.clip(values, 0.0, MAX_LOG_PRICE))
+
+
 def normalize_text(value):
     if value is None:
         return ""
@@ -282,6 +296,17 @@ def canonical_tipo(value):
 def canonical_bairro(value):
     text = normalize_text(value)
     return text if text else "sem bairro"
+
+
+# Grafias diferentes do mesmo bairro vindas das imobiliárias (chave já normalizada).
+BAIRRO_ALIASES = {
+    "presidente medice": "Presidente Medici",
+}
+
+
+def unify_bairro(value):
+    """Troca grafias alternativas conhecidas pelo nome oficial do bairro."""
+    return BAIRRO_ALIASES.get(normalize_text(value), value)
 
 
 def canonical_endereco(value, street_only=False):
@@ -349,7 +374,7 @@ def infer_group_keys(row):
     )
 
     keys = []
-    bairro = normalize_text(row["bairro"])
+    bairro = normalize_text(unify_bairro(row["bairro"]))
     if bairro:
         keys.append(("bairro",) + base + (bairro,))
 
@@ -376,10 +401,10 @@ def extract_codigo(row):
 
     imovel_id = row.get("id")
     if imovel_id not in (None, ""):
-        imovel_id = str(imovel_id).strip()
-        if "-" in imovel_id:
-            return imovel_id.split("-", 1)[1]
-        return imovel_id
+        # Mantém o prefixo da imobiliária (ex.: "C-123"). Antes o prefixo era
+        # removido, e imóveis DIFERENTES de imobiliárias diferentes com o mesmo
+        # número (C-123 e P-123) eram fundidos num só registro.
+        return str(imovel_id).strip()
 
     return ""
 
@@ -410,8 +435,10 @@ def parse_datetime(value):
 
 
 def db_has_column(conn, table_name, column_name):
+    if not str(table_name).isidentifier():
+        raise ValueError(f"Nome de tabela inválido: {table_name!r}")
     cur = conn.cursor()
-    cols = [row[1] for row in cur.execute(f"PRAGMA table_info({table_name})")]
+    cols = [row[0] for row in cur.execute("SELECT name FROM pragma_table_info(?)", (table_name,))]
     return column_name in cols
 
 
@@ -441,7 +468,7 @@ def print_property_types():
 
 def build_group_id(key):
     raw = json.dumps(key, ensure_ascii=False, separators=(",", ":"))
-    digest = hashlib.sha1(raw.encode("utf-8")).hexdigest()[:16]
+    digest = hashlib.sha1(raw.encode("utf-8"), usedforsecurity=False).hexdigest()[:16]
     return f"NR-{digest}"
 
 
@@ -462,18 +489,45 @@ def build_image_hash(content):
         return ""
 
 
+MAX_IMAGE_BYTES = 5 * 1024 * 1024  # 5 MB
+
+
+def download_limited(session, url, max_bytes=MAX_IMAGE_BYTES, timeout=20):
+    """Baixa uma imagem com limite de tamanho e checagem de content-type.
+
+    Evita que uma URL maliciosa/gigante (vinda dos dados raspados) esgote memória.
+    """
+    with session.get(url, timeout=timeout, stream=True, allow_redirects=True) as response:
+        response.raise_for_status()
+        content_type = response.headers.get("Content-Type", "")
+        if content_type and not content_type.lower().startswith("image/"):
+            return b""
+        declared = response.headers.get("Content-Length")
+        if declared and declared.isdigit() and int(declared) > max_bytes:
+            return b""
+        chunks, total = [], 0
+        for chunk in response.iter_content(chunk_size=64 * 1024):
+            total += len(chunk)
+            if total > max_bytes:
+                return b""
+            chunks.append(chunk)
+        return b"".join(chunks)
+
+
 def fetch_image_hash(image_url, session, cache):
     if not image_url or Image is None or ImageOps is None:
         return ""
     if image_url in cache:
         return cache[image_url]
 
-    try:
-        response = session.get(image_url, timeout=20)
-        response.raise_for_status()
-        image_hash = build_image_hash(response.content)
-    except Exception:
-        image_hash = ""
+    image_hash = ""
+    if urlparse(str(image_url)).scheme in ("http", "https"):
+        try:
+            content = download_limited(session, image_url)
+            if content:
+                image_hash = build_image_hash(content)
+        except (requests.RequestException, ValueError):
+            image_hash = ""
 
     cache[image_url] = image_hash
     return image_hash
@@ -554,33 +608,55 @@ def are_visual_duplicates(left, right):
     return True
 
 
+SOURCE_OPTIONAL_COLUMNS = ("codigo", "endereco", "imagem_url")
+SOURCE_BASE_COLUMNS = (
+    "id", "preco", "preco_m2", "bairro", "cidade", "tipo_imovel",
+    "area_total", "area_privada", "quartos", "banheiros", "vagas",
+    "date_registration", "data_insercao", "data_atualizacao",
+)
+
+
+def build_source_select(conn):
+    """Monta o SELECT das bases brutas usando SOMENTE nomes de coluna fixos (whitelist).
+
+    Nenhum valor vindo de dados/usuário entra na query; colunas opcionais que não
+    existem em bases antigas viram NULL.
+    """
+    columns = [
+        col if db_has_column(conn, "imoveis", col) else f"NULL AS {col}"
+        for col in SOURCE_OPTIONAL_COLUMNS
+    ]
+    columns.extend(SOURCE_BASE_COLUMNS)
+    query = "SELECT " + ", ".join(columns)  # nosec B608 - colunas de whitelist fixa
+    return query + " FROM imoveis WHERE preco IS NOT NULL AND preco > 0"
+
+
 def read_source_rows(source_db):
     conn = sqlite3.connect(source_db)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
-    has_codigo = db_has_column(conn, "imoveis", "codigo")
-    has_endereco = db_has_column(conn, "imoveis", "endereco")
-    has_imagem_url = db_has_column(conn, "imoveis", "imagem_url")
-    codigo_select = "codigo" if has_codigo else "NULL AS codigo"
-    endereco_select = "endereco" if has_endereco else "NULL AS endereco"
-    imagem_select = "imagem_url" if has_imagem_url else "NULL AS imagem_url"
-
-    rows = cur.execute(
-        f"""
-        SELECT
-            {codigo_select},
-            {endereco_select},
-            {imagem_select},
-            id, preco, preco_m2, bairro, cidade, tipo_imovel,
-            area_total, area_privada, quartos, banheiros, vagas,
-            date_registration, data_insercao, data_atualizacao
-        FROM imoveis
-        WHERE preco IS NOT NULL AND preco > 0
-        """
-    ).fetchall()
+    rows = cur.execute(build_source_select(conn)).fetchall()
     conn.close()
     return [dict(row) for row in rows]
+
+
+SNAPSHOT_NAME_RE = re.compile(r"(\d{2})_(\d{2})_(\d{4})")
+
+
+def collection_date(item):
+    """Data em que o preço foi observado: pelo nome do arquivo (imoveis_DD_MM_AAAA.db)
+    ou, na falta dele, pela data de atualização/inserção do registro."""
+    match = SNAPSHOT_NAME_RE.search(Path(str(item.get("_source_db") or "")).name)
+    if match:
+        day, month, year = (int(v) for v in match.groups())
+        try:
+            return datetime(year, month, day)
+        except ValueError:
+            pass
+    return parse_datetime(item.get("data_atualizacao")) or parse_datetime(
+        item.get("data_insercao")
+    )
 
 
 def merge_source_dbs(source_dbs, output_db):
@@ -589,25 +665,7 @@ def merge_source_dbs(source_dbs, output_db):
         conn = sqlite3.connect(db_path)
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
-        has_codigo = db_has_column(conn, "imoveis", "codigo")
-        has_endereco = db_has_column(conn, "imoveis", "endereco")
-        has_imagem_url = db_has_column(conn, "imoveis", "imagem_url")
-        codigo_select = "codigo" if has_codigo else "NULL AS codigo"
-        endereco_select = "endereco" if has_endereco else "NULL AS endereco"
-        imagem_select = "imagem_url" if has_imagem_url else "NULL AS imagem_url"
-        rows = cur.execute(
-            f"""
-            SELECT
-                {codigo_select},
-                {endereco_select},
-                {imagem_select},
-                id, preco, preco_m2, bairro, cidade, tipo_imovel,
-                area_total, area_privada, quartos, banheiros, vagas,
-                date_registration, data_insercao, data_atualizacao
-            FROM imoveis
-            WHERE preco IS NOT NULL AND preco > 0
-            """
-        ).fetchall()
+        rows = cur.execute(build_source_select(conn)).fetchall()
         conn.close()
         for row in rows:
             record = dict(row)
@@ -734,6 +792,7 @@ def merge_source_dbs(source_dbs, output_db):
                 if has_value(value):
                     merged[field] = value
 
+        merged["bairro"] = unify_bairro(merged["bairro"])
         merged["quartos"] = safe_int(merged["quartos"])
         merged["banheiros"] = safe_int(merged["banheiros"])
         merged["vagas"] = safe_int(merged["vagas"])
@@ -781,6 +840,46 @@ def merge_source_dbs(source_dbs, output_db):
                 "source_count": len(items),
             }
         )
+
+    # Histórico de preços: uma linha por (imóvel, data de coleta). A tabela `imoveis`
+    # guarda só o registro mais recente; é este histórico que permite estudar a
+    # valorização de cada imóvel ao longo dos meses.
+    cur.execute(
+        """
+        CREATE TABLE historico_precos (
+            codigo TEXT NOT NULL,
+            data_coleta TEXT NOT NULL,
+            preco REAL,
+            preco_m2 REAL,
+            source_id TEXT,
+            source_db TEXT,
+            PRIMARY KEY (codigo, data_coleta, source_db)
+        )
+        """
+    )
+    historico = []
+    for codigo, items in grouped.items():
+        for item in items:
+            preco = safe_float(item.get("preco"))
+            if preco <= 0:
+                continue
+            coleta = collection_date(item)
+            if coleta is None:
+                continue
+            area_ref = safe_float(item.get("area_privada")) or safe_float(item.get("area_total"))
+            historico.append(
+                (
+                    codigo,
+                    coleta.date().isoformat(),
+                    preco,
+                    round(preco / area_ref, 6) if area_ref else None,
+                    str(item.get("id") or ""),
+                    str(item.get("_source_db") or ""),
+                )
+            )
+    cur.executemany(
+        "INSERT OR REPLACE INTO historico_precos VALUES (?, ?, ?, ?, ?, ?)", historico
+    )
 
     cur.executemany(
         """
@@ -877,7 +976,7 @@ def aggregate_cluster(key, items):
     area_privada_values = list_non_zero([safe_float(r["area_privada"]) for r in items])
     area_values = list_non_zero([canonical_area(r) for r in items])
 
-    bairro = mode_or_none([r["bairro"] for r in items]) or ""
+    bairro = mode_or_none([unify_bairro(r["bairro"]) for r in items]) or ""
     endereco_values = [r.get("endereco") for r in items]
     imagem_values = [r.get("imagem_url") for r in items]
     imagem_hashes = [r.get("_imagem_hash") for r in items if r.get("_imagem_hash")]
@@ -1217,25 +1316,31 @@ def make_model_factories(seed=42):
             verbose=False,
         )
 
+    if tabpfn_enabled():
+        factories[TABPFN_NAME] = lambda: make_tabpfn(NUMERIC_COLUMNS, CATEGORICAL_COLUMNS, seed=seed)
+
     return factories
 
 
 def build_regressor(name, seed=42):
-    preprocessor = make_preprocessor()
     factories = make_model_factories(seed=seed)
     if name not in factories:
         raise ValueError(f"Modelo desconhecido: {name}")
     regressor = factories[name]()
-    pipeline = Pipeline(
-        steps=[
-            ("preprocess", preprocessor),
-            ("model", regressor),
-        ]
-    )
+    if name == TABPFN_NAME:
+        # TabPFN faz a própria codificação (sem one-hot/padronização).
+        pipeline = Pipeline(steps=[("model", regressor)])
+    else:
+        pipeline = Pipeline(
+            steps=[
+                ("preprocess", make_preprocessor()),
+                ("model", regressor),
+            ]
+        )
     return TransformedTargetRegressor(
         regressor=pipeline,
         func=np.log1p,
-        inverse_func=np.expm1,
+        inverse_func=safe_expm1,
         check_inverse=False,
     )
 
@@ -1295,108 +1400,147 @@ def remove_outliers_iqr(df, columns=("preco", "preco_m2"), by_type=True, factor=
     return work[keep].copy()
 
 
-def benchmark_ridge_variant(df, *, use_log=False, seed=42, test_size=0.2):
-    X = df[FEATURE_COLUMNS].copy()
-    y = df["preco"].astype(float).to_numpy()
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=seed
-    )
+def add_price_per_m2(df):
+    work = df.copy()
+    area_ref = work["area_privada"].where(work["area_privada"] > 0, work["area_total"])
+    area_ref = area_ref.where(area_ref > 0)
+    work["preco_m2"] = work["preco"] / area_ref
+    return work
 
-    model = build_regressor("Ridge", seed=seed) if use_log else Pipeline(
+
+def compute_iqr_bounds(df, columns=("preco", "preco_m2"), factor=1.5, by_type=False):
+    """Aprende os limites do IQR (mesma regra de remove_outliers_iqr) sem aplicá-los.
+
+    Com by_type=True devolve {tipo: {coluna: (min, max)}}; senão {"all": {...}}.
+    """
+    bounds = {}
+    if df.empty:
+        return bounds
+    groups = (
+        list(df.groupby(df["tipo_imovel"].map(canonical_tipo))) if by_type else [("all", df)]
+    )
+    for group_name, group in groups:
+        group_bounds = {}
+        for column in columns:
+            if column not in group.columns:
+                continue
+            series = pd.to_numeric(group[column], errors="coerce").dropna()
+            series = series[series > 0]
+            if len(series) < 8:
+                continue
+            q1 = series.quantile(0.25)
+            q3 = series.quantile(0.75)
+            iqr = q3 - q1
+            if iqr <= 0:
+                continue
+            group_bounds[column] = (float(q1 - factor * iqr), float(q3 + factor * iqr))
+        bounds[group_name] = group_bounds
+    return bounds
+
+
+def within_iqr_bounds(df, bounds):
+    """Máscara booleana: True para linhas dentro dos limites aprendidos (no treino)."""
+    keep = pd.Series(True, index=df.index)
+    if df.empty or not bounds:
+        return keep
+    if set(bounds) == {"all"}:
+        group_keys = pd.Series("all", index=df.index)
+    else:
+        group_keys = df["tipo_imovel"].map(canonical_tipo)
+    for group_name, group_bounds in bounds.items():
+        in_group = group_keys == group_name
+        for column, (lower, upper) in group_bounds.items():
+            values = pd.to_numeric(df[column], errors="coerce")
+            ok = values.between(lower, upper) | values.isna()
+            keep &= ~in_group | ok
+    return keep
+
+
+def make_ridge_variant(use_log=False, seed=42):
+    if use_log:
+        return build_regressor("Ridge", seed=seed)
+    return Pipeline(
         steps=[
             ("preprocess", make_preprocessor()),
             ("model", Ridge(alpha=5.0)),
         ]
     )
 
-    if use_log:
-        model.fit(X_train, y_train)
-        preds = model.predict(X_test)
-    else:
-        model.fit(X_train, y_train)
-        preds = model.predict(X_test)
 
-    return calculate_metrics(y_test, preds), model
-
-
-def benchmark_separate_by_type(df, seed=42, test_size=0.2):
-    rows = []
-    all_true = []
-    all_pred = []
-    for tipo in ("Casa", "Apartamento"):
-        subset = df[df["tipo_imovel"].map(canonical_tipo) == tipo].copy()
-        if len(subset) < 10:
-            continue
-        metrics, model = benchmark_ridge_variant(subset, use_log=False, seed=seed, test_size=test_size)
-        rows.append({"model": f"{tipo} (modelo separado)", **metrics, "n": len(subset)})
-
-        X = subset[FEATURE_COLUMNS].copy()
-        y = subset["preco"].astype(float).to_numpy()
-        _, X_test, _, y_test = train_test_split(X, y, test_size=test_size, random_state=seed)
-        preds = model.predict(X_test)
-        all_true.extend(y_test.tolist())
-        all_pred.extend(preds.tolist())
-
-    combined = calculate_metrics(all_true, all_pred) if all_true else {
-        "mae": 0.0, "rmse": 0.0, "r2": 0.0, "mape": 0.0
-    }
-    return rows, combined
+def fit_and_score(train_df, test_df, *, use_log=False, seed=42):
+    """Treina no treino e mede no teste informado. Retorna (métricas, y_true, y_pred)."""
+    model = make_ridge_variant(use_log=use_log, seed=seed)
+    model.fit(train_df[FEATURE_COLUMNS].copy(), train_df["preco"].astype(float).to_numpy())
+    if test_df.empty:
+        return {"mae": 0.0, "rmse": 0.0, "r2": 0.0, "mape": 0.0}, [], []
+    y_true = test_df["preco"].astype(float).to_numpy()
+    y_pred = model.predict(test_df[FEATURE_COLUMNS].copy())
+    return calculate_metrics(y_true, y_pred), y_true.tolist(), list(y_pred)
 
 
 def benchmark_type_scenarios(df, seed=42, test_size=0.2):
-    subset = filter_property_subset(df, allowed_types=("Casa", "Apartamento"))
-    subset = subset.copy()
-    area_ref = subset["area_privada"].where(subset["area_privada"] > 0, subset["area_total"])
-    area_ref = area_ref.where(area_ref > 0)
-    subset["preco_m2"] = subset["preco"] / area_ref
+    """Compara os cenários SEMPRE no mesmo conjunto de teste.
 
-    scenarios = []
+    Antes, os cenários 3 e 4 removiam outliers da base inteira antes de dividir,
+    o que (a) usava o teste para aprender os limites e (b) avaliava esses cenários
+    num teste "mais fácil" que os cenários 1 e 2. Agora:
+      - o split é feito uma única vez, antes de tudo;
+      - limites do IQR são aprendidos só no treino;
+      - todos os cenários são medidos no teste completo e também no teste típico
+        (linhas do teste dentro da faixa aprendida no treino).
+    """
+    subset = add_price_per_m2(filter_property_subset(df, allowed_types=("Casa", "Apartamento")))
+    train, test = train_test_split(subset, test_size=test_size, random_state=seed)
 
-    metrics_1, _ = benchmark_ridge_variant(subset, use_log=False, seed=seed, test_size=test_size)
+    bounds = compute_iqr_bounds(train, columns=("preco", "preco_m2"), by_type=True)
+    train_clean = train[within_iqr_bounds(train, bounds)].copy()
+    test_typical = test[within_iqr_bounds(test, bounds)].copy()
+
+    def scenario_row(label, train_df, use_log=False):
+        full, _, _ = fit_and_score(train_df, test, use_log=use_log, seed=seed)
+        typical, _, _ = fit_and_score(train_df, test_typical, use_log=use_log, seed=seed)
+        return {
+            "scenario": label,
+            **full,
+            "mae_tipico": typical["mae"],
+            "r2_tipico": typical["r2"],
+            "n": int(len(train_df)),
+        }
+
+    scenarios = [scenario_row("1. Casas/Apartamentos - modelo único", train)]
+
+    separate_rows = []
+    full_true, full_pred, typ_true, typ_pred = [], [], [], []
+    for tipo in ("Casa", "Apartamento"):
+        tr = train[train["tipo_imovel"].map(canonical_tipo) == tipo]
+        te = test[test["tipo_imovel"].map(canonical_tipo) == tipo]
+        te_typ = test_typical[test_typical["tipo_imovel"].map(canonical_tipo) == tipo]
+        if len(tr) < 10:
+            continue
+        metrics, yt, yp = fit_and_score(tr, te, seed=seed)
+        _, yt2, yp2 = fit_and_score(tr, te_typ, seed=seed)
+        full_true += yt
+        full_pred += yp
+        typ_true += yt2
+        typ_pred += yp2
+        separate_rows.append({"model": f"{tipo} (modelo separado)", **metrics, "n": int(len(tr))})
+    empty = {"mae": 0.0, "rmse": 0.0, "r2": 0.0, "mape": 0.0}
+    combined = calculate_metrics(full_true, full_pred) if full_true else empty
+    combined_typ = calculate_metrics(typ_true, typ_pred) if typ_true else empty
     scenarios.append(
         {
-            "scenario": "1. Casas/Apartamentos - modelo único",
-            **metrics_1,
-            "n": len(subset),
+            "scenario": "2. Casas/Apartamentos - modelos separados",
+            **combined,
+            "mae_tipico": combined_typ["mae"],
+            "r2_tipico": combined_typ["r2"],
+            "n": int(len(train)),
         }
     )
 
-    separate_rows, combined_metrics = benchmark_separate_by_type(
-        subset, seed=seed, test_size=test_size
-    )
-    scenarios.extend(
-        [
-            {
-                "scenario": "2. Casas/Apartamentos - modelos separados",
-                **combined_metrics,
-                "n": len(subset),
-            }
-        ]
-    )
-
-    subset_no_out = remove_outliers_iqr(subset, columns=("preco", "preco_m2"), by_type=True)
-    metrics_3, _ = benchmark_ridge_variant(
-        subset_no_out, use_log=False, seed=seed, test_size=test_size
-    )
+    scenarios.append(scenario_row("3. Casas/Apartamentos - sem outliers (no treino)", train_clean))
     scenarios.append(
-        {
-            "scenario": "3. Casas/Apartamentos - sem outliers",
-            **metrics_3,
-            "n": len(subset_no_out),
-        }
+        scenario_row("4. Casas/Apartamentos - sem outliers + log(preco)", train_clean, use_log=True)
     )
-
-    metrics_4, _ = benchmark_ridge_variant(
-        subset_no_out, use_log=True, seed=seed, test_size=test_size
-    )
-    scenarios.append(
-        {
-            "scenario": "4. Casas/Apartamentos - sem outliers + log(preco)",
-            **metrics_4,
-            "n": len(subset_no_out),
-        }
-    )
-
     return scenarios, separate_rows
 
 
@@ -1406,23 +1550,27 @@ def build_type_scenario_markdown(scenarios, separate_rows):
         "",
         "Base do teste: apenas imóveis classificados como **Casa** ou **Apartamento**.",
         "",
+        "Todos os cenários usam **o mesmo conjunto de teste**, separado antes de qualquer",
+        "limpeza. Limites de outlier são aprendidos somente no treino. N = linhas de treino.",
+        "",
         "## Cenários",
         "",
-        "| Cenário | N | MAE | RMSE | R² | MAPE |",
-        "|---|---:|---:|---:|---:|---:|",
+        "| Cenário | N treino | MAE (teste completo) | RMSE | R² | MAPE | MAE (teste típico) | R² (teste típico) |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in scenarios:
         lines.append(
             f"| {row['scenario']} | {row['n']} | {format_currency(row['mae'])} | "
-            f"{format_currency(row['rmse'])} | {row['r2']:.4f} | {row['mape']:.2f}% |"
+            f"{format_currency(row['rmse'])} | {row['r2']:.4f} | {row['mape']:.2f}% | "
+            f"{format_currency(row.get('mae_tipico', 0.0))} | {row.get('r2_tipico', 0.0):.4f} |"
         )
 
     lines.extend(
         [
             "",
-            "## Modelos separados",
+            "## Modelos separados (teste completo)",
             "",
-            "| Tipo | N | MAE | RMSE | R² | MAPE |",
+            "| Tipo | N treino | MAE | RMSE | R² | MAPE |",
             "|---|---:|---:|---:|---:|---:|",
         ]
     )
@@ -1439,8 +1587,9 @@ def build_type_scenario_markdown(scenarios, separate_rows):
             "",
             "- O cenário 1 mede o ganho bruto ao reduzir a variedade de tipos.",
             "- O cenário 2 testa se separar casa e apartamento melhora o ajuste.",
-            "- O cenário 3 avalia a remoção de outliers.",
+            "- O cenário 3 avalia a remoção de outliers **do treino**.",
             "- O cenário 4 avalia o efeito do `log(preco)` depois do corte de outliers.",
+            "- Teste típico = imóveis do teste dentro da faixa de preço aprendida no treino.",
         ]
     )
     return "\n".join(lines)
@@ -1543,50 +1692,63 @@ def make_candidate_estimator(base_cls, params, use_log, seed=42):
         return TransformedTargetRegressor(
             regressor=pipeline,
             func=np.log1p,
-            inverse_func=np.expm1,
+            inverse_func=safe_expm1,
             check_inverse=False,
         )
     return pipeline
 
 
+TUNING_CV_FOLDS = 5
+
+
 def tune_type_models(df, seed=42, test_size=0.2):
-    subset = filter_property_subset(df, allowed_types=("Casa", "Apartamento"))
-    subset = subset.copy()
-    area_ref = subset["area_privada"].where(subset["area_privada"] > 0, subset["area_total"])
-    area_ref = area_ref.where(area_ref > 0)
-    subset["preco_m2"] = subset["preco"] / area_ref
-    subset = remove_outliers_iqr(subset, columns=("preco", "preco_m2"), by_type=True)
+    subset = add_price_per_m2(filter_property_subset(df, allowed_types=("Casa", "Apartamento")))
     subset = subset[subset["preco"] > 0].copy()
     if subset.empty:
-        return [], {"train_rows": 0, "test_rows": 0, "seed": seed, "test_size": test_size}
+        return [], {"train_rows": 0, "test_rows": 0, "seed": seed, "test_size": test_size, "n": 0}
 
-    X = subset[FEATURE_COLUMNS].copy()
-    y = subset["preco"].astype(float).to_numpy()
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=seed
-    )
+    # Split ANTES da limpeza; limites de outlier aprendidos só no treino.
+    train, test = train_test_split(subset, test_size=test_size, random_state=seed)
+    bounds = compute_iqr_bounds(train, columns=("preco", "preco_m2"), by_type=True)
+    train = train[within_iqr_bounds(train, bounds)].copy()
+    test = test[within_iqr_bounds(test, bounds)].copy()
+
+    X_train = train[FEATURE_COLUMNS].copy()
+    y_train = train["preco"].astype(float).to_numpy()
+    X_test = test[FEATURE_COLUMNS].copy()
+    y_test = test["preco"].astype(float).to_numpy()
 
     results = []
     specs = tuned_model_specs(seed=seed)
+    folds = int(max(2, min(TUNING_CV_FOLDS, len(X_train) // 10)))
+    cv = KFold(n_splits=folds, shuffle=True, random_state=seed)
     for use_log in (False, True):
         for model_name, model_cls, grid in specs:
-            best_row = None
+            # 1) escolhe os hiperparâmetros por validação cruzada DENTRO do treino
+            best_params, best_cv_mae = None, None
             for params in iter_param_grid(grid):
                 estimator = make_candidate_estimator(model_cls, params, use_log=use_log, seed=seed)
-                estimator.fit(X_train, y_train)
-                preds = estimator.predict(X_test)
-                metrics = calculate_metrics(y_test, preds)
-                row = {
+                cv_preds = cross_val_predict(estimator, X_train, y_train, cv=cv)
+                cv_mae = float(np.mean(np.abs(y_train - cv_preds)))
+                if best_cv_mae is None or cv_mae < best_cv_mae:
+                    best_params, best_cv_mae = params, cv_mae
+            if best_params is None:
+                continue
+
+            # 2) treina a configuração escolhida no treino e mede UMA vez no teste
+            estimator = make_candidate_estimator(model_cls, best_params, use_log=use_log, seed=seed)
+            estimator.fit(X_train, y_train)
+            metrics = calculate_metrics(y_test, estimator.predict(X_test))
+            results.append(
+                {
                     "model": model_name,
                     "target": "log(preco)" if use_log else "preco",
-                    "params": json.dumps(params, ensure_ascii=False, sort_keys=True),
-                    "n": int(len(subset)),
+                    "params": json.dumps(best_params, ensure_ascii=False, sort_keys=True),
+                    "n": int(len(train)),
+                    "cv_mae": best_cv_mae,
                     **metrics,
                 }
-                if best_row is None or row["mae"] < best_row["mae"]:
-                    best_row = row
-            if best_row:
-                results.append(best_row)
+            )
 
     results.sort(key=lambda item: (item["mae"], item["rmse"]))
     split_info = {
@@ -1594,7 +1756,7 @@ def tune_type_models(df, seed=42, test_size=0.2):
         "test_rows": int(len(X_test)),
         "seed": seed,
         "test_size": test_size,
-        "n": int(len(subset)),
+        "n": int(len(train) + len(test)),
     }
     return results, split_info
 
@@ -1603,10 +1765,12 @@ def build_tuning_markdown(results, split_info):
     lines = [
         "# Tuning Casas/Apartamentos",
         "",
-        f"- base final: {split_info['n']} imóveis após filtro e remoção de outliers",
+        f"- base final: {split_info['n']} imóveis após filtro e remoção de outliers (limites do treino)",
         f"- treino: {split_info['train_rows']}",
         f"- teste: {split_info['test_rows']}",
         f"- seed: {split_info['seed']}",
+        "- hiperparâmetros escolhidos por validação cruzada no treino; MAE/RMSE/R² abaixo medidos no teste, uma única vez",
+        "- split feito antes da limpeza; limites de outlier (IQR) aprendidos só no treino e aplicados ao teste",
         "",
         "| Modelo | Alvo | MAE | RMSE | R² | MAPE |",
         "|---|---|---:|---:|---:|---:|",
@@ -1744,9 +1908,10 @@ class MedianEnsembleModel:
 
     def fit(self, X, y):
         self.models_ = []
-        preprocessor = make_preprocessor()
         for name, estimator in self._candidate_estimators():
-            pipeline = Pipeline([("preprocess", preprocessor), ("model", estimator)])
+            # Cada modelo recebe seu PRÓPRIO pré-processador (antes era um objeto
+            # compartilhado e reajustado a cada fit).
+            pipeline = Pipeline([("preprocess", make_preprocessor()), ("model", estimator)])
             pipeline.fit(X, y)
             self.models_.append((name, pipeline))
         return self
@@ -1776,6 +1941,43 @@ def prepare_segment_baseline_frame(df, property_type):
     return subset, rare_bairros, clip_bounds
 
 
+def split_prepare_baseline_segment(df, property_type, seed=42, test_size=0.2):
+    """Split treino/teste ANTES do pré-processamento (sem vazamento).
+
+    Bairros raros, clipagem e limites de IQR são aprendidos no treino. Outliers saem
+    do treino; do teste saem apenas as linhas fora da faixa aprendida no treino
+    (mesmo critério de "imóvel típico" usado nos relatórios).
+    """
+    raw = filter_property_subset(df, allowed_types=(property_type,))
+    raw = raw[raw["preco"] > 0].copy()
+    if len(raw) < 10:
+        return None
+    train, test = train_test_split(raw, test_size=test_size, random_state=seed)
+    rare_bairros = compute_rare_bairros(train, min_count=BASELINE_RARE_BAIRRO_MIN_COUNT)
+    clip_bounds = compute_numeric_clip_bounds(
+        train, columns=NUMERIC_COLUMNS, quantiles=BASELINE_CLIP_QUANTILES
+    )
+
+    def transform(part):
+        part = apply_rare_bairros(part, rare_bairros)
+        part = apply_numeric_clip_bounds(part, clip_bounds)
+        return add_price_per_m2(part)
+
+    train = transform(train)
+    test = transform(test)
+    bounds = compute_iqr_bounds(train, columns=("preco", "preco_m2"), by_type=False)
+    train = train[within_iqr_bounds(train, bounds)]
+    test = test[within_iqr_bounds(test, bounds)]
+    if len(train) < 5 or test.empty:
+        return None
+    return (
+        train[FEATURE_COLUMNS].copy(),
+        train["preco"].astype(float).to_numpy(),
+        test[FEATURE_COLUMNS].copy(),
+        test["preco"].astype(float).to_numpy(),
+    )
+
+
 def train_segmented_baseline(df, seed=42, test_size=0.2):
     segments = {}
     combined_true = []
@@ -1785,25 +1987,27 @@ def train_segmented_baseline(df, seed=42, test_size=0.2):
     total_test_rows = 0
 
     for property_type in BASELINE_SEGMENT_TYPES:
-        subset, rare_bairros, clip_bounds = prepare_segment_baseline_frame(df, property_type)
-        if subset.empty:
+        split = split_prepare_baseline_segment(df, property_type, seed=seed, test_size=test_size)
+        if split is None:
             continue
+        X_train, y_train, X_test, y_test = split
 
+        # Base inteira (bairros raros/clipagem/outliers aprendidos em tudo) só para o
+        # modelo FINAL; as métricas vêm do modelo treinado apenas no treino.
+        subset, rare_bairros, clip_bounds = prepare_segment_baseline_frame(df, property_type)
         X = subset[FEATURE_COLUMNS].copy()
         y = subset["preco"].astype(float).to_numpy()
-        if len(subset) < 5:
-            continue
 
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=test_size, random_state=seed
-        )
         model = MedianEnsembleModel(seed=seed)
         model.fit(X_train, y_train)
-        segment_metrics = calculate_metrics(y_test, model.predict(X_test))
+        # Previsão do modelo treinado SÓ com o treino: é ela que mede o desempenho.
+        segment_prediction = model.predict(X_test)
+        segment_metrics = calculate_metrics(y_test, segment_prediction)
 
+        # Modelo final (vai para produção): treinado com todos os dados do segmento.
+        # Ele NÃO deve ser usado para calcular métricas no X_test (já viu essas linhas).
         final_model = MedianEnsembleModel(seed=seed)
         final_model.fit(X, y)
-        segment_prediction = final_model.predict(X_test)
         combined_true.extend(y_test.tolist())
         combined_pred.extend(segment_prediction.tolist())
         total_rows += len(subset)
@@ -1887,27 +2091,24 @@ def save_artifact(artifact, model_path):
 
 
 def load_artifact(model_path):
-    """Carrega o baseline em JSON e mantém compatibilidade com pickles antigos."""
-    path = Path(model_path)
-    raw = path.read_bytes()
-    try:
-        return json.loads(raw.decode("utf-8"))
-    except Exception:
-        pass
+    """Carrega o baseline salvo em JSON.
 
-    with path.open("rb") as f:
+    Pickles antigos NÃO são mais aceitos: pickle.load executa código arbitrário
+    contido no arquivo. Se o modelo for um pickle antigo, refaça o treino.
+    """
+    path = Path(model_path)
+    candidates = [path, path.with_suffix(".json")]
+    for candidate in candidates:
+        if not candidate.exists():
+            continue
         try:
-            return pickle.load(f)
-        except Exception as exc:
-            json_path = path.with_suffix(".json")
-            if json_path.exists():
-                try:
-                    return json.loads(json_path.read_text(encoding="utf-8"))
-                except Exception:
-                    pass
-            raise SystemExit(
-                "Nao foi possivel carregar o modelo salvo. Refaça o treino no ambiente atual."
-            ) from exc
+            return json.loads(candidate.read_text(encoding="utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            continue
+    raise SystemExit(
+        "Nao foi possivel carregar o modelo salvo (esperado JSON). "
+        "Modelos antigos em pickle nao sao mais aceitos por seguranca; refaça o treino."
+    )
 
 
 def benchmark_models(df, seed=42, test_size=0.2):

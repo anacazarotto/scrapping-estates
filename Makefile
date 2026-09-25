@@ -79,3 +79,24 @@ predict-price-hibrido:
 
 types:
 	$(PYTHON) scripts_predict/imoveis_ml.py types
+
+benchmark-valorizacao:
+	$(PYTHON) scripts_predict/imoveis_ml.py unify --pattern 'imoveis_??_??_????.db' --output-db imoveis_unificado.db && $(PYTHON) scripts_predict/imoveis_valorizacao.py benchmark-valorizacao --unified-db imoveis_unificado.db $(ARGS)
+
+train-valorizacao:
+	$(PYTHON) scripts_predict/imoveis_valorizacao.py train-valorizacao --unified-db imoveis_unificado.db --model-path modelos/valorizacao_modelo.pkl $(ARGS)
+
+predict-valorizacao:
+	$(PYTHON) scripts_predict/imoveis_valorizacao.py predict-valorizacao --model-path modelos/valorizacao_modelo.pkl $(ARGS)
+
+train-price-model-rapido:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/imoveis_ml_hibrido.py train-hibrido --normalized-db imoveis_normalizados.db --model-path modelos/preco_imovel_modelo_hibrido_rapido.pkl
+
+train-projecao:
+	$(PYTHON) scripts_predict/imoveis_projecao.py train-projecao --unified-db imoveis_unificado.db
+
+projetar:
+	$(PYTHON) scripts_predict/imoveis_projecao.py projetar $(ARGS)
+
+interface:
+	$(PYTHON) -m streamlit run interface/app.py

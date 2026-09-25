@@ -7,7 +7,7 @@ from time import sleep
 
 import requests
 
-from db import get_db_path
+from db import get_db_path, require_env_value
 
 conn = sqlite3.connect(get_db_path())
 cursor = conn.cursor()
@@ -40,7 +40,7 @@ URL_DETALHE = (
 HEADERS = {
     "accept": "application/json, text/plain, */*",
     "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "authorization": "Bearer 84536ff1ec00a5c5b88465a7aa936703",  # Token genérico encontrado nas requisições do site
+    "authorization": f"Bearer {require_env_value('MARKIZE_API_TOKEN')}",
     "from": "site",
     "origin": "https://www.markize.com.br",
     "referer": "https://www.markize.com.br/",
@@ -227,7 +227,7 @@ def main():
         }
 
         payload = {"data": json.dumps(payload_inner, ensure_ascii=False)}
-        r = requests.post(URL_LISTA, data=payload, headers=HEADERS)
+        r = requests.post(URL_LISTA, data=payload, headers=HEADERS, timeout=30)
         data = r.json()
         results = data.get("result", [])
 
@@ -242,7 +242,7 @@ def main():
                 continue
 
             # Consulta a API de detalhe pelo código
-            r_det = requests.get(URL_DETALHE.format(codigo=codigo), headers=HEADERS)
+            r_det = requests.get(URL_DETALHE.format(codigo=codigo), headers=HEADERS, timeout=30)
             det_data = r_det.json()
             det_list = det_data.get("result", [])
 
