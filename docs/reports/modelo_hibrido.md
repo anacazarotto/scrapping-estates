@@ -23,73 +23,73 @@ Depois disso, ele junta os melhores modelos em um ensemble ponderado por MAE.
 
 | Conjunto de teste | MAE | RMSE | R² | MAPE |
 |---|---:|---:|---:|---:|
-| Típico (sem outliers) | R$ 199.440,50 | R$ 312.885,20 | 0.6752 | 485148.12% |
-| Completo (com outliers) | R$ 293.258,47 | R$ 612.704,83 | 0.4508 | 578152.76% |
+| Típico (sem outliers) | R$ 194.535,59 | R$ 307.015,00 | 0.6787 | 492525.28% |
+| Completo (com outliers) | R$ 275.989,72 | R$ 574.982,01 | 0.5026 | 597547.60% |
 
 ## Segmento: Casa
 
-- Registros no modelo final: 1299
-- Treino (após limpeza): 1042 | Teste típico: 256 | Teste completo: 278
+- Registros no modelo final: 1298
+- Treino (após limpeza): 1038 | Teste típico: 261 | Teste completo: 278
 - Validação cruzada: 5 folds
 
 | Conjunto de teste | MAE | RMSE | R² | MAPE |
 |---|---:|---:|---:|---:|
-| Típico (sem outliers) | R$ 301.041,07 | R$ 437.489,33 | 0.5608 | 1161677.79% |
-| Completo (com outliers) | R$ 443.109,84 | R$ 852.712,78 | 0.3219 | 1069750.80% |
+| Típico (sem outliers) | R$ 293.975,46 | R$ 428.181,98 | 0.5642 | 1166185.31% |
+| Completo (com outliers) | R$ 409.960,63 | R$ 792.007,98 | 0.3960 | 1094874.85% |
 
 ### Modelos escolhidos no ensemble
 
 | Modelo | Alvo | Peso | MAE validação cruzada | MAE no teste típico | R² no teste típico |
 |---|---|---:|---:|---:|---:|
-| TabPFN v2 | preco | 0.343 | R$ 275.807,22 | R$ 306.696,77 | 0.5358 |
-| TabPFN v2 | log(preco) | 0.329 | R$ 287.537,83 | R$ 314.543,80 | 0.5183 |
-| CatBoost | preco | 0.328 | R$ 288.015,83 | R$ 299.490,59 | 0.5597 |
+| TabPFN v2 | preco | 0.339 | R$ 279.395,26 | R$ 299.681,14 | 0.5414 |
+| CatBoost | preco | 0.331 | R$ 286.418,39 | R$ 286.088,76 | 0.5878 |
+| TabPFN v2 | log(preco) | 0.330 | R$ 286.887,04 | R$ 305.772,57 | 0.5200 |
 
 ### Top 10 do ranking (validação cruzada no treino)
 
 | Modelo | Alvo | MAE | RMSE | R² | MAPE |
 |---|---|---:|---:|---:|---:|
-| TabPFN v2 | preco | R$ 275.807,22 | R$ 391.049,98 | 0.6435 | 744745.42% |
-| TabPFN v2 | log(preco) | R$ 287.537,83 | R$ 421.982,24 | 0.5848 | 592344.10% |
-| CatBoost | preco | R$ 288.015,83 | R$ 407.372,31 | 0.6131 | 686993.44% |
-| XGBoost | preco | R$ 290.768,59 | R$ 414.055,62 | 0.6003 | 672366.94% |
-| Random Forest | preco | R$ 292.331,97 | R$ 413.429,43 | 0.6015 | 701029.75% |
-| Gradient Boosting | preco | R$ 295.709,77 | R$ 423.405,92 | 0.5820 | 709739.18% |
-| Ridge | preco | R$ 316.012,09 | R$ 436.182,91 | 0.5564 | 809934.29% |
-| Lasso | preco | R$ 317.535,23 | R$ 437.851,16 | 0.5530 | 814590.59% |
-| Regressão Linear Múltipla | preco | R$ 317.535,23 | R$ 437.851,16 | 0.5530 | 814590.59% |
-| CatBoost | log(preco) | R$ 331.011,33 | R$ 497.139,76 | 0.4238 | 631015.41% |
+| TabPFN v2 | preco | R$ 279.395,26 | R$ 394.447,06 | 0.6400 | 765289.62% |
+| CatBoost | preco | R$ 286.418,39 | R$ 402.538,19 | 0.6251 | 707133.22% |
+| TabPFN v2 | log(preco) | R$ 286.887,04 | R$ 413.712,09 | 0.6040 | 677704.50% |
+| XGBoost | preco | R$ 289.136,28 | R$ 404.462,12 | 0.6215 | 654844.38% |
+| Random Forest | preco | R$ 291.506,90 | R$ 407.882,32 | 0.6151 | 721661.00% |
+| Gradient Boosting | preco | R$ 295.209,94 | R$ 413.142,35 | 0.6051 | 707483.96% |
+| Ridge | preco | R$ 318.028,42 | R$ 438.106,87 | 0.5559 | 816273.34% |
+| Lasso | preco | R$ 319.856,39 | R$ 440.126,84 | 0.5518 | 821542.21% |
+| Regressão Linear Múltipla | preco | R$ 319.856,39 | R$ 440.126,85 | 0.5518 | 821542.22% |
+| CatBoost | log(preco) | R$ 330.795,92 | R$ 496.859,28 | 0.4288 | 713984.72% |
 
 ## Segmento: Apartamento
 
-- Registros no modelo final: 1757
-- Treino (após limpeza): 1401 | Teste típico: 357 | Teste completo: 380
+- Registros no modelo final: 1756
+- Treino (após limpeza): 1400 | Teste típico: 357 | Teste completo: 380
 - Validação cruzada: 5 folds
 
 | Conjunto de teste | MAE | RMSE | R² | MAPE |
 |---|---:|---:|---:|---:|
-| Típico (sem outliers) | R$ 126.584,07 | R$ 175.640,80 | 0.7756 | 17.60% |
-| Completo (com outliers) | R$ 183.630,37 | R$ 343.660,03 | 0.5990 | 218509.99% |
+| Típico (sem outliers) | R$ 121.835,85 | R$ 170.679,01 | 0.7854 | 17.53% |
+| Completo (com outliers) | R$ 177.979,43 | R$ 336.994,20 | 0.6200 | 233713.46% |
 
 ### Modelos escolhidos no ensemble
 
 | Modelo | Alvo | Peso | MAE validação cruzada | MAE no teste típico | R² no teste típico |
 |---|---|---:|---:|---:|---:|
-| TabPFN v2 | log(preco) | 0.335 | R$ 119.323,96 | R$ 127.090,55 | 0.7723 |
-| TabPFN v2 | preco | 0.333 | R$ 120.044,04 | R$ 127.108,80 | 0.7761 |
-| CatBoost | log(preco) | 0.332 | R$ 120.646,77 | R$ 126.827,03 | 0.7699 |
+| TabPFN v2 | log(preco) | 0.335 | R$ 120.416,79 | R$ 122.096,80 | 0.7819 |
+| TabPFN v2 | preco | 0.334 | R$ 120.874,38 | R$ 123.126,50 | 0.7838 |
+| CatBoost | log(preco) | 0.330 | R$ 122.256,19 | R$ 122.162,44 | 0.7827 |
 
 ### Top 10 do ranking (validação cruzada no treino)
 
 | Modelo | Alvo | MAE | RMSE | R² | MAPE |
 |---|---|---:|---:|---:|---:|
-| TabPFN v2 | log(preco) | R$ 119.323,96 | R$ 169.941,94 | 0.7792 | 17.05% |
-| TabPFN v2 | preco | R$ 120.044,04 | R$ 169.143,21 | 0.7813 | 17.57% |
-| CatBoost | log(preco) | R$ 120.646,77 | R$ 170.061,93 | 0.7789 | 17.32% |
-| Gradient Boosting | log(preco) | R$ 122.060,85 | R$ 174.583,95 | 0.7670 | 17.48% |
-| CatBoost | preco | R$ 122.398,48 | R$ 170.889,60 | 0.7767 | 18.20% |
-| XGBoost | log(preco) | R$ 123.380,89 | R$ 178.996,44 | 0.7551 | 17.68% |
-| XGBoost | preco | R$ 124.502,41 | R$ 181.059,43 | 0.7494 | 18.20% |
-| Gradient Boosting | preco | R$ 124.699,02 | R$ 175.940,72 | 0.7634 | 18.40% |
-| Random Forest | preco | R$ 128.662,27 | R$ 182.954,53 | 0.7441 | 19.12% |
-| Random Forest | log(preco) | R$ 129.157,72 | R$ 184.413,31 | 0.7400 | 18.74% |
+| TabPFN v2 | log(preco) | R$ 120.416,79 | R$ 170.133,09 | 0.7812 | 17.18% |
+| TabPFN v2 | preco | R$ 120.874,38 | R$ 169.478,70 | 0.7829 | 17.68% |
+| CatBoost | log(preco) | R$ 122.256,19 | R$ 171.651,64 | 0.7773 | 17.58% |
+| XGBoost | log(preco) | R$ 123.762,11 | R$ 176.833,46 | 0.7636 | 17.92% |
+| CatBoost | preco | R$ 124.069,93 | R$ 172.841,85 | 0.7742 | 18.39% |
+| Gradient Boosting | log(preco) | R$ 124.261,19 | R$ 175.840,84 | 0.7663 | 17.75% |
+| Gradient Boosting | preco | R$ 124.476,49 | R$ 174.862,17 | 0.7689 | 18.49% |
+| XGBoost | preco | R$ 125.568,07 | R$ 179.088,10 | 0.7576 | 18.52% |
+| Random Forest | preco | R$ 127.820,76 | R$ 181.826,51 | 0.7501 | 19.14% |
+| Random Forest | log(preco) | R$ 127.917,23 | R$ 182.510,43 | 0.7482 | 18.71% |
