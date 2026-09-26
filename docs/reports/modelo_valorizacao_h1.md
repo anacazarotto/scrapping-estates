@@ -22,13 +22,13 @@
 | Modelo | RMSE CV treino (p.p.) | RMSE teste (p.p.) | MAE teste (p.p.) | R² (log) | Acurácia direção | MAE (R$) |
 |---|---:|---:|---:|---:|---:|---:|
 | Baseline: preço não muda | - | 2.356 | 0.338 | -0.0043 | 95.5% | R$ 3.659,57 |
-| TabPFN v2 | 2.109 | 2.357 | 0.405 | -0.0062 | 95.0% | R$ 4.202,58 |
-| Baseline: média do segmento | - | 2.365 | 0.452 | -0.0137 | 91.5% | R$ 4.881,62 |
-| Ridge | 2.173 | 2.385 | 0.552 | -0.0326 | 88.5% | R$ 5.780,24 |
-| Random Forest | 2.121 | 2.393 | 0.570 | -0.0431 | 85.2% | R$ 5.914,34 |
-| XGBoost | 2.119 | 2.411 | 0.551 | -0.0597 | 87.1% | R$ 5.784,86 |
-| Gradient Boosting | 2.140 | 2.414 | 0.662 | -0.0660 | 75.7% | R$ 6.748,89 |
-| CatBoost | 2.121 | 2.507 | 0.503 | -0.1419 | 91.6% | R$ 5.280,04 |
+| TabPFN v2 | 2.108 | 2.356 | 0.407 | -0.0056 | 95.1% | R$ 4.217,18 |
+| Baseline: média do segmento | - | 2.364 | 0.448 | -0.0134 | 91.5% | R$ 4.831,05 |
+| Ridge | 2.175 | 2.386 | 0.554 | -0.0338 | 88.7% | R$ 5.807,54 |
+| Random Forest | 2.120 | 2.393 | 0.564 | -0.0433 | 85.2% | R$ 5.856,17 |
+| Gradient Boosting | 2.141 | 2.410 | 0.653 | -0.0616 | 76.5% | R$ 6.705,53 |
+| XGBoost | 2.120 | 2.420 | 0.553 | -0.0690 | 87.3% | R$ 5.772,93 |
+| CatBoost | 2.122 | 2.522 | 0.506 | -0.1547 | 91.9% | R$ 5.308,23 |
 
 ## Chance de redução de preço (> 0.5%) em 1 mês(es)
 
@@ -37,12 +37,12 @@ Taxa de reduções: 1.4% no treino, 1.4% no teste. AUC 0,5 = sorteio; Brier meno
 | Classificador | AUC | Brier |
 |---|---:|---:|
 | Baseline: taxa histórica | 0.500 | 0.0133 |
-| Regressão Logística | 0.648 | 0.0138 |
-| Gradient Boosting | 0.695 | 0.0131 |
+| Regressão Logística | 0.651 | 0.0138 |
+| Gradient Boosting | 0.691 | 0.0133 |
 
 ## Leitura
 
-- Modelo escolhido (menor RMSE de CV): **TabPFN v2** — RMSE no teste 2.357 p.p. contra 2.356 p.p. do melhor baseline (Baseline: preço não muda).
+- Modelo escolhido (menor RMSE de CV): **TabPFN v2** — RMSE no teste 2.356 p.p. contra 2.356 p.p. do melhor baseline (Baseline: preço não muda).
 - O modelo **não** superou o baseline no teste: com os meses disponíveis, a variação futura ainda não é previsível além da tendência do segmento. Isso é um resultado válido para o TCC; reavalie com mais meses de coleta.
 - Limitações: preço anunciado ≠ preço de venda; imóveis vendidos saem do painel (viés de sobrevivência); poucos meses = pouca variação observada.
 
@@ -75,10 +75,10 @@ Segmentos com poucos imóveis repetidos usam o índice do tipo (Casa/Apartamento
 | santa maria | Apartamento | 303 | 100.0 | 99.99 | 100.06 | 100.17 | 100.17 | 0.17 |
 |  | Apartamento | 85 | 100.0 | 100.04 | 100.14 | 100.14 | 100.14 | 0.14 |
 | bom retiro | Apartamento | 50 | 100.0 | 100.0 | 100.0 | 100.0 | 100.0 | 0.0 |
-| presidente medice | Apartamento | 49 | 100.0 | 100.0 | 100.0 | 100.0 | 100.0 | 0.0 |
 | seminario | Apartamento | 73 | 100.0 | 100.0 | 100.0 | 100.0 | 100.0 | 0.0 |
 | vila real | Apartamento | 132 | 100.0 | 98.83 | 100.0 | 100.0 | 100.0 | -0.0 |
-| presidente medici | Apartamento | 559 | 100.0 | 100.01 | 100.08 | 99.95 | 99.95 | -0.05 |
+| presidente medici | Apartamento | 608 | 100.0 | 100.01 | 100.07 | 99.95 | 99.95 | -0.05 |
 | esplanada | Apartamento | 158 | 100.0 | 99.85 | 99.85 | 99.85 | 99.85 | -0.15 |
 | bela vista | Apartamento | 116 | 100.0 | 100.0 | 99.74 | 99.74 | 99.74 | -0.26 |
 | dom geronimo | Apartamento | 54 | 100.0 | 99.24 | 99.24 | 99.24 | 99.24 | -0.76 |
+| saic | Apartamento | 62 | 100.0 | 100.0 | 99.14 | 99.14 | 99.14 | -0.86 |
