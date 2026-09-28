@@ -716,6 +716,66 @@ def predict_price(artifact, area_total, area_privada, bairro, tipo_imovel, quart
     return prediction
 
 
+INPUT_LABELS = {
+    "area_total": ("área total", " m²"),
+    "area_privada": ("área privativa", " m²"),
+    "quartos": ("quartos", ""),
+    "banheiros": ("banheiros", ""),
+    "vagas": ("vagas", ""),
+}
+
+
+def input_warnings(artifact, area_total, area_privada, bairro, tipo_imovel, quartos, banheiros, vagas):
+    """Avisos quando a entrada foge do que o modelo viu no treino.
+
+    `predict_price` limita cada valor numérico à faixa de 2% a 98% do treino, então uma
+    casa de 3.000 m² é estimada como se tivesse ~1.050 m² sem que ninguém perceba. Esta
+    função devolve, em texto, cada campo fora da faixa (valores 0 contam como "não
+    informado") e se o bairro tem poucos exemplos no treino.
+    """
+    tipo = canonical_tipo(tipo_imovel)
+    segment = artifact["segments"].get(tipo)
+    if segment is None:
+        return []
+    values = {
+        "area_total": area_total,
+        "area_privada": area_privada,
+        "quartos": quartos,
+        "banheiros": banheiros,
+        "vagas": vagas,
+    }
+    warnings = []
+    for column, (lower, upper) in segment["clip_bounds"].items():
+        value = float(values.get(column) or 0)
+        if value <= 0 or lower <= value <= upper:
+            continue
+        name, unit = INPUT_LABELS[column]
+        limit = upper if value > upper else lower
+        direction = "acima" if value > upper else "abaixo"
+        if unit:
+            faixa = f"{lower:,.0f} a {upper:,.0f}{unit}".replace(",", ".")
+            atual = f"{value:,.0f}{unit}".replace(",", ".")
+        else:
+            faixa = f"{lower:.0f} a {upper:.0f}"
+            atual = f"{value:.0f}"
+        warnings.append(
+            f"{name.capitalize()} ({atual}) está {direction} do comum nos anúncios de "
+            f"{tipo.lower()}s usados no treino ({faixa}); o modelo calcula como se fosse "
+            f"{limit:,.0f}{unit}.".replace(",", ".")
+        )
+    area_total = float(area_total or 0)
+    area_privada = float(area_privada or 0)
+    if area_total > 0 and area_privada > area_total:
+        warnings.append("A área privativa está maior que a área total; confira os valores.")
+    if normalize_text(bairro) in set(segment["rare_bairros"]):
+        min_count = artifact.get("strategy", {}).get("rare_bairro_min_count", RARE_BAIRRO_MIN_COUNT)
+        warnings.append(
+            f"O bairro tem menos de {min_count} "
+            f"{tipo.lower()}s no treino; o modelo usa o padrão geral dos bairros com poucos anúncios."
+        )
+    return warnings
+
+
 def cmd_benchmark(args):
     df = load_training_frame(Path(args.normalized_db or DEFAULT_NORMALIZED_DB))
     artifact = train_hybrid(df, seed=args.seed, test_size=args.test_size, cv_folds=args.cv_folds)
