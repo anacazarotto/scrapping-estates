@@ -231,8 +231,10 @@ O site usa só os arquivos versionados: `interface/`, `scripts_predict/`,
 1. Entre em https://share.streamlit.io com a conta do GitHub.
 2. **Create app** → repositório `anacazarotto/scrapping-estates`, branch `main`,
    arquivo principal `interface/app.py`.
-3. Em **Advanced settings**, escolha **Python 3.13** (mesma versão usada no treino; os
-   modelos `.pkl` dependem das versões exatas das bibliotecas).
+3. Em **Advanced settings**, escolha **Python 3.13** (mesma versão usada no treino). O
+   site também instala no Python 3.14, padrão do Streamlit Cloud: o CatBoost do site é
+   o 1.2.10, que tem pacote para 3.14 e dá as mesmas previsões do 1.2.8 usado no treino.
+   Os modelos `.pkl` dependem das versões das bibliotecas; teste antes de trocar outra.
 4. Se um dia definir `MODEL_SIGNING_KEY` no `.env`, cadastre a mesma chave em
    **Secrets** (`MODEL_SIGNING_KEY = "..."`); sem ela, a assinatura usa SHA-256 e não
    precisa de segredo.
