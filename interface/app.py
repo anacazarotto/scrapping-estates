@@ -8,8 +8,8 @@ Precisa dos modelos treinados:
     python scripts_predict/imoveis_projecao.py train-projecao     (valorização anual)
 """
 
+import json
 import os
-import sqlite3
 import sys
 from pathlib import Path
 
@@ -20,12 +20,12 @@ import streamlit as st
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "scripts_predict"))
 
-from imoveis_ml import canonical_tipo, normalize_text  # noqa: E402
 from imoveis_ml_hibrido import format_currency  # noqa: E402
 from imoveis_ml_hibrido import load_artifact as load_price_artifact  # noqa: E402
 from imoveis_projecao import (  # noqa: E402
     MAX_ANOS,
     annual_pct,
+    bairros_por_tipo,
     load_projection_artifact,
     project,
     reference_rate,
@@ -40,9 +40,9 @@ PRICE_MODEL = Path(
 PROJECTION_MODEL = Path(
     os.getenv("MODELO_PROJECAO", PROJECT_ROOT / "modelos" / "projecao_modelo.pkl")
 )
+BAIRROS_JSON = PROJECT_ROOT / "dados" / "bairros.json"
 NORMALIZED_DB = PROJECT_ROOT / "imoveis_normalizados.db"
 TIPOS = ("Apartamento", "Casa")
-MIN_IMOVEIS_BAIRRO = 3
 
 # Paleta de referência (skill de visualização): série 1 = azul, série 2 = laranja.
 COR_CENTRAL = "#2a78d6"
@@ -68,22 +68,13 @@ def carregar_modelos():
 
 
 @st.cache_data(show_spinner=False)
-def bairros_por_tipo():
-    """Bairros com anúncios suficientes em cada tipo, para a lista de seleção."""
-    if not NORMALIZED_DB.exists():
-        return {t: [] for t in TIPOS}
-    with sqlite3.connect(NORMALIZED_DB) as conn:
-        df = pd.read_sql_query(
-            "SELECT bairro, tipo_imovel FROM imoveis_normalizados", conn
-        )
-    df["bairro"] = df["bairro"].fillna("").map(normalize_text)
-    df["tipo_imovel"] = df["tipo_imovel"].fillna("").map(canonical_tipo)
-    df = df[df["bairro"] != ""]
-    out = {}
-    for tipo in TIPOS:
-        counts = df.loc[df["tipo_imovel"] == tipo, "bairro"].value_counts()
-        out[tipo] = sorted(counts[counts >= MIN_IMOVEIS_BAIRRO].index)
-    return out
+def carregar_bairros():
+    """Lista de bairros por tipo: do JSON publicado ou, localmente, do banco normalizado."""
+    if BAIRROS_JSON.exists():
+        return json.loads(BAIRROS_JSON.read_text(encoding="utf-8"))
+    if NORMALIZED_DB.exists():
+        return bairros_por_tipo(NORMALIZED_DB)
+    return {t: [] for t in TIPOS}
 
 
 def pct(valor, casas=2):
@@ -207,7 +198,7 @@ def escolher_referencia(proj_art):
 
 # ------------------------------------------------------------------ telas
 def tela_estimativa(price_art, proj_art):
-    bairros = bairros_por_tipo()
+    bairros = carregar_bairros()
 
     with st.sidebar:
         st.header("Características do imóvel")
@@ -218,13 +209,14 @@ def tela_estimativa(price_art, proj_art):
 
         c1, c2 = st.columns(2)
         area_privada = c1.number_input(
-            "Área privativa (m²)", min_value=0.0, value=80.0, step=5.0
+            "Área privativa (m²)", min_value=0.0, value=80.0, step=5.0, format="%.0f"
         )
         area_total = c2.number_input(
             "Área total (m²)",
             min_value=0.0,
             value=100.0 if tipo == "Apartamento" else 300.0,
             step=5.0,
+            format="%.0f",
         )
         c1, c2, c3 = st.columns(3)
         quartos = c1.number_input("Quartos", min_value=0, max_value=10, value=2)
@@ -355,6 +347,8 @@ def tela_bairros(proj_art):
     df = pd.DataFrame(rows)
     tipo = st.radio("Tipo", TIPOS, horizontal=True, key="tipo_bairros")
     df = df[df["Tipo"] == tipo].sort_values("Central (%/ano)", ascending=False)
+    for col in ("Central (%/ano)", "Pessimista (%/ano)", "Otimista (%/ano)"):
+        df[col] = df[col].map(pct)
     geral = proj_art["tipos"][tipo]
     st.caption(
         f"Taxa geral de {tipo.lower()}s: {pct(annual_pct(geral['mensal']))} ao ano "
@@ -374,7 +368,7 @@ def tela_modelos(price_art, proj_art):
                 "Imóveis no treino": seg["rows"],
                 "MAE": format_currency(m["mae"]),
                 "RMSE": format_currency(m["rmse"]),
-                "R²": round(m["r2"], 3),
+                "R²": f"{m['r2']:.3f}".replace(".", ","),
                 "Modelos no ensemble": ", ".join(
                     f"{s['model_name']} ({s['target']})" for s in seg["selected"]
                 ),
@@ -390,7 +384,11 @@ def tela_modelos(price_art, proj_art):
 
 def main():
     st.title("🏠 Quanto o imóvel pode valer ao longo dos anos")
-    st.caption("Imóveis à venda em Chapecó/SC — estimativa por aprendizado de máquina")
+    st.caption(
+        "Imóveis à venda em Chapecó/SC — estimativa por aprendizado de máquina. "
+        "Projeto acadêmico (TCC): os valores são estimativas a partir de preços anunciados "
+        "e não substituem uma avaliação profissional do imóvel."
+    )
 
     price_art, proj_art, faltando = carregar_modelos()
     if faltando:

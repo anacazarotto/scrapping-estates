@@ -26,6 +26,8 @@ do painel (viés de sobrevivência). A projeção é um cenário, não uma garan
 """
 
 import argparse
+import json
+import sqlite3
 from datetime import datetime
 from pathlib import Path
 
@@ -43,6 +45,9 @@ DEFAULT_UNIFIED_DB = Path("imoveis_unificado.db")
 DEFAULT_PRICE_MODEL = Path("modelos/preco_imovel_modelo_hibrido_rapido.pkl")
 DEFAULT_MODEL_PATH = Path("modelos/projecao_modelo.pkl")
 DEFAULT_REPORT_PATH = Path("docs/reports/taxas_valorizacao_anual.md")
+DEFAULT_NORMALIZED_DB = Path("imoveis_normalizados.db")
+DEFAULT_BAIRROS_PATH = Path("dados/bairros.json")
+MIN_IMOVEIS_BAIRRO = 3  # bairros oferecidos na interface
 
 ARTIFACT_KIND = "projecao_anual_v1"
 CREDIBILITY_K = 30  # imóveis: com 30 imóveis repetidos o bairro pesa 50%
@@ -314,9 +319,40 @@ def build_report(artifact):
     return "\n".join(lines) + "\n"
 
 
+def bairros_por_tipo(normalized_db, min_count=MIN_IMOVEIS_BAIRRO):
+    """Bairros com pelo menos `min_count` anúncios de cada tipo (lista da interface)."""
+    with sqlite3.connect(normalized_db) as conn:
+        df = pd.read_sql_query(
+            "SELECT bairro, tipo_imovel FROM imoveis_normalizados", conn
+        )
+    df["bairro"] = df["bairro"].fillna("").map(normalize_text)
+    df["tipo_imovel"] = df["tipo_imovel"].fillna("").map(canonical_tipo)
+    df = df[df["bairro"] != ""]
+    out = {}
+    for tipo in ALLOWED_TYPES:
+        counts = df.loc[df["tipo_imovel"] == tipo, "bairro"].value_counts()
+        out[tipo] = sorted(counts[counts >= min_count].index)
+    return out
+
+
+def exportar_bairros(normalized_db, path):
+    """Salva a lista de bairros em JSON para o site não depender do banco SQLite."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    bairros = bairros_por_tipo(normalized_db)
+    path.write_text(json.dumps(bairros, ensure_ascii=False, indent=1), encoding="utf-8")
+    return bairros
+
+
 def cmd_train(args):
     artifact = build_artifact(args.unified_db, seed=args.seed)
     save_model(artifact, args.model_path)
+    if Path(args.normalized_db).exists():
+        bairros = exportar_bairros(args.normalized_db, args.bairros_path)
+        print(
+            f"Bairros da interface: {args.bairros_path} "
+            + ", ".join(f"{t}={len(b)}" for t, b in bairros.items())
+        )
     report = Path(args.report_path)
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(build_report(artifact), encoding="utf-8")
@@ -414,6 +450,8 @@ def build_parser():
     t.add_argument("--model-path", default=str(DEFAULT_MODEL_PATH))
     t.add_argument("--report-path", default=str(DEFAULT_REPORT_PATH))
     t.add_argument("--seed", type=int, default=42)
+    t.add_argument("--normalized-db", default=str(DEFAULT_NORMALIZED_DB))
+    t.add_argument("--bairros-path", default=str(DEFAULT_BAIRROS_PATH))
     t.set_defaults(func=cmd_train)
 
     p = sub.add_parser("projetar", help="Projeta o valor de um imóvel ano a ano.")
