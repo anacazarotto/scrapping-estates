@@ -20,7 +20,7 @@ import streamlit as st
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "scripts_predict"))
 
-from imoveis_ml_hibrido import format_currency  # noqa: E402
+from imoveis_ml_hibrido import format_currency, input_warnings  # noqa: E402
 from imoveis_ml_hibrido import load_artifact as load_price_artifact  # noqa: E402
 from imoveis_projecao import (  # noqa: E402
     MAX_ANOS,
@@ -263,6 +263,23 @@ def tela_estimativa(price_art, proj_art):
     final = tabela.iloc[-1]
 
     st.subheader(f"{tipo} no bairro {rotulo_bairro(bairro)}")
+    if not res["usou_preco_informado"]:
+        avisos = input_warnings(
+            price_art,
+            area_total=area_total,
+            area_privada=area_privada,
+            bairro=bairro,
+            tipo_imovel=tipo,
+            quartos=quartos,
+            banheiros=banheiros,
+            vagas=vagas,
+        )
+        if avisos:
+            st.warning(
+                "**Estimativa pouco confiável: este imóvel foge do padrão dos dados de treino.**\n\n"
+                + "\n".join(f"- {a}" for a in avisos),
+                icon="⚠️",
+            )
     c1, c2, c3 = st.columns(3)
     c1.metric(
         "Valor estimado hoje",
