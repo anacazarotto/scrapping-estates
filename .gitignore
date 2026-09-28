@@ -37,7 +37,12 @@ Thumbs.db
 *.db-wal
 *.sqlite
 *.sqlite3
-modelos/
+modelos/*
+# Modelos publicados com o site (o de TabPFN, 179 MB, fica só local)
+!modelos/preco_imovel_modelo_hibrido_rapido.pkl
+!modelos/preco_imovel_modelo_hibrido_rapido.pkl.sig
+!modelos/projecao_modelo.pkl
+!modelos/projecao_modelo.pkl.sig
 catboost_info/
 
 # Logs and temp files

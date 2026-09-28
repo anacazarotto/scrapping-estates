@@ -1,0 +1,12 @@
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+# Esconde o menu de desenvolvedor (botão "Deploy") para quem visita o site.
+toolbarMode = "viewer"
+
+[theme]
+primaryColor = "#2a78d6"

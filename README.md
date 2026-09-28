@@ -220,6 +220,43 @@ Grafias diferentes do mesmo bairro são unificadas no `unify` (`BAIRRO_ALIASES` 
 A interface abre no navegador (http://localhost:8501) com três abas: estimativa
 (formulário + gráfico ano a ano), valorização por bairro e desempenho dos modelos.
 
+### Publicação do site (Streamlit Community Cloud)
+
+O site usa só os arquivos versionados: `interface/`, `scripts_predict/`,
+`modelos/preco_imovel_modelo_hibrido_rapido.pkl` e `modelos/projecao_modelo.pkl` (com os
+`.sig`), `dados/bairros.json` e `dados/ipca.json`. As dependências do site ficam em
+`interface/requirements.txt` (sem Selenium nem TabPFN) e a aparência em
+`.streamlit/config.toml`.
+
+1. Entre em https://share.streamlit.io com a conta do GitHub.
+2. **Create app** → repositório `anacazarotto/scrapping-estates`, branch `main`,
+   arquivo principal `interface/app.py`.
+3. Em **Advanced settings**, escolha **Python 3.13** (mesma versão usada no treino; os
+   modelos `.pkl` dependem das versões exatas das bibliotecas).
+4. Se um dia definir `MODEL_SIGNING_KEY` no `.env`, cadastre a mesma chave em
+   **Secrets** (`MODEL_SIGNING_KEY = "..."`); sem ela, a assinatura usa SHA-256 e não
+   precisa de segredo.
+5. **Deploy**. Cada push no `main` atualiza o site.
+
+Atualizar os dados do site (depois de novas coletas):
+
+```bash
+make unify-db && make normalize-db
+make train-price-model-rapido
+make train-projecao          # também atualiza dados/bairros.json e o IPCA
+git add modelos dados docs/reports && git commit -m "Atualiza modelos" && git push
+```
+
+### Análise exploratória e documentação do TCC
+
+A documentação completa (coleta, EDA, modelos, valorização, interface e conclusões) está
+em [`docs/`](docs/README.md). Para gerar as figuras:
+
+```bash
+make eda                  # docs/figures/eda_*.png
+make figuras-resultados   # docs/figures/11 a 14
+```
+
 ### Como as métricas são medidas
 
 Em todos os scripts o teste é separado **antes** de qualquer pré-processamento: bairros

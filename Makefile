@@ -100,3 +100,9 @@ projetar:
 
 interface:
 	$(PYTHON) -m streamlit run interface/app.py
+
+eda:
+	$(PYTHON) scripts_predict/eda.py
+
+figuras-resultados:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/figuras_resultados.py
