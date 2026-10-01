@@ -30,6 +30,31 @@ Para cada segmento (**Casa** e **Apartamento**), separadamente:
 6. **Avaliação** no teste, que não participou de nenhuma escolha.
 7. **Modelo final**: retreinado com todos os dados do segmento para uso em produção.
 
+O pré-processamento fica dentro de um `Pipeline` do scikit-learn (vazios viram 0,
+números padronizados com `StandardScaler`, bairro e tipo em colunas binárias com
+`OneHotEncoder`), para que a previsão receba exatamente o mesmo tratamento do treino. O
+alvo em log usa `TransformedTargetRegressor` (treina em log(1 + preço) e devolve reais).
+
+### Como funciona cada candidato
+
+| Modelo | Família | Ideia | Parâmetros | Pontos positivos | Pontos negativos |
+|---|---|---|---|---|---|
+| Regressão Linear Múltipla | linear | preço = soma de pesos das variáveis | — | simples de explicar | só relações em linha reta; sensível a outliers |
+| Ridge | linear (penalização L2) | igual à linear, mas limita o tamanho dos pesos | alpha 5,0 | estável com variáveis correlacionadas (área e quartos) | continua linear |
+| Lasso | linear (penalização L1) | pode zerar pesos de variáveis inúteis | alpha 0,0005 | ajuda a interpretar | continua linear |
+| Random Forest | árvores em paralelo (bagging) | média de 400 árvores, cada uma com um sorteio dos dados | 400 árvores, mín. 2 por folha | robusto a outliers e a parâmetros | não extrapola; arquivo grande |
+| Gradient Boosting | árvores em sequência (boosting) | cada árvore corrige o erro das anteriores | 500 árvores, taxa 0,05, profundidade 3 | costuma ser o melhor em tabelas | treino mais lento |
+| XGBoost | boosting otimizado | boosting com amostragem e regularização | 400 árvores, taxa 0,05, profundidade 6, amostragem 90% | rápido e robusto | muitos parâmetros |
+| CatBoost | boosting com árvores simétricas | boosting que trata bem variáveis categóricas | 500 iterações, taxa 0,05, profundidade 6 | melhor com o bairro; bom sem ajuste | precisou de adaptador para o scikit-learn 1.6+ (`sklearn_compat.py`) |
+| Rede Neural (MLP) | rede neural | camadas de neurônios que combinam as variáveis | camadas 128 e 64, ReLU, parada antecipada | capta padrões complexos com muitos dados | instável com 1 a 2 mil exemplos |
+| SVM (SVR) | vetores de suporte | curva que passa perto da maioria dos pontos (kernel RBF) | C 20, epsilon 0,1 | bom em bases médias | muito sensível à escala do alvo |
+| TabPFN v2 | modelo de fundação (transformer) | pré-treinado em tabelas sintéticas; prevê pelo contexto, sem treino nos nossos dados | nenhum ajuste | venceu a validação cruzada sem configuração | lento em CPU, 179 MB, até 10 mil linhas |
+
+Os modelos de árvore venceram porque o preço não é uma soma linear das características
+(o preço/m² não sobe com o número de quartos, seção 2.5) e porque são pouco afetados por
+valores estranhos. MLP e SVM ficaram por último: com 1.000 a 1.400 imóveis por tipo, não
+há dados suficientes para eles.
+
 ## 4.3 Ranking dos candidatos
 
 ![Ranking dos modelos](figures/11_preco_ranking_modelos.png)

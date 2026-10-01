@@ -59,9 +59,13 @@ A normalização gera `imoveis_normalizados.db`, agrupando anúncios que represe
 mesmo imóvel:
 
 1. **Chaves de agrupamento**: cidade + tipo + área arredondada + quartos + banheiros +
-   vagas, combinadas com o bairro ou com o endereço/logradouro (quando existe).
-2. **Comparação por imagem**: anúncios com imagem principal muito parecida (hash
-   perceptual) e área semelhante são considerados o mesmo imóvel.
+   vagas, combinadas com o bairro ou com o endereço/logradouro (quando existe). Os
+   grupos são formados por *union-find*: se A combina com B e B com C, os três viram um
+   grupo só.
+2. **Comparação por imagem**: a foto principal (até 5 MB) é reduzida a 9 × 8 pixels em
+   tons de cinza, e cada pixel é comparado com o vizinho, gerando uma "impressão digital"
+   de 64 bits (*difference hash*). Dois anúncios são o mesmo imóvel se as impressões
+   diferem em até 8 bits, as áreas em até 18% e os preços em até 25%.
 3. **Consolidação**: preço e áreas pela mediana do grupo; bairro, cidade e tipo pelo
    valor mais frequente; guarda os códigos e imobiliárias de origem.
 4. **Padronização do tipo**: textos livres ("Sobrado", "Apto", "Casa geminada"...) são

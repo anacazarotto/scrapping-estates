@@ -100,4 +100,7 @@ bairro como igual, o que é uma das principais fontes do erro que resta.
 5. **Obter preços de venda reais** (ITBI da prefeitura, cartórios) para comparar com os
    preços anunciados.
 6. **Modelar terrenos** separadamente, com preço por m² de terreno.
-7. **Publicar o site** para uso público (capítulo seguinte do projeto).
+7. **Conferir a deduplicação à mão** numa amostra, para medir quantos anúncios foram
+   agrupados certo ou errado (unidades iguais no mesmo prédio podem virar um só imóvel).
+8. **Ajustar os hiperparâmetros** do ensemble final e repetir a avaliação com outras
+   divisões treino/teste, para medir a variação do resultado.
