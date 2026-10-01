@@ -27,7 +27,9 @@ python -m streamlit run interface/app.py     # abre em http://localhost:8501
 - taxa de valorização anual do bairro, com a faixa pessimista–otimista;
 - quanto o imóvel valeria se apenas acompanhasse a inflação;
 - gráfico interativo com o cenário central, a faixa de incerteza e a linha do IPCA;
-- aviso quando o bairro tem poucos dados e foi usada a taxa geral do tipo.
+- aviso quando o bairro tem poucos dados e foi usada a taxa geral do tipo;
+- aviso de **estimativa pouco confiável** quando o imóvel foge do padrão dos dados de
+  treino (seção 6.5).
 
 ## 6.2 Tabela ano a ano e explicação do método
 
@@ -51,7 +53,43 @@ acompanhados e a faixa de incerteza, para apartamentos e para casas.
 Desempenho do modelo de preço no conjunto de teste (MAE, RMSE e R² por tipo) e os
 modelos que compõem o ensemble.
 
-## 6.5 Decisões de projeto
+## 6.5 Aviso de dados fora do padrão
+
+O modelo de preço limita cada valor numérico à faixa de 2% a 98% do treino (seção 4.2).
+Sem aviso, uma casa de 3.000 m² seria estimada como se tivesse cerca de 1.049 m², e o
+site mostraria o valor normalmente. A função `input_warnings`
+(`scripts_predict/imoveis_ml_hibrido.py`) compara o que foi digitado com essas faixas,
+guardadas no próprio modelo, e a interface mostra um alerta amarelo quando:
+
+- algum campo (área total, área privativa, quartos, banheiros, vagas) está fora da faixa
+  do tipo de imóvel — o aviso diz a faixa e o valor que o modelo usou no cálculo;
+- a área privativa é maior que a área total;
+- o bairro tem menos de 10 imóveis do tipo no treino e entrou no grupo "outros".
+
+| Tipo | Área total no treino | Quartos | Vagas |
+|---|---|---|---|
+| Apartamento | 39 a 438 m² | 1 a 4 | 1 a 3 |
+| Casa | 50 a 1.049 m² | 2 a 5 | 1 a 4,6 |
+
+Valores 0 contam como "não informado" e não geram aviso.
+
+## 6.6 Publicação
+
+O site está publicado no **Streamlit Community Cloud** (gratuito), ligado ao repositório
+do GitHub: cada push na branch `main` atualiza o site automaticamente.
+
+- **Modelos versionados**: só o modelo rápido (`preco_imovel_modelo_hibrido_rapido.pkl`,
+  24 MB) e o de projeção vão para o GitHub; o modelo com TabPFN (179 MB) fica local.
+- **Dados**: os bancos `.db` não são publicados; o site usa `dados/bairros.json` e
+  `dados/ipca.json`.
+- **Dependências**: `interface/requirements.txt`, com 9 bibliotecas em versões fixas.
+- **Versão do Python**: o servidor usa Python 3.14. O CatBoost 1.2.8, usado no treino,
+  não tem pacote para essa versão; o site usa o CatBoost 1.2.10, e foi verificado que o
+  modelo salvo dá exatamente as mesmas previsões nas duas versões.
+- **Desempenho**: cerca de 300 MB de memória. No plano gratuito o site "dorme" sem
+  acessos e leva cerca de 30 segundos para voltar.
+
+## 6.7 Decisões de projeto
 
 - **Modelo sem TabPFN na interface**: resposta imediata, com precisão equivalente
   (seção 4.6).
