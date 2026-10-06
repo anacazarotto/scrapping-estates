@@ -45,7 +45,7 @@ from sklearn.metrics import brier_score_loss, mean_absolute_error, r2_score, roc
 from sklearn.model_selection import GroupKFold, cross_val_predict
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from tabpfn_model import TABPFN_NAME, make_tabpfn, tabpfn_enabled
+from tabpfn_model import TABPFN_VARIANTS, enabled_tabpfn_variants, make_tabpfn
 
 try:
     from xgboost import XGBRegressor
@@ -311,8 +311,10 @@ def model_factories(seed=42):
         factories["CatBoost"] = lambda: CatBoostRegressor(
             iterations=500, depth=5, learning_rate=0.03, random_seed=seed, verbose=False
         )
-    if tabpfn_enabled():
-        factories[TABPFN_NAME] = lambda: make_tabpfn(NUMERIC_FEATURES, CATEGORICAL_FEATURES, seed=seed)
+    for tabpfn_name in enabled_tabpfn_variants(verbose=False):
+        factories[tabpfn_name] = lambda version=TABPFN_VARIANTS[tabpfn_name]: make_tabpfn(
+            NUMERIC_FEATURES, CATEGORICAL_FEATURES, seed=seed, version=version
+        )
     return factories
 
 
@@ -333,7 +335,7 @@ def build_classifier(name, seed=42):
 
 def build_model(name, seed=42):
     estimator = model_factories(seed)[name]()
-    if name == TABPFN_NAME:
+    if name in TABPFN_VARIANTS:
         return Pipeline([("model", estimator)])
     return Pipeline([("prep", make_preprocessor()), ("model", estimator)])
 

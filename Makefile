@@ -106,3 +106,9 @@ eda:
 
 figuras-resultados:
 	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/figuras_resultados.py
+
+resultados-modelos:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/resultados_modelos.py
+
+experimento-v2:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/experimento_preco_v2.py

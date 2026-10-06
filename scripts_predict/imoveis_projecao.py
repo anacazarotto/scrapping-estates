@@ -38,7 +38,7 @@ from imoveis_ml_hibrido import format_currency
 from imoveis_ml_hibrido import load_artifact as load_price_artifact
 from imoveis_ml_hibrido import predict_price
 from imoveis_valorizacao import ALLOWED_TYPES, MAX_ABS_MONTHLY_LOG_CHANGE, load_panel
-from ipca import load_ipca
+from ipca import faixa_anual, load_ipca
 from model_io import load_model, save_model
 
 DEFAULT_UNIFIED_DB = Path("imoveis_unificado.db")
@@ -56,6 +56,8 @@ BOOTSTRAP_SAMPLES = 1000
 INTERVAL = (10, 90)  # percentis do cenário pessimista / otimista
 MAX_ANOS = 30
 REFERENCIAS = ("ipca-media", "ipca-12m", "nenhuma")
+# v2: força do IPCA como ponto de partida, em "meses de dados equivalentes".
+IPCA_PRIOR_MESES = 12
 
 
 # --------------------------------------------------------------------- taxas
@@ -153,6 +155,41 @@ def lookup_rate(artifact, bairro, tipo):
     return artifact["tipos"][tipo], "tipo"
 
 
+def meses_observados(artifact):
+    """Meses entre a primeira e a última coleta (mar->ago/2026 = 5)."""
+    meses = [pd.Period(m, freq="M") for m in artifact["meses"]]
+    return max(1, (max(meses) - min(meses)).n)
+
+
+def ajustar_ipca(rate, artifact, prior_meses=IPCA_PRIOR_MESES):
+    """Taxa v2: combina a taxa medida nos anúncios com o IPCA (média de 10 anos).
+
+    O IPCA entra como ponto de partida ("a priori") e a taxa medida ganha peso conforme
+    há mais meses de dados: peso_dados = T / (T + prior_meses). Com 5 meses de coleta e
+    prior de 12 meses, a taxa medida pesa 29% e o IPCA 71%. Mais meses de coleta movem a
+    taxa para o que os dados mostram. As diferenças entre bairros são mantidas,
+    reduzidas pelo mesmo peso.
+    """
+    ipca = artifact.get("ipca")
+    if not ipca:
+        return rate, None
+    t = meses_observados(artifact)
+    w = t / (t + prior_meses)
+
+    def mensal(pct_anual):
+        return float(np.log1p(pct_anual / 100.0) / 12.0)
+
+    central = mensal(ipca["media_anual_pct"])
+    faixa = faixa_anual()  # IPCA 12 meses, percentis 10 e 90 dos últimos 10 anos
+    baixa, alta = (mensal(faixa[0]), mensal(faixa[1])) if faixa else (central, central)
+    ajustada = {
+        "mensal": w * float(rate["mensal"]) + (1 - w) * central,
+        "mensal_baixa": w * float(rate["mensal_baixa"]) + (1 - w) * baixa,
+        "mensal_alta": w * float(rate["mensal_alta"]) + (1 - w) * alta,
+    }
+    return {**rate, **ajustada}, w
+
+
 def project(
     artifact,
     price_artifact,
@@ -167,11 +204,14 @@ def project(
     anos=10,
     preco_atual=None,
     taxa_referencia=None,
+    versao="v1",
 ):
     """Valor estimado hoje e ano a ano. Função pensada para ser usada pela interface.
 
     `preco_atual` (opcional) substitui o valor estimado pelo modelo de preço.
     `taxa_referencia` (opcional, % ao ano) adiciona um cenário de referência (IPCA).
+    `versao`: "v1" usa só a taxa medida nos anúncios; "v2" a combina com o IPCA
+    (`ajustar_ipca`).
     """
     bairro = unify_bairro(bairro)
     tipo = canonical_tipo(tipo_imovel)
@@ -193,6 +233,11 @@ def project(
     )
     valor_hoje = float(preco_atual) if preco_atual else float(valor_modelo)
     rate, origem = lookup_rate(artifact, bairro, tipo)
+    peso_dados = 1.0
+    if versao == "v2":
+        rate, peso = ajustar_ipca(rate, artifact)
+        if peso is not None:
+            peso_dados = peso
 
     rows = []
     for ano in range(0, anos + 1):
@@ -219,6 +264,8 @@ def project(
         "taxa_anual_pessimista_pct": annual_pct(rate["mensal_baixa"]),
         "taxa_anual_otimista_pct": annual_pct(rate["mensal_alta"]),
         "taxa_referencia_pct": taxa_referencia,
+        "versao": versao,
+        "peso_dados": peso_dados,  # v2: peso da taxa medida (o resto é IPCA)
         "dados_ate": artifact["ultimo_mes"],
         "projecao": pd.DataFrame(rows),
     }
@@ -402,6 +449,7 @@ def cmd_predict(args):
             anos=args.anos,
             preco_atual=args.preco_atual,
             taxa_referencia=taxa_ref,
+            versao=args.versao,
         )
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
@@ -482,6 +530,12 @@ def build_parser():
         choices=REFERENCIAS,
         default="ipca-media",
         help="Cenário de referência (padrão: IPCA média anual de 10 anos).",
+    )
+    p.add_argument(
+        "--versao",
+        choices=("v1", "v2"),
+        default="v1",
+        help="v1: taxa medida nos anúncios; v2: taxa medida combinada com o IPCA.",
     )
     p.set_defaults(func=cmd_predict)
     return parser

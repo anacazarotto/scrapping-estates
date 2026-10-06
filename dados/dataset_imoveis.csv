@@ -1,0 +1,3284 @@
+tipo_imovel,bairro,area_total,area_privada,quartos,banheiros,vagas,preco,preco_m2
+Apartamento,,50.68,49.25,2,1,1,180000.0,3654.82
+Apartamento,,76.1,47.8,2,1,1,220000.0,4602.51
+Apartamento,,50.0,50.0,2,1,1,230000.0,4600.0
+Apartamento,,50.0,50.0,2,1,1,242000.0,4840.0
+Apartamento,,56.97,46.55,2,1,1,245000.0,5263.16
+Apartamento,,69.04,45.18,2,1,1,250000.0,5533.42
+Apartamento,,45.0,45.0,2,1,1,255000.0,5666.67
+Apartamento,,53.68,53.68,2,1,1,255000.0,4750.37
+Apartamento,,54.68,47.89,2,1,1,265000.0,5533.51
+Apartamento,,68.81,49.28,2,1,1,270000.0,5478.9
+Apartamento,,45.48,45.48,2,1,1,279000.0,6134.56
+Apartamento,,32.96,32.96,1,1,1,280000.0,8495.15
+Apartamento,,72.0,43.0,2,1,1,300000.0,6976.74
+Apartamento,,38.64,38.64,1,1,0,320000.0,8281.57
+Apartamento,,80.0,59.0,2,1,1,330000.0,5593.22
+Apartamento,,50.0,50.0,2,1,1,338000.0,6760.0
+Apartamento,,59.7,59.7,2,1,2,350000.0,5862.65
+Apartamento,,44.5,44.5,2,1,1,359000.0,8067.42
+Apartamento,,1.0,1.0,2,1,1,360000.0,360000.0
+Apartamento,,59.15,59.15,2,1,1,360000.0,6086.22
+Apartamento,,60.15,60.15,2,1,1,371000.0,6167.91
+Apartamento,,60.15,60.15,2,1,1,371000.0,6167.91
+Apartamento,,1.0,1.0,2,2,2,375000.0,375000.0
+Apartamento,,69.0,50.0,2,1,1,380000.0,7600.0
+Apartamento,,89.84,49.5,2,1,1,400000.0,8080.81
+Apartamento,,50.39,50.39,2,1,1,400000.0,7938.08
+Apartamento,,79.0,79.0,3,2,1,403000.0,5101.27
+Apartamento,,54.93,54.93,2,2,1,405000.0,7373.02
+Apartamento,,66.34,66.34,3,2,1,425000.0,6406.39
+Apartamento,,54.21,46.29,2,1,3,450000.0,9721.32
+Apartamento,,64.0,64.0,2,1,1,450000.0,7031.25
+Apartamento,,46.29,46.29,2,1,1,456000.0,9850.94
+Apartamento,,54.0,54.0,2,1,1,460000.0,8518.52
+Apartamento,,49.33,49.33,2,1,1,480000.0,9730.39
+Apartamento,,74.89,63.85,2,1,1,480000.0,7517.62
+Apartamento,,58.82,58.82,2,1,1,480000.0,8160.49
+Apartamento,,56.74,56.74,2,1,1,500000.0,8812.13
+Apartamento,,82.03,66.02,2,1,1,550000.0,8330.81
+Apartamento,,127.07,90.11,3,1,1,565000.0,6270.11
+Apartamento,,64.07,64.07,2,2,1,649000.0,10129.55
+Apartamento,,59.34,59.34,2,1,1,650000.0,10953.83
+Apartamento,,100.0,100.0,3,1,1,650000.0,6500.0
+Apartamento,,72.8,72.8,2,2,1,700000.0,9615.38
+Apartamento,,73.82,73.82,2,2,2,700000.0,9482.53
+Apartamento,,143.39,143.39,3,2,2,790000.0,5509.45
+Apartamento,,143.0,123.0,3,1,1,950000.0,7723.58
+Apartamento,araras,47.1,47.1,2,1,1,240000.0,5095.54
+Apartamento,araras,41.76,41.76,2,1,1,280000.0,6704.98
+Apartamento,autodromo,80.0,60.0,2,1,1,350000.0,5833.33
+Apartamento,bairro universitario,64.0,64.0,2,2,0,425000.0,6640.62
+Apartamento,bela vista,68.03,68.03,2,1,1,300000.0,4409.82
+Apartamento,bela vista,66.96,66.96,2,1,1,300000.0,4480.29
+Apartamento,bela vista,77.95,77.95,2,1,1,310000.0,3976.91
+Apartamento,bela vista,85.14,85.14,2,1,1,320000.0,3758.52
+Apartamento,bela vista,88.8,88.8,2,1,1,345000.0,3885.14
+Apartamento,bela vista,84.7,84.7,2,1,1,345000.0,4073.2
+Apartamento,bela vista,90.0,90.0,3,1,2,550000.0,6111.11
+Apartamento,bela vista,119.0,100.0,3,1,1,575000.0,5750.0
+Apartamento,bela vista,90.11,90.11,3,1,2,586000.0,6503.16
+Apartamento,bela vista,80.9,80.9,2,0,2,640000.0,7911.0
+Apartamento,bela vista,80.9,80.9,2,1,0,640000.0,7911.0
+Apartamento,bela vista,108.03,80.9,2,1,2,640000.0,7911.0
+Apartamento,bela vista,80.9,80.9,2,1,2,642500.0,7941.9
+Apartamento,bela vista,81.4,81.4,2,1,2,744500.0,9146.19
+Apartamento,bela vista,145.95,145.95,3,2,2,770000.0,5275.78
+Apartamento,bela vista,109.33,109.33,3,2,2,800000.0,7317.3
+Apartamento,bela vista,1.08,1.08,3,1,2,840000.0,777777.78
+Apartamento,belvedere,64.0,64.0,2,1,1,235000.0,3671.88
+Apartamento,belvedere,96.55,60.1,2,1,1,320000.0,5324.46
+Apartamento,belvedere,58.48,58.48,2,1,1,330000.0,5642.95
+Apartamento,belvedere,55.0,55.0,2,1,1,340000.0,6181.82
+Apartamento,belvedere,75.0,75.0,2,1,1,349800.0,4664.0
+Apartamento,belvedere,61.8,61.8,2,1,1,360000.0,5825.24
+Apartamento,bom pastor,88.77,66.9,2,1,1,280000.0,4185.35
+Apartamento,bom pastor,74.0,54.0,2,1,1,297500.0,5509.26
+Apartamento,bom pastor,59.15,59.15,2,1,0,330000.0,5579.04
+Apartamento,bom pastor,59.15,59.15,2,1,1,330000.0,5579.04
+Apartamento,bom pastor,60.0,60.0,2,1,1,350000.0,5833.33
+Apartamento,bom pastor,60.15,60.15,2,1,0,350000.0,5818.79
+Apartamento,bom pastor,66.91,66.9,2,1,1,375000.0,5605.38
+Apartamento,bom pastor,54.0,54.0,2,1,1,381000.0,7055.56
+Apartamento,bom pastor,60.0,60.0,0,0,0,385000.0,6416.67
+Apartamento,bom pastor,54.91,54.91,2,0,1,425000.0,7739.94
+Apartamento,bom pastor,58.96,58.96,2,1,1,450000.0,7632.29
+Apartamento,bom pastor,58.94,58.94,2,2,2,450000.0,7634.88
+Apartamento,bom pastor,105.0,105.0,3,2,1,650000.0,6190.48
+Apartamento,bom retiro,50.34,50.34,2,1,1,409000.0,8124.75
+Apartamento,bom retiro,74.04,74.04,2,1,1,410000.0,5537.55
+Apartamento,bom retiro,50.0,50.0,2,1,1,413400.0,8268.0
+Apartamento,bom retiro,68.0,50.0,2,1,1,420000.0,8400.0
+Apartamento,bom retiro,50.39,50.39,2,1,1,426000.0,8454.06
+Apartamento,bom retiro,50.73,50.73,2,1,1,430000.0,8476.25
+Apartamento,bom retiro,50.34,50.34,2,1,0,430000.0,8541.91
+Apartamento,bom retiro,46.88,46.88,2,1,1,462500.0,9865.61
+Apartamento,bom retiro,60.0,60.0,2,1,1,480000.0,8000.0
+Apartamento,bom retiro,67.61,67.61,2,1,1,495000.0,7321.4
+Apartamento,bom retiro,70.98,70.98,2,2,1,537000.0,7565.51
+Apartamento,bom retiro,59.83,59.83,2,1,0,565000.0,9443.42
+Apartamento,central,140.0,140.0,3,1,2,1200000.0,8571.43
+Apartamento,centro,89.51,89.51,3,2,2,1.0,0.01
+Apartamento,centro,160.0,160.0,3,2,3,1.5,0.01
+Apartamento,centro,214.59,128.98,3,1,2,1.54,0.01
+Apartamento,centro,160.75,160.75,3,3,2,2.17,0.01
+Apartamento,centro,470.0,470.0,2,0,3,3.2,0.01
+Apartamento,centro,42.44,42.44,1,1,0,276664.0,6518.94
+Apartamento,centro,49.34,49.34,1,1,0,278005.0,5634.48
+Apartamento,centro,33.88,33.88,1,1,0,285000.0,8412.04
+Apartamento,centro,38.64,38.64,1,1,0,320000.0,8281.57
+Apartamento,centro,57.23,57.23,2,1,0,330000.0,5766.21
+Apartamento,centro,61.7,61.7,2,1,0,340000.0,5510.53
+Apartamento,centro,111.89,111.89,3,3,1,345000.65,3083.39
+Apartamento,centro,76.0,58.0,2,1,1,349900.0,6032.76
+Apartamento,centro,57.23,57.23,2,1,1,350000.0,6115.67
+Apartamento,centro,46.29,46.29,1,1,1,350000.0,7561.03
+Apartamento,centro,22.0,22.0,1,1,0,351095.0,15958.86
+Apartamento,centro,68.43,55.0,1,1,0,380000.0,6909.09
+Apartamento,centro,55.0,55.0,1,1,0,380000.0,6909.09
+Apartamento,centro,82.47,63.92,2,1,0,382500.0,5984.04
+Apartamento,centro,88.0,88.0,2,1,0,400000.0,4545.45
+Apartamento,centro,72.5,72.5,2,1,1,405000.0,5586.21
+Apartamento,centro,84.0,72.0,2,1,1,405000.0,5625.0
+Apartamento,centro,69.54,69.54,2,1,0,425000.0,6111.59
+Apartamento,centro,64.8,64.8,2,1,0,430000.0,6635.8
+Apartamento,centro,70.0,70.0,2,1,1,430000.0,6142.86
+Apartamento,centro,85.0,85.0,3,1,0,430000.0,5058.82
+Apartamento,centro,38.88,38.88,1,1,0,436476.29,11226.24
+Apartamento,centro,38.88,38.88,2,1,1,437000.0,11239.71
+Apartamento,centro,36.85,36.85,1,1,1,440000.0,11940.3
+Apartamento,centro,78.0,36.0,1,1,1,440000.0,12222.22
+Apartamento,centro,32.99,32.99,2,1,1,440000.0,13337.37
+Apartamento,centro,74.46,74.46,2,1,1,450000.0,6043.51
+Apartamento,centro,63.92,63.92,2,1,1,450000.0,7040.05
+Apartamento,centro,92.0,85.0,3,1,0,450000.0,5294.12
+Apartamento,centro,67.0,36.5,1,1,0,461000.0,12630.14
+Apartamento,centro,91.6,65.72,2,1,1,477000.0,7258.06
+Apartamento,centro,30.57,30.57,1,1,1,479607.73,15688.84
+Apartamento,centro,35.31,35.31,1,0,1,480000.0,13593.88
+Apartamento,centro,90.0,90.0,2,0,0,480000.0,5333.33
+Apartamento,centro,103.0,70.0,2,1,1,480000.0,6857.14
+Apartamento,centro,82.27,82.27,2,1,1,480000.0,5834.45
+Apartamento,centro,147.0,131.04,3,2,1,480000.0,3663.0
+Apartamento,centro,60.0,36.0,1,1,1,480000.0,13333.33
+Apartamento,centro,88.0,64.0,2,1,1,480000.0,7500.0
+Apartamento,centro,36.01,36.01,1,1,1,480000.0,13329.63
+Apartamento,centro,66.55,36.6,0,1,1,480000.0,13114.75
+Apartamento,centro,38.29,38.29,1,1,0,484202.7,12645.67
+Apartamento,centro,120.69,85.0,2,2,1,490000.0,5764.71
+Apartamento,centro,104.71,86.64,2,1,1,490000.0,5655.59
+Apartamento,centro,80.81,80.81,2,1,1,495000.0,6125.48
+Apartamento,centro,69.2,69.2,2,1,1,497500.0,7189.31
+Apartamento,centro,69.01,69.01,2,1,2,499000.0,7230.84
+Apartamento,centro,69.2,69.2,2,1,2,500000.0,7225.43
+Apartamento,centro,108.41,108.41,2,1,1,500000.0,4612.12
+Apartamento,centro,120.69,120.69,2,2,0,500000.0,4142.85
+Apartamento,centro,100.0,69.0,2,1,2,500000.0,7246.38
+Apartamento,centro,74.6,74.6,2,1,1,507163.0,6798.43
+Apartamento,centro,119.17,119.17,3,1,1,520000.0,4363.51
+Apartamento,centro,93.17,93.17,3,1,1,520000.0,5581.2
+Apartamento,centro,36.2,36.2,1,1,1,520000.0,14364.64
+Apartamento,centro,100.15,100.15,2,2,1,525000.0,5242.14
+Apartamento,centro,88.76,78.13,2,1,1,527500.0,6751.57
+Apartamento,centro,85.55,85.55,2,2,0,530000.0,6195.21
+Apartamento,centro,80.81,80.81,2,2,1,530000.0,6558.59
+Apartamento,centro,75.0,75.0,2,1,1,532000.0,7093.33
+Apartamento,centro,104.3,136.75,3,2,1,534000.0,3904.94
+Apartamento,centro,58.24,58.24,2,1,1,535000.0,9186.13
+Apartamento,centro,131.04,131.04,4,1,1,540000.0,4120.88
+Apartamento,centro,102.0,86.0,2,1,1,540000.0,6279.07
+Apartamento,centro,80.94,80.94,3,2,0,550000.0,6795.16
+Apartamento,centro,35.0,35.0,1,1,1,550000.0,15714.29
+Apartamento,centro,126.0,93.0,3,1,1,550000.0,5913.98
+Apartamento,centro,76.3,76.3,2,1,1,555000.0,7273.92
+Apartamento,centro,67.05,67.05,2,1,2,555000.0,8277.4
+Apartamento,centro,45.0,40.5,1,1,1,565000.0,13950.62
+Apartamento,centro,49.02,49.02,2,1,1,565000.0,11525.91
+Apartamento,centro,107.95,107.95,3,3,1,570000.0,5280.22
+Apartamento,centro,61.33,61.33,2,1,1,575000.0,9375.51
+Apartamento,centro,51.61,51.61,1,1,1,580000.0,11238.13
+Apartamento,centro,32.81,32.81,1,1,0,580000.0,17677.54
+Apartamento,centro,113.56,113.56,3,1,1,580000.0,5107.43
+Apartamento,centro,113.0,113.0,3,3,1,580000.0,5132.74
+Apartamento,centro,78.64,66.0,2,1,1,580000.0,8787.88
+Apartamento,centro,47.56,47.56,2,1,1,580000.0,12195.12
+Apartamento,centro,51.89,51.89,2,1,0,582529.69,11226.24
+Apartamento,centro,93.11,93.11,2,1,1,585000.0,6282.89
+Apartamento,centro,117.91,117.91,3,1,1,590000.0,5003.82
+Apartamento,centro,45.35,45.35,1,0,0,590000.0,13009.92
+Apartamento,centro,47.0,47.0,2,1,1,590000.0,12553.19
+Apartamento,centro,81.08,47.17,2,1,1,590000.0,12507.95
+Apartamento,centro,89.9,89.9,3,1,1,595000.0,6618.46
+Apartamento,centro,52.07,52.07,2,1,1,599000.0,11503.74
+Apartamento,centro,157.12,157.12,4,2,1,600000.0,3818.74
+Apartamento,centro,45.1,45.1,1,1,1,600000.0,13303.77
+Apartamento,centro,112.91,112.91,3,0,1,600000.0,5313.97
+Apartamento,centro,112.91,112.91,3,1,1,600000.0,5313.97
+Apartamento,centro,128.0,81.0,2,1,1,600000.0,7407.41
+Apartamento,centro,98.25,98.25,2,3,2,615000.0,6259.54
+Apartamento,centro,107.0,75.3,2,1,1,617000.0,8193.89
+Apartamento,centro,64.07,64.07,2,2,1,619000.0,9661.31
+Apartamento,centro,93.24,93.24,2,2,1,620000.0,6649.51
+Apartamento,centro,64.17,64.17,2,1,1,626081.5,9756.61
+Apartamento,centro,51.89,51.89,2,1,1,630000.0,12141.07
+Apartamento,centro,105.28,86.91,2,1,1,630000.0,7248.88
+Apartamento,centro,60.1,60.1,2,2,1,630000.0,10482.53
+Apartamento,centro,100.47,100.47,2,1,0,635000.0,6320.29
+Apartamento,centro,90.0,100.0,2,1,1,638000.0,6380.0
+Apartamento,centro,88.02,88.02,3,1,1,640000.0,7271.07
+Apartamento,centro,83.88,83.88,2,1,1,640000.0,7629.95
+Apartamento,centro,112.0,112.0,3,2,1,640000.0,5714.29
+Apartamento,centro,900.0,134.45,3,1,2,640000.0,4760.13
+Apartamento,centro,182.0,139.0,3,1,1,640000.0,4604.32
+Apartamento,centro,80.98,80.98,2,1,1,644500.0,7958.76
+Apartamento,centro,85.63,85.63,3,2,1,645000.0,7532.41
+Apartamento,centro,90.0,90.0,3,1,1,650000.0,7222.22
+Apartamento,centro,70.49,70.49,2,2,1,650000.0,9221.17
+Apartamento,centro,92.37,92.37,2,2,2,650000.0,7036.92
+Apartamento,centro,88.47,73.72,2,1,1,650000.0,8817.15
+Apartamento,centro,133.0,70.0,2,1,1,650000.0,9285.71
+Apartamento,centro,143.0,143.0,2,1,1,650000.0,4545.45
+Apartamento,centro,103.92,103.92,3,1,1,650000.0,6254.81
+Apartamento,centro,161.74,161.74,3,1,2,650000.0,4018.8
+Apartamento,centro,98.25,98.25,2,1,1,650000.0,6615.78
+Apartamento,centro,125.02,110.02,3,1,1,650000.0,5908.02
+Apartamento,centro,74.05,74.05,3,1,1,650000.0,8777.85
+Apartamento,centro,120.56,88.0,3,2,1,650000.0,7386.36
+Apartamento,centro,101.17,75.22,2,1,2,650000.0,8641.32
+Apartamento,centro,194.61,194.61,2,1,1,650000.0,3340.01
+Apartamento,centro,132.0,81.0,3,1,1,650000.0,8024.69
+Apartamento,centro,92.37,92.37,2,1,2,650000.0,7036.92
+Apartamento,centro,123.21,92.37,2,0,2,650000.0,7036.92
+Apartamento,centro,123.59,92.82,2,2,2,650000.0,7002.8
+Apartamento,centro,70.84,70.84,2,2,1,660000.0,9316.77
+Apartamento,centro,211.58,149.39,3,1,2,660000.0,4417.97
+Apartamento,centro,113.94,113.94,3,1,2,664500.0,5832.02
+Apartamento,centro,106.66,84.65,2,2,2,670000.0,7914.94
+Apartamento,centro,45.35,45.35,1,1,1,672500.0,14829.11
+Apartamento,centro,108.0,68.0,2,1,1,680000.0,10000.0
+Apartamento,centro,134.0,122.0,3,1,1,680000.0,5573.77
+Apartamento,centro,120.0,86.0,2,1,1,680000.0,7906.98
+Apartamento,centro,112.62,112.62,3,1,1,680000.0,6038.0
+Apartamento,centro,63.32,63.32,2,1,2,680000.0,10739.1
+Apartamento,centro,97.05,62.87,2,2,1,680000.0,10815.97
+Apartamento,centro,64.35,64.35,2,1,1,680000.0,10567.21
+Apartamento,centro,101.0,75.0,2,1,2,680000.0,9066.67
+Apartamento,centro,75.0,53.0,2,1,2,680000.0,12830.19
+Apartamento,centro,98.71,98.71,3,1,1,690000.0,6990.17
+Apartamento,centro,156.0,113.0,2,1,1,690000.0,6106.19
+Apartamento,centro,65.6,65.6,2,2,2,690000.0,10518.29
+Apartamento,centro,113.0,113.0,4,1,2,690000.0,6106.19
+Apartamento,centro,113.84,89.68,3,1,1,690000.0,7694.02
+Apartamento,centro,72.14,72.14,2,1,1,691000.0,9578.6
+Apartamento,centro,123.0,93.0,2,1,2,695000.0,7473.12
+Apartamento,centro,92.0,92.0,2,1,1,695000.0,7554.35
+Apartamento,centro,64.17,64.17,2,2,1,695000.0,10830.61
+Apartamento,centro,172.0,112.62,3,1,1,699000.0,6206.71
+Apartamento,centro,112.42,112.42,3,1,1,699000.0,6217.75
+Apartamento,centro,138.06,138.06,3,2,0,700000.0,5070.26
+Apartamento,centro,86.24,86.24,2,1,1,700000.0,8116.88
+Apartamento,centro,62.0,62.0,2,1,2,700000.0,11290.32
+Apartamento,centro,65.0,65.0,2,2,0,700000.0,10769.23
+Apartamento,centro,98.08,98.08,2,1,2,700738.0,7144.56
+Apartamento,centro,98.56,98.56,2,1,2,709215.0,7195.77
+Apartamento,centro,129.92,129.92,3,3,1,710000.0,5464.9
+Apartamento,centro,96.06,96.06,2,1,1,710000.0,7391.21
+Apartamento,centro,128.0,117.5,3,1,1,715000.0,6085.11
+Apartamento,centro,110.74,110.74,4,3,2,720000.0,6501.72
+Apartamento,centro,80.0,80.0,2,1,1,720000.0,9000.0
+Apartamento,centro,80.4,80.4,2,2,2,720000.0,8955.22
+Apartamento,centro,101.42,62.34,1,0,1,720800.0,11562.4
+Apartamento,centro,70.0,70.0,2,2,1,724000.0,10342.86
+Apartamento,centro,79.66,77.33,2,1,2,724500.0,9368.94
+Apartamento,centro,65.37,65.37,2,2,1,725000.0,11090.71
+Apartamento,centro,71.82,71.82,2,2,2,730000.0,10164.3
+Apartamento,centro,173.0,173.0,3,2,1,730000.0,4219.65
+Apartamento,centro,153.0,127.0,3,1,1,730000.0,5748.03
+Apartamento,centro,60.91,60.91,2,1,1,730000.0,11984.9
+Apartamento,centro,94.01,94.01,2,1,2,733234.0,7799.53
+Apartamento,centro,64.07,64.07,2,1,1,739000.0,11534.26
+Apartamento,centro,79.73,79.73,2,2,1,740000.0,9281.32
+Apartamento,centro,119.52,119.52,3,2,1,740000.0,6191.43
+Apartamento,centro,129.67,129.67,4,2,2,740000.0,5706.79
+Apartamento,centro,154.35,98.25,2,1,1,740000.0,7531.81
+Apartamento,centro,98.0,98.0,2,1,1,742000.0,7571.43
+Apartamento,centro,73.63,73.63,3,2,1,744900.0,10116.8
+Apartamento,centro,126.83,126.83,2,1,1,745000.0,5874.0
+Apartamento,centro,60.91,60.91,2,1,2,745000.0,12231.16
+Apartamento,centro,100.88,79.3,2,1,1,745000.0,9394.7
+Apartamento,centro,135.0,110.0,3,2,2,745000.0,6772.73
+Apartamento,centro,71.87,71.87,2,2,1,746500.0,10386.81
+Apartamento,centro,71.82,71.82,2,1,2,748165.0,10417.22
+Apartamento,centro,106.85,79.66,2,2,2,749000.0,9402.46
+Apartamento,centro,127.0,127.0,2,1,1,750000.0,5905.51
+Apartamento,centro,210.0,210.0,3,1,2,750000.0,3571.43
+Apartamento,centro,121.43,121.43,2,2,1,750000.0,6176.4
+Apartamento,centro,93.0,93.0,3,2,2,750000.0,8064.52
+Apartamento,centro,111.94,111.94,3,2,2,750000.0,6700.02
+Apartamento,centro,98.6,98.6,2,1,1,750000.0,7606.49
+Apartamento,centro,91.04,91.04,2,1,1,750000.0,8238.14
+Apartamento,centro,79.3,79.3,2,1,1,750000.0,9457.76
+Apartamento,centro,66.62,66.62,2,1,1,750000.0,11257.88
+Apartamento,centro,79.54,79.54,2,1,1,750000.0,9429.22
+Apartamento,centro,65.34,65.34,2,1,1,750000.0,11478.42
+Apartamento,centro,92.86,92.86,2,1,1,750000.0,8076.67
+Apartamento,centro,130.75,130.75,3,0,1,750000.0,5736.14
+Apartamento,centro,233.28,124.8,3,2,2,750000.0,6009.62
+Apartamento,centro,93.0,93.0,3,1,2,750000.0,8064.52
+Apartamento,centro,79.12,79.12,2,1,1,750000.0,9479.27
+Apartamento,centro,170.0,91.0,2,2,2,750000.0,8241.76
+Apartamento,centro,103.0,103.0,3,1,1,750000.0,7281.55
+Apartamento,centro,93.06,93.06,3,2,2,750000.0,8059.32
+Apartamento,centro,93.0,93.0,2,2,2,758508.0,8156.0
+Apartamento,centro,65.0,65.0,2,2,1,760000.0,11692.31
+Apartamento,centro,79.66,76.83,2,2,2,760000.0,9891.97
+Apartamento,centro,65.71,95.0,2,1,2,760000.0,8000.0
+Apartamento,centro,135.0,99.0,2,2,2,760000.0,7676.77
+Apartamento,centro,64.17,64.17,2,2,2,760000.0,11843.54
+Apartamento,centro,101.83,101.83,2,1,2,768049.0,7542.46
+Apartamento,centro,79.73,79.73,2,1,1,770000.0,9657.59
+Apartamento,centro,199.18,199.18,2,1,1,770000.0,3865.85
+Apartamento,centro,135.0,135.0,3,1,0,770000.0,5703.7
+Apartamento,centro,87.75,87.75,2,2,1,775000.0,8831.91
+Apartamento,centro,211.21,137.47,3,3,1,780000.0,5673.97
+Apartamento,centro,90.0,65.0,1,1,1,780000.0,12000.0
+Apartamento,centro,159.0,130.0,3,0,1,781250.0,6009.62
+Apartamento,centro,141.6,141.6,3,1,2,787000.0,5557.91
+Apartamento,centro,91.19,71.63,2,1,1,789000.0,11014.94
+Apartamento,centro,127.11,127.11,3,2,0,790000.0,6215.09
+Apartamento,centro,107.0,107.0,3,1,2,790000.0,7383.18
+Apartamento,centro,63.37,63.37,2,1,1,790000.0,12466.47
+Apartamento,centro,181.79,140.65,3,1,2,790000.0,5616.78
+Apartamento,centro,133.71,108.08,3,1,1,790000.0,7309.4
+Apartamento,centro,218.23,139.57,3,1,2,790000.0,5660.24
+Apartamento,centro,132.63,132.63,3,1,1,795000.0,5994.12
+Apartamento,centro,106.57,106.57,3,1,1,795000.0,7459.89
+Apartamento,centro,171.7,135.08,2,3,1,795000.0,5885.4
+Apartamento,centro,87.32,87.32,2,2,2,795000.0,9104.44
+Apartamento,centro,87.0,87.0,2,1,2,797000.0,9160.92
+Apartamento,centro,128.93,128.93,3,1,1,797500.0,6185.53
+Apartamento,centro,71.82,71.82,2,1,1,798000.0,11111.11
+Apartamento,centro,128.55,128.55,3,2,2,798000.0,6207.7
+Apartamento,centro,87.32,87.32,2,1,2,798000.0,9138.8
+Apartamento,centro,99.73,99.73,3,1,1,799000.0,8011.63
+Apartamento,centro,93.27,93.27,2,2,0,799000.0,8566.53
+Apartamento,centro,65.0,65.0,2,1,1,800000.0,12307.69
+Apartamento,centro,675.0,219.24,3,1,2,800000.0,3648.97
+Apartamento,centro,116.3,116.3,3,2,1,800000.0,6878.76
+Apartamento,centro,664.35,232.85,3,1,2,800000.0,3435.69
+Apartamento,centro,182.02,120.0,3,1,2,800000.0,6666.67
+Apartamento,centro,309.0,243.0,4,1,2,800000.0,3292.18
+Apartamento,centro,144.12,144.12,3,1,2,800000.0,5550.93
+Apartamento,centro,118.13,118.13,3,3,2,800000.0,6772.2
+Apartamento,centro,85.11,85.11,2,2,1,800000.0,9399.6
+Apartamento,centro,38.83,71.47,2,1,2,800000.0,11193.51
+Apartamento,centro,158.02,91.44,2,2,2,800000.0,8748.91
+Apartamento,centro,314.91,234.47,3,1,2,800000.0,3411.95
+Apartamento,centro,234.0,234.0,4,3,2,800000.0,3418.8
+Apartamento,centro,112.88,112.88,2,1,2,806692.0,7146.46
+Apartamento,centro,87.0,64.0,2,1,1,815000.0,12734.38
+Apartamento,centro,147.63,147.63,2,0,2,820000.0,5554.43
+Apartamento,centro,87.0,87.0,2,3,1,820000.0,9425.29
+Apartamento,centro,134.45,134.45,3,2,2,820000.0,6098.92
+Apartamento,centro,180.41,134.45,3,2,2,820000.0,6098.92
+Apartamento,centro,180.41,134.45,3,1,2,820000.0,6098.92
+Apartamento,centro,75.0,75.0,2,2,2,823936.17,10985.82
+Apartamento,centro,123.74,85.52,2,3,1,824500.0,9641.02
+Apartamento,centro,160.0,114.5,3,1,2,825000.0,7205.24
+Apartamento,centro,65.34,65.34,2,1,2,825000.0,12626.26
+Apartamento,centro,154.65,105.97,3,2,1,825000.0,7785.22
+Apartamento,centro,85.23,63.32,2,1,2,825000.0,13029.06
+Apartamento,centro,112.79,112.79,2,1,2,826282.0,7325.84
+Apartamento,centro,304.0,222.0,3,2,2,830000.0,3738.74
+Apartamento,centro,113.31,113.31,3,1,2,832653.0,7348.45
+Apartamento,centro,72.0,72.0,2,1,1,835000.0,11597.22
+Apartamento,centro,175.0,175.0,3,0,2,835000.0,4771.43
+Apartamento,centro,71.0,71.0,2,1,1,835000.0,11760.56
+Apartamento,centro,151.96,151.96,3,2,1,835000.0,5494.87
+Apartamento,centro,114.21,114.21,3,1,2,837678.0,7334.54
+Apartamento,centro,62.34,62.34,2,2,1,840000.0,13474.49
+Apartamento,centro,113.61,113.61,3,1,2,842675.0,7417.26
+Apartamento,centro,108.52,108.52,2,1,2,844108.0,7778.36
+Apartamento,centro,70.48,70.48,2,1,2,845000.0,11989.22
+Apartamento,centro,75.35,75.35,2,1,0,845897.33,11226.24
+Apartamento,centro,129.92,129.92,3,1,0,847000.0,6519.4
+Apartamento,centro,65.7,65.7,2,1,1,847500.0,12899.54
+Apartamento,centro,115.42,115.42,3,1,2,847875.0,7346.0
+Apartamento,centro,78.0,78.0,2,2,2,848000.0,10871.79
+Apartamento,centro,167.69,62.87,2,0,2,848000.0,13488.15
+Apartamento,centro,165.49,111.49,3,2,2,848000.0,7606.06
+Apartamento,centro,97.31,75.3,2,0,2,850000.0,11288.18
+Apartamento,centro,113.0,113.0,3,0,2,850000.0,7522.12
+Apartamento,centro,159.0,130.0,2,1,1,850000.0,6538.46
+Apartamento,centro,119.0,119.0,2,1,1,850000.0,7142.86
+Apartamento,centro,96.48,96.48,2,1,1,850000.0,8810.12
+Apartamento,centro,181.9,181.9,3,1,1,850000.0,4672.9
+Apartamento,centro,111.49,111.49,3,1,2,850000.0,7624.0
+Apartamento,centro,75.3,75.3,2,1,2,850000.0,11288.18
+Apartamento,centro,219.22,123.0,3,1,2,850000.0,6910.57
+Apartamento,centro,96.48,96.48,2,2,1,850000.0,8810.12
+Apartamento,centro,71.0,71.0,2,0,2,850000.0,11971.83
+Apartamento,centro,132.63,132.63,3,2,2,850000.0,6408.81
+Apartamento,centro,111.0,111.0,2,2,2,850000.0,7657.66
+Apartamento,centro,130.0,130.0,3,2,2,850000.0,6538.46
+Apartamento,centro,127.0,127.0,3,2,2,850000.0,6692.91
+Apartamento,centro,127.21,127.21,3,0,2,850000.0,6681.86
+Apartamento,centro,212.0,159.0,3,2,1,850000.0,5345.91
+Apartamento,centro,175.0,141.0,3,1,2,850000.0,6028.37
+Apartamento,centro,177.0,123.0,3,1,2,850000.0,6910.57
+Apartamento,centro,241.0,141.0,3,2,2,850000.0,6028.37
+Apartamento,centro,120.0,263.18,3,3,2,850000.0,3229.73
+Apartamento,centro,65.0,65.0,2,1,2,851000.0,13092.31
+Apartamento,centro,150.53,70.97,2,1,1,851000.0,11990.98
+Apartamento,centro,106.0,106.0,2,2,1,852000.0,8037.74
+Apartamento,centro,133.0,133.0,3,2,1,852000.0,6406.02
+Apartamento,centro,113.25,113.25,3,1,2,852816.0,7530.38
+Apartamento,centro,76.08,76.08,2,1,0,854092.49,11226.24
+Apartamento,centro,113.34,113.34,2,1,2,854268.0,7537.22
+Apartamento,centro,107.29,107.29,3,1,0,858000.0,7997.02
+Apartamento,centro,108.0,108.0,3,2,2,858608.71,7950.08
+Apartamento,centro,53.01,53.01,2,1,0,860000.0,16223.35
+Apartamento,centro,65.0,65.0,2,1,0,862500.0,13269.23
+Apartamento,centro,117.66,117.66,3,1,1,870000.0,7394.19
+Apartamento,centro,112.92,112.92,3,1,2,870000.0,7704.57
+Apartamento,centro,105.8,105.8,3,1,2,870000.0,8223.06
+Apartamento,centro,104.66,104.66,3,2,1,870000.0,8312.63
+Apartamento,centro,201.0,145.0,3,1,2,870000.0,6000.0
+Apartamento,centro,165.86,105.8,3,1,2,875000.0,8270.32
+Apartamento,centro,120.0,120.0,3,1,1,880000.0,7333.33
+Apartamento,centro,92.0,92.0,2,1,2,880000.0,9565.22
+Apartamento,centro,107.54,107.54,3,1,2,880000.0,8183.0
+Apartamento,centro,63.32,63.32,2,1,1,880000.0,13897.66
+Apartamento,centro,147.9,111.49,3,2,1,880000.0,7893.08
+Apartamento,centro,1200.0,63.13,2,2,1,880715.75,13950.83
+Apartamento,centro,211.82,211.82,3,2,2,883000.0,4168.63
+Apartamento,centro,110.07,110.07,2,1,2,884188.0,8032.96
+Apartamento,centro,62.0,62.0,2,1,1,885000.0,14274.19
+Apartamento,centro,161.26,161.26,4,1,2,890000.0,5519.04
+Apartamento,centro,120.0,120.0,3,1,2,890000.0,7416.67
+Apartamento,centro,79.3,79.3,2,1,2,890000.0,11223.2
+Apartamento,centro,71.47,71.47,2,1,0,890000.0,12452.78
+Apartamento,centro,79.3,79.3,2,2,1,890000.0,11223.2
+Apartamento,centro,218.65,123.0,3,2,2,890000.0,7235.77
+Apartamento,centro,96.48,96.48,3,1,1,890000.0,9224.71
+Apartamento,centro,135.54,65.0,2,2,1,890000.0,13692.31
+Apartamento,centro,137.9,87.0,2,2,1,890000.0,10229.89
+Apartamento,centro,200.0,127.0,3,2,2,895000.0,7047.24
+Apartamento,centro,700.0,126.67,3,2,2,895000.0,7065.6
+Apartamento,centro,120.49,120.49,3,1,2,896447.0,7440.01
+Apartamento,centro,169.27,169.27,3,1,2,896447.0,5295.96
+Apartamento,centro,73.37,73.37,2,1,2,898330.97,12243.85
+Apartamento,centro,76.37,76.37,2,1,2,899000.0,11771.64
+Apartamento,centro,229.34,229.34,3,1,2,899000.0,3919.94
+Apartamento,centro,130.0,130.0,2,1,2,899000.0,6915.38
+Apartamento,centro,229.34,129.45,3,0,2,899000.0,6944.77
+Apartamento,centro,167.52,167.52,3,2,1,899000.0,5366.52
+Apartamento,centro,234.47,234.47,3,5,2,899000.0,3834.18
+Apartamento,centro,129.45,129.45,3,1,2,899000.0,6944.77
+Apartamento,centro,120.82,120.82,3,2,1,899000.0,7440.82
+Apartamento,centro,125.0,125.0,3,1,2,900000.0,7200.0
+Apartamento,centro,114.95,114.95,3,1,1,900000.0,7829.49
+Apartamento,centro,113.57,113.57,3,2,1,900000.0,7924.63
+Apartamento,centro,119.47,119.47,2,2,2,900000.0,7533.27
+Apartamento,centro,167.0,134.0,3,4,2,900000.0,6716.42
+Apartamento,centro,900.0,141.47,3,3,2,900000.0,6361.77
+Apartamento,centro,182.02,107.59,3,2,2,904000.0,8402.27
+Apartamento,centro,58.0,58.0,2,1,1,905000.0,15603.45
+Apartamento,centro,175.0,113.0,2,0,2,905000.0,8008.85
+Apartamento,centro,122.32,122.32,3,1,2,907166.0,7416.33
+Apartamento,centro,134.45,134.45,3,1,2,910000.0,6768.32
+Apartamento,centro,229.34,129.45,3,2,2,912000.0,7045.19
+Apartamento,centro,121.93,121.93,3,1,2,912680.0,7485.28
+Apartamento,centro,368.0,180.0,4,1,2,916000.0,5088.89
+Apartamento,centro,140.0,140.0,3,3,2,920000.0,6571.43
+Apartamento,centro,108.16,108.16,2,1,2,931355.73,8610.91
+Apartamento,centro,120.17,120.17,3,1,2,935220.0,7782.47
+Apartamento,centro,110.81,110.81,3,1,1,940000.0,8482.99
+Apartamento,centro,130.0,130.0,3,1,1,942000.0,7246.15
+Apartamento,centro,96.0,71.0,2,1,2,947000.0,13338.03
+Apartamento,centro,185.98,185.98,3,1,1,948301.98,5098.95
+Apartamento,centro,187.7,139.52,2,3,2,949581.2,6806.06
+Apartamento,centro,194.61,194.61,3,1,1,950000.0,4881.56
+Apartamento,centro,63.32,63.32,1,1,1,950000.0,15003.16
+Apartamento,centro,145.71,145.71,3,2,2,950000.0,6519.8
+Apartamento,centro,159.37,130.83,3,1,1,950000.0,7261.33
+Apartamento,centro,246.19,145.71,3,2,2,950000.0,6519.8
+Apartamento,centro,118.0,118.0,3,1,1,950000.0,8050.85
+Apartamento,centro,96.48,96.48,2,0,2,955000.0,9898.42
+Apartamento,centro,98.0,98.0,2,2,2,957446.8,9769.87
+Apartamento,centro,126.49,126.49,3,2,2,957446.8,7569.35
+Apartamento,centro,122.0,122.0,2,1,2,960000.0,7868.85
+Apartamento,centro,97.72,97.72,2,1,2,960000.0,9823.99
+Apartamento,centro,126.67,126.67,3,2,2,960000.0,7578.75
+Apartamento,centro,174.3,174.3,3,1,1,960000.0,5507.75
+Apartamento,centro,193.98,110.71,3,2,2,969999.99,8761.63
+Apartamento,centro,194.64,194.64,3,1,2,977569.0,5022.45
+Apartamento,centro,115.22,115.22,3,1,2,980000.0,8505.47
+Apartamento,centro,110.76,110.76,3,1,2,980000.0,8847.96
+Apartamento,centro,73.37,73.37,2,1,1,980000.0,13356.96
+Apartamento,centro,103.3,103.3,3,2,2,980000.0,9486.93
+Apartamento,centro,181.08,181.08,3,3,1,980000.0,5411.97
+Apartamento,centro,124.0,124.0,2,2,2,980000.0,7903.23
+Apartamento,centro,127.58,127.58,3,2,2,980000.0,7681.45
+Apartamento,centro,122.1,122.1,3,1,2,980000.0,8026.21
+Apartamento,centro,116.0,116.0,3,2,3,980000.0,8448.28
+Apartamento,centro,900.0,213.73,3,2,2,980000.0,4585.22
+Apartamento,centro,155.0,110.0,3,1,2,980000.0,8909.09
+Apartamento,centro,162.6,116.0,3,1,2,980000.0,8448.28
+Apartamento,centro,108.65,108.65,2,3,2,990000.0,9111.83
+Apartamento,centro,195.11,195.11,3,2,2,990000.0,5074.06
+Apartamento,centro,172.88,172.88,3,2,1,990000.0,5726.52
+Apartamento,centro,92.6,92.6,3,2,2,994500.0,10739.74
+Apartamento,centro,121.55,121.55,3,1,2,999000.0,8218.84
+Apartamento,centro,89.51,89.51,3,1,0,999000.0,11160.76
+Apartamento,centro,135.0,124.5,3,1,2,1000000.0,8032.13
+Apartamento,centro,194.91,127.0,3,3,1,1000000.0,7874.02
+Apartamento,centro,600.0,212.82,3,2,1,1000000.0,4698.81
+Apartamento,centro,197.17,135.08,3,1,2,1000000.0,7403.02
+Apartamento,centro,70.48,70.48,2,2,2,1006441.26,14279.81
+Apartamento,centro,201.8,201.8,4,2,2,1010000.0,5004.96
+Apartamento,centro,156.0,156.0,3,2,1,1020000.0,6538.46
+Apartamento,centro,121.0,121.0,3,1,2,1021675.0,8443.6
+Apartamento,centro,140.0,140.0,3,3,3,1026990.0,7335.64
+Apartamento,centro,219.73,140.54,3,3,3,1045490.0,7439.09
+Apartamento,centro,136.08,136.08,3,2,2,1050000.0,7716.05
+Apartamento,centro,110.0,110.0,3,0,2,1050000.0,9545.45
+Apartamento,centro,137.0,137.0,1,1,2,1050000.0,7664.23
+Apartamento,centro,123.0,123.0,3,2,2,1050000.0,8536.59
+Apartamento,centro,95.0,95.0,3,1,2,1060000.0,11157.89
+Apartamento,centro,141.62,141.62,3,3,2,1062000.0,7498.94
+Apartamento,centro,855.0,230.0,2,3,2,1068936.77,4647.55
+Apartamento,centro,116.58,116.58,3,3,2,1070000.0,9178.25
+Apartamento,centro,129.99,129.99,3,1,2,1075000.0,8269.87
+Apartamento,centro,150.0,121.5,3,1,2,1075000.0,8847.74
+Apartamento,centro,128.34,128.34,3,0,2,1075000.0,8376.19
+Apartamento,centro,177.0,150.0,3,0,2,1080000.0,7200.0
+Apartamento,centro,115.72,115.72,4,1,2,1080000.0,9332.87
+Apartamento,centro,193.98,193.98,3,1,2,1095000.0,5644.91
+Apartamento,centro,150.34,150.34,3,2,2,1095000.0,7283.49
+Apartamento,centro,154.33,154.33,3,3,2,1099000.0,7121.1
+Apartamento,centro,116.0,116.0,3,1,2,1100000.0,9482.76
+Apartamento,centro,197.16,197.16,3,2,2,1100000.0,5579.22
+Apartamento,centro,184.47,184.47,3,2,2,1100000.0,5963.03
+Apartamento,centro,314.0,223.0,3,1,2,1100000.0,4932.74
+Apartamento,centro,168.42,168.42,3,1,1,1100000.0,6531.29
+Apartamento,centro,177.2,177.2,3,1,0,1100000.0,6207.67
+Apartamento,centro,89.51,89.51,3,1,2,1100000.0,12289.13
+Apartamento,centro,117.0,117.0,3,2,2,1100000.0,9401.71
+Apartamento,centro,140.96,140.96,3,2,2,1100000.0,7803.63
+Apartamento,centro,115.22,115.22,3,0,2,1100000.0,9546.95
+Apartamento,centro,114.95,114.95,3,0,2,1100000.0,9569.38
+Apartamento,centro,105.45,105.45,3,3,2,1100000.0,10431.48
+Apartamento,centro,238.76,183.37,3,4,2,1100000.0,5998.8
+Apartamento,centro,199.41,177.33,3,4,2,1100000.0,6203.12
+Apartamento,centro,154.0,95.0,3,1,0,1100000.0,11578.95
+Apartamento,centro,141.0,108.0,2,2,3,1100000.0,10185.19
+Apartamento,centro,183.0,159.0,3,1,2,1100000.0,6918.24
+Apartamento,centro,260.0,260.0,3,2,2,1100000.0,4230.77
+Apartamento,centro,140963.72,140963.72,3,3,0,1100000.0,7.8
+Apartamento,centro,153.6,153.6,3,2,2,1108000.0,7213.54
+Apartamento,centro,141.46,141.46,3,1,3,1120000.0,7917.43
+Apartamento,centro,140.0,140.0,3,1,3,1125000.0,8035.71
+Apartamento,centro,180.0,157.0,3,1,2,1125000.0,7165.61
+Apartamento,centro,131.0,131.0,3,2,2,1130000.0,8625.95
+Apartamento,centro,140.0,140.0,3,1,2,1150000.0,8214.29
+Apartamento,centro,299.12,217.32,3,1,2,1150000.0,5291.74
+Apartamento,centro,133.3,133.3,3,3,2,1150000.0,8627.16
+Apartamento,centro,213.73,213.73,3,2,2,1150000.0,5380.62
+Apartamento,centro,186.55,115.0,0,2,2,1150000.0,10000.0
+Apartamento,centro,147.0,147.0,3,1,3,1150000.0,7823.13
+Apartamento,centro,162.0,115.0,3,2,2,1150000.0,10000.0
+Apartamento,centro,197.0,165.0,3,1,2,1150000.0,6969.7
+Apartamento,centro,184.47,136.38,3,1,0,1150000.0,8432.32
+Apartamento,centro,123.52,123.52,3,4,2,1151779.47,9324.64
+Apartamento,centro,200.12,200.12,3,2,1,1160000.0,5796.52
+Apartamento,centro,110.39,110.39,3,1,2,1170000.0,10598.79
+Apartamento,centro,108.31,108.31,3,1,1,1170000.0,10802.33
+Apartamento,centro,804.0,126.49,3,2,2,1170000.0,9249.74
+Apartamento,centro,140.0,140.0,3,2,3,1170000.0,8357.14
+Apartamento,centro,127.97,84.93,3,2,2,1172000.0,13799.6
+Apartamento,centro,211.21,137.47,3,2,2,1172000.0,8525.5
+Apartamento,centro,194.21,128.34,3,2,2,1178200.6,9180.31
+Apartamento,centro,150.0,150.0,3,2,2,1180000.0,7866.67
+Apartamento,centro,720.0,115.0,3,2,2,1180744.41,10267.34
+Apartamento,centro,125.0,125.0,2,0,2,1190000.0,9520.0
+Apartamento,centro,166.01,128.5,3,1,2,1190000.0,9260.7
+Apartamento,centro,150.56,150.56,2,1,2,1190000.0,7903.83
+Apartamento,centro,264.0,178.0,3,3,2,1190000.0,6685.39
+Apartamento,centro,222.1,152.0,3,2,2,1197000.0,7875.0
+Apartamento,centro,154.39,127.32,3,0,2,1199000.0,9417.22
+Apartamento,centro,98.0,98.0,2,0,2,1200000.0,12244.9
+Apartamento,centro,141.0,141.0,3,2,3,1200000.0,8510.64
+Apartamento,centro,156.0,156.0,3,1,2,1200000.0,7692.31
+Apartamento,centro,156.0,118.0,2,2,2,1200000.0,10169.49
+Apartamento,centro,127.92,127.92,3,1,2,1200000.0,9380.86
+Apartamento,centro,162.0,162.0,3,3,2,1200000.0,7407.41
+Apartamento,centro,154.33,154.33,3,2,2,1200000.0,7775.55
+Apartamento,centro,115.45,115.45,3,2,2,1200000.0,10394.11
+Apartamento,centro,139.0,139.0,3,1,3,1200000.0,8633.09
+Apartamento,centro,283.0,188.0,3,1,2,1200000.0,6382.98
+Apartamento,centro,119.72,119.72,0,0,0,1209124.15,10099.6
+Apartamento,centro,222.63,117.33,3,1,1,1232000.0,10500.3
+Apartamento,centro,113.06,113.06,2,1,2,1241257.82,10978.75
+Apartamento,centro,218.61,218.61,4,2,2,1244380.0,5692.24
+Apartamento,centro,169.12,174.04,3,2,2,1244380.0,7149.97
+Apartamento,centro,224.0,99.0,2,1,2,1250000.0,12626.26
+Apartamento,centro,116.71,116.71,3,1,0,1250000.0,10710.31
+Apartamento,centro,168.52,168.52,3,1,1,1250000.0,7417.52
+Apartamento,centro,140.65,140.65,3,1,2,1250000.0,8887.31
+Apartamento,centro,232.82,134.0,3,4,3,1250000.0,9328.36
+Apartamento,centro,199.51,199.51,3,2,2,1250000.0,6265.35
+Apartamento,centro,259.29,177.84,3,2,2,1250000.0,7028.79
+Apartamento,centro,163.0,140.0,0,1,2,1250000.0,8928.57
+Apartamento,centro,136.0,136.0,3,0,3,1275000.0,9375.0
+Apartamento,centro,128.74,128.74,3,1,2,1275000.0,9903.68
+Apartamento,centro,140.96,140.96,3,1,3,1275000.0,9045.12
+Apartamento,centro,307.95,269.63,4,3,2,1276595.74,4734.62
+Apartamento,centro,183.37,183.37,3,0,2,1277000.0,6964.06
+Apartamento,centro,111.0,111.0,3,3,2,1280000.0,11531.53
+Apartamento,centro,118.68,118.68,3,1,2,1280000.0,10785.31
+Apartamento,centro,115.33,115.33,3,1,2,1280000.0,11098.59
+Apartamento,centro,125.31,105.79,3,0,2,1280000.0,12099.44
+Apartamento,centro,269.0,269.0,3,1,2,1290000.0,4795.54
+Apartamento,centro,115.45,115.45,3,1,2,1290000.0,11173.67
+Apartamento,centro,165.42,130.0,3,1,2,1290000.0,9923.08
+Apartamento,centro,308.0,270.0,3,2,2,1290000.0,4777.78
+Apartamento,centro,224.15,117.3,3,1,2,1295000.0,11040.07
+Apartamento,centro,250.0,250.0,3,2,2,1300000.0,5200.0
+Apartamento,centro,222.0,200.0,3,2,2,1300000.0,6500.0
+Apartamento,centro,186.0,186.0,3,1,2,1300000.0,6989.25
+Apartamento,centro,114.03,114.03,3,1,0,1300000.0,11400.51
+Apartamento,centro,113.06,113.06,2,1,1,1300000.0,11498.32
+Apartamento,centro,217.33,217.33,3,1,0,1300000.0,5981.69
+Apartamento,centro,127.85,127.85,3,1,2,1300000.0,10168.17
+Apartamento,centro,147.04,147.04,3,1,2,1300000.0,8841.13
+Apartamento,centro,178.13,154.33,3,2,2,1300000.0,8423.51
+Apartamento,centro,123.16,123.16,3,3,1,1300000.0,10555.38
+Apartamento,centro,140.0,140.0,3,0,3,1300000.0,9285.71
+Apartamento,centro,1869.0,131.0,3,2,2,1300000.0,9923.66
+Apartamento,centro,105.0,105.0,3,0,2,1300000.0,12380.95
+Apartamento,centro,123.16,123.16,3,1,2,1320000.0,10717.77
+Apartamento,centro,119.72,119.72,3,1,2,1324363.85,11062.18
+Apartamento,centro,116.71,116.71,3,1,2,1330000.0,11395.77
+Apartamento,centro,229.63,229.63,3,1,2,1340000.0,5835.47
+Apartamento,centro,183.71,183.71,3,0,2,1345953.0,7326.51
+Apartamento,centro,600.0,112.0,3,2,2,1348000.0,12035.71
+Apartamento,centro,214.59,131.49,3,4,2,1349000.0,10259.34
+Apartamento,centro,108.77,108.77,3,1,1,1350000.0,12411.51
+Apartamento,centro,154.28,154.28,3,1,2,1350000.0,8750.32
+Apartamento,centro,110.65,110.65,3,4,2,1350000.0,12200.63
+Apartamento,centro,169.0,110.65,3,4,2,1350000.0,12200.63
+Apartamento,centro,222.0,180.0,3,3,2,1350000.0,7500.0
+Apartamento,centro,282.02,229.63,3,3,2,1350000.0,5879.02
+Apartamento,centro,111.0,111.0,3,0,2,1350000.0,12162.16
+Apartamento,centro,158.96,109.86,3,4,2,1377541.49,12539.06
+Apartamento,centro,252.0,138.4,3,0,1,1380000.0,9971.1
+Apartamento,centro,299.12,217.33,3,3,2,1380000.0,6349.79
+Apartamento,centro,189.0,139.0,3,1,2,1380000.0,9928.06
+Apartamento,centro,185.73,185.73,3,0,2,1381961.0,7440.7
+Apartamento,centro,184.7,184.7,3,0,2,1385000.0,7498.65
+Apartamento,centro,155.36,155.36,3,1,2,1385000.0,8914.78
+Apartamento,centro,162.56,162.56,3,0,0,1390000.0,8550.69
+Apartamento,centro,233.7,153.29,3,4,2,1395000.0,9100.4
+Apartamento,centro,138.4,138.4,3,3,3,1395000.0,10079.48
+Apartamento,centro,142.73,142.73,3,0,0,1400000.0,9808.73
+Apartamento,centro,138.56,138.56,3,0,2,1400000.0,10103.93
+Apartamento,centro,106.66,106.66,3,2,0,1400000.0,13125.82
+Apartamento,centro,121.28,121.28,3,2,2,1400000.0,11543.54
+Apartamento,centro,267.0,267.0,4,2,2,1400000.0,5243.45
+Apartamento,centro,116.5,116.5,3,1,1,1400000.0,12017.17
+Apartamento,centro,113.06,113.06,3,1,2,1400000.0,12382.81
+Apartamento,centro,105.0,105.0,3,3,2,1400000.0,13333.33
+Apartamento,centro,131.0,131.0,3,4,2,1440000.0,10992.37
+Apartamento,centro,247.0,131.0,3,1,2,1440000.0,10992.37
+Apartamento,centro,253.0,140.0,0,4,3,1440000.0,10285.71
+Apartamento,centro,131.49,131.49,3,0,1,1440680.0,10956.57
+Apartamento,centro,136.38,136.38,3,0,2,1443319.48,10583.07
+Apartamento,centro,252.88,140.25,3,4,3,1449681.77,10336.41
+Apartamento,centro,131.49,131.49,3,0,2,1450000.0,11027.45
+Apartamento,centro,319.28,162.56,3,1,3,1450000.0,8919.78
+Apartamento,centro,309.22,180.36,3,4,2,1475933.95,8183.27
+Apartamento,centro,138.55,138.55,3,1,2,1484000.0,10710.93
+Apartamento,centro,124.89,124.89,3,1,3,1490000.0,11930.5
+Apartamento,centro,115.0,115.0,2,1,0,1490000.0,12956.52
+Apartamento,centro,119.0,119.0,3,3,3,1490000.0,12521.01
+Apartamento,centro,108.77,108.77,3,1,0,1497000.0,13762.99
+Apartamento,centro,1000.0,136.0,3,4,2,1499815.13,11028.05
+Apartamento,centro,189.53,189.53,4,4,2,1500000.0,7914.31
+Apartamento,centro,120.0,120.0,3,1,3,1500000.0,12500.0
+Apartamento,centro,348.0,220.0,3,1,4,1500000.0,6818.18
+Apartamento,centro,121.81,121.81,0,0,2,1500000.0,12314.26
+Apartamento,centro,200.12,200.12,3,2,2,1500000.0,7495.5
+Apartamento,centro,138.35,138.35,3,1,0,1500000.0,10842.07
+Apartamento,centro,159.0,159.0,3,0,3,1500000.0,9433.96
+Apartamento,centro,229.0,229.0,4,1,2,1500000.0,6550.22
+Apartamento,centro,230.75,230.75,4,1,3,1500000.0,6500.54
+Apartamento,centro,110.65,110.65,3,3,1,1500000.0,13556.26
+Apartamento,centro,139.52,139.52,3,4,2,1500000.0,10751.15
+Apartamento,centro,160.0,160.0,3,4,3,1500000.0,9375.0
+Apartamento,centro,160.0,160.0,3,3,3,1500000.0,9375.0
+Apartamento,centro,140.25,140.25,3,2,3,1500000.0,10695.19
+Apartamento,centro,157.0,135.55,3,3,3,1500000.0,11066.03
+Apartamento,centro,900.0,235.21,3,4,2,1500000.0,6377.28
+Apartamento,centro,250.0,250.0,3,3,2,1500000.0,6000.0
+Apartamento,centro,277.0,277.0,4,3,2,1500000.0,5415.16
+Apartamento,centro,160.0,160.0,3,1,3,1500000.0,9375.0
+Apartamento,centro,205.88,147.38,3,4,2,1500000.0,10177.77
+Apartamento,centro,225.0,140.0,3,0,3,1500000.0,10714.29
+Apartamento,centro,330.29,330.29,4,4,2,1500000.0,4541.46
+Apartamento,centro,280.0,160.0,3,1,3,1500000.0,9375.0
+Apartamento,centro,280.0,160.0,0,4,3,1500000.0,9375.0
+Apartamento,centro,217.66,188.2,3,2,2,1500000.0,7970.24
+Apartamento,centro,237.0,152.0,0,1,2,1500000.0,9868.42
+Apartamento,centro,167.46,167.46,3,0,2,1515459.0,9049.68
+Apartamento,centro,279.28,279.28,3,1,3,1550000.0,5549.99
+Apartamento,centro,161.67,161.67,3,0,4,1550000.0,9587.43
+Apartamento,centro,217.33,217.33,3,1,2,1550000.0,7132.01
+Apartamento,centro,139.52,139.52,2,3,2,1550000.0,11109.52
+Apartamento,centro,236.0,236.0,4,3,2,1550000.0,6567.8
+Apartamento,centro,191.07,150.18,2,1,2,1550000.0,10320.95
+Apartamento,centro,160.55,160.55,3,0,3,1570000.0,9778.89
+Apartamento,centro,173.0,173.0,3,2,2,1590000.0,9190.75
+Apartamento,centro,375.0,234.0,0,5,3,1590000.0,6794.87
+Apartamento,centro,242.21,242.21,4,1,0,1596000.0,6589.32
+Apartamento,centro,333.8,268.24,4,3,4,1596000.0,5949.9
+Apartamento,centro,138.35,138.35,3,1,3,1600000.0,11564.87
+Apartamento,centro,128.98,128.98,3,4,2,1606382.97,12454.51
+Apartamento,centro,109.97,109.97,3,1,2,1620000.0,14731.29
+Apartamento,centro,253.56,253.56,3,0,2,1631880.0,6435.87
+Apartamento,centro,189.0,148.0,3,2,2,1640000.0,11081.08
+Apartamento,centro,183.34,138.44,3,1,3,1646000.0,11889.63
+Apartamento,centro,140.0,140.0,3,4,3,1650000.0,11785.71
+Apartamento,centro,256.94,256.94,3,3,3,1650000.0,6421.73
+Apartamento,centro,196.61,196.61,3,0,3,1682482.0,8557.46
+Apartamento,centro,131.49,131.49,3,1,0,1690000.0,12852.69
+Apartamento,centro,205.93,147.38,0,4,1,1690000.0,11466.96
+Apartamento,centro,153.29,153.29,3,2,2,1691000.0,11031.38
+Apartamento,centro,148.64,148.64,3,1,1,1696000.0,11410.12
+Apartamento,centro,278.13,187.87,4,3,2,1700000.0,9048.81
+Apartamento,centro,188.84,188.84,3,0,2,1700000.0,9002.33
+Apartamento,centro,131.49,131.49,3,1,2,1700000.0,12928.74
+Apartamento,centro,259.0,208.0,4,1,2,1700000.0,8173.08
+Apartamento,centro,148.0,148.0,3,0,2,1705000.0,11520.27
+Apartamento,centro,164.0,164.0,3,0,3,1750000.0,10670.73
+Apartamento,centro,176.38,176.38,3,3,3,1750000.0,9921.76
+Apartamento,centro,227.17,164.29,3,3,3,1750000.0,10651.9
+Apartamento,centro,215.0,172.0,3,4,2,1780000.0,10348.84
+Apartamento,centro,255.87,255.87,3,1,2,1800000.0,7034.82
+Apartamento,centro,161.0,161.0,3,0,2,1800000.0,11180.12
+Apartamento,centro,258.77,208.0,3,1,2,1800000.0,8653.85
+Apartamento,centro,156.0,156.0,3,2,2,1810000.0,11602.56
+Apartamento,centro,197.0,197.0,3,4,2,1830000.0,9289.34
+Apartamento,centro,161.5,161.5,3,4,2,1850000.0,11455.11
+Apartamento,centro,152.35,152.35,3,1,3,1850000.0,12143.09
+Apartamento,centro,205.0,177.68,3,1,2,1865640.0,10500.0
+Apartamento,centro,248.27,248.27,3,4,2,1875000.0,7552.26
+Apartamento,centro,196.61,196.61,3,1,3,1895000.0,9638.37
+Apartamento,centro,250.0,214.5,3,1,2,1900000.0,8857.81
+Apartamento,centro,190.0,190.0,3,1,3,1900000.0,10000.0
+Apartamento,centro,368.33,224.47,3,4,3,1900000.0,8464.38
+Apartamento,centro,280.0,235.0,3,3,2,1900000.0,8085.11
+Apartamento,centro,249.36,249.36,5,5,2,1908000.0,7651.59
+Apartamento,centro,147.38,147.38,3,0,1,1915000.0,12993.62
+Apartamento,centro,138.0,138.0,3,4,3,1924500.0,13945.65
+Apartamento,centro,204.0,176.88,3,1,2,1945608.0,10999.59
+Apartamento,centro,188.81,188.81,3,4,2,1950000.0,10327.84
+Apartamento,centro,377.4,234.25,4,1,3,1950000.0,8324.44
+Apartamento,centro,367.0,208.0,3,0,4,1960000.0,9423.08
+Apartamento,centro,165.56,165.56,3,1,3,1990000.0,12019.81
+Apartamento,centro,165.69,165.69,3,4,3,1990000.0,12010.38
+Apartamento,centro,144.0,144.0,3,3,2,1995000.0,13854.17
+Apartamento,centro,290.0,232.8,3,1,2,1999000.0,8586.77
+Apartamento,centro,296.0,157.0,3,2,3,2000000.0,12738.85
+Apartamento,centro,344.3,344.3,3,1,2,2000000.0,5808.89
+Apartamento,centro,354.0,249.0,4,2,2,2022000.0,8120.48
+Apartamento,centro,273.96,170.87,3,1,2,2053000.0,12014.98
+Apartamento,centro,186.05,186.05,3,4,3,2074468.08,11150.06
+Apartamento,centro,162.0,162.0,3,1,2,2099000.0,12956.79
+Apartamento,centro,165.56,165.56,2,2,2,2100000.0,12684.22
+Apartamento,centro,165.56,165.56,3,0,2,2100000.0,12684.22
+Apartamento,centro,160.0,160.0,3,4,2,2120000.0,13250.0
+Apartamento,centro,277.56,211.42,3,4,2,2120000.0,10027.43
+Apartamento,centro,344.2,211.42,3,1,3,2120000.0,10027.43
+Apartamento,centro,182.13,182.13,3,4,2,2127659.57,11682.09
+Apartamento,centro,164.5,164.5,2,0,3,2150000.0,13069.91
+Apartamento,centro,236.0,236.0,4,4,2,2150000.0,9110.17
+Apartamento,centro,232.8,232.8,4,4,2,2150000.0,9235.4
+Apartamento,centro,160.0,160.0,3,0,0,2200000.0,13750.0
+Apartamento,centro,177.88,177.88,3,4,2,2200000.0,12367.89
+Apartamento,centro,331.18,241.28,3,4,3,2220000.0,9200.93
+Apartamento,centro,432.0,232.8,3,1,2,2225580.0,9560.05
+Apartamento,centro,164.5,164.5,3,0,2,2233236.87,13575.91
+Apartamento,centro,232.8,232.8,4,1,2,2250000.0,9664.95
+Apartamento,centro,290.0,165.0,3,0,2,2250000.0,13636.36
+Apartamento,centro,138.44,138.44,3,4,3,2280000.0,16469.23
+Apartamento,centro,306.0,233.0,1,1,2,2300000.0,9871.24
+Apartamento,centro,249.36,249.36,4,4,2,2300000.0,9223.61
+Apartamento,centro,154.43,154.43,3,0,3,2300000.0,14893.48
+Apartamento,centro,251.63,156.83,3,2,3,2300000.0,14665.56
+Apartamento,centro,333.0,246.0,3,0,3,2350000.0,9552.85
+Apartamento,centro,177.68,177.68,3,4,3,2350000.0,13226.02
+Apartamento,centro,241.28,241.28,3,1,3,2350000.0,9739.72
+Apartamento,centro,284.0,210.0,4,2,3,2350000.0,11190.48
+Apartamento,centro,232.0,232.0,4,5,2,2390000.0,10301.72
+Apartamento,centro,156.83,156.83,3,1,2,2400000.0,15303.19
+Apartamento,centro,224.47,224.47,3,1,3,2400000.0,10691.85
+Apartamento,centro,196.6,196.6,3,4,4,2400000.0,12207.53
+Apartamento,centro,156.83,156.83,3,0,3,2425000.0,15462.6
+Apartamento,centro,340.0,340.0,5,2,3,2440000.0,7176.47
+Apartamento,centro,303.13,303.13,4,1,3,2446808.51,8071.81
+Apartamento,centro,428.87,303.13,4,2,2,2450000.0,8082.34
+Apartamento,centro,303.13,303.13,4,2,3,2500000.0,8247.29
+Apartamento,centro,431.0,221.0,4,5,4,2500000.0,11312.22
+Apartamento,centro,435.42,247.0,3,1,3,2500000.0,10121.46
+Apartamento,centro,141.47,141.47,3,2,2,2500000.0,17671.59
+Apartamento,centro,207.62,207.62,3,2,3,2500000.0,12041.23
+Apartamento,centro,1350.0,450.0,4,0,4,2500000.0,5555.56
+Apartamento,centro,349.0,273.0,4,1,4,2500000.0,9157.51
+Apartamento,centro,247.0,156.0,3,1,3,2500000.0,16025.64
+Apartamento,centro,533.94,380.78,3,1,4,2500000.0,6565.47
+Apartamento,centro,534.0,381.0,3,3,4,2500000.0,6561.68
+Apartamento,centro,247.27,247.27,3,4,3,2600000.0,10514.82
+Apartamento,centro,224.47,224.47,3,4,2,2660000.0,11850.14
+Apartamento,centro,230.24,230.24,3,1,2,2670000.0,11596.59
+Apartamento,centro,251.36,156.83,3,4,2,2725000.0,17375.5
+Apartamento,centro,479.38,329.4,4,5,3,2750000.0,8348.51
+Apartamento,centro,311.0,311.0,4,5,3,2799000.0,9000.0
+Apartamento,centro,300.13,300.13,4,1,0,2800000.0,9329.29
+Apartamento,centro,400.0,400.0,4,3,4,2800000.0,7000.0
+Apartamento,centro,227.92,227.92,3,1,2,2881152.0,12641.07
+Apartamento,centro,219.69,219.69,3,0,0,2900000.0,13200.42
+Apartamento,centro,241.28,241.28,3,4,2,2900000.0,12019.23
+Apartamento,centro,535.45,330.0,0,0,4,2900000.0,8787.88
+Apartamento,centro,367.71,367.71,4,4,4,2990000.0,8131.41
+Apartamento,centro,171.0,171.0,3,1,2,2990000.0,17485.38
+Apartamento,centro,171.0,171.0,3,4,2,2990000.0,17485.38
+Apartamento,centro,552.32,359.79,4,5,4,2999990.0,8338.17
+Apartamento,centro,175.33,175.33,3,0,4,3250000.0,18536.47
+Apartamento,centro,164.5,164.5,3,0,1,3298000.0,20048.63
+Apartamento,centro,250.0,250.0,3,4,3,3392000.0,13568.0
+Apartamento,centro,509.0,311.0,4,1,4,3500000.0,11254.02
+Apartamento,centro,220.0,220.0,3,0,3,3500000.0,15909.09
+Apartamento,centro,359.79,359.79,4,1,3,3700000.0,10283.78
+Apartamento,centro,297.0,297.0,3,4,0,3800000.0,12794.61
+Apartamento,centro,373.81,373.81,4,1,4,3900000.0,10433.11
+Apartamento,centro,535.45,373.81,3,4,4,3900000.0,10433.11
+Apartamento,cristo rei,78.04,78.04,3,1,1,370000.0,4741.16
+Apartamento,cristo rei,68.0,68.0,3,1,1,380000.0,5588.24
+Apartamento,desbravador,48.0,48.0,2,1,1,250000.0,5208.33
+Apartamento,desbravador,44.0,44.0,2,1,1,250000.0,5681.82
+Apartamento,desbravador,44.1,44.1,2,1,1,265000.0,6009.07
+Apartamento,desbravador,42.98,42.98,2,1,1,265000.0,6165.66
+Apartamento,desbravador,44.16,44.16,2,1,1,270000.0,6114.13
+Apartamento,desbravador,68.32,56.21,2,1,1,270000.0,4803.42
+Apartamento,desbravador,44.1,44.1,2,1,0,275000.0,6235.83
+Apartamento,desbravador,92.42,56.18,2,1,1,318000.0,5660.38
+Apartamento,desbravador,45.58,45.58,2,1,1,351100.0,7702.94
+Apartamento,desbravador,112.0,78.0,2,1,1,393227.02,5041.37
+Apartamento,desbravador,101.75,79.52,2,2,1,399000.0,5017.61
+Apartamento,desbravador,99.33,77.58,2,1,1,403000.0,5194.64
+Apartamento,desbravador,80.32,80.32,2,1,1,407000.0,5067.23
+Apartamento,desbravador,79.52,79.52,2,1,0,440000.0,5533.2
+Apartamento,desbravador,99.33,77.58,2,0,2,440000.0,5671.56
+Apartamento,desbravador,177.0,177.0,3,3,2,800000.0,4519.77
+Apartamento,desbravador,177.0,177.0,3,1,2,800000.0,4519.77
+Apartamento,dom geronimo,70.0,70.0,2,1,1,305000.0,4357.14
+Apartamento,dom geronimo,57.0,57.0,2,1,1,320000.0,5614.04
+Apartamento,dom geronimo,65.0,55.0,2,1,1,380000.0,6909.09
+Apartamento,dom geronimo,62.55,56.58,2,1,1,419000.0,7405.44
+Apartamento,dom geronimo,68.0,57.0,2,1,1,420000.0,7368.42
+Apartamento,dom geronimo,66.0,66.0,2,2,2,420000.0,6363.64
+Apartamento,dom geronimo,54.31,54.31,2,1,1,425000.0,7825.45
+Apartamento,dom geronimo,56.92,56.92,2,1,1,425531.91,7475.96
+Apartamento,dom geronimo,66.62,66.62,2,2,1,475000.0,7129.99
+Apartamento,dom geronimo,81.04,81.04,2,2,2,495000.0,6108.09
+Apartamento,dom geronimo,67.0,67.0,2,1,0,532000.0,7940.3
+Apartamento,don geronimo,56.0,56.0,2,1,1,380000.0,6785.71
+Apartamento,efapi,31.45,31.45,1,1,1,179500.0,5707.47
+Apartamento,efapi,35.21,31.45,1,1,0,181000.0,5755.17
+Apartamento,efapi,30.35,30.35,1,1,0,189000.0,6227.35
+Apartamento,efapi,35.0,35.0,1,1,1,189000.0,5400.0
+Apartamento,efapi,19.52,19.52,1,1,1,192000.0,9836.07
+Apartamento,efapi,25.0,25.0,1,1,1,192000.0,7680.0
+Apartamento,efapi,43.0,32.0,1,1,1,199900.0,6246.88
+Apartamento,efapi,43.08,43.08,2,1,1,200000.0,4642.53
+Apartamento,efapi,44.1,44.1,2,1,1,222500.0,5045.35
+Apartamento,efapi,45.0,45.0,2,1,1,227500.0,5055.56
+Apartamento,efapi,52.0,43.0,2,1,1,230000.0,5348.84
+Apartamento,efapi,49.28,49.28,2,1,1,230000.0,4667.21
+Apartamento,efapi,45.5,45.5,2,1,1,235000.0,5164.84
+Apartamento,efapi,65.87,47.1,2,1,0,235000.0,4989.38
+Apartamento,efapi,55.0,55.0,2,1,1,240000.0,4363.64
+Apartamento,efapi,48.0,48.0,2,1,1,240000.0,5000.0
+Apartamento,efapi,50.0,50.0,2,1,0,240000.0,4800.0
+Apartamento,efapi,52.0,52.0,2,1,2,250000.0,4807.69
+Apartamento,efapi,45.0,45.0,2,1,0,250000.0,5555.56
+Apartamento,efapi,45.18,45.18,2,1,1,250000.0,5533.42
+Apartamento,efapi,44.0,44.0,2,1,1,250000.0,5681.82
+Apartamento,efapi,45.83,45.83,2,1,1,250000.0,5454.94
+Apartamento,efapi,49.0,49.0,2,1,0,255000.0,5204.08
+Apartamento,efapi,49.07,49.07,2,1,0,255000.0,5196.66
+Apartamento,efapi,79.94,79.94,2,1,2,260000.0,3252.44
+Apartamento,efapi,31.27,31.27,1,1,1,260000.0,8314.68
+Apartamento,efapi,49.28,49.28,2,1,2,260000.0,5275.97
+Apartamento,efapi,49.0,49.0,2,1,1,262500.0,5357.14
+Apartamento,efapi,66.0,66.0,2,1,1,265000.0,4015.15
+Apartamento,efapi,46.33,46.33,2,1,1,265000.0,5719.84
+Apartamento,efapi,48.7,48.7,2,1,1,266000.0,5462.01
+Apartamento,efapi,45.0,45.0,1,1,1,266000.0,5911.11
+Apartamento,efapi,43.08,43.08,2,1,0,267000.0,6197.77
+Apartamento,efapi,59.0,59.0,2,1,1,270000.0,4576.27
+Apartamento,efapi,60.3,60.3,2,1,1,270000.0,4477.61
+Apartamento,efapi,32.96,32.96,1,1,1,275000.0,8343.45
+Apartamento,efapi,50.0,50.0,2,1,1,277500.0,5550.0
+Apartamento,efapi,47.8,47.8,1,1,1,280000.0,5857.74
+Apartamento,efapi,60.0,60.0,2,1,1,280000.0,4666.67
+Apartamento,efapi,65.35,65.35,1,1,1,288000.0,4407.04
+Apartamento,efapi,68.81,68.81,2,1,1,288800.0,4197.06
+Apartamento,efapi,63.0,63.0,2,1,1,289500.0,4595.24
+Apartamento,efapi,77.63,77.63,2,1,1,290000.0,3735.67
+Apartamento,efapi,48.41,48.41,2,1,1,295000.0,6093.78
+Apartamento,efapi,50.0,50.0,2,1,2,295500.0,5910.0
+Apartamento,efapi,49.28,49.28,2,1,0,315000.0,6392.05
+Apartamento,efapi,63.33,63.33,2,1,1,315000.0,4973.95
+Apartamento,efapi,47.0,47.0,2,1,409,320000.0,6808.51
+Apartamento,efapi,48.0,48.0,2,0,1,320000.0,6666.67
+Apartamento,efapi,80.77,80.77,3,1,1,320000.0,3961.87
+Apartamento,efapi,55.94,55.94,2,1,1,325000.0,5809.8
+Apartamento,efapi,52.2,52.2,2,1,1,330000.0,6321.84
+Apartamento,efapi,45.89,45.89,2,1,0,335500.0,7310.96
+Apartamento,efapi,61.98,61.98,2,1,1,338000.0,5453.37
+Apartamento,efapi,56.44,56.44,2,1,1,350000.0,6201.28
+Apartamento,efapi,78.0,78.0,2,0,2,350000.0,4487.18
+Apartamento,efapi,48.0,48.0,2,0,0,360000.0,7500.0
+Apartamento,efapi,62.4,62.4,2,1,1,390000.0,6250.0
+Apartamento,efapi,88.05,88.05,2,1,1,405000.0,4599.66
+Apartamento,efapi,48.77,48.77,2,1,1,405000.0,8304.29
+Apartamento,efapi,62.4,62.4,2,1,0,408000.0,6538.46
+Apartamento,efapi,44.92,44.92,2,1,1,420000.0,9349.96
+Apartamento,efapi,65.0,46.93,2,1,1,420000.0,8949.5
+Apartamento,efapi,61.0,61.0,2,1,1,430000.0,7049.18
+Apartamento,efapi,61.26,61.26,2,1,1,450000.0,7345.74
+Apartamento,efapi,95.0,95.0,3,1,1,460000.0,4842.11
+Apartamento,efapi,100.0,100.0,3,1,2,490000.0,4900.0
+Apartamento,efapi,100.76,100.76,2,1,2,490005.52,4863.1
+Apartamento,efapi,150.67,94.55,3,2,2,491000.0,5193.02
+Apartamento,efapi,0.01,0.01,0,0,0,497000.0,49700000.0
+Apartamento,efapi,175.0,110.0,3,2,2,497000.0,4518.18
+Apartamento,efapi,117.0,117.0,0,0,0,508000.0,4341.88
+Apartamento,efapi,120.0,120.0,3,1,2,510000.0,4250.0
+Apartamento,efapi,125.0,125.0,3,2,2,586000.0,4688.0
+Apartamento,efapi,83.82,83.82,3,2,2,595000.0,7098.54
+Apartamento,engenho braun,36.0,36.0,1,1,1,250000.0,6944.44
+Apartamento,engenho braun,36.09,36.09,1,1,1,250000.0,6927.13
+Apartamento,engenho braun,60.0,36.0,1,1,1,250000.0,6944.44
+Apartamento,engenho braun,46.85,46.85,2,1,1,280000.0,5976.52
+Apartamento,engenho braun,48.0,48.0,2,1,1,400000.0,8333.33
+Apartamento,esplanada,54.27,54.27,2,1,1,298000.0,5491.06
+Apartamento,esplanada,54.45,54.45,2,1,1,307500.0,5647.38
+Apartamento,esplanada,69.88,69.88,2,1,0,320000.0,4579.28
+Apartamento,esplanada,52.25,52.25,2,1,1,350000.0,6698.56
+Apartamento,esplanada,69.83,58.79,2,1,1,350000.0,5953.39
+Apartamento,esplanada,59.01,59.01,2,1,1,355000.0,6015.93
+Apartamento,esplanada,75.22,75.22,2,1,0,375000.0,4985.38
+Apartamento,esplanada,85.99,65.5,2,1,1,375000.0,5725.19
+Apartamento,esplanada,96.77,86.31,2,1,2,385000.0,4460.67
+Apartamento,esplanada,61.3,61.3,2,1,1,390000.0,6362.15
+Apartamento,esplanada,61.97,61.97,2,1,1,405000.0,6535.42
+Apartamento,esplanada,100.0,68.54,2,1,2,405000.0,5908.96
+Apartamento,esplanada,80.0,80.0,3,1,1,420000.0,5250.0
+Apartamento,esplanada,34.25,34.25,1,0,0,424000.0,12379.56
+Apartamento,esplanada,86.0,86.0,2,2,1,424000.0,4930.23
+Apartamento,esplanada,79.84,79.84,3,1,0,426000.0,5335.67
+Apartamento,esplanada,61.97,61.97,2,0,0,430000.0,6938.84
+Apartamento,esplanada,36.57,36.57,1,1,0,445200.0,12173.91
+Apartamento,esplanada,70.0,70.0,3,0,0,450000.0,6428.57
+Apartamento,esplanada,76.88,76.88,2,2,1,450000.0,5853.28
+Apartamento,esplanada,73.95,61.92,2,2,1,450000.0,7267.44
+Apartamento,esplanada,42.6,42.6,1,1,0,455800.0,10699.53
+Apartamento,esplanada,86.31,86.31,2,1,1,480000.0,5561.35
+Apartamento,esplanada,190.0,137.0,3,1,2,481000.0,3510.95
+Apartamento,esplanada,73.32,73.32,2,2,1,500000.0,6819.42
+Apartamento,esplanada,63.17,63.17,1,1,1,505000.0,7994.3
+Apartamento,esplanada,84.45,84.45,2,2,1,594000.0,7033.75
+Apartamento,esplanada,91.06,91.06,3,2,2,620000.0,6808.7
+Apartamento,esplanada,84.45,84.45,2,2,2,668000.0,7910.01
+Apartamento,esplanada,74.78,74.78,2,2,1,694250.0,9283.9
+Apartamento,esplanada,84.22,84.22,2,2,2,742000.0,8810.26
+Apartamento,esplanada,148.27,148.27,3,1,2,760000.0,5125.78
+Apartamento,esplanada,239.47,239.47,3,1,2,780000.0,3257.19
+Apartamento,esplanada,74.79,74.79,2,0,1,789480.0,10555.96
+Apartamento,esplanada,99.34,99.34,3,2,2,892000.0,8979.26
+Apartamento,esplanada,135.42,135.42,3,2,2,895000.0,6609.07
+Apartamento,esplanada,99.11,99.11,3,2,2,899000.0,9070.73
+Apartamento,jardim america,50.0,50.0,2,1,1,380000.0,7600.0
+Apartamento,jardim america,64.1,64.1,2,1,2,400000.0,6240.25
+Apartamento,jardim america,75.0,75.0,2,1,1,420000.0,5600.0
+Apartamento,jardim america,69.15,69.15,2,1,1,426000.0,6160.52
+Apartamento,jardim america,68.35,68.35,3,1,1,460000.0,6730.07
+Apartamento,jardim america,102.04,102.04,2,1,1,480000.0,4704.04
+Apartamento,jardim europa,141.0,101.0,3,2,2,600000.0,5940.59
+Apartamento,jardim europa,189.48,189.48,3,1,2,699000.0,3689.04
+Apartamento,jardim europa,85.53,85.53,3,1,2,699000.0,8172.57
+Apartamento,jardim italia,86.57,86.57,3,2,2,1.03,0.01
+Apartamento,jardim italia,46.07,46.07,1,1,1,299000.0,6490.12
+Apartamento,jardim italia,107.4,107.4,2,1,1,350000.0,3258.85
+Apartamento,jardim italia,79.5,79.5,2,0,1,350000.0,4402.52
+Apartamento,jardim italia,77.0,46.0,2,1,1,350000.0,7608.7
+Apartamento,jardim italia,77.65,63.72,2,1,2,360000.0,5649.72
+Apartamento,jardim italia,81.0,63.5,2,1,1,377500.0,5944.88
+Apartamento,jardim italia,47.0,47.0,2,1,1,380000.0,8085.11
+Apartamento,jardim italia,92.7,92.7,2,1,1,380000.0,4099.24
+Apartamento,jardim italia,67.93,60.8,2,1,1,385000.0,6332.24
+Apartamento,jardim italia,82.0,49.0,1,1,1,390000.0,7959.18
+Apartamento,jardim italia,80.55,67.09,2,1,1,390000.0,5813.09
+Apartamento,jardim italia,107.6,83.2,3,1,0,399000.0,4795.67
+Apartamento,jardim italia,72.0,67.0,2,1,1,410000.0,6119.4
+Apartamento,jardim italia,68.0,68.0,2,1,1,410000.0,6029.41
+Apartamento,jardim italia,60.8,60.8,2,1,1,415000.0,6825.66
+Apartamento,jardim italia,64.0,64.0,2,1,1,425000.0,6640.62
+Apartamento,jardim italia,54.63,54.63,2,1,1,425000.0,7779.61
+Apartamento,jardim italia,110.21,64.34,2,1,1,425000.0,6605.53
+Apartamento,jardim italia,85.0,85.0,3,1,1,450000.0,5294.12
+Apartamento,jardim italia,90.0,80.0,2,1,1,460000.0,5750.0
+Apartamento,jardim italia,53.15,53.15,2,1,0,463200.0,8714.96
+Apartamento,jardim italia,65.72,65.72,2,1,1,478000.0,7273.28
+Apartamento,jardim italia,74.33,74.33,3,1,0,479000.0,6444.24
+Apartamento,jardim italia,66.57,66.57,2,1,1,479000.0,7195.43
+Apartamento,jardim italia,55.67,55.67,1,1,1,479000.0,8604.28
+Apartamento,jardim italia,100.11,66.57,2,1,1,479000.0,7195.43
+Apartamento,jardim italia,70.0,70.0,2,1,1,480000.0,6857.14
+Apartamento,jardim italia,66.57,66.57,2,1,0,480000.0,7210.46
+Apartamento,jardim italia,0.01,0.01,2,1,1,490000.0,49000000.0
+Apartamento,jardim italia,127.0,106.0,3,1,1,520000.0,4905.66
+Apartamento,jardim italia,83.2,83.2,3,1,1,530000.0,6370.19
+Apartamento,jardim italia,75.46,75.46,2,1,1,532000.0,7050.09
+Apartamento,jardim italia,83.74,55.67,1,1,1,533000.0,9574.28
+Apartamento,jardim italia,79.86,79.86,2,2,2,540000.0,6761.83
+Apartamento,jardim italia,79.22,79.22,2,1,1,543000.0,6854.33
+Apartamento,jardim italia,119.0,77.0,2,1,0,548550.0,7124.03
+Apartamento,jardim italia,123.62,123.62,2,1,1,550000.0,4449.12
+Apartamento,jardim italia,78.63,78.63,2,1,1,550000.0,6994.79
+Apartamento,jardim italia,69.59,69.59,2,2,1,550000.0,7903.43
+Apartamento,jardim italia,87.0,70.0,2,1,1,550000.0,7857.14
+Apartamento,jardim italia,87.0,87.0,3,0,0,550000.0,6321.84
+Apartamento,jardim italia,68.5,68.5,2,1,1,560000.0,8175.18
+Apartamento,jardim italia,119.0,77.0,2,1,2,563000.0,7311.69
+Apartamento,jardim italia,119.99,69.59,2,1,0,570000.0,8190.83
+Apartamento,jardim italia,119.0,77.0,2,1,2,570000.0,7402.6
+Apartamento,jardim italia,77.8,77.8,2,1,2,577845.0,7427.31
+Apartamento,jardim italia,77.8,77.8,2,2,2,587034.72,7545.43
+Apartamento,jardim italia,128.74,70.5,2,2,1,594000.0,8425.53
+Apartamento,jardim italia,70.8,70.8,2,1,1,594000.0,8389.83
+Apartamento,jardim italia,74.0,74.0,2,1,1,600000.0,8108.11
+Apartamento,jardim italia,94.8,77.8,2,1,2,616000.0,7917.74
+Apartamento,jardim italia,1059.6,91.86,3,1,3,620000.0,6749.4
+Apartamento,jardim italia,75.0,75.0,2,1,2,620000.0,8266.67
+Apartamento,jardim italia,81.39,81.39,2,2,2,649000.0,7973.95
+Apartamento,jardim italia,62.0,62.0,2,1,1,650000.0,10483.87
+Apartamento,jardim italia,120.0,120.0,3,1,1,660000.0,5500.0
+Apartamento,jardim italia,91.86,91.86,3,1,0,660000.0,7184.85
+Apartamento,jardim italia,82.0,82.0,2,1,2,660000.0,8048.78
+Apartamento,jardim italia,117.0,117.0,3,1,2,680000.0,5811.97
+Apartamento,jardim italia,69.0,69.0,2,1,1,688000.0,9971.01
+Apartamento,jardim italia,74.0,74.0,2,1,2,690000.0,9324.32
+Apartamento,jardim italia,75.75,75.75,2,1,2,692000.0,9135.31
+Apartamento,jardim italia,73.82,73.82,2,1,2,699000.0,9468.98
+Apartamento,jardim italia,70.52,70.52,2,1,0,699000.0,9912.08
+Apartamento,jardim italia,72.8,72.8,2,2,1,700000.0,9615.38
+Apartamento,jardim italia,128.0,128.0,3,1,2,700000.0,5468.75
+Apartamento,jardim italia,72.8,72.8,2,1,1,700000.0,9615.38
+Apartamento,jardim italia,73.82,73.82,2,2,2,700000.0,9482.53
+Apartamento,jardim italia,117.0,82.5,2,1,1,707500.0,8575.76
+Apartamento,jardim italia,72.0,72.0,2,2,1,717500.0,9965.28
+Apartamento,jardim italia,80.22,80.22,2,1,1,720000.0,8975.32
+Apartamento,jardim italia,70.52,70.52,2,2,1,720000.0,10209.87
+Apartamento,jardim italia,133.0,111.0,3,1,2,725000.0,6531.53
+Apartamento,jardim italia,72.0,72.0,0,0,0,735000.0,10208.33
+Apartamento,jardim italia,79.39,79.39,2,2,1,740000.0,9321.07
+Apartamento,jardim italia,208.0,83.0,2,1,2,745000.0,8975.9
+Apartamento,jardim italia,75.17,75.17,2,1,2,750000.0,9977.38
+Apartamento,jardim italia,69.29,69.29,2,1,1,750000.0,10824.07
+Apartamento,jardim italia,69.0,69.0,2,0,1,750000.0,10869.57
+Apartamento,jardim italia,75.17,75.17,2,2,2,750000.0,9977.38
+Apartamento,jardim italia,76.3,76.3,2,2,1,755317.49,9899.31
+Apartamento,jardim italia,134.0,81.0,2,1,1,760000.0,9382.72
+Apartamento,jardim italia,152.9,151.9,2,3,2,780000.0,5134.96
+Apartamento,jardim italia,110.0,72.0,2,1,1,785000.0,10902.78
+Apartamento,jardim italia,72.0,72.0,2,2,2,785000.0,10902.78
+Apartamento,jardim italia,72.0,72.0,2,2,0,785000.0,10902.78
+Apartamento,jardim italia,91.85,91.85,3,1,1,790000.0,8600.98
+Apartamento,jardim italia,90.89,90.89,3,1,2,790000.0,8691.83
+Apartamento,jardim italia,75.58,75.58,2,2,1,790000.0,10452.5
+Apartamento,jardim italia,72.0,72.0,2,1,2,799000.0,11097.22
+Apartamento,jardim italia,89.0,75.0,2,1,2,799000.0,10653.33
+Apartamento,jardim italia,145.0,145.0,2,1,2,800000.0,5517.24
+Apartamento,jardim italia,77.0,77.0,2,2,2,820000.0,10649.35
+Apartamento,jardim italia,75.0,75.0,2,2,1,840000.0,11200.0
+Apartamento,jardim italia,90.89,90.89,2,0,1,850000.0,9351.96
+Apartamento,jardim italia,171.17,171.17,3,1,2,850000.0,4965.82
+Apartamento,jardim italia,128.91,83.87,2,2,2,850000.0,10134.73
+Apartamento,jardim italia,90.89,90.89,2,1,1,860000.0,9461.99
+Apartamento,jardim italia,70.52,70.52,2,2,2,870000.0,12336.93
+Apartamento,jardim italia,130.0,130.0,3,1,2,875000.0,6730.77
+Apartamento,jardim italia,84.56,84.56,2,1,0,880000.0,10406.81
+Apartamento,jardim italia,86.27,86.27,2,1,2,880000.0,10200.53
+Apartamento,jardim italia,113.87,113.87,3,1,3,890000.0,7815.93
+Apartamento,jardim italia,100.0,100.0,2,0,0,890000.0,8900.0
+Apartamento,jardim italia,92.0,92.0,2,2,2,890000.0,9673.91
+Apartamento,jardim italia,113.0,113.0,3,1,2,900000.0,7964.6
+Apartamento,jardim italia,104.0,104.0,2,2,2,900000.0,8653.85
+Apartamento,jardim italia,83.87,83.87,2,1,2,905000.0,10790.51
+Apartamento,jardim italia,137.0,137.0,2,1,2,950000.0,6934.31
+Apartamento,jardim italia,69.0,69.0,2,2,1,960000.0,13913.04
+Apartamento,jardim italia,139.2,139.2,3,1,3,980000.0,7040.23
+Apartamento,jardim italia,118.0,118.0,3,2,2,980000.0,8305.08
+Apartamento,jardim italia,86.57,86.57,2,1,2,1050000.0,12128.91
+Apartamento,jardim italia,113.87,113.87,3,2,1,1060000.0,9308.86
+Apartamento,jardim italia,113.87,113.87,3,1,1,1060000.0,9308.86
+Apartamento,jardim italia,130.0,130.0,3,1,3,1065000.0,8192.31
+Apartamento,jardim italia,76.3,76.3,2,1,1,1100000.0,14416.78
+Apartamento,jardim italia,110.33,110.33,3,3,2,1100000.0,9970.09
+Apartamento,jardim italia,109.0,109.0,3,1,2,1150000.0,10550.46
+Apartamento,jardim italia,125.0,125.0,3,1,2,1170000.0,9360.0
+Apartamento,jardim italia,156.0,125.0,3,1,2,1170000.0,9360.0
+Apartamento,jardim italia,130.15,130.15,3,4,3,1500000.0,11525.16
+Apartamento,jardim italia,289.0,224.0,3,2,3,1550000.0,6919.64
+Apartamento,jardim italia,253.36,253.36,3,3,3,1850000.0,7301.86
+Apartamento,jardim italia,230.0,230.0,3,4,3,2223000.0,9665.22
+Apartamento,jardim italia,225.0,225.0,3,0,2,2290000.0,10177.78
+Apartamento,jardim italia,225.0,225.0,3,3,3,2390000.0,10622.22
+Apartamento,jardim italia,225.0,225.0,3,4,3,2440000.0,10844.44
+Apartamento,jardim italia,580.0,330.0,3,3,5,3000000.0,9090.91
+Apartamento,jardins,80.0,80.0,2,1,2,750000.0,9375.0
+Apartamento,jardins do vale,47.8,47.8,2,0,0,290000.0,6066.95
+Apartamento,jardins do vale,47.8,47.8,2,1,1,300000.0,6276.15
+Apartamento,jardins do vale,50.96,50.96,2,1,0,320000.0,6279.43
+Apartamento,jardins do vale,60.0,60.0,2,1,1,330000.0,5500.0
+Apartamento,jardins lunardi,77.5,77.5,2,1,2,645000.0,8322.58
+Apartamento,jardins lunardi,79.12,79.12,2,1,2,750000.0,9479.27
+Apartamento,jardins lunardi,79.12,79.12,2,2,2,750000.0,9479.27
+Apartamento,lider,62.0,54.0,2,1,1,330000.0,6111.11
+Apartamento,lider,90.0,50.0,2,1,1,341000.0,6820.0
+Apartamento,lider,90.27,78.35,2,2,2,350000.0,4467.13
+Apartamento,lider,49.0,49.0,2,1,1,350000.0,7142.86
+Apartamento,lider,70.0,70.0,2,1,1,360000.0,5142.86
+Apartamento,lider,94.86,76.81,2,1,1,380000.0,4947.27
+Apartamento,lider,74.0,74.0,2,1,1,395000.0,5337.84
+Apartamento,lider,52.05,52.05,2,2,1,400000.0,7684.92
+Apartamento,lider,93.67,80.2,2,2,1,410000.0,5112.22
+Apartamento,lider,52.05,52.05,2,1,1,411500.0,7905.86
+Apartamento,lider,89.0,50.0,2,1,1,425000.0,8500.0
+Apartamento,lider,59.82,59.82,2,2,2,450000.0,7522.57
+Apartamento,lider,60.19,60.19,2,1,2,455000.0,7559.4
+Apartamento,lider,59.0,59.0,2,0,1,465000.0,7881.36
+Apartamento,lider,59.38,59.38,2,1,1,466000.0,7847.76
+Apartamento,lider,60.0,60.0,2,1,1,472500.0,7875.0
+Apartamento,lider,77.46,77.46,2,1,0,480000.0,6196.75
+Apartamento,lider,121.0,67.81,2,1,1,500000.0,7373.54
+Apartamento,lider,67.99,67.99,2,1,1,520000.0,7648.18
+Apartamento,lider,104.0,78.0,2,1,0,525000.0,6730.77
+Apartamento,lider,77.48,77.48,2,1,1,525000.0,6775.94
+Apartamento,lider,127.13,127.13,2,1,1,550000.0,4326.28
+Apartamento,lider,73.96,73.96,2,0,1,554772.85,7500.98
+Apartamento,lider,69.13,69.13,2,1,2,580000.0,8389.99
+Apartamento,lider,92.7,92.7,3,0,1,592000.0,6386.19
+Apartamento,lider,89.5,89.5,3,1,2,650000.0,7262.57
+Apartamento,lider,82.9,82.9,2,1,2,650000.0,7840.77
+Apartamento,lider,123.63,123.63,3,1,1,650000.0,5257.62
+Apartamento,lider,116.0,86.0,2,2,2,650000.0,7558.14
+Apartamento,lider,125.08,125.08,3,2,1,652000.0,5212.66
+Apartamento,lider,89.8,89.8,3,0,2,653600.6,7278.4
+Apartamento,lider,95.5,95.5,3,1,2,670000.0,7015.71
+Apartamento,lider,95.45,95.45,3,1,3,670000.0,7019.38
+Apartamento,lider,97.39,83.86,2,2,2,670000.0,7989.51
+Apartamento,lider,95.5,95.5,3,2,3,675000.0,7068.06
+Apartamento,lider,123.63,123.63,3,1,2,679000.0,5492.19
+Apartamento,lider,67.81,67.81,3,1,1,695000.0,10249.23
+Apartamento,lider,95.0,95.0,3,2,2,742000.0,7810.53
+Apartamento,lider,95.0,95.0,3,1,2,750000.0,7894.74
+Apartamento,lider,115.64,115.64,3,1,2,850000.0,7350.4
+Apartamento,loteamento dom geronimo,56.77,56.77,2,1,1,375000.0,6605.6
+Apartamento,maria gorete,102.39,75.0,2,1,1,380000.0,5066.67
+Apartamento,maria goretti,37.43,37.43,1,1,0,266000.0,7106.6
+Apartamento,maria goretti,57.0,57.0,2,1,1,345000.0,6052.63
+Apartamento,maria goretti,64.43,64.43,2,1,1,399000.0,6192.77
+Apartamento,maria goretti,58.31,58.31,1,1,1,431000.0,7391.53
+Apartamento,maria goretti,79.01,79.01,2,1,1,435000.0,5505.63
+Apartamento,maria goretti,68.0,59.61,2,1,2,450000.0,7549.07
+Apartamento,maria goretti,103.24,103.24,2,2,1,458607.0,4442.14
+Apartamento,maria goretti,90.0,90.0,3,1,1,495000.0,5500.0
+Apartamento,maria goretti,104.25,104.25,4,2,1,495000.0,4748.2
+Apartamento,maria goretti,77.1,77.1,3,1,0,548000.0,7107.65
+Apartamento,maria goretti,77.0,77.0,3,2,1,548000.0,7116.88
+Apartamento,maria goretti,85.0,85.0,3,1,1,550000.0,6470.59
+Apartamento,maria goretti,142.0,94.44,2,1,2,630000.0,6670.9
+Apartamento,maria goretti,100.0,100.0,3,1,1,650000.0,6500.0
+Apartamento,maria goretti,113.84,113.84,3,2,1,700000.0,6148.98
+Apartamento,maria goretti,89.68,89.68,3,1,1,700000.0,7805.53
+Apartamento,maria goretti,167.51,121.0,3,1,2,720000.0,5950.41
+Apartamento,maria goretti,99.94,79.73,2,1,1,745000.0,9344.04
+Apartamento,maria goretti,158.02,91.44,2,1,2,756000.0,8267.72
+Apartamento,maria goretti,78.86,78.86,2,2,2,780000.0,9890.95
+Apartamento,maria goretti,92.0,92.0,3,2,2,790000.0,8586.96
+Apartamento,maria goretti,92.0,92.0,3,1,2,790000.0,8586.96
+Apartamento,maria goretti,129.3,129.3,3,1,1,795000.0,6148.49
+Apartamento,maria goretti,129.3,129.3,3,3,1,795000.0,6148.49
+Apartamento,maria goretti,174.01,174.01,3,1,1,799500.0,4594.56
+Apartamento,maria goretti,170.0,93.0,2,2,0,805000.0,8655.91
+Apartamento,maria goretti,95.26,95.26,3,1,1,807500.0,8476.8
+Apartamento,maria goretti,76.3,76.3,2,2,1,850000.0,11140.24
+Apartamento,maria goretti,78.83,78.83,2,2,1,864570.74,10967.53
+Apartamento,maria goretti,99.99,99.99,0,3,2,880000.0,8800.88
+Apartamento,maria goretti,92.6,92.6,2,2,2,899000.0,9708.42
+Apartamento,maria goretti,121.0,121.0,3,2,2,901000.0,7446.28
+Apartamento,maria goretti,131.0,131.0,3,1,2,905000.0,6908.4
+Apartamento,maria goretti,237.07,237.07,3,2,2,920000.0,3880.71
+Apartamento,maria goretti,89.9,89.9,2,1,0,924500.0,10283.65
+Apartamento,maria goretti,100.48,100.48,3,0,2,940000.0,9355.1
+Apartamento,maria goretti,89.9,89.9,2,2,1,950000.0,10567.3
+Apartamento,maria goretti,99.99,99.99,2,1,2,950000.0,9500.95
+Apartamento,maria goretti,182.17,100.0,2,1,2,950000.0,9500.0
+Apartamento,maria goretti,170.62,100.48,3,2,2,980000.0,9753.18
+Apartamento,maria goretti,169.0,99.0,2,3,2,1100000.0,11111.11
+Apartamento,maria goretti,1200.0,106.81,3,2,2,1120747.71,10492.91
+Apartamento,maria goretti,118.96,118.96,3,1,2,1125000.0,9456.96
+Apartamento,maria goretti,118.96,118.96,3,3,2,1150000.0,9667.11
+Apartamento,maria goretti,125.33,125.33,3,0,2,1170000.0,9335.35
+Apartamento,maria goretti,209.29,118.96,3,1,2,1170000.0,9835.24
+Apartamento,maria goretti,125.33,125.33,2,1,2,1190000.0,9494.93
+Apartamento,maria goretti,106.81,106.81,3,1,2,1200000.0,11234.9
+Apartamento,maria goretti,135.0,135.0,3,2,2,1200000.0,8888.89
+Apartamento,maria goretti,103.0,103.0,3,3,2,1300000.0,12621.36
+Apartamento,maria goretti,230.0,137.32,2,1,2,1376810.0,10026.29
+Apartamento,maria goretti,115.09,115.09,3,3,2,1382978.72,12016.5
+Apartamento,maria goretti,224.53,146.44,3,1,3,1386000.0,9464.63
+Apartamento,maria goretti,205.0,150.0,3,3,4,1420000.0,9466.67
+Apartamento,maria goretti,235.95,150.7,3,1,0,1440000.0,9555.41
+Apartamento,maria goretti,450.0,167.22,3,3,2,1479881.91,8849.91
+Apartamento,maria goretti,163.0,163.0,3,1,2,1490000.0,9141.1
+Apartamento,maria goretti,220.0,150.0,3,4,3,1499000.0,9993.33
+Apartamento,maria goretti,143.41,143.41,3,4,3,1500000.0,10459.52
+Apartamento,maria goretti,118.96,118.96,1,1,0,1550000.0,13029.59
+Apartamento,maria goretti,149.0,149.0,3,4,3,1566000.0,10510.07
+Apartamento,maria goretti,148.0,148.0,3,4,2,1589979.97,10743.11
+Apartamento,maria goretti,244.59,137.32,3,1,2,1650000.0,12015.73
+Apartamento,maria goretti,148.64,148.64,3,3,2,1900000.0,12782.56
+Apartamento,maria goretti,160.13,160.13,3,0,0,2200000.0,13738.84
+Apartamento,maria goretti,162.19,162.19,3,4,2,2200000.0,13564.34
+Apartamento,maria goretti,406.0,235.0,0,1,3,2250000.0,9574.47
+Apartamento,maria goretti,406.0,235.06,3,4,3,2299272.7,9781.64
+Apartamento,maria goretti,412.0,162.19,0,0,0,2300000.0,14180.9
+Apartamento,maria goretti,235.0,235.0,3,0,3,2308000.0,9821.28
+Apartamento,maria goretti,235.06,235.06,3,1,3,2331000.0,9916.62
+Apartamento,maria goretti,412.0,162.19,3,3,2,2390000.0,14735.8
+Apartamento,maria goretti,167.0,167.0,2,3,2,2475000.0,14820.36
+Apartamento,maria goretti,368.33,368.33,3,0,3,2570000.0,6977.44
+Apartamento,maria goretti,160.12,160.12,0,1,3,2600000.0,16237.82
+Apartamento,maria goretti,424.34,224.47,3,4,3,2800000.0,12473.83
+Apartamento,maria goretti,371.16,600.0,3,2,0,4000000.0,6666.67
+Apartamento,meia praia,308.4,223.0,4,4,3,3500000.0,15695.07
+Apartamento,palmital,48.0,48.0,2,1,1,250000.0,5208.33
+Apartamento,palmital,47.0,47.0,2,1,1,250000.0,5319.15
+Apartamento,palmital,47.89,47.89,2,1,0,265000.0,5533.51
+Apartamento,palmital,47.07,47.07,2,1,0,270000.0,5736.14
+Apartamento,palmital,55.82,55.82,2,1,1,350169.35,6273.19
+Apartamento,palmital,52.44,52.44,2,1,1,370000.0,7055.68
+Apartamento,palmital,54.93,54.93,2,2,1,370000.0,6735.85
+Apartamento,palmital,60.0,60.0,3,1,1,372000.0,6200.0
+Apartamento,palmital,57.56,57.56,3,1,1,385000.0,6688.67
+Apartamento,palmital,95.2,51.31,2,1,1,385000.0,7503.41
+Apartamento,palmital,80.0,80.0,3,1,1,390000.0,4875.0
+Apartamento,palmital,98.0,52.0,2,1,1,390000.0,7500.0
+Apartamento,palmital,57.41,57.41,2,1,1,395000.0,6880.33
+Apartamento,palmital,76.85,69.15,2,1,2,395000.0,5712.22
+Apartamento,palmital,54.21,54.21,2,2,1,398000.0,7341.82
+Apartamento,palmital,57.56,57.56,2,1,0,399000.0,6931.9
+Apartamento,palmital,57.56,57.56,3,1,0,399000.0,6931.9
+Apartamento,palmital,55.18,55.18,2,1,1,400000.0,7249.0
+Apartamento,palmital,105.9,105.9,3,1,1,400000.0,3777.15
+Apartamento,palmital,54.93,54.93,2,1,0,420000.0,7646.1
+Apartamento,palmital,60.0,60.0,2,2,1,420000.0,7000.0
+Apartamento,palmital,68.53,68.53,2,1,2,450000.0,6566.47
+Apartamento,palmital,54.21,54.21,2,1,1,455000.0,8393.29
+Apartamento,palmital,78.87,68.53,2,1,1,470000.0,6858.31
+Apartamento,palmital,106.45,91.78,3,2,2,750000.0,8171.71
+Apartamento,palmital,92.0,92.0,2,2,2,782000.0,8500.0
+Apartamento,palmital,78.15,78.15,2,2,2,900000.0,11516.31
+Apartamento,palmital,130.99,130.99,3,1,3,1300000.0,9924.42
+Apartamento,paraiso,63.83,63.83,2,1,1,297000.0,4652.98
+Apartamento,paraiso,87.0,87.0,3,1,1,300000.0,3448.28
+Apartamento,paraiso,50.0,50.0,2,1,1,324900.0,6498.0
+Apartamento,paraiso,77.0,65.0,2,1,1,329000.0,5061.54
+Apartamento,paraiso,69.24,69.24,2,1,2,341000.0,4924.9
+Apartamento,paraiso,54.18,54.18,2,1,1,345000.0,6367.66
+Apartamento,paraiso,60.49,60.49,2,1,0,350000.0,5786.08
+Apartamento,paraiso,60.0,60.0,2,1,0,350000.0,5833.33
+Apartamento,paraiso,68.0,60.0,2,1,1,350000.0,5833.33
+Apartamento,paraiso,87.09,79.9,3,1,0,360000.0,4505.63
+Apartamento,paraiso,75.47,75.47,2,1,1,369000.0,4889.36
+Apartamento,paraiso,57.0,57.0,2,1,1,370000.0,6491.23
+Apartamento,paraiso,55.93,55.93,2,2,1,373000.0,6669.05
+Apartamento,paraiso,60.31,60.31,2,1,1,382500.0,6342.23
+Apartamento,paraiso,59.0,59.0,2,1,1,387500.0,6567.8
+Apartamento,paraiso,53.0,53.0,2,1,1,389000.0,7339.62
+Apartamento,paraiso,110.0,80.0,2,1,1,390000.0,4875.0
+Apartamento,paraiso,77.58,77.58,3,1,1,400000.0,5155.97
+Apartamento,paraiso,62.27,62.27,2,1,1,405000.0,6503.93
+Apartamento,paraiso,80.0,80.0,3,1,1,415000.0,5187.5
+Apartamento,paraiso,75.0,75.0,2,0,0,415000.0,5533.33
+Apartamento,paraiso,90.0,90.0,3,1,1,420000.0,4666.67
+Apartamento,paraiso,88.86,72.45,2,2,1,420000.0,5797.1
+Apartamento,paraiso,79.9,79.9,3,2,1,425000.0,5319.15
+Apartamento,paraiso,60.3,60.3,2,1,0,425000.0,7048.09
+Apartamento,paraiso,67.0,67.0,2,1,1,430000.0,6417.91
+Apartamento,paraiso,100.0,100.0,3,2,1,430000.0,4300.0
+Apartamento,paraiso,95.0,95.0,2,1,1,440000.0,4631.58
+Apartamento,paraiso,79.9,79.9,3,0,1,450000.0,5632.04
+Apartamento,paraiso,60.0,60.0,2,1,1,450000.0,7500.0
+Apartamento,paraiso,69.9,69.9,2,1,1,450000.0,6437.77
+Apartamento,paraiso,93.0,53.0,2,1,1,450000.0,8490.57
+Apartamento,paraiso,79.0,79.0,3,2,1,450000.0,5696.2
+Apartamento,paraiso,62.27,62.27,2,1,2,458000.0,7355.07
+Apartamento,paraiso,64.02,64.02,2,1,0,470000.0,7341.46
+Apartamento,paraiso,66.43,66.43,2,1,1,490000.0,7376.19
+Apartamento,paraiso,67.45,67.45,2,1,2,490000.0,7264.64
+Apartamento,paraiso,83.02,83.02,3,1,1,499000.0,6010.6
+Apartamento,paraiso,116.0,75.0,2,1,2,499000.0,6653.33
+Apartamento,paraiso,68.91,68.91,2,1,1,524500.0,7611.38
+Apartamento,paraiso,69.84,69.84,2,2,2,525000.0,7517.18
+Apartamento,paraiso,69.92,69.92,2,2,2,530000.0,7580.09
+Apartamento,paraiso,120.9,69.84,2,1,2,530000.0,7588.77
+Apartamento,paraiso,120.09,69.84,2,1,2,535000.0,7660.37
+Apartamento,paraiso,69.92,69.92,2,0,2,539980.55,7722.83
+Apartamento,paraiso,80.75,68.91,2,2,2,583000.0,8460.31
+Apartamento,paraiso,70.0,70.0,2,1,1,585000.0,8357.14
+Apartamento,paraiso,70.0,70.0,2,2,1,586000.0,8371.43
+Apartamento,paraiso,78.63,78.63,2,1,2,600000.0,7630.68
+Apartamento,paraiso,198.32,198.32,3,4,4,1890000.0,9530.05
+Apartamento,parque das palmeiras,50.0,50.0,2,1,1,265000.0,5300.0
+Apartamento,parque das palmeiras,60.0,60.0,2,1,1,276600.0,4610.0
+Apartamento,parque das palmeiras,76.62,76.62,2,1,1,400000.0,5220.57
+Apartamento,parque das palmeiras,64.12,64.12,2,1,1,450000.0,7018.09
+Apartamento,parque das palmeiras,87.7,87.7,3,2,1,650000.0,7411.63
+Apartamento,passo dos fortes,228.7,228.7,3,3,4,1.2,0.01
+Apartamento,passo dos fortes,40.28,40.28,1,1,0,170000.0,4220.46
+Apartamento,passo dos fortes,1.0,1.0,2,1,1,242000.0,242000.0
+Apartamento,passo dos fortes,48.44,48.44,2,1,1,247500.0,5109.41
+Apartamento,passo dos fortes,55.0,55.0,2,1,1,250000.0,4545.45
+Apartamento,passo dos fortes,53.0,47.0,2,1,1,275000.0,5851.06
+Apartamento,passo dos fortes,50.0,50.0,2,1,1,310000.0,6200.0
+Apartamento,passo dos fortes,47.0,47.0,2,1,1,310000.0,6595.74
+Apartamento,passo dos fortes,50.46,50.46,2,1,1,314500.0,6232.66
+Apartamento,passo dos fortes,47.6,47.6,2,1,0,320000.0,6722.69
+Apartamento,passo dos fortes,57.49,57.49,2,1,1,320000.0,5566.19
+Apartamento,passo dos fortes,48.74,48.74,2,1,0,336000.0,6893.72
+Apartamento,passo dos fortes,51.84,46.32,2,2,1,340000.0,7340.24
+Apartamento,passo dos fortes,62.0,57.71,2,1,1,347500.0,6021.49
+Apartamento,passo dos fortes,59.96,59.96,2,1,1,349500.0,5828.89
+Apartamento,passo dos fortes,57.9,57.9,2,1,1,360000.0,6217.62
+Apartamento,passo dos fortes,54.27,54.27,2,1,1,360000.0,6633.5
+Apartamento,passo dos fortes,97.0,74.0,2,1,1,360000.0,4864.86
+Apartamento,passo dos fortes,54.5,54.5,2,1,1,360000.0,6605.5
+Apartamento,passo dos fortes,48.74,48.74,2,1,1,371000.0,7611.82
+Apartamento,passo dos fortes,80.04,48.74,2,1,1,372000.0,7632.33
+Apartamento,passo dos fortes,48.0,48.0,2,1,1,385000.0,8020.83
+Apartamento,passo dos fortes,59.08,59.08,3,1,1,385000.0,6516.59
+Apartamento,passo dos fortes,61.88,61.88,2,1,1,385000.0,6221.72
+Apartamento,passo dos fortes,71.89,65.59,2,1,1,390000.0,5946.03
+Apartamento,passo dos fortes,49.5,49.5,2,1,1,404500.0,8171.72
+Apartamento,passo dos fortes,49.68,49.68,2,1,0,424500.0,8544.69
+Apartamento,passo dos fortes,109.24,50.55,2,1,1,425000.0,8407.52
+Apartamento,passo dos fortes,51.85,46.26,2,1,1,430000.0,9295.29
+Apartamento,passo dos fortes,82.63,82.63,2,1,1,430000.0,5203.92
+Apartamento,passo dos fortes,48.18,48.18,2,1,1,432000.0,8966.38
+Apartamento,passo dos fortes,70.0,70.0,2,1,1,433000.0,6185.71
+Apartamento,passo dos fortes,50.99,50.99,2,1,1,440000.0,8629.14
+Apartamento,passo dos fortes,72.0,64.03,2,1,1,440000.0,6871.78
+Apartamento,passo dos fortes,83.83,83.83,2,1,2,450000.0,5368.01
+Apartamento,passo dos fortes,67.0,67.0,2,1,1,450000.0,6716.42
+Apartamento,passo dos fortes,77.53,77.53,2,1,1,450000.0,5804.2
+Apartamento,passo dos fortes,56.0,56.0,2,1,1,460000.0,8214.29
+Apartamento,passo dos fortes,56.0,56.0,3,0,2,467000.0,8339.29
+Apartamento,passo dos fortes,54.09,54.09,2,2,1,470000.0,8689.22
+Apartamento,passo dos fortes,90.64,90.64,3,1,1,485000.0,5350.84
+Apartamento,passo dos fortes,51.85,51.85,2,1,2,490000.0,9450.34
+Apartamento,passo dos fortes,57.6,57.6,2,2,1,499000.0,8663.19
+Apartamento,passo dos fortes,71.0,71.0,2,1,1,535000.0,7535.21
+Apartamento,passo dos fortes,73.0,73.0,2,1,2,549000.0,7520.55
+Apartamento,passo dos fortes,68.0,68.0,2,1,1,550000.0,8088.24
+Apartamento,passo dos fortes,53.76,53.76,2,1,2,557500.0,10370.16
+Apartamento,passo dos fortes,73.0,73.0,2,1,1,560000.0,7671.23
+Apartamento,passo dos fortes,94.22,74.95,2,2,1,565053.5,7539.07
+Apartamento,passo dos fortes,75.86,75.86,2,1,2,585000.0,7711.57
+Apartamento,passo dos fortes,95.0,95.0,3,2,2,599000.0,6305.26
+Apartamento,passo dos fortes,99.4,99.4,2,2,2,617021.27,6207.46
+Apartamento,passo dos fortes,72.87,72.87,2,1,1,620000.0,8508.3
+Apartamento,passo dos fortes,118.0,80.0,2,1,2,620000.0,7750.0
+Apartamento,passo dos fortes,109.2,86.86,2,2,1,638280.0,7348.38
+Apartamento,passo dos fortes,67.49,67.49,3,1,1,639000.0,9468.07
+Apartamento,passo dos fortes,82.0,82.0,2,1,2,650000.0,7926.83
+Apartamento,passo dos fortes,99.15,99.15,2,1,2,671000.0,6767.52
+Apartamento,passo dos fortes,142.0,117.0,3,1,2,680000.0,5811.97
+Apartamento,passo dos fortes,98.77,98.77,3,2,2,725000.0,7340.29
+Apartamento,passo dos fortes,82.16,82.16,3,1,2,745000.0,9067.67
+Apartamento,passo dos fortes,71.13,71.13,2,2,1,785500.0,11043.16
+Apartamento,passo dos fortes,97.17,97.17,2,1,2,790000.0,8130.08
+Apartamento,passo dos fortes,84.1,84.1,2,0,2,840000.0,9988.11
+Apartamento,passo dos fortes,103.0,103.0,3,1,2,849000.0,8242.72
+Apartamento,passo dos fortes,135.0,107.0,2,1,2,885000.0,8271.03
+Apartamento,passo dos fortes,123.91,123.91,3,1,2,950000.0,7666.85
+Apartamento,passo dos fortes,137.0,137.0,3,2,2,950000.0,6934.31
+Apartamento,passo dos fortes,118.0,118.0,3,1,2,950000.0,8050.85
+Apartamento,passo dos fortes,113.65,113.65,3,1,1,1050000.0,9238.89
+Apartamento,passo dos fortes,162.15,162.15,3,3,4,1589114.77,9800.28
+Apartamento,passo dos fortes,944.11,164.29,3,3,3,1650000.0,10043.22
+Apartamento,passo dos fortes,164.29,164.29,3,3,4,1780000.0,10834.5
+Apartamento,passo dos fortes,162.0,162.0,3,1,2,2060000.0,12716.05
+Apartamento,petropolis,135.87,72.33,3,1,1,450000.0,6221.48
+Apartamento,pinheirinho,63.0,52.0,2,1,1,235000.0,4519.23
+Apartamento,pinheirinho,49.19,49.19,2,1,1,245000.0,4980.69
+Apartamento,pinheirinho,49.5,49.5,2,1,1,245000.0,4949.49
+Apartamento,pinheirinho,55.0,55.0,2,1,1,265000.0,4818.18
+Apartamento,pinheirinho,73.0,73.0,2,1,1,265000.0,3630.14
+Apartamento,pinheirinho,49.19,49.19,2,1,0,267000.0,5427.93
+Apartamento,pinheirinho,56.0,56.0,2,1,1,270000.0,4821.43
+Apartamento,pinheirinho,50.0,50.0,2,1,1,277000.0,5540.0
+Apartamento,pinheirinho,68.41,59.29,2,1,0,278000.0,4688.82
+Apartamento,pinheirinho,51.0,51.0,2,1,1,280000.0,5490.2
+Apartamento,pinheirinho,52.65,52.65,2,1,1,285000.0,5413.11
+Apartamento,pinheirinho,60.23,54.71,2,1,1,286000.0,5227.56
+Apartamento,pinheirinho,57.74,57.74,2,0,0,290000.0,5022.51
+Apartamento,pinheirinho,46.73,46.73,2,1,0,293000.0,6270.06
+Apartamento,pinheirinho,57.0,57.0,2,1,1,293000.0,5140.35
+Apartamento,pinheirinho,46.55,46.55,2,1,0,295000.0,6337.27
+Apartamento,pinheirinho,60.0,53.5,2,1,1,297750.0,5565.42
+Apartamento,pinheirinho,63.89,52.65,2,1,0,299000.0,5679.01
+Apartamento,pinheirinho,60.0,52.0,2,1,0,300000.0,5769.23
+Apartamento,pinheirinho,60.23,49.19,2,1,0,300000.0,6098.8
+Apartamento,pinheirinho,65.0,65.0,2,1,0,320000.0,4923.08
+Apartamento,pinheirinho,57.0,57.0,2,0,0,320000.0,5614.04
+Apartamento,pinheirinho,78.6,78.6,2,1,1,323300.0,4113.23
+Apartamento,pinheirinho,79.11,79.11,2,1,0,325000.0,4108.2
+Apartamento,pinheirinho,54.0,54.0,2,2,2,350000.0,6481.48
+Apartamento,pinheirinho,101.0,60.0,2,1,1,350000.0,5833.33
+Apartamento,pinheirinho,54.3,54.3,2,1,0,350000.0,6445.67
+Apartamento,pinheirinho,52.65,52.65,2,1,0,357500.0,6790.12
+Apartamento,pinheirinho,54.0,54.0,2,1,1,359000.0,6648.15
+Apartamento,pinheirinho,54.0,54.0,2,1,0,360000.0,6666.67
+Apartamento,pinheirinho,72.0,72.0,2,1,1,372500.0,5173.61
+Apartamento,pinheirinho,55.05,55.05,2,1,2,380000.0,6902.82
+Apartamento,pinheirinho,54.55,54.55,2,1,2,400000.0,7332.72
+Apartamento,presidente medici,40.0,40.0,1,1,0,270000.0,6750.0
+Apartamento,presidente medici,54.34,54.34,2,1,0,320000.0,5888.85
+Apartamento,presidente medici,54.34,54.34,2,1,1,320000.0,5888.85
+Apartamento,presidente medici,101.0,80.0,3,1,1,340000.0,4250.0
+Apartamento,presidente medici,81.0,93.0,3,1,1,355000.0,3817.2
+Apartamento,presidente medici,91.24,91.24,2,1,1,360000.0,3945.64
+Apartamento,presidente medici,81.0,81.0,3,1,1,373000.0,4604.94
+Apartamento,presidente medici,101.87,67.02,2,1,1,375000.0,5595.34
+Apartamento,presidente medici,74.08,74.08,2,1,1,380000.0,5129.59
+Apartamento,presidente medici,93.0,65.0,2,1,1,390000.0,6000.0
+Apartamento,presidente medici,79.32,79.32,2,1,0,399000.0,5030.26
+Apartamento,presidente medici,78.87,78.87,3,1,1,415000.0,5261.82
+Apartamento,presidente medici,76.1,66.06,2,1,1,419000.0,6342.72
+Apartamento,presidente medici,91.48,91.48,3,1,1,430000.0,4700.48
+Apartamento,presidente medici,79.9,79.9,3,2,1,450000.0,5632.04
+Apartamento,presidente medici,76.0,76.0,2,1,1,450000.0,5921.05
+Apartamento,presidente medici,76.96,52.98,2,1,1,450000.0,8493.77
+Apartamento,presidente medici,81.0,56.0,2,1,0,465000.0,8303.57
+Apartamento,presidente medici,76.87,76.87,2,1,1,470000.0,6114.22
+Apartamento,presidente medici,116.23,77.7,3,1,1,479999.78,6177.6
+Apartamento,presidente medici,77.7,77.7,3,1,1,480000.0,6177.61
+Apartamento,presidente medici,76.0,76.0,3,1,1,480000.0,6315.79
+Apartamento,presidente medici,130.0,130.0,3,1,1,480000.0,3692.31
+Apartamento,presidente medici,80.02,80.02,2,1,1,525000.0,6560.86
+Apartamento,presidente medici,84.01,84.01,3,1,1,530000.0,6308.77
+Apartamento,presidente medici,60.94,60.94,2,1,1,535000.0,8779.13
+Apartamento,presidente medici,76.06,76.06,2,2,1,550000.0,7231.13
+Apartamento,presidente medici,77.0,77.0,2,1,2,550000.0,7142.86
+Apartamento,presidente medici,75.0,75.0,2,2,1,567000.0,7560.0
+Apartamento,presidente medici,63.97,63.97,2,2,2,570000.0,8910.43
+Apartamento,presidente medici,152.0,104.0,3,1,1,580000.0,5576.92
+Apartamento,presidente medici,59.0,59.0,2,1,1,594000.0,10067.8
+Apartamento,presidente medici,140.65,140.65,3,0,2,620000.62,4408.11
+Apartamento,presidente medici,110.02,110.02,3,1,2,640000.0,5817.12
+Apartamento,presidente medici,74.23,74.23,2,2,1,645000.0,8689.21
+Apartamento,presidente medici,135.34,135.34,3,2,0,650000.0,4802.72
+Apartamento,presidente medici,600.0,135.0,3,2,1,650000.0,4814.81
+Apartamento,presidente medici,735.0,65.03,2,1,1,650000.0,9995.39
+Apartamento,presidente medici,200.0,110.0,3,1,2,650000.0,5909.09
+Apartamento,presidente medici,92.57,92.57,3,1,2,650000.0,7021.71
+Apartamento,presidente medici,111.82,80.04,2,1,2,650000.0,8120.94
+Apartamento,presidente medici,118.49,118.49,3,1,2,660000.0,5570.09
+Apartamento,presidente medici,97.83,97.83,3,1,3,692000.0,7073.49
+Apartamento,presidente medici,130.0,100.0,3,1,2,695000.0,6950.0
+Apartamento,presidente medici,69.22,69.22,2,1,2,699000.0,10098.24
+Apartamento,presidente medici,121.9,121.9,3,1,1,699000.0,5734.21
+Apartamento,presidente medici,80.5,80.5,2,1,2,699000.0,8683.23
+Apartamento,presidente medici,135.0,135.0,3,3,2,700000.0,5185.19
+Apartamento,presidente medici,135.0,90.0,2,2,2,700000.0,7777.78
+Apartamento,presidente medici,95.0,95.0,3,1,3,730000.0,7684.21
+Apartamento,presidente medici,93.89,93.89,3,1,2,730000.0,7775.06
+Apartamento,presidente medici,99.46,99.46,3,2,2,740000.0,7440.18
+Apartamento,presidente medici,74.85,74.85,2,2,1,744680.85,9948.98
+Apartamento,presidente medici,68.33,68.33,2,2,2,744680.85,10898.3
+Apartamento,presidente medici,90.46,90.46,3,1,2,749900.0,8289.85
+Apartamento,presidente medici,128.91,128.91,2,2,1,750000.0,5818.01
+Apartamento,presidente medici,70.0,70.0,2,1,1,750000.0,10714.29
+Apartamento,presidente medici,90.46,90.46,3,1,0,750000.0,8290.96
+Apartamento,presidente medici,137.0,137.0,4,2,2,750000.0,5474.45
+Apartamento,presidente medici,88.0,88.0,2,1,2,750000.0,8522.73
+Apartamento,presidente medici,94.42,94.42,3,1,2,780000.0,8260.96
+Apartamento,presidente medici,90.0,90.0,3,2,2,789400.0,8771.11
+Apartamento,presidente medici,80.0,80.0,2,0,2,790000.0,9875.0
+Apartamento,presidente medici,158.0,158.0,3,1,1,790000.0,5000.0
+Apartamento,presidente medici,136.67,103.62,3,2,2,800000.0,7720.52
+Apartamento,presidente medici,90.0,90.0,3,0,2,835000.0,9277.78
+Apartamento,presidente medici,97.62,97.62,0,1,2,837400.0,8578.16
+Apartamento,presidente medici,135.77,135.77,2,0,2,850000.0,6260.59
+Apartamento,presidente medici,85.5,85.5,2,1,1,850000.0,9941.52
+Apartamento,presidente medici,123.0,123.0,3,1,2,850000.0,6910.57
+Apartamento,presidente medici,113.81,113.81,3,0,2,850000.0,7468.59
+Apartamento,presidente medici,112.0,112.0,2,2,2,850000.0,7589.29
+Apartamento,presidente medici,191.71,137.12,4,3,1,850000.0,6198.95
+Apartamento,presidente medici,139.21,113.0,2,1,2,850000.0,7522.12
+Apartamento,presidente medici,101.0,121.0,2,1,2,855000.0,7066.12
+Apartamento,presidente medici,101.39,101.39,2,1,1,860000.0,8482.1
+Apartamento,presidente medici,112.0,112.0,2,2,1,860000.0,7678.57
+Apartamento,presidente medici,97.77,86.21,2,1,2,860000.0,9975.64
+Apartamento,presidente medici,167.93,99.0,2,3,2,870000.0,8787.88
+Apartamento,presidente medici,88.8,88.8,3,2,2,890000.0,10022.52
+Apartamento,presidente medici,701.0,97.04,3,2,1,890000.0,9171.48
+Apartamento,presidente medici,97.5,97.5,3,1,0,899000.0,9220.51
+Apartamento,presidente medici,190.0,190.0,3,0,1,900000.0,4736.84
+Apartamento,presidente medici,130.0,130.0,0,3,2,900000.0,6923.08
+Apartamento,presidente medici,90.0,90.0,3,1,2,930000.0,10333.33
+Apartamento,presidente medici,100.0,100.0,3,2,2,930000.0,9300.0
+Apartamento,presidente medici,112.0,112.0,3,1,2,930000.0,8303.57
+Apartamento,presidente medici,101.16,101.16,2,2,1,949000.0,9381.18
+Apartamento,presidente medici,133.09,111.0,3,1,1,950000.0,8558.56
+Apartamento,presidente medici,97.5,97.5,3,2,1,950000.0,9743.59
+Apartamento,presidente medici,106.0,106.0,3,3,2,950000.0,8962.26
+Apartamento,presidente medici,665.7,97.04,3,2,2,950000.0,9789.78
+Apartamento,presidente medici,155.85,101.16,2,2,1,950000.0,9391.06
+Apartamento,presidente medici,130.0,106.0,2,1,2,960000.0,9056.6
+Apartamento,presidente medici,97.04,97.04,3,2,2,960000.0,9892.83
+Apartamento,presidente medici,155.85,101.16,2,1,1,960000.0,9489.92
+Apartamento,presidente medici,437.0,151.84,3,3,2,965000.0,6355.37
+Apartamento,presidente medici,112.68,112.68,3,1,2,975000.0,8652.82
+Apartamento,presidente medici,165.0,165.0,3,2,2,980000.0,5939.39
+Apartamento,presidente medici,107.96,107.96,3,1,0,990000.0,9170.06
+Apartamento,presidente medici,114.0,114.0,3,2,2,990000.0,8684.21
+Apartamento,presidente medici,116.58,116.58,3,1,5,999000.0,8569.22
+Apartamento,presidente medici,123.16,123.16,3,0,2,999000.0,8111.4
+Apartamento,presidente medici,121.37,101.39,2,2,1,1000000.0,9862.91
+Apartamento,presidente medici,128.36,105.06,2,2,2,1100000.0,10470.21
+Apartamento,presidente medici,134.88,112.68,3,2,2,1100000.0,9762.16
+Apartamento,presidente medici,213.0,123.0,3,1,2,1100000.0,8943.09
+Apartamento,presidente medici,127.0,92.0,2,1,1,1100000.0,11956.52
+Apartamento,presidente medici,140.57,140.57,3,2,2,1150000.0,8180.98
+Apartamento,presidente medici,111.0,111.0,3,2,2,1150000.0,10360.36
+Apartamento,presidente medici,238.0,165.0,3,1,2,1150000.0,6969.7
+Apartamento,presidente medici,138.0,138.0,3,3,2,1150000.0,8333.33
+Apartamento,presidente medici,212.0,117.0,3,1,1,1165000.0,9957.26
+Apartamento,presidente medici,251.65,166.83,3,1,2,1180000.0,7073.07
+Apartamento,presidente medici,262.99,139.05,3,4,2,1199000.0,8622.8
+Apartamento,presidente medici,347.2,347.2,3,1,2,1200000.0,3456.22
+Apartamento,presidente medici,229.3,229.3,3,1,2,1200000.0,5233.32
+Apartamento,presidente medici,116.58,116.58,3,2,5,1200000.0,10293.36
+Apartamento,presidente medici,660.0,140.0,3,4,2,1245000.0,8892.86
+Apartamento,presidente medici,140.65,140.65,0,4,2,1250000.0,8887.31
+Apartamento,presidente medici,140.65,140.65,3,4,2,1250000.0,8887.31
+Apartamento,presidente medici,117.33,117.33,3,0,2,1267000.0,10798.6
+Apartamento,presidente medici,99.42,99.42,3,2,2,1277000.0,12844.5
+Apartamento,presidente medici,240.0,123.0,3,1,1,1284000.0,10439.02
+Apartamento,presidente medici,203.64,123.0,3,1,1,1316000.0,10699.19
+Apartamento,presidente medici,123.0,123.0,2,0,2,1350000.0,10975.61
+Apartamento,presidente medici,237.14,152.38,3,0,2,1383000.0,9075.99
+Apartamento,presidente medici,134.0,134.0,3,3,2,1395000.0,10410.45
+Apartamento,presidente medici,314.0,223.0,4,2,2,1430000.0,6412.56
+Apartamento,presidente medici,237.14,152.38,3,3,2,1437000.0,9430.37
+Apartamento,presidente medici,134.34,134.34,3,3,2,1450000.0,10793.51
+Apartamento,presidente medici,385.0,281.0,5,2,2,1480000.0,5266.9
+Apartamento,presidente medici,180.0,180.0,3,2,2,1480000.0,8222.22
+Apartamento,presidente medici,134.34,134.34,3,1,2,1490000.0,11091.26
+Apartamento,presidente medici,390.0,504.0,7,3,4,1490000.0,2956.35
+Apartamento,presidente medici,600.0,134.34,3,1,3,1495000.0,11128.48
+Apartamento,presidente medici,198.32,198.32,3,1,4,1500000.0,7563.53
+Apartamento,presidente medici,97.62,97.62,2,1,3,1550000.0,15877.89
+Apartamento,presidente medici,168.0,168.0,3,4,2,1700000.0,10119.05
+Apartamento,presidente medici,152.38,152.38,3,0,0,1715000.0,11254.76
+Apartamento,presidente medici,134.0,134.0,3,4,2,1790000.0,13358.21
+Apartamento,presidente medici,308.91,229.0,4,0,2,1800000.0,7860.26
+Apartamento,presidente medici,188.81,188.81,3,1,4,1850000.0,9798.21
+Apartamento,presidente medici,260.91,260.91,3,2,3,2040000.0,7818.79
+Apartamento,presidente medici,256.34,338.0,4,2,3,2820000.0,8343.2
+Apartamento,presidente medici,1069.0,350.0,0,5,3,10000000.0,28571.43
+Apartamento,progresso,49.25,49.25,2,0,1,165000.0,3350.25
+Apartamento,progresso,46.3,46.3,2,1,0,250000.0,5399.57
+Apartamento,saic,68.0,68.0,2,1,1,350000.0,5147.06
+Apartamento,saic,52.1,52.1,2,1,1,350000.0,6717.85
+Apartamento,saic,69.57,69.57,2,2,2,370000.0,5318.38
+Apartamento,saic,78.33,78.33,3,1,1,420000.0,5361.93
+Apartamento,saic,110.0,90.0,3,1,1,430000.0,4777.78
+Apartamento,saic,80.0,80.0,3,1,0,430000.0,5375.0
+Apartamento,saic,75.0,55.0,2,1,1,440000.0,8000.0
+Apartamento,saic,68.0,68.0,2,2,1,450000.0,6617.65
+Apartamento,saic,62.0,62.0,2,1,1,450000.0,7258.06
+Apartamento,saic,108.0,108.0,3,1,1,460000.0,4259.26
+Apartamento,saic,95.0,95.0,3,1,1,470000.0,4947.37
+Apartamento,saic,72.6,72.6,2,1,1,480000.0,6611.57
+Apartamento,saic,85.0,85.0,2,1,1,499000.0,5870.59
+Apartamento,saic,174.0,115.0,3,2,2,690000.0,6000.0
+Apartamento,santa maria,74.0,50.0,2,1,1,319000.0,6380.0
+Apartamento,santa maria,60.0,60.0,2,1,2,320000.0,5333.33
+Apartamento,santa maria,47.0,47.0,2,1,1,320000.0,6808.51
+Apartamento,santa maria,76.63,76.63,3,1,0,330000.0,4306.41
+Apartamento,santa maria,51.0,51.0,2,1,1,335000.0,6568.63
+Apartamento,santa maria,60.0,60.0,2,1,0,335000.0,5583.33
+Apartamento,santa maria,47.07,47.07,2,1,1,339000.0,7202.04
+Apartamento,santa maria,62.0,62.0,2,1,1,367500.0,5927.42
+Apartamento,santa maria,70.0,48.0,2,1,2,370000.0,7708.33
+Apartamento,santa maria,74.0,74.0,3,1,1,375000.0,5067.57
+Apartamento,santa maria,73.65,50.01,2,1,1,397000.0,7938.41
+Apartamento,santa maria,66.0,66.0,2,1,1,400000.0,6060.61
+Apartamento,santa maria,70.0,70.0,2,0,1,420000.0,6000.0
+Apartamento,santa maria,85.24,69.31,2,1,1,420000.0,6059.73
+Apartamento,santa maria,58.96,58.96,2,1,1,424000.0,7191.32
+Apartamento,santa maria,70.0,70.0,2,1,1,450000.0,6428.57
+Apartamento,santa maria,55.0,55.0,2,1,1,460000.0,8363.64
+Apartamento,santa maria,56.0,56.0,2,1,1,468500.0,8366.07
+Apartamento,santa maria,64.0,64.0,2,1,1,475000.0,7421.88
+Apartamento,santa maria,75.0,75.0,2,2,1,480000.0,6400.0
+Apartamento,santa maria,51.17,51.17,2,1,1,515000.0,10064.49
+Apartamento,santa maria,84.44,84.44,2,2,0,530000.0,6276.65
+Apartamento,santa maria,156.0,82.75,2,1,2,531914.89,6427.97
+Apartamento,santa maria,58.7,58.7,2,1,1,540000.0,9199.32
+Apartamento,santa maria,91.08,91.08,2,2,1,550000.0,6038.65
+Apartamento,santa maria,86.43,86.43,3,2,1,550000.0,6363.53
+Apartamento,santa maria,118.48,58.7,2,1,2,550000.0,9369.68
+Apartamento,santa maria,83.0,83.0,2,2,2,560000.0,6746.99
+Apartamento,santa maria,83.5,70.5,2,1,1,560000.0,7943.26
+Apartamento,santa maria,84.0,84.0,2,1,1,579000.0,6892.86
+Apartamento,santa maria,76.02,76.02,2,2,2,580000.0,7629.57
+Apartamento,santa maria,120.15,72.97,2,1,0,580000.0,7948.47
+Apartamento,santa maria,76.0,76.0,2,1,1,585000.0,7697.37
+Apartamento,santa maria,110.0,110.0,3,2,1,590000.0,5363.64
+Apartamento,santa maria,98.92,98.92,3,1,0,590000.0,5964.42
+Apartamento,santa maria,98.92,98.92,3,2,1,590000.0,5964.42
+Apartamento,santa maria,69.17,69.17,2,1,1,630000.0,9107.99
+Apartamento,santa maria,100.97,68.66,2,1,2,630000.0,9175.65
+Apartamento,santa maria,129.45,84.26,2,1,1,630000.0,7476.86
+Apartamento,santa maria,123.0,123.0,3,1,1,640000.0,5203.25
+Apartamento,santa maria,83.81,83.81,3,1,1,650000.0,7755.64
+Apartamento,santa maria,90.0,90.0,3,1,1,650000.0,7222.22
+Apartamento,santa maria,91.08,91.08,2,1,1,650000.0,7136.58
+Apartamento,santa maria,89.0,89.0,3,2,1,650000.0,7303.37
+Apartamento,santa maria,127.57,127.57,3,2,1,650000.0,5095.24
+Apartamento,santa maria,127.57,113.32,3,1,1,650000.0,5735.97
+Apartamento,santa maria,69.17,69.17,2,1,0,660000.0,9541.71
+Apartamento,santa maria,76.02,76.02,2,1,2,690000.0,9076.56
+Apartamento,santa maria,80.84,80.84,3,1,1,690000.0,8535.38
+Apartamento,santa maria,123.0,83.0,2,2,1,690000.0,8313.25
+Apartamento,santa maria,65.24,65.24,2,2,1,692658.94,10617.09
+Apartamento,santa maria,85.54,85.54,2,1,2,699000.0,8171.62
+Apartamento,santa maria,84.26,84.26,2,1,2,720000.0,8544.98
+Apartamento,santa maria,70.96,70.96,2,2,1,720000.0,10146.56
+Apartamento,santa maria,103.95,103.95,3,2,1,744680.84,7163.84
+Apartamento,santa maria,95.84,95.84,3,1,0,745000.0,7773.37
+Apartamento,santa maria,89.16,89.16,3,1,0,745000.0,8355.76
+Apartamento,santa maria,95.84,95.84,3,1,1,745000.0,7773.37
+Apartamento,santa maria,85.0,85.0,2,1,2,750000.0,8823.53
+Apartamento,santa maria,89.16,89.16,3,2,1,776595.74,8710.14
+Apartamento,santa maria,95.84,95.84,3,2,1,797872.34,8325.05
+Apartamento,santa maria,94.14,94.14,2,1,0,799000.0,8487.36
+Apartamento,santa maria,92.0,92.0,3,1,1,799000.0,8684.78
+Apartamento,santa maria,103.95,103.95,3,1,1,850000.0,8177.01
+Apartamento,santa maria,378.0,347.0,3,2,2,1000000.0,2881.84
+Apartamento,santa maria,166.94,166.94,3,1,2,1290000.0,7727.33
+Apartamento,santa maria,168.0,168.0,3,3,1,1290000.0,7678.57
+Apartamento,santa maria,167.0,167.0,3,1,2,1290000.0,7724.55
+Apartamento,santa maria,202.54,151.07,3,0,0,1290000.0,8539.09
+Apartamento,santa maria,202.54,151.07,3,3,2,1290000.0,8539.09
+Apartamento,santa maria,145.71,145.71,3,3,2,1300000.0,8921.83
+Apartamento,santa maria,155.85,155.85,3,4,3,1450000.0,9303.82
+Apartamento,santa maria,156.0,156.0,0,4,3,1490000.0,9551.28
+Apartamento,santa maria,182.61,182.61,3,4,3,2100000.0,11499.92
+Apartamento,santa maria,69.0,69.0,2,1,1,436170210.0,6321307.39
+Apartamento,santa paulina,58.0,58.0,2,1,1,265000.0,4568.97
+Apartamento,santa paulina,55.0,55.0,2,1,1,265957.44,4835.59
+Apartamento,santa paulina,55.62,55.62,2,1,1,266000.0,4782.45
+Apartamento,santo antonio,38.46,33.4,1,1,1,210000.0,6287.43
+Apartamento,santo antonio,68.0,55.0,2,1,1,255000.0,4636.36
+Apartamento,santo antonio,55.0,55.0,2,1,1,260000.0,4727.27
+Apartamento,santo antonio,44.1,44.1,2,2,0,266000.0,6031.75
+Apartamento,santo antonio,55.54,55.54,2,1,1,270000.0,4861.36
+Apartamento,santo antonio,43.0,43.0,2,1,1,275000.0,6395.35
+Apartamento,santo antonio,56.0,56.0,2,1,1,275000.0,4910.71
+Apartamento,santo antonio,55.75,55.75,2,1,0,285000.0,5112.11
+Apartamento,santo antonio,47.05,47.05,2,1,0,310000.0,6588.74
+Apartamento,santo antonio,67.62,58.59,2,1,0,310000.0,5291.01
+Apartamento,santo antonio,48.0,48.0,2,1,1,310000.0,6458.33
+Apartamento,santo antonio,53.85,53.85,2,1,1,320000.0,5942.43
+Apartamento,santo antonio,64.0,55.5,2,1,1,320000.0,5765.77
+Apartamento,santo antonio,57.3,57.3,2,1,2,350000.0,6108.2
+Apartamento,santo antonio,43.08,43.08,2,1,0,352000.0,8170.84
+Apartamento,santo antonio,57.85,57.85,2,1,1,360000.0,6222.99
+Apartamento,santo antonio,69.13,56.9,2,1,1,370000.0,6502.64
+Apartamento,santo antonio,70.0,70.0,2,1,1,375000.0,5357.14
+Apartamento,santo antonio,116.16,116.16,2,1,1,380000.0,3271.35
+Apartamento,santo antonio,64.67,48.47,2,1,1,380000.0,7839.9
+Apartamento,santo antonio,66.0,66.0,2,1,1,380000.0,5757.58
+Apartamento,santo antonio,58.7,58.7,2,1,1,382500.0,6516.18
+Apartamento,santo antonio,69.0,69.0,2,1,2,392000.0,5681.16
+Apartamento,santo antonio,82.0,55.0,1,1,0,398000.0,7236.36
+Apartamento,santo antonio,65.0,49.0,2,1,1,399000.0,8142.86
+Apartamento,santo antonio,94.0,94.0,3,1,2,425000.0,4521.28
+Apartamento,santo antonio,48.47,48.47,2,1,1,479000.0,9882.4
+Apartamento,santos dumont,53.32,53.32,2,0,1,270000.0,5063.77
+Apartamento,santos dumont,97.0,97.0,2,2,1,500000.0,5154.64
+Apartamento,sao cristovao,32.57,32.57,1,1,1,255000.0,7829.29
+Apartamento,sao cristovao,50.0,50.0,1,0,1,270000.0,5400.0
+Apartamento,sao cristovao,66.39,66.39,1,1,1,277000.0,4172.32
+Apartamento,sao cristovao,45.0,45.0,1,1,0,280000.0,6222.22
+Apartamento,sao cristovao,45.0,45.0,1,1,1,320000.0,7111.11
+Apartamento,sao cristovao,48.72,53.54,1,1,1,340000.0,6350.39
+Apartamento,sao cristovao,62.68,62.68,2,1,1,375000.0,5982.77
+Apartamento,sao cristovao,65.0,65.0,2,1,1,380000.0,5846.15
+Apartamento,sao cristovao,90.86,51.08,2,1,1,380000.0,7439.31
+Apartamento,sao cristovao,61.55,61.55,2,1,1,382978.72,6222.24
+Apartamento,sao cristovao,59.99,59.99,2,0,1,385000.0,6417.74
+Apartamento,sao cristovao,80.0,67.0,2,2,1,390000.0,5820.9
+Apartamento,sao cristovao,95.06,53.88,2,1,1,400000.0,7423.9
+Apartamento,sao cristovao,67.7,67.7,2,1,1,404000.0,5967.5
+Apartamento,sao cristovao,59.94,59.94,2,1,0,405000.0,6756.76
+Apartamento,sao cristovao,51.0,51.0,2,1,1,420000.0,8235.29
+Apartamento,sao cristovao,96.0,65.0,2,1,1,425000.0,6538.46
+Apartamento,sao cristovao,70.0,70.0,2,1,1,426000.0,6085.71
+Apartamento,sao cristovao,77.39,77.39,2,1,1,430000.0,5556.27
+Apartamento,sao cristovao,60.0,60.0,2,1,1,430000.0,7166.67
+Apartamento,sao cristovao,56.5,56.5,1,1,1,436000.0,7716.81
+Apartamento,sao cristovao,77.0,77.0,2,1,1,437000.0,5675.32
+Apartamento,sao cristovao,68.0,68.0,2,1,1,439361.7,6461.2
+Apartamento,sao cristovao,37.66,37.66,1,1,1,442000.0,11736.59
+Apartamento,sao cristovao,54.0,54.0,2,1,1,445000.0,8240.74
+Apartamento,sao cristovao,52.0,52.0,2,1,1,450000.0,8653.85
+Apartamento,sao cristovao,55.0,55.0,2,1,1,452500.0,8227.27
+Apartamento,sao cristovao,62.0,57.5,2,1,1,455000.0,7913.04
+Apartamento,sao cristovao,105.0,65.0,2,1,0,460000.0,7076.92
+Apartamento,sao cristovao,58.0,58.0,2,1,1,478000.0,8241.38
+Apartamento,sao cristovao,83.0,83.0,2,1,1,479000.0,5771.08
+Apartamento,sao cristovao,62.68,62.68,2,0,1,480000.0,7657.95
+Apartamento,sao cristovao,41.68,41.68,1,1,1,480000.0,11516.31
+Apartamento,sao cristovao,95.02,65.4,2,1,1,485000.0,7415.9
+Apartamento,sao cristovao,55.0,55.0,2,1,2,490000.0,8909.09
+Apartamento,sao cristovao,59.0,59.0,2,1,1,492500.0,8347.46
+Apartamento,sao cristovao,51.64,51.64,2,1,1,500000.0,9682.42
+Apartamento,sao cristovao,80.26,80.26,2,1,1,500000.0,6229.75
+Apartamento,sao cristovao,58.82,58.82,2,1,1,500000.0,8500.51
+Apartamento,sao cristovao,113.0,113.0,3,2,1,531914.89,4707.21
+Apartamento,sao cristovao,90.59,90.59,2,1,1,534269.35,5897.66
+Apartamento,sao cristovao,122.95,122.95,2,1,1,550000.0,4473.36
+Apartamento,sao cristovao,84.81,84.81,2,1,2,550000.0,6485.08
+Apartamento,sao cristovao,56.07,56.07,2,1,1,550000.0,9809.17
+Apartamento,sao cristovao,90.55,76.63,2,1,1,550000.0,7177.35
+Apartamento,sao cristovao,70.0,70.0,2,1,2,565000.0,8071.43
+Apartamento,sao cristovao,56.74,56.74,2,1,1,565000.0,9957.7
+Apartamento,sao cristovao,91.0,91.0,3,1,1,565000.0,6208.79
+Apartamento,sao cristovao,63.68,63.68,2,1,1,579000.0,9092.34
+Apartamento,sao cristovao,135.0,104.01,3,1,1,580000.0,5576.39
+Apartamento,sao cristovao,69.58,69.58,2,2,2,583000.0,8378.84
+Apartamento,sao cristovao,66.77,66.77,2,1,1,590000.0,8836.3
+Apartamento,sao cristovao,86.34,86.34,2,1,2,600000.0,6949.27
+Apartamento,sao cristovao,86.39,86.39,2,2,2,600000.0,6945.25
+Apartamento,sao cristovao,130.0,94.0,2,2,1,604000.0,6425.53
+Apartamento,sao cristovao,80.0,80.0,2,1,1,606000.0,7575.0
+Apartamento,sao cristovao,90.95,90.95,3,1,0,628000.0,6904.89
+Apartamento,sao cristovao,72.23,72.23,2,1,0,628000.0,8694.45
+Apartamento,sao cristovao,137.0,98.0,3,1,2,630000.0,6428.57
+Apartamento,sao cristovao,131.0,91.0,3,1,1,640000.0,7032.97
+Apartamento,sao cristovao,117.0,83.0,2,1,1,650000.0,7831.33
+Apartamento,sao cristovao,81.24,81.24,2,1,2,695000.0,8554.9
+Apartamento,sao cristovao,75.0,75.0,2,2,2,699000.0,9320.0
+Apartamento,sao cristovao,87.42,87.42,2,1,2,730000.0,8350.49
+Apartamento,sao cristovao,99.0,99.0,3,1,2,742000.0,7494.95
+Apartamento,sao cristovao,90.65,90.65,3,1,2,745000.0,8218.42
+Apartamento,sao cristovao,90.0,90.0,3,2,2,750000.0,8333.33
+Apartamento,sao cristovao,196.96,196.96,3,1,2,750000.0,3807.88
+Apartamento,sao cristovao,90.2,90.2,3,1,2,750000.0,8314.86
+Apartamento,sao cristovao,112.0,112.0,3,2,1,800000.0,7142.86
+Apartamento,sao cristovao,115.0,115.0,3,2,2,800000.0,6956.52
+Apartamento,sao cristovao,90.0,90.0,3,1,2,850000.0,9444.44
+Apartamento,sao cristovao,130.0,130.0,3,2,0,875000.0,6730.77
+Apartamento,sao cristovao,127.48,127.48,3,2,2,875000.0,6863.82
+Apartamento,sao cristovao,226.81,226.81,3,1,1,890000.0,3923.99
+Apartamento,sao cristovao,186.0,186.0,3,1,2,905000.0,4865.59
+Apartamento,sao cristovao,226.81,226.81,3,1,2,990000.0,4364.89
+Apartamento,sao cristovao,101.16,101.16,3,2,2,1060000.0,10478.45
+Apartamento,sao cristovao,134.8,134.8,3,1,3,1080000.0,8011.87
+Apartamento,sao cristovao,200.61,134.84,3,2,3,1080000.0,8009.49
+Apartamento,sao cristovao,129.97,129.97,3,1,2,1180000.0,9079.02
+Apartamento,sao cristovao,129.97,129.97,3,1,3,1350000.0,10387.01
+Apartamento,sao cristovao,227.0,227.0,4,2,2,1500000.0,6607.93
+Apartamento,sao cristovao,124.0,124.0,3,3,2,1550000.0,12500.0
+Apartamento,sao lucas,50.71,50.71,2,1,1,230000.0,4535.59
+Apartamento,sao lucas,54.67,54.67,2,1,1,265000.0,4847.27
+Apartamento,sao lucas,47.0,47.0,2,1,0,280000.0,5957.45
+Apartamento,sao lucas,47.0,47.0,2,1,1,280000.0,5957.45
+Apartamento,sao lucas,47.0,47.0,2,0,1,280000.0,5957.45
+Apartamento,sao lucas,87.77,64.9,2,2,1,320000.0,4930.66
+Apartamento,sao lucas,58.02,58.02,2,1,1,325000.0,5601.52
+Apartamento,sao lucas,50.01,50.01,2,1,0,340000.0,6798.64
+Apartamento,sao lucas,120.87,84.37,2,1,2,599000.0,7099.68
+Apartamento,sao lucas,84.37,84.37,3,1,0,599000.0,7099.68
+Apartamento,sao lucas,85.0,85.0,2,1,2,599000.0,7047.06
+Apartamento,sao pedro,98.0,98.0,2,2,1,450000.0,4591.84
+Apartamento,seminario,70.85,43.95,2,1,1,205000.0,4664.39
+Apartamento,seminario,45.0,45.0,2,1,1,227500.0,5055.56
+Apartamento,seminario,48.02,48.02,2,1,1,228500.0,4758.43
+Apartamento,seminario,49.0,49.0,2,1,1,240000.0,4897.96
+Apartamento,seminario,50.0,50.0,2,1,1,258000.0,5160.0
+Apartamento,seminario,61.0,61.0,2,1,1,290000.0,4754.1
+Apartamento,seminario,59.8,59.8,2,1,2,330000.0,5518.39
+Apartamento,seminario,50.69,50.69,2,1,0,340000.0,6707.44
+Apartamento,seminario,93.61,59.7,2,1,1,340000.0,5695.14
+Apartamento,seminario,59.7,59.7,2,1,0,350000.0,5862.65
+Apartamento,seminario,59.7,59.7,2,1,2,350000.0,5862.65
+Apartamento,seminario,64.0,64.0,2,1,1,350000.0,5468.75
+Apartamento,seminario,93.06,93.06,2,1,2,357000.0,3836.23
+Apartamento,seminario,63.3,63.3,2,1,2,370000.0,5845.18
+Apartamento,seminario,59.7,59.7,2,1,1,385000.0,6448.91
+Apartamento,seminario,69.0,69.0,2,1,2,410000.0,5942.03
+Apartamento,universitario,52.55,52.55,2,1,0,335000.0,6374.88
+Apartamento,universitario,65.12,65.12,2,1,1,360000.0,5528.26
+Apartamento,universitario,54.0,54.0,2,1,1,372875.68,6905.11
+Apartamento,universitario,54.86,54.86,2,1,1,394000.0,7181.92
+Apartamento,universitario,115.0,89.0,3,1,1,400000.0,4494.38
+Apartamento,universitario,76.88,76.88,2,1,1,410000.0,5332.99
+Apartamento,universitario,76.88,76.88,2,2,1,410000.0,5332.99
+Apartamento,universitario,79.0,79.0,3,1,2,425000.0,5379.75
+Apartamento,universitario,79.0,79.0,3,2,1,450000.0,5696.2
+Apartamento,universitario,89.0,80.0,2,1,0,450000.0,5625.0
+Apartamento,universitario,68.0,68.0,2,1,1,450000.0,6617.65
+Apartamento,universitario,47.77,47.77,2,1,1,453274.0,9488.67
+Apartamento,universitario,85.0,85.0,3,2,1,500000.0,5882.35
+Apartamento,universitario,84.27,84.27,2,1,1,530000.0,6289.31
+Apartamento,universitario,116.0,116.0,2,1,2,550000.0,4741.38
+Apartamento,universitario,145.61,73.0,2,1,2,560000.0,7671.23
+Apartamento,universitario,72.0,72.0,2,2,2,565000.0,7847.22
+Apartamento,universitario,146.0,73.0,2,1,2,580000.0,7945.21
+Apartamento,universitario,97.76,97.76,2,2,1,580000.0,5932.9
+Apartamento,universitario,73.0,73.0,2,1,1,585000.0,8013.7
+Apartamento,universitario,125.0,125.0,3,1,2,680000.0,5440.0
+Apartamento,universitario,120.0,120.0,3,1,2,730000.0,6083.33
+Apartamento,universitario,101.7,101.7,3,1,2,745000.0,7325.47
+Apartamento,universitario,107.0,107.0,3,1,2,800000.0,7476.64
+Apartamento,universitario,104.8,104.8,3,2,2,840000.0,8015.27
+Apartamento,universitario,115.7,115.7,3,1,2,850000.0,7346.59
+Apartamento,universitario,121.0,121.0,3,1,2,897000.0,7413.22
+Apartamento,universitario,131.0,108.0,3,1,2,900000.0,8333.33
+Apartamento,universitario,104.8,104.8,3,1,2,975500.0,9308.21
+Apartamento,universitario,750.0,686.0,10,6,6,1800000.0,2623.91
+Apartamento,vederti,56.0,56.0,2,1,1,309000.0,5517.86
+Apartamento,vederti,57.18,57.18,2,1,1,310000.0,5421.48
+Apartamento,vila mantelli,50.76,50.76,2,2,1,275000.0,5417.65
+Apartamento,vila real,66.94,44.1,2,1,0,249500.0,5657.6
+Apartamento,vila real,44.0,44.0,2,1,1,250000.0,5681.82
+Apartamento,vila real,66.94,44.1,2,1,1,250000.0,5668.93
+Apartamento,vila real,56.0,56.0,2,1,0,250000.0,4464.29
+Apartamento,vila real,44.1,44.1,2,1,1,260000.0,5895.69
+Apartamento,vila real,51.06,51.06,2,1,1,260000.0,5092.05
+Apartamento,vila real,46.0,46.0,2,1,1,260000.0,5652.17
+Apartamento,vila real,44.0,44.0,2,1,0,266000.0,6045.45
+Apartamento,vila real,60.0,60.0,2,1,1,282500.0,4708.33
+Apartamento,vila real,79.81,51.0,2,1,1,290000.0,5686.27
+Apartamento,vila real,55.0,49.5,2,1,1,294500.0,5949.49
+Apartamento,vila real,60.11,49.29,2,1,1,300000.0,6086.43
+Apartamento,vila real,49.29,49.29,2,1,1,314000.0,6370.46
+Apartamento,vila real,78.67,54.47,2,1,1,315000.0,5783.0
+Apartamento,vila real,54.47,54.47,2,1,1,318000.0,5838.08
+Apartamento,vila real,48.0,48.0,2,1,1,320000.0,6666.67
+Apartamento,vila real,56.18,56.18,2,1,1,320000.0,5695.98
+Apartamento,vila real,95.0,54.0,2,1,0,320000.0,5925.93
+Apartamento,vila real,79.0,54.0,2,1,2,320000.0,5925.93
+Apartamento,vila real,65.0,65.0,2,1,1,340000.0,5230.77
+Apartamento,vila real,54.47,54.47,2,2,2,345000.0,6333.76
+Apartamento,vila real,51.39,51.39,2,1,1,350000.0,6810.66
+Apartamento,vila real,78.67,54.47,2,1,0,360000.0,6609.14
+Apartamento,vila real,75.05,48.11,2,1,1,380000.0,7898.57
+Apartamento,vila real,59.62,59.62,2,1,1,390000.0,6541.43
+Apartamento,vila real,100.0,100.0,3,1,2,430000.0,4300.0
+Apartamento,vila real,118.47,102.29,3,1,2,560000.0,5474.63
+Apartamento,vila real,80.2,80.2,3,1,2,570000.0,7107.23
+Apartamento,walville,174.7,87.26,3,2,2,588000.0,6738.48
+Apartamento,walville,170.85,85.53,3,2,2,594000.0,6944.93
+Apartamento,walville,172.46,87.26,3,2,2,599000.0,6864.54
+Apartamento,walville,179.72,87.26,3,2,2,646000.0,7403.16
+Casa,,420.0,420.0,2,1,2,1.35,0.0
+Casa,,110.0,110.0,2,1,2,350000.0,3181.82
+Casa,,226.5,226.5,3,2,1,412000.0,1818.98
+Casa,,101.25,101.25,2,1,1,425000.0,4197.53
+Casa,,120.0,120.0,2,1,1,450000.0,3750.0
+Casa,,180.0,180.0,2,2,1,470000.0,2611.11
+Casa,,159.6,159.6,2,1,1,499000.0,3126.57
+Casa,,113.0,113.0,3,1,1,515000.0,4557.52
+Casa,,362.5,362.5,4,2,3,689000.0,1900.69
+Casa,,240.0,240.0,3,1,2,750000.0,3125.0
+Casa,aeroporto,1300.0,220.0,0,4,2,4000000.0,18181.82
+Casa,agua santa,600.0,221.11,3,4,2,1900000.0,8593.01
+Casa,agua santa,450.0,450.0,3,1,4,3600000.0,8000.0
+Casa,alvorada,150.0,150.0,3,1,2,550000.0,3666.67
+Casa,alvorada,166.0,166.0,4,1,1,620000.0,3734.94
+Casa,alvorada,130.0,360.0,4,1,1,742000.0,2061.11
+Casa,alvorada,196.0,196.0,4,1,1,742000.0,3785.71
+Casa,alvorada,384.0,303.0,3,2,3,1080000.0,3564.36
+Casa,alvorada,220.0,220.0,5,0,2,1100000.0,5000.0
+Casa,alvorada,210.0,360.0,2,2,1,1200000.0,3333.33
+Casa,alvorada,295.0,360.0,0,0,0,1705000.0,4736.11
+Casa,araras,79.0,79.0,2,1,1,320000.0,4050.63
+Casa,araras,225.0,225.0,2,1,1,350000.0,1555.56
+Casa,araras,125.0,54.0,2,1,0,360000.0,6666.67
+Casa,araras,45.0,45.0,1,1,0,420000.0,9333.33
+Casa,araras,58.79,58.79,2,1,2,420000.0,7144.07
+Casa,araras,87.84,87.84,3,1,1,441000.0,5020.49
+Casa,araras,180.0,63.0,2,2,0,450000.0,7142.86
+Casa,araras,110.0,110.0,3,1,2,500000.0,4545.45
+Casa,araras,360.0,82.0,3,0,0,569000.0,6939.02
+Casa,araras,209.37,125.99,2,1,0,589000.0,4674.97
+Casa,araras,250.0,100.0,2,1,0,600000.0,6000.0
+Casa,araras,280.0,280.0,2,1,2,1750000.0,6250.0
+Casa,area rural de chapeco,327.0,327.0,3,4,2,2670000.0,8165.14
+Casa,area rural de chapeco,316.21,316.21,3,1,3,4050000.0,12807.94
+Casa,autodromo,57.0,57.0,2,1,1,360000.0,6315.79
+Casa,autodromo,55.84,55.84,2,1,1,360000.0,6446.99
+Casa,autodromo,87.45,47.85,2,1,0,360000.0,7523.51
+Casa,autodromo,59.0,59.0,2,1,1,390000.0,6610.17
+Casa,autodromo,130.5,59.0,2,1,1,390000.0,6610.17
+Casa,autodromo,180.05,63.92,2,1,2,420000.0,6570.71
+Casa,autodromo,106.9,90.0,3,2,1,465000.0,5166.67
+Casa,autodromo,73.0,73.0,3,1,0,479000.0,6561.64
+Casa,autodromo,78.2,78.2,2,1,1,520000.0,6649.62
+Casa,autodromo,195.0,90.0,2,2,4,569000.0,6322.22
+Casa,autodromo,195.0,90.0,2,2,1,569000.0,6322.22
+Casa,autodromo,131.0,131.0,2,0,2,579000.0,4419.85
+Casa,autodromo,99.0,99.0,2,1,2,590000.0,5959.6
+Casa,autodromo,100.0,100.0,3,0,0,599000.0,5990.0
+Casa,autodromo,110.0,110.0,3,0,0,630000.0,5727.27
+Casa,autodromo,130.0,130.0,3,2,2,630000.0,4846.15
+Casa,bairro engenho braum,375.0,348.0,6,4,0,1100000.0,3160.92
+Casa,bairro universitario,450.0,450.0,5,0,0,1700000.0,3777.78
+Casa,bairro universitario,450.0,450.0,5,5,0,2500000.0,5555.56
+Casa,bairro vederti,116.0,82.0,0,1,1,485000.0,5914.63
+Casa,bela vista,348.0,348.0,2,2,2,1.1,0.0
+Casa,bela vista,92.08,92.08,2,1,2,480000.0,5212.86
+Casa,bela vista,348.0,141.0,4,1,1,570000.0,4042.55
+Casa,bela vista,427.5,427.5,0,0,0,585000.0,1368.42
+Casa,bela vista,202.0,130.0,2,1,2,599000.0,4607.69
+Casa,bela vista,360.0,262.5,3,2,2,600000.6,2285.72
+Casa,bela vista,82.0,82.0,2,1,2,710000.0,8658.54
+Casa,bela vista,140.0,336.0,3,3,2,790000.0,2351.19
+Casa,bela vista,200.0,170.0,3,3,1,800000.0,4705.88
+Casa,bela vista,242.54,208.75,3,2,3,960000.0,4598.8
+Casa,bela vista,90.0,364.65,3,1,0,980000.0,2687.51
+Casa,bela vista,206.0,397.5,5,2,2,1010000.0,2540.88
+Casa,bela vista,422.0,220.0,3,3,4,1180000.0,5363.64
+Casa,bela vista,360.0,127.28,3,1,2,1200000.0,9428.03
+Casa,bela vista,167.0,167.0,2,1,2,1200000.0,7185.63
+Casa,bela vista,165.0,165.0,3,1,2,1200000.0,7272.73
+Casa,bela vista,422.5,180.0,3,3,3,1200000.0,6666.67
+Casa,bela vista,480.0,180.0,3,2,2,1450000.0,8055.56
+Casa,bela vista,795.0,300.0,4,2,1,1500000.0,5000.0
+Casa,bela vista,279.8,422.5,5,2,2,1500000.0,3550.3
+Casa,bela vista,590.0,387.6,4,7,5,1600000.0,4127.97
+Casa,bela vista,110.0,110.0,3,1,1,1696000.0,15418.18
+Casa,bela vista,215.0,215.0,0,1,0,1915000.0,8906.98
+Casa,bela vista,370.0,397.5,8,3,2,2400000.0,6037.74
+Casa,belvedere,360.0,58.0,2,1,0,410000.0,7068.97
+Casa,belvedere,360.0,160.0,2,2,3,600000.0,3750.0
+Casa,belvedere,228.75,228.75,2,3,2,636000.0,2780.33
+Casa,belvedere,360.0,360.0,3,1,0,690000.0,1916.67
+Casa,belvedere,95.0,95.0,3,2,3,700000.0,7368.42
+Casa,belvedere,156.91,360.0,3,1,2,765000.0,2125.0
+Casa,belvedere,143.0,143.0,3,1,2,776000.0,5426.57
+Casa,belvedere,457.5,457.5,3,2,2,795000.0,1737.7
+Casa,belvedere,700.0,121.0,3,2,0,800000.0,6611.57
+Casa,belvedere,168.0,168.0,3,2,2,800000.0,4761.9
+Casa,belvedere,457.5,150.0,3,3,2,879000.0,5860.0
+Casa,boa vista,100.16,48.82,2,1,1,340000.0,6964.36
+Casa,boa vista,66.0,66.0,2,0,2,370000.0,5606.06
+Casa,boa vista,200.34,48.83,2,1,2,370000.0,7577.31
+Casa,boa vista,66.0,66.0,2,1,2,370000.0,5606.06
+Casa,boa vista,120.0,56.75,2,1,1,382978.72,6748.52
+Casa,boa vista,200.49,141.86,3,2,3,650000.0,4581.98
+Casa,bom pastor,397.16,397.16,3,2,0,300000.0,755.36
+Casa,bom pastor,70.0,70.0,2,1,1,400000.0,5714.29
+Casa,bom pastor,150.0,390.0,3,1,1,590000.0,1512.82
+Casa,bom retiro,117.0,57.98,2,2,1,478723.4,8256.7
+Casa,bom retiro,192.0,58.0,2,2,1,480000.0,8275.86
+Casa,bom retiro,57.98,57.98,2,1,0,480000.0,8278.72
+Casa,bom retiro,176.0,360.0,3,1,2,1380000.0,3833.33
+Casa,bom retiro,230.25,230.25,3,0,2,1480000.0,6427.8
+Casa,bom retiro,130.24,130.24,3,1,2,1490000.0,11440.42
+Casa,bom retiro,225.0,198.89,4,3,2,1500000.0,7541.86
+Casa,bom retiro,230.0,230.0,3,3,2,1500000.0,6521.74
+Casa,bom retiro,450.0,230.0,3,3,2,1550000.0,6739.13
+Casa,bom retiro,230.0,230.0,3,1,2,1600000.0,6956.52
+Casa,bom retiro,185.74,390.0,5,2,1,1699000.0,4356.41
+Casa,bouganville,1303.98,182.46,3,0,2,1400000.0,7672.91
+Casa,bouganville,1354.0,400.0,0,1,2,2070000.0,5175.0
+Casa,bouganville,1150.63,350.0,3,3,4,2127659.57,6079.03
+Casa,bouganville,1160.0,260.0,3,4,2,2450000.0,9423.08
+Casa,bouganville residence,1200.0,155.0,3,2,4,1450000.0,9354.84
+Casa,bouganville residence,82.68,200.0,3,1,2,1572000.0,7860.0
+Casa,bouganville residence,211.0,211.0,4,5,2,1790000.0,8483.41
+Casa,bouganville residence,1204.0,203.0,3,3,2,1850000.0,9113.3
+Casa,campestre,1000.0,370.0,5,2,4,1800000.0,4864.86
+Casa,centro,360.0,125.0,3,1,0,850000.0,6800.0
+Casa,centro,180.0,276.0,0,0,0,1000000.0,3623.19
+Casa,centro,186.0,186.0,3,0,2,1000000.0,5376.34
+Casa,centro,302.5,302.5,0,0,0,1100000.0,3636.36
+Casa,centro,13.85,200.0,3,1,0,1190000.0,5950.0
+Casa,centro,372.0,134.72,3,2,1,1200000.0,8907.36
+Casa,centro,412.5,174.02,3,1,3,1200000.0,6895.76
+Casa,centro,360.0,138.0,3,2,5,1272000.0,9217.39
+Casa,centro,269.0,269.0,4,1,4,1450000.0,5390.33
+Casa,centro,300.0,300.0,2,2,0,1450000.0,4833.33
+Casa,centro,156.0,156.0,4,2,2,1520000.0,9743.59
+Casa,centro,198.0,198.0,0,0,0,1550000.0,7828.28
+Casa,centro,136.0,240.0,3,1,1,1590000.0,6625.0
+Casa,centro,178.2,178.2,3,2,2,1600000.0,8978.68
+Casa,centro,230.0,165.0,3,2,2,1601000.01,9703.03
+Casa,centro,263.44,286.38,3,2,2,1620000.0,5656.82
+Casa,centro,382.5,270.0,3,3,0,1650000.0,6111.11
+Casa,centro,383.0,269.0,4,0,4,1650000.0,6133.83
+Casa,centro,219.66,480.0,3,1,2,1680000.0,3500.0
+Casa,centro,324.0,324.0,5,4,3,1690000.0,5216.05
+Casa,centro,321.0,270.0,4,1,2,1700000.0,6296.3
+Casa,centro,480.0,219.66,3,2,2,1700000.0,7739.23
+Casa,centro,219.66,219.66,3,1,2,1700000.0,7739.23
+Casa,centro,269.0,269.0,4,0,2,1750000.0,6505.58
+Casa,centro,229.0,140.0,3,2,0,1800000.0,12857.14
+Casa,centro,397.5,395.53,5,2,4,1800000.0,4550.86
+Casa,centro,306.0,220.4,3,3,2,1800000.0,8166.97
+Casa,centro,375.0,152.7,0,0,0,1900000.0,12442.7
+Casa,centro,555.0,555.0,3,3,2,1900000.0,3423.42
+Casa,centro,208.0,450.0,3,2,3,2000000.0,4444.44
+Casa,centro,450.0,292.0,3,2,2,2000000.0,6849.32
+Casa,centro,480.0,364.3,4,6,2,2074468.09,5694.39
+Casa,centro,450.0,146.0,0,0,0,2120000.0,14520.55
+Casa,centro,240.0,184.0,3,1,2,2127659.57,11563.37
+Casa,centro,900.0,90.0,3,2,0,2200000.0,24444.44
+Casa,centro,555.0,555.0,3,5,2,2200000.0,3963.96
+Casa,centro,450.0,280.0,4,4,3,2300000.0,8214.29
+Casa,centro,320.0,320.0,4,0,4,2500000.0,7812.5
+Casa,centro,342.0,342.0,3,3,5,2650000.0,7748.54
+Casa,centro,296.12,787.5,5,2,2,2800000.0,3555.56
+Casa,centro,540.0,300.0,4,3,2,2900000.0,9666.67
+Casa,centro,340.0,360.1,3,2,2,3200000.0,8886.42
+Casa,centro,875.0,379.0,4,2,3,3500000.0,9234.83
+Casa,centro,379.0,875.0,3,2,2,3500000.0,4000.0
+Casa,centro,900.0,900.0,0,0,0,3525000.0,3916.67
+Casa,centro,397.11,397.11,3,0,1,3798000.0,9564.1
+Casa,centro,900.0,412.0,0,2,0,4000000.0,9708.74
+Casa,centro,397.11,600.0,4,2,2,4000000.0,6666.67
+Casa,centro,451.0,1012.0,0,0,0,7990000.0,7895.26
+Casa,centro,800.0,1200.0,4,3,8,15500000.0,12916.67
+Casa,colonia bacia,300.0,1.0,3,1,2,1700000.0,1700000.0
+Casa,cond bouganville,386.0,386.0,3,0,2,1950000.0,5051.81
+Casa,condominio espelho das aguas,277.0,277.0,3,2,2,1450000.0,5234.66
+Casa,condominio espelho das aguas,180.1,180.1,3,2,2,1580000.0,8772.9
+Casa,condominio espelho das aguas,376.92,376.92,3,3,4,1950000.0,5173.51
+Casa,condominio espelho das aguas,215.48,215.48,3,3,4,2200000.0,10209.76
+Casa,condominio espelho das aguas,287.38,287.38,4,1,2,2300000.0,8003.34
+Casa,condominio fazenda guatapara,234.0,234.0,3,1,2,2100000.0,8974.36
+Casa,condominio fechado espelho das aguas,1301.0,1301.0,3,4,5,4300000.0,3305.15
+Casa,condominio luz do sol,329.0,329.0,3,3,4,2898000.0,8808.51
+Casa,cristo rei,360.0,360.0,3,1,2,648000.0,1800.0
+Casa,cristo rei,30.0,30.0,3,2,3,770000.0,25666.67
+Casa,cristo rei,270.0,360.0,3,2,0,960000.0,2666.67
+Casa,cristo rei,360.0,360.0,3,1,3,980000.0,2722.22
+Casa,cristo rei,360.0,180.0,5,3,2,990000.0,5500.0
+Casa,cristo rei,230.0,230.0,4,2,3,1200000.0,5217.39
+Casa,desbravador,40.0,40.0,1,1,0,350000.0,8750.0
+Casa,desbravador,56.11,56.11,2,1,2,355000.0,6326.86
+Casa,desbravador,50.0,50.0,2,1,2,370000.0,7400.0
+Casa,desbravador,48.46,48.46,2,1,1,370000.0,7635.16
+Casa,desbravador,0.01,0.01,0,0,0,380000.0,38000000.0
+Casa,desbravador,87.0,58.0,2,1,0,380000.0,6551.72
+Casa,desbravador,54.0,72.0,2,1,1,390000.0,5416.67
+Casa,desbravador,136.0,68.0,2,1,0,415000.0,6102.94
+Casa,desbravador,59.0,59.0,2,2,1,422000.0,7152.54
+Casa,desbravador,120.0,120.0,2,2,2,425000.0,3541.67
+Casa,desbravador,59.95,120.0,2,1,0,430000.0,3583.33
+Casa,desbravador,120.0,66.0,2,2,1,445000.0,6742.42
+Casa,desbravador,120.0,120.0,2,1,1,449000.0,3741.67
+Casa,desbravador,110.0,58.0,2,1,2,450000.0,7758.62
+Casa,desbravador,120.0,69.0,2,1,2,450000.0,6521.74
+Casa,desbravador,120.0,120.0,3,1,2,460000.0,3833.33
+Casa,desbravador,75.1,75.1,2,1,1,463800.0,6175.77
+Casa,desbravador,157.0,84.0,2,2,1,475000.0,5654.76
+Casa,desbravador,82.0,82.0,1,1,1,477000.0,5817.07
+Casa,desbravador,68.6,68.6,2,1,1,479900.0,6995.63
+Casa,desbravador,136.0,136.0,2,2,2,480000.0,3529.41
+Casa,desbravador,111.2,213.12,3,1,3,490000.0,2299.17
+Casa,desbravador,130.0,130.0,2,1,0,500000.0,3846.15
+Casa,desbravador,90.0,90.0,2,2,2,500000.0,5555.56
+Casa,desbravador,110.0,110.0,2,2,2,510000.0,4636.36
+Casa,desbravador,149.45,240.0,2,1,1,514500.0,2143.75
+Casa,desbravador,200.0,75.0,2,1,2,520000.0,6933.33
+Casa,desbravador,95.0,95.0,2,1,2,525300.0,5529.47
+Casa,desbravador,120.0,115.0,2,2,4,530000.0,4608.7
+Casa,desbravador,58.53,58.53,2,2,2,531915.0,9087.9
+Casa,desbravador,115.0,115.0,2,2,2,535000.0,4652.17
+Casa,desbravador,240.0,134.0,2,2,3,539000.0,4022.39
+Casa,desbravador,80.0,80.0,2,1,3,550000.0,6875.0
+Casa,desbravador,55.8,240.0,2,1,0,550000.0,2291.67
+Casa,desbravador,300.0,150.0,2,2,4,574000.0,3826.67
+Casa,desbravador,105.55,133.0,3,2,1,578000.0,4345.86
+Casa,desbravador,118.0,118.0,3,0,2,645000.0,5466.1
+Casa,desbravador,114.0,127.0,3,1,2,647000.0,5094.49
+Casa,desbravador,75.0,75.0,2,0,0,650000.0,8666.67
+Casa,desbravador,300.0,150.0,2,0,0,650000.0,4333.33
+Casa,desbravador,113.75,127.35,3,1,0,656000.0,5151.16
+Casa,desbravador,113.75,127.35,3,1,2,656000.0,5151.16
+Casa,desbravador,127.35,113.75,3,1,1,669500.0,5885.71
+Casa,desbravador,115.32,120.0,3,1,1,680000.0,5666.67
+Casa,desbravador,115.32,115.32,3,3,2,680000.0,5896.64
+Casa,desbravador,240.0,159.31,3,1,3,695000.0,4362.56
+Casa,desbravador,142.0,136.0,3,1,2,699200.0,5141.18
+Casa,desbravador,136.25,142.32,3,0,2,699200.0,4912.87
+Casa,desbravador,123.0,123.0,3,0,2,700000.0,5691.06
+Casa,desbravador,120.0,117.66,3,2,2,715000.0,6076.83
+Casa,desbravador,150.0,150.0,3,3,1,720000.0,4800.0
+Casa,desbravador,240.0,102.0,2,1,2,722500.0,7083.33
+Casa,desbravador,120.0,124.15,3,0,2,739000.0,5952.48
+Casa,desbravador,122.08,122.08,3,1,1,746000.0,6110.75
+Casa,desbravador,300.0,85.15,2,1,2,747500.0,8778.63
+Casa,desbravador,123.0,121.5,3,1,2,749500.0,6168.72
+Casa,desbravador,119.56,300.0,2,1,1,750000.0,2500.0
+Casa,desbravador,120.0,120.0,3,0,2,750000.0,6250.0
+Casa,desbravador,240.0,240.0,2,0,2,750000.0,3125.0
+Casa,desbravador,300.0,118.26,3,2,2,750000.0,6341.96
+Casa,desbravador,124.15,124.15,3,1,2,759000.0,6113.57
+Casa,desbravador,122.08,122.08,3,1,0,764200.0,6259.83
+Casa,desbravador,97.15,242.14,3,1,1,765000.0,3159.33
+Casa,desbravador,137.64,240.0,3,1,2,790000.0,3291.67
+Casa,desbravador,240.0,130.32,3,2,2,798500.0,6127.23
+Casa,desbravador,150.0,150.0,2,2,2,800000.0,5333.33
+Casa,desbravador,181.54,181.54,3,1,3,825000.0,4544.45
+Casa,desbravador,205.55,205.55,3,1,1,850000.0,4135.25
+Casa,desbravador,205.0,177.0,3,1,2,850000.0,4802.26
+Casa,desbravador,240.0,103.0,3,0,2,850000.0,8252.43
+Casa,desbravador,177.0,177.0,3,0,2,850000.0,4802.26
+Casa,desbravador,137.0,137.0,2,1,2,897000.0,6547.45
+Casa,desbravador,137.64,137.64,3,1,2,897000.0,6517.0
+Casa,desbravador,103.0,103.0,3,1,2,900000.0,8737.86
+Casa,desbravador,240.0,86.0,1,1,2,921000.0,10709.3
+Casa,desbravador,240.0,200.0,5,4,2,970000.0,4850.0
+Casa,desbravador,137.0,137.0,3,0,2,997000.0,7277.37
+Casa,desbravador,360.0,110.0,2,1,2,1010000.0,9181.82
+Casa,desbravador,240.0,197.88,3,3,2,1060000.0,5356.78
+Casa,desbravador,164.0,164.0,2,1,4,1100000.0,6707.32
+Casa,desbravador,198.5,300.0,3,1,2,1140000.0,3800.0
+Casa,desbravador,163.0,163.0,3,0,2,1150000.0,7055.21
+Casa,desbravador,300.0,170.0,3,3,2,1166000.0,6858.82
+Casa,desbravador,145.0,300.0,3,1,1,1190000.0,3966.67
+Casa,desbravador,170.0,170.0,3,1,2,1250000.0,7352.94
+Casa,desbravador,167.0,167.0,3,4,2,1320000.0,7904.19
+Casa,desbravador,300.0,170.0,1,2,2,1390000.0,8176.47
+Casa,desbravador,300.0,155.5,3,2,0,1500000.0,9646.3
+Casa,desbravador,300.0,220.0,3,3,3,1699000.0,7722.73
+Casa,desbravador,300.0,220.0,3,2,3,1700000.0,7727.27
+Casa,desbravador,282.0,360.0,3,1,2,1990000.0,5527.78
+Casa,desbravador,298.0,316.0,3,3,2,2650000.0,8386.08
+Casa,di fiori,133.0,133.0,3,1,2,595000.0,4473.68
+Casa,di fiori,160.0,160.0,3,3,3,850000.0,5312.5
+Casa,distrito de goio en,169.48,1234.45,3,1,2,980000.0,793.88
+Casa,distrito de goio en,2044.04,2044.04,3,1,2,1599000.0,782.27
+Casa,distrito de marechal bormann,165.0,380.0,3,1,1,1300000.0,3421.05
+Casa,distrito marechal bormann,9000.0,150.0,3,1,2,3600000.0,24000.0
+Casa,dom pascoal,109.82,109.82,3,1,1,950000.0,8650.52
+Casa,efapi,460.99,460.99,3,3,4,1.88,0.0
+Casa,efapi,43.0,43.0,2,0,0,275000.0,6395.35
+Casa,efapi,200.0,56.0,2,1,0,275000.0,4910.71
+Casa,efapi,56.0,56.0,2,1,1,275000.0,4910.71
+Casa,efapi,56.0,200.0,0,0,0,290000.0,1450.0
+Casa,efapi,72.0,72.0,2,1,2,330000.0,4583.33
+Casa,efapi,96.3,96.3,2,1,1,345000.0,3582.55
+Casa,efapi,54.13,54.13,2,1,1,347115.0,6412.62
+Casa,efapi,59.85,59.85,2,1,1,350000.0,5847.95
+Casa,efapi,75.0,75.0,3,1,1,350000.0,4666.67
+Casa,efapi,120.0,56.0,2,1,1,350000.0,6250.0
+Casa,efapi,85.0,85.0,2,1,1,360000.0,4235.29
+Casa,efapi,59.35,59.35,2,1,1,365000.0,6149.96
+Casa,efapi,0.01,0.01,2,1,1,371000.0,37100000.0
+Casa,efapi,57.93,57.93,2,1,1,371000.0,6404.28
+Casa,efapi,70.0,70.0,2,1,0,375000.0,5357.14
+Casa,efapi,57.19,57.19,2,1,1,375000.0,6557.09
+Casa,efapi,110.0,250.0,3,1,1,380000.0,1520.0
+Casa,efapi,0.01,0.01,2,2,0,380000.0,38000000.0
+Casa,efapi,51.6,51.6,2,1,0,384000.0,7441.86
+Casa,efapi,54.64,54.64,2,1,1,384000.0,7027.82
+Casa,efapi,63.0,63.0,2,1,1,385000.0,6111.11
+Casa,efapi,61.5,61.5,2,1,1,390000.0,6341.46
+Casa,efapi,59.0,59.0,2,1,1,390000.0,6610.17
+Casa,efapi,60.0,100.0,2,1,1,390000.0,3900.0
+Casa,efapi,71.7,71.7,2,1,2,395000.0,5509.07
+Casa,efapi,59.16,59.16,2,1,1,399900.0,6759.63
+Casa,efapi,61.7,61.7,2,1,0,400000.0,6482.98
+Casa,efapi,220.0,220.0,3,1,1,400000.0,1818.18
+Casa,efapi,62.9,62.9,2,1,1,410000.0,6518.28
+Casa,efapi,90.0,90.0,2,1,2,412000.0,4577.78
+Casa,efapi,84.0,84.0,2,1,1,424000.0,5047.62
+Casa,efapi,86.0,86.0,2,1,1,424000.0,4930.23
+Casa,efapi,68.57,68.57,3,1,2,424349.0,6188.55
+Casa,efapi,54.0,54.0,3,1,1,426000.0,7888.89
+Casa,efapi,85.0,85.0,2,2,2,430000.0,5058.82
+Casa,efapi,55.0,55.0,2,1,0,430000.0,7818.18
+Casa,efapi,114.03,114.03,3,2,2,430000.0,3770.94
+Casa,efapi,52.0,52.0,2,1,1,430000.0,8269.23
+Casa,efapi,240.0,114.0,2,2,2,430000.0,3771.93
+Casa,efapi,92.94,92.94,2,1,1,430000.0,4626.64
+Casa,efapi,65.0,65.0,2,1,0,435000.0,6692.31
+Casa,efapi,200.0,165.0,2,1,2,435000.0,2636.36
+Casa,efapi,189.16,189.16,2,1,0,435000.0,2299.64
+Casa,efapi,200.0,200.0,2,2,1,440000.0,2200.0
+Casa,efapi,101.72,101.72,3,1,1,441000.0,4335.43
+Casa,efapi,129.4,129.4,2,2,1,447000.0,3454.4
+Casa,efapi,166.6,130.0,2,2,1,450000.0,3461.54
+Casa,efapi,80.0,80.0,4,1,2,450000.0,5625.0
+Casa,efapi,95.0,95.0,2,1,2,450000.0,4736.84
+Casa,efapi,103.0,103.0,3,1,1,450000.0,4368.93
+Casa,efapi,134.85,134.85,3,1,2,453000.0,3359.29
+Casa,efapi,76.36,76.36,3,1,1,460000.0,6024.1
+Casa,efapi,106.0,106.0,3,1,1,462000.0,4358.49
+Casa,efapi,76.48,76.48,3,2,2,478000.0,6250.0
+Casa,efapi,102.08,102.08,2,1,1,479000.0,4692.4
+Casa,efapi,118.42,118.42,2,1,1,480000.0,4053.37
+Casa,efapi,75.21,75.21,3,1,1,480000.0,6382.13
+Casa,efapi,187.5,187.5,3,1,1,480000.0,2560.0
+Casa,efapi,190.0,100.0,2,1,2,499000.0,4990.0
+Casa,efapi,120.0,120.0,2,1,2,500000.0,4166.67
+Casa,efapi,130.0,130.0,3,1,2,500000.0,3846.15
+Casa,efapi,220.0,120.0,3,1,0,510000.0,4250.0
+Casa,efapi,300.0,130.0,3,2,2,510000.0,3923.08
+Casa,efapi,100.0,100.0,3,3,2,512000.0,5120.0
+Casa,efapi,100.0,94.15,3,2,1,512000.0,5438.13
+Casa,efapi,88.3,88.3,2,2,2,520000.0,5889.01
+Casa,efapi,65.0,65.0,2,1,2,521500.0,8023.08
+Casa,efapi,80.0,80.0,3,1,1,524500.0,6556.25
+Casa,efapi,120.0,120.0,3,1,2,530000.0,4416.67
+Casa,efapi,56.0,56.0,2,1,2,530000.0,9464.29
+Casa,efapi,300.0,130.0,3,1,2,530000.0,4076.92
+Casa,efapi,209.0,130.0,3,2,2,535000.0,4115.38
+Casa,efapi,100.0,100.0,2,1,2,537000.0,5370.0
+Casa,efapi,100.0,92.17,2,2,1,550882.55,5976.81
+Casa,efapi,120.23,120.23,3,2,3,553500.0,4603.68
+Casa,efapi,81.64,81.64,3,2,0,569000.0,6969.62
+Casa,efapi,100.0,100.0,3,1,1,569000.0,5690.0
+Casa,efapi,110.0,110.0,2,1,2,570000.0,5181.82
+Casa,efapi,84.0,84.0,3,2,0,579000.0,6892.86
+Casa,efapi,134.19,134.19,2,2,2,580000.0,4322.23
+Casa,efapi,0.01,0.01,4,2,2,583000.0,58300000.0
+Casa,efapi,178.0,170.0,3,1,2,585000.0,3441.18
+Casa,efapi,126.0,209.37,2,2,3,589000.0,2813.2
+Casa,efapi,0.01,0.01,2,1,4,590000.0,59000000.0
+Casa,efapi,240.0,150.0,3,4,2,590000.0,3933.33
+Casa,efapi,240.0,127.0,4,2,0,600000.0,4724.41
+Casa,efapi,450.0,130.0,3,1,1,600000.0,4615.38
+Casa,efapi,87.69,87.69,3,2,0,609000.0,6944.92
+Casa,efapi,103.0,390.0,3,1,1,640000.0,1641.03
+Casa,efapi,160.0,160.0,3,2,4,640000.0,4000.0
+Casa,efapi,120.0,120.0,8,1,1,640000.0,5333.33
+Casa,efapi,160.0,160.0,4,2,2,646600.0,4041.25
+Casa,efapi,55.0,55.0,2,1,5,650000.0,11818.18
+Casa,efapi,130.0,130.0,3,2,4,650000.0,5000.0
+Casa,efapi,170.0,200.0,3,2,2,655000.0,3275.0
+Casa,efapi,113.0,113.0,3,1,2,660000.0,5840.71
+Casa,efapi,154.0,154.0,2,1,2,670000.0,4350.65
+Casa,efapi,95.0,95.0,3,1,3,680000.0,7157.89
+Casa,efapi,110.0,110.0,3,1,2,690000.0,6272.73
+Casa,efapi,98.6,98.6,3,1,1,690000.0,6997.97
+Casa,efapi,153.21,153.21,2,1,1,700000.0,4568.89
+Casa,efapi,97.03,97.03,2,1,2,700000.0,7214.26
+Casa,efapi,160.0,240.0,4,2,3,700000.0,2916.67
+Casa,efapi,120.27,120.27,3,2,0,739000.0,6144.51
+Casa,efapi,105.96,105.96,3,2,0,739000.0,6974.33
+Casa,efapi,130.0,130.0,5,2,3,750000.0,5769.23
+Casa,efapi,75.0,75.0,3,2,3,750000.0,10000.0
+Casa,efapi,140.0,375.0,3,1,1,775000.0,2066.67
+Casa,efapi,155.0,227.92,3,2,2,850000.0,3729.38
+Casa,efapi,200.0,200.0,8,4,4,850000.0,4250.0
+Casa,efapi,124.46,124.46,3,2,0,869000.0,6982.16
+Casa,efapi,180.0,227.92,3,1,2,880000.0,3861.0
+Casa,efapi,317.0,360.0,6,3,4,880000.0,2444.44
+Casa,efapi,115.0,115.0,3,1,1,895000.0,7782.61
+Casa,efapi,360.0,171.0,3,2,2,920000.0,5380.12
+Casa,efapi,360.0,171.0,3,1,2,960000.0,5614.04
+Casa,efapi,171.0,171.0,3,1,3,960000.0,5614.04
+Casa,efapi,156.0,156.0,2,3,2,980000.0,6282.05
+Casa,efapi,160.0,160.0,2,1,3,1010700.0,6316.88
+Casa,efapi,230.0,200.0,3,1,2,1050000.0,5250.0
+Casa,efapi,174.0,390.0,3,1,2,1200000.0,3076.92
+Casa,efapi,212.0,212.0,4,2,2,1272000.0,6000.0
+Casa,efapi,149.0,149.0,3,4,2,1300000.0,8724.83
+Casa,efapi,320.0,475.0,3,1,5,1400000.0,2947.37
+Casa,efapi,350.0,266.0,3,2,2,1500000.0,5639.1
+Casa,efapi,118.0,118.0,3,1,1,1590000.0,13474.58
+Casa,efapi,230.0,360.18,4,2,1,1590000.0,4414.46
+Casa,efapi,181.64,181.64,4,3,4,1590000.0,8753.58
+Casa,efapi,420.0,288.0,3,3,2,1755000.0,6093.75
+Casa,efapi,268.0,420.0,3,1,2,1800000.0,4285.71
+Casa,efapi,320.0,320.0,3,2,2,2300000.0,7187.5
+Casa,eldorado,335.0,420.0,0,0,0,650000.0,1547.62
+Casa,eldorado,420.0,156.0,3,3,2,660000.0,4230.77
+Casa,eldorado,420.0,296.7,3,2,3,775000.0,2612.07
+Casa,eldorado,420.0,213.0,0,0,2,900000.0,4225.35
+Casa,eldorado,213.0,420.0,3,2,2,905000.0,2154.76
+Casa,engenho braun,70.16,70.16,2,1,1,400000.0,5701.25
+Casa,engenho braun,65.0,65.0,2,1,1,532000.0,8184.62
+Casa,engenho braun,131.84,131.84,3,1,1,675000.0,5119.84
+Casa,engenho braun,147.66,147.66,3,3,2,756000.0,5119.87
+Casa,engenho braun,155.0,155.0,3,1,2,799000.0,5154.84
+Casa,engenho braun,280.0,375.0,2,1,1,1100000.0,2933.33
+Casa,engenho braun,200.0,668.0,4,1,2,1170000.0,1751.5
+Casa,engenho braun,170.0,170.0,3,1,2,1190000.0,7000.0
+Casa,engenho braun,360.0,156.5,3,0,0,1219950.0,7795.21
+Casa,engenho braun,375.0,300.0,5,4,4,1290000.0,4300.0
+Casa,espelho das agua,1149.0,1149.0,2,3,2,1.6,0.0
+Casa,espelho das aguas,1000.0,130.0,2,3,2,1350000.0,10384.62
+Casa,espelho das aguas,1006.55,199.0,2,3,5,1350000.0,6783.92
+Casa,espelho das aguas,1000.0,256.0,3,3,4,1600000.0,6250.0
+Casa,espelho das aguas,267.0,1000.0,3,3,3,1700000.0,1700.0
+Casa,espelho das aguas,1044.0,237.0,3,3,4,1700000.0,7173.0
+Casa,espelho das aguas,1000.0,204.0,3,1,2,1740000.0,8529.41
+Casa,espelho das aguas,233.37,1000.0,4,1,2,1950000.0,1950.0
+Casa,espelho das aguas,1054.15,376.92,3,4,4,1950000.0,5173.51
+Casa,espelho das aguas,1000.0,274.0,0,4,2,2070000.0,7554.74
+Casa,espelho das aguas,1235.12,260.69,0,5,2,2300000.0,8822.74
+Casa,espelho das aguas,1241.0,295.0,1,2,2,2800000.0,9491.53
+Casa,espelho das aguas,1047.18,272.0,3,5,2,2870000.0,10551.47
+Casa,esplanada,207.0,207.0,3,2,1,1.3,0.01
+Casa,esplanada,70.0,70.0,2,0,1,370000.0,5285.71
+Casa,esplanada,220.95,66.2,2,2,2,450000.0,6797.58
+Casa,esplanada,433.0,433.0,0,0,0,500000.0,1154.73
+Casa,esplanada,102.0,109.0,3,2,0,586000.0,5376.15
+Casa,esplanada,399.0,104.0,3,2,1,590000.0,5673.08
+Casa,esplanada,70.0,70.0,2,1,1,600000.0,8571.43
+Casa,esplanada,382.5,236.25,2,1,1,630000.0,2666.67
+Casa,esplanada,128.0,80.0,2,1,0,649000.0,8112.5
+Casa,esplanada,139.85,132.0,2,2,2,700000.0,5303.03
+Casa,esplanada,412.0,90.0,3,2,2,700000.0,7777.78
+Casa,esplanada,240.0,382.5,5,2,3,750000.0,1960.78
+Casa,esplanada,450.0,450.0,6,3,4,750000.0,1666.67
+Casa,esplanada,361.2,172.18,3,3,2,770000.0,4472.06
+Casa,esplanada,207.0,207.0,5,3,2,780000.0,3768.12
+Casa,esplanada,150.0,382.5,3,1,2,799000.0,2088.89
+Casa,esplanada,187.36,411.1,2,1,2,800000.0,1946.0
+Casa,esplanada,0.01,0.01,3,2,2,800000.0,80000000.0
+Casa,esplanada,220.58,213.7,2,2,2,800000.0,3743.57
+Casa,esplanada,450.0,132.07,4,1,2,816200.0,6180.06
+Casa,esplanada,450.0,133.17,4,1,0,820000.0,6157.54
+Casa,esplanada,450.0,132.07,4,2,2,820000.0,6208.83
+Casa,esplanada,110.0,144.0,3,2,1,830000.0,5763.89
+Casa,esplanada,207.0,207.0,5,2,2,842000.0,4067.63
+Casa,esplanada,450.0,450.0,3,1,4,850000.0,1888.89
+Casa,esplanada,270.0,270.0,4,2,2,852000.0,3155.56
+Casa,esplanada,459.0,140.0,3,2,0,858000.0,6128.57
+Casa,esplanada,144.49,144.49,3,1,2,898000.0,6214.96
+Casa,esplanada,375.0,243.97,4,3,2,900000.0,3688.98
+Casa,esplanada,375.0,243.97,4,2,2,900000.0,3688.98
+Casa,esplanada,163.0,163.0,3,1,2,900000.0,5521.47
+Casa,esplanada,196.0,459.0,2,1,1,910000.0,1982.57
+Casa,esplanada,165.0,165.0,3,1,2,950000.0,5757.58
+Casa,esplanada,433.5,190.0,3,2,0,990000.0,5210.53
+Casa,esplanada,184.45,433.5,3,2,2,1000000.0,2306.81
+Casa,esplanada,315.0,165.0,3,1,1,1100000.0,6666.67
+Casa,esplanada,246.0,366.57,5,3,2,1100000.0,3000.79
+Casa,esplanada,55.0,55.0,0,1,0,1200000.0,21818.18
+Casa,esplanada,337.0,337.0,4,2,2,1200000.0,3560.83
+Casa,esplanada,382.5,155.0,3,2,2,1250000.0,8064.52
+Casa,esplanada,240.0,240.0,3,3,4,1272000.0,5300.0
+Casa,esplanada,382.5,154.0,3,3,2,1300000.0,8441.56
+Casa,esplanada,459.0,204.0,3,2,2,1300000.0,6372.55
+Casa,esplanada,215.0,215.0,3,2,2,1300000.0,6046.51
+Casa,esplanada,203.75,203.75,4,4,3,1350000.0,6625.77
+Casa,esplanada,157.8,157.8,2,1,2,1400000.0,8871.99
+Casa,esplanada,130.0,130.0,4,2,1,1450000.0,11153.85
+Casa,esplanada,469.0,469.0,3,0,0,1500000.0,3198.29
+Casa,esplanada,26.6,350.0,3,1,5,1500000.0,4285.71
+Casa,esplanada,310.0,310.0,3,0,2,1500000.0,4838.71
+Casa,esplanada,200.0,200.0,3,4,2,1700000.0,8500.0
+Casa,esplanada,290.38,282.88,3,1,2,1775000.0,6274.75
+Casa,esplanada,120.0,120.0,3,0,0,1850000.0,15416.67
+Casa,esplanada,214.63,157.8,3,2,2,1900000.0,12040.56
+Casa,esplanada,481.69,481.69,7,4,5,3521000.0,7309.68
+Casa,florianopolis,425.0,355.62,0,5,2,5600000.0,15747.15
+Casa,goio-en,267.5,267.5,3,2,2,1450000.0,5420.56
+Casa,interior,277.0,1145.0,2,1,2,1200000.0,1048.03
+Casa,interior,3200.0,200.0,2,3,0,1700000.0,8500.0
+Casa,interior,287.68,2044.4,3,1,4,2656000.0,1299.16
+Casa,interior,323.0,323.0,2,1,2,3400000.0,10526.32
+Casa,jardim america,100.0,100.0,0,0,0,430000.0,4300.0
+Casa,jardim america,96.0,96.0,2,1,1,560000.0,5833.33
+Casa,jardim america,421.87,100.0,3,2,3,650000.0,6500.0
+Casa,jardim america,76.06,76.06,2,2,2,691000.0,9084.93
+Casa,jardim america,70.0,70.0,2,1,0,700000.0,10000.0
+Casa,jardim america,420.0,190.0,0,1,2,700000.0,3684.21
+Casa,jardim america,150.0,150.0,3,1,2,740000.0,4933.33
+Casa,jardim america,367.5,150.0,4,2,2,740000.0,4933.33
+Casa,jardim america,145.0,450.0,3,1,1,750000.0,1666.67
+Casa,jardim america,210.0,170.0,4,1,2,770000.0,4529.41
+Casa,jardim america,420.0,120.0,3,2,1,780000.0,6500.0
+Casa,jardim america,106.86,106.86,2,2,2,963000.0,9011.79
+Casa,jardim america,421.87,421.87,3,2,2,1100000.0,2607.44
+Casa,jardim america,280.0,280.0,2,0,2,1296000.0,4628.57
+Casa,jardim america,454.5,305.0,3,2,2,1300000.0,4262.3
+Casa,jardim america,231.0,231.0,3,2,2,1330000.0,5757.58
+Casa,jardim america,500.0,300.0,4,2,4,1500000.0,5000.0
+Casa,jardim america,188.7,188.7,3,3,4,1780000.0,9432.96
+Casa,jardim europa,115.0,366.0,3,2,1,740000.0,2021.86
+Casa,jardim europa,320.0,62.0,0,0,0,930851.06,15013.73
+Casa,jardim europa,366.0,148.0,3,2,2,1020000.0,6891.89
+Casa,jardim europa,167.0,167.0,3,2,4,1250000.0,7485.03
+Casa,jardim europa,213.51,213.51,3,4,3,1250000.0,5854.53
+Casa,jardim europa,360.0,195.14,3,2,2,1394897.85,7148.19
+Casa,jardim europa,231.0,360.0,3,1,2,1480000.0,4111.11
+Casa,jardim europa,360.0,176.0,3,3,0,1480000.0,8409.09
+Casa,jardim europa,176.0,176.0,3,2,4,1480000.0,8409.09
+Casa,jardim europa,360.0,235.28,3,2,4,1490000.0,6332.88
+Casa,jardim europa,393.45,171.9,3,2,2,1490000.0,8667.83
+Casa,jardim europa,160.0,160.0,3,2,4,1490000.0,9312.5
+Casa,jardim europa,400.0,366.0,4,1,2,1500000.0,4098.36
+Casa,jardim europa,231.0,231.0,3,1,4,1615000.0,6991.34
+Casa,jardim europa,360.0,202.0,3,0,0,1690000.0,8366.34
+Casa,jardim europa,360.0,254.0,4,5,2,1690000.0,6653.54
+Casa,jardim europa,202.0,202.0,3,1,2,1690000.0,8366.34
+Casa,jardim europa,202.0,202.0,3,3,2,1690000.0,8366.34
+Casa,jardim europa,360.0,247.5,3,2,0,1742500.0,7040.4
+Casa,jardim europa,360.0,306.0,2,0,2,1749659.99,5717.84
+Casa,jardim europa,360.0,266.44,3,4,2,1790000.0,6718.21
+Casa,jardim europa,360.0,223.0,3,3,4,1790000.0,8026.91
+Casa,jardim europa,220.0,220.0,3,3,2,1849000.0,8404.55
+Casa,jardim europa,360.0,297.0,3,0,4,1850000.0,6228.96
+Casa,jardim europa,210.0,210.0,3,1,0,1850000.0,8809.52
+Casa,jardim europa,251.82,360.0,4,1,2,1895000.0,5263.89
+Casa,jardim europa,450.0,450.0,4,2,2,1949000.0,4331.11
+Casa,jardim europa,266.0,266.0,3,0,2,1980000.0,7443.61
+Casa,jardim europa,360.0,297.0,3,1,4,2000000.0,6734.01
+Casa,jardim europa,224.0,224.0,3,1,4,2190000.0,9776.79
+Casa,jardim europa,450.0,225.0,0,5,4,2197997.97,9768.88
+Casa,jardim europa,225.0,450.0,3,0,2,2300000.0,5111.11
+Casa,jardim europa,360.0,311.49,3,4,4,2306198.34,7403.76
+Casa,jardim europa,300.14,360.0,3,1,1,2390000.0,6638.89
+Casa,jardim europa,360.0,298.5,3,5,4,2390000.0,8006.7
+Casa,jardim europa,264.59,393.45,3,1,4,2400000.0,6099.89
+Casa,jardim europa,373.3,360.0,3,1,4,2400000.0,6666.67
+Casa,jardim europa,593.35,593.35,3,0,3,2500000.0,4213.36
+Casa,jardim europa,375.0,375.0,4,2,2,2500000.0,6666.67
+Casa,jardim europa,247.0,247.0,3,2,2,2660000.0,10769.23
+Casa,jardim europa,389.31,389.31,4,5,2,2750000.0,7063.78
+Casa,jardim europa,720.0,340.0,4,5,3,2765957.45,8135.17
+Casa,jardim europa,350.0,300.0,3,1,4,2790000.0,9300.0
+Casa,jardim europa,366.0,398.0,3,5,4,2800000.0,7035.18
+Casa,jardim europa,450.0,320.0,3,4,4,2950000.0,9218.75
+Casa,jardim europa,412.45,412.04,4,0,2,2970000.0,7208.04
+Casa,jardim europa,340.0,720.0,3,2,2,2980000.0,4138.89
+Casa,jardim europa,360.0,365.0,3,0,0,2990000.0,8191.78
+Casa,jardim europa,300.0,300.0,3,1,2,2990000.0,9966.67
+Casa,jardim europa,373.23,373.23,4,0,4,3300000.0,8841.73
+Casa,jardim europa,448.23,450.0,3,0,4,3800000.0,8444.44
+Casa,jardim europa,469.36,393.0,3,1,2,3800000.0,9669.21
+Casa,jardim europa,393.0,469.36,0,2,2,3800000.0,8096.13
+Casa,jardim europa,488.23,488.23,3,1,4,3800000.0,7783.22
+Casa,jardim europa,450.0,538.0,5,5,4,4200000.0,7806.69
+Casa,jardim italia,354.0,354.0,2,1,1,1.58,0.0
+Casa,jardim italia,360.0,360.0,4,3,4,2.78,0.01
+Casa,jardim italia,130.0,130.0,3,2,2,1065000.0,8192.31
+Casa,jardim italia,15.0,306.35,2,1,1,1150000.0,3753.88
+Casa,jardim italia,400.0,147.0,2,0,3,1289000.0,8768.71
+Casa,jardim italia,560.0,160.0,3,3,2,1300000.0,8125.0
+Casa,jardim italia,550.0,550.0,0,0,0,1300000.0,2363.64
+Casa,jardim italia,260.0,560.0,3,1,2,1350000.0,2410.71
+Casa,jardim italia,560.0,143.0,3,2,0,1350000.0,9440.56
+Casa,jardim italia,354.0,258.0,4,1,4,1579000.0,6120.16
+Casa,jardim italia,258.0,354.0,3,2,2,1579000.0,4460.45
+Casa,jardim italia,360.0,258.0,2,2,2,1580000.0,6124.03
+Casa,jardim italia,210.0,210.0,3,1,2,1590000.0,7571.43
+Casa,jardim italia,780.0,242.0,3,2,2,1699000.0,7020.66
+Casa,jardim italia,780.0,115.0,3,3,2,1699999.99,14782.61
+Casa,jardim italia,224.7,224.7,4,1,3,1700000.0,7565.64
+Casa,jardim italia,200.0,200.0,3,3,3,1750000.0,8750.0
+Casa,jardim italia,675.0,300.0,3,3,0,1980000.0,6600.0
+Casa,jardim italia,307.0,450.0,3,1,2,2010000.0,4466.67
+Casa,jardim italia,1000.0,432.0,6,3,3,2200000.0,5092.59
+Casa,jardim italia,430.0,1000.0,5,3,3,2300000.0,2300.0
+Casa,jardim italia,600.0,197.0,5,2,1,2300000.0,11675.13
+Casa,jardim italia,490.0,450.0,4,5,4,2490000.0,5533.33
+Casa,jardim italia,360.0,249.0,3,3,0,2500000.0,10040.16
+Casa,jardim italia,600.0,600.0,5,3,1,2500000.0,4166.67
+Casa,jardim italia,317.0,412.5,4,1,2,2600000.0,6303.03
+Casa,jardim italia,249.0,360.0,3,1,2,2777000.0,7713.89
+Casa,jardim italia,560.0,398.29,4,3,0,2800000.0,7030.05
+Casa,jardim italia,249.0,249.0,3,1,4,2900000.0,11646.59
+Casa,jardim italia,214.0,214.0,3,4,2,3000000.0,14018.69
+Casa,jardim italia,474.5,474.5,4,4,4,3500000.0,7376.19
+Casa,jardim italia,277.86,277.86,4,0,2,3500000.0,12596.27
+Casa,jardim italia,441.0,122.0,4,2,2,3500000.0,28688.52
+Casa,jardim italia,310.0,340.0,5,1,2,3550000.0,10441.18
+Casa,jardim italia,394.0,1125.0,5,3,2,3900000.0,3466.67
+Casa,jardim italia,847.5,389.0,4,4,2,5490000.0,14113.11
+Casa,jardim italia,1440.2,500.0,4,0,4,5500000.0,11000.0
+Casa,jardim italia,358.0,1440.2,3,1,2,5500000.0,3818.91
+Casa,jardim italia,358.0,358.0,3,0,2,5500000.0,15363.13
+Casa,jardim italia,600.0,468.0,4,6,4,6000000.0,12820.51
+Casa,jardim italia,450.0,650.0,0,5,4,6999999.99,10769.23
+Casa,jardim italia,600.0,1320.0,3,0,0,7400000.0,5606.06
+Casa,jardim paraiso,600.0,164.0,2,3,2,1350000.0,8231.71
+Casa,jardim paraiso,360.0,260.0,2,0,2,1970000.0,7576.92
+Casa,jardin europa,533.95,322.0,4,0,2,2760000.0,8571.43
+Casa,jardins do vale,1000.0,454.37,4,5,3,5510000.0,12126.68
+Casa,jardins lunardi,364.0,360.0,3,2,4,2165000.0,6013.89
+Casa,jardins mezomo,330.0,200.0,3,2,2,900000.0,4500.0
+Casa,lider,200.0,200.0,2,0,0,435000.0,2175.0
+Casa,lider,215.0,104.0,3,0,0,510000.0,4903.85
+Casa,lider,200.0,135.68,3,1,0,532000.0,3920.99
+Casa,lider,100.0,381.5,2,1,0,550000.0,1441.68
+Casa,lider,400.0,75.0,2,2,0,580000.0,7733.33
+Casa,lider,215.0,215.0,3,2,2,597000.0,2776.74
+Casa,lider,295.39,295.39,2,1,0,650000.0,2200.48
+Casa,lider,140.0,215.0,2,2,3,650000.0,3023.26
+Casa,lider,110.0,110.0,2,1,4,695000.0,6318.18
+Casa,lider,480.0,71.0,2,2,0,735000.0,10352.11
+Casa,lider,75.0,75.0,2,1,3,780000.0,10400.0
+Casa,lider,130.0,305.0,3,1,2,790000.0,2590.16
+Casa,lider,16.0,16.0,0,0,2,800000.0,50000.0
+Casa,lider,222.0,190.0,3,2,0,850000.0,4473.68
+Casa,lider,190.0,222.98,4,2,3,850000.0,3812.0
+Casa,lider,120.0,120.0,3,2,2,890000.0,7416.67
+Casa,lider,119.29,312.55,3,2,2,980000.0,3135.5
+Casa,lider,146.5,561.72,4,1,2,980000.0,1744.64
+Casa,lider,109.83,109.83,3,1,2,1000000.0,9104.98
+Casa,lider,800.0,121.0,3,1,0,1000000.0,8264.46
+Casa,lider,390.0,242.0,3,2,2,1100000.0,4545.45
+Casa,lider,305.9,138.0,3,2,0,1200000.0,8695.65
+Casa,lider,300.0,195.0,3,2,4,1200000.0,6153.85
+Casa,lider,270.0,300.0,3,1,2,1280000.0,4266.67
+Casa,lider,360.4,280.0,3,2,4,1309000.0,4675.0
+Casa,lider,220.0,220.0,3,2,2,1340000.0,6090.91
+Casa,lider,230.0,600.0,4,1,2,1350000.0,2250.0
+Casa,lider,800.0,154.87,4,2,0,1490000.0,9620.97
+Casa,lider,154.74,800.0,4,1,1,1490000.0,1862.5
+Casa,lider,240.0,340.0,3,1,2,1500000.0,4411.76
+Casa,lider,600.0,400.0,4,4,2,1620000.0,4050.0
+Casa,lider,600.0,277.16,3,4,4,1660000.0,5989.32
+Casa,lider,200.0,1256.08,3,1,1,1915000.0,1524.58
+Casa,lider,400.0,400.0,3,2,3,2200000.0,5500.0
+Casa,lider,360.0,317.0,3,2,5,2550000.0,8044.16
+Casa,lider,400.0,1.2,3,1,2,2700000.0,2250000.0
+Casa,lider,640.0,230.0,3,3,2,2800000.0,12173.91
+Casa,lider,1200.0,298.0,3,2,3,3000000.0,10067.11
+Casa,linha campinas,1141.93,200.0,3,2,2,1500000.0,7500.0
+Casa,linha campinas,2478.0,153.0,2,1,2,1650000.0,10784.31
+Casa,linha campinas,1154.0,296.0,3,2,4,1900000.0,6418.92
+Casa,linha colonia bacia,362.0,362.0,3,0,2,2500000.0,6906.08
+Casa,loteamento desbravador ii,150.0,144.49,3,4,2,890000.0,6159.6
+Casa,loteamento porto seguro,73.0,73.0,2,1,2,550000.0,7534.25
+Casa,loteamento vederti,297.0,297.0,4,2,3,949000.0,3195.29
+Casa,maria goretti,84.0,84.0,2,1,1,650000.0,7738.1
+Casa,maria goretti,382.5,101.0,2,2,0,680000.0,6732.67
+Casa,maria goretti,241.03,241.03,2,1,2,750000.0,3111.65
+Casa,maria goretti,255.0,150.0,3,2,2,799000.0,5326.67
+Casa,maria goretti,386.0,99.0,2,1,2,799990.0,8080.71
+Casa,maria goretti,210.0,390.0,4,1,2,848000.0,2174.36
+Casa,maria goretti,410.15,410.15,0,0,0,900000.0,2194.32
+Casa,maria goretti,404.0,126.0,3,2,2,920000.0,7301.59
+Casa,maria goretti,163.0,408.0,3,1,0,980000.0,2401.96
+Casa,maria goretti,255.0,139.0,3,2,0,990000.0,7122.3
+Casa,maria goretti,125.0,382.5,3,1,1,990000.0,2588.24
+Casa,maria goretti,600.0,224.0,4,3,4,1060000.0,4732.14
+Casa,maria goretti,85.41,85.41,3,2,1,1064000.0,12457.56
+Casa,maria goretti,163.35,163.35,3,2,2,1115000.0,6825.83
+Casa,maria goretti,150.0,150.0,3,1,2,1200000.0,8000.0
+Casa,maria goretti,224.0,224.0,4,2,2,1200000.0,5357.14
+Casa,maria goretti,153.0,300.0,3,1,2,1200000.0,4000.0
+Casa,maria goretti,160.0,412.5,3,1,2,1280000.0,3103.03
+Casa,maria goretti,412.5,233.5,4,3,8,1350000.0,5781.58
+Casa,maria goretti,250.0,412.5,4,2,3,1350000.0,3272.73
+Casa,maria goretti,310.0,382.5,4,2,1,1400000.0,3660.13
+Casa,maria goretti,190.0,412.5,3,2,1,1400000.0,3393.94
+Casa,maria goretti,282.0,281.97,4,1,2,1430000.0,5071.46
+Casa,maria goretti,180.0,612.0,3,1,3,1450000.0,2369.28
+Casa,maria goretti,251.0,412.5,5,2,1,1500000.0,3636.36
+Casa,maria goretti,600.0,600.0,0,0,0,1500000.0,2500.0
+Casa,maria goretti,220.0,220.0,3,1,2,1500000.0,6818.18
+Casa,maria goretti,207.0,207.0,3,0,2,1500000.0,7246.38
+Casa,maria goretti,405.0,100.0,2,1,1,1600000.0,16000.0
+Casa,maria goretti,390.0,390.0,3,0,0,1600000.0,4102.56
+Casa,maria goretti,412.0,229.65,3,2,2,1600000.0,6967.12
+Casa,maria goretti,95.0,95.0,2,1,1,1600000.0,16842.11
+Casa,maria goretti,228.0,228.0,3,3,3,1750000.0,7675.44
+Casa,maria goretti,398.0,228.0,3,3,3,1750000.0,7675.44
+Casa,maria goretti,300.0,525.0,5,1,4,1800000.0,3428.57
+Casa,maria goretti,400.4,284.84,4,4,3,1850000.0,6494.87
+Casa,maria goretti,218.89,412.5,5,3,3,1950000.0,4727.27
+Casa,maria goretti,300.0,160.0,3,0,0,1950000.0,12187.5
+Casa,maria goretti,195.74,996.0,3,1,1,2130000.0,2138.55
+Casa,maria goretti,317.2,317.0,3,2,2,2187500.0,6900.63
+Casa,maria goretti,498.0,204.79,3,1,2,2200000.0,10742.71
+Casa,maria goretti,579.6,430.0,8,3,3,2200000.0,5116.28
+Casa,maria goretti,283.0,337.5,3,1,2,2205000.0,6533.33
+Casa,maria goretti,279.0,279.0,3,3,2,2300000.0,8243.73
+Casa,maria goretti,422.79,180.0,0,0,0,2300000.0,12777.78
+Casa,maria goretti,356.0,278.4,3,3,2,2300000.0,8261.49
+Casa,maria goretti,367.5,278.0,3,1,0,2450000.0,8812.95
+Casa,maria goretti,352.5,245.0,4,2,2,2450000.0,10000.0
+Casa,maria goretti,235.0,600.0,4,1,1,2450000.0,4083.33
+Casa,maria goretti,352.0,245.0,4,3,2,2450000.0,10000.0
+Casa,maria goretti,300.0,300.0,5,3,4,2500000.0,8333.33
+Casa,maria goretti,360.0,579.0,8,1,3,2527000.0,4364.42
+Casa,maria goretti,293.67,293.67,3,4,5,2627000.0,8945.41
+Casa,maria goretti,500.0,500.0,5,0,4,2650000.0,5300.0
+Casa,maria goretti,600.0,240.0,4,2,2,2660000.0,11083.33
+Casa,maria goretti,412.5,242.72,3,0,0,2790000.0,11494.73
+Casa,maria goretti,422.79,234.0,4,4,4,2900000.0,12393.16
+Casa,maria goretti,520.0,520.0,0,0,0,3500000.0,6730.77
+Casa,maria goretti,412.5,525.0,5,4,4,3500000.0,6666.67
+Casa,maria goretti,241.0,241.0,5,1,2,3500000.0,14522.82
+Casa,maria goretti,525.0,525.0,5,5,0,3830000.0,7295.24
+Casa,mirante do trevo,150.0,250.0,2,1,1,586000.0,2344.0
+Casa,mirante do trevo,250.0,113.92,3,2,2,850000.0,7461.38
+Casa,palmital,375.0,60.0,2,1,0,480000.0,8000.0
+Casa,palmital,109.66,109.66,4,2,2,480000.0,4377.17
+Casa,palmital,85.0,85.0,2,1,1,550000.0,6470.59
+Casa,palmital,185.66,185.66,2,2,2,650000.0,3501.02
+Casa,palmital,114.0,114.0,2,1,2,650000.0,5701.75
+Casa,palmital,186.0,115.0,2,1,2,650000.0,5652.17
+Casa,palmital,114.72,185.66,2,0,2,670000.0,3608.75
+Casa,palmital,92.0,568.0,3,1,1,750000.0,1320.42
+Casa,palmital,130.0,600.0,3,1,1,750000.0,1250.0
+Casa,palmital,214.0,214.0,3,2,2,800000.0,3738.32
+Casa,palmital,615.47,615.47,0,0,0,850000.0,1381.06
+Casa,palmital,100.0,100.0,4,1,0,888000.0,8880.0
+Casa,palmital,280.0,280.0,3,2,2,897500.0,3205.36
+Casa,palmital,107.64,562.5,3,1,1,905000.0,1608.89
+Casa,palmital,130.0,130.0,3,1,2,950000.0,7307.69
+Casa,palmital,568.0,568.0,3,2,2,999000.0,1758.8
+Casa,palmital,200.0,200.0,3,1,2,1000000.0,5000.0
+Casa,palmital,258.85,258.85,4,2,4,1200000.0,4635.89
+Casa,palmital,165.0,532.59,3,1,2,1250000.0,2347.02
+Casa,palmital,285.0,285.0,3,1,2,1350000.0,4736.84
+Casa,palmital,426.67,226.0,3,2,0,1435000.0,6349.56
+Casa,palmital,250.0,250.0,4,3,2,1470000.0,5880.0
+Casa,palmital,958.06,254.5,3,3,4,1500000.0,5893.91
+Casa,palmital,958.0,188.0,3,3,2,1500000.0,7978.72
+Casa,palmital,206.0,206.0,4,3,0,1500000.0,7281.55
+Casa,palmital,195.0,195.0,3,2,3,1550000.0,7948.72
+Casa,palmital,450.0,450.0,0,0,0,1600000.0,3555.56
+Casa,palmital,424.0,148.0,3,1,2,1700000.0,11486.49
+Casa,palmital,160.0,160.0,2,2,3,1800000.0,11250.0
+Casa,palmital,565.0,344.0,5,4,2,1800000.0,5232.56
+Casa,palmital,319.0,319.0,4,2,2,2660000.0,8338.56
+Casa,palmital,327.21,360.0,4,1,2,2950000.0,8194.44
+Casa,palmital,919.47,919.47,0,0,0,3198000.0,3478.09
+Casa,paraiso,120.0,120.0,3,3,3,1.1,0.01
+Casa,paraiso,200.0,200.0,2,1,2,295000.0,1475.0
+Casa,paraiso,50.0,50.0,2,1,0,300000.0,6000.0
+Casa,paraiso,60.0,60.0,2,1,1,350000.0,5833.33
+Casa,paraiso,200.0,200.0,2,1,1,350000.0,1750.0
+Casa,paraiso,49.0,49.0,2,1,0,364000.0,7428.57
+Casa,paraiso,79.98,43.54,2,1,1,372500.0,8555.35
+Casa,paraiso,67.5,67.5,2,1,1,390000.0,5777.78
+Casa,paraiso,180.0,180.0,4,1,2,400000.0,2222.22
+Casa,paraiso,240.0,55.0,2,1,0,424000.0,7709.09
+Casa,paraiso,55.0,55.0,2,1,0,430000.0,7818.18
+Casa,paraiso,140.0,140.0,3,2,2,450000.0,3214.29
+Casa,paraiso,67.0,56.0,2,1,1,450000.0,8035.71
+Casa,paraiso,55.0,55.0,2,1,1,460000.0,8363.64
+Casa,paraiso,205.0,100.0,2,0,2,470000.0,4700.0
+Casa,paraiso,102.0,102.0,3,1,1,480000.0,4705.88
+Casa,paraiso,250.0,65.0,2,1,1,520000.0,8000.0
+Casa,paraiso,57.19,220.0,2,1,2,554000.0,2518.18
+Casa,paraiso,103.0,103.0,3,1,1,565000.0,5485.44
+Casa,paraiso,140.0,140.0,2,1,2,600000.0,4285.71
+Casa,paraiso,125.74,205.0,3,1,2,600000.0,2926.83
+Casa,paraiso,120.0,95.0,2,1,2,660000.0,6947.37
+Casa,paraiso,96.0,96.0,2,1,3,670500.0,6984.38
+Casa,paraiso,200.0,140.0,2,2,4,689000.0,4921.43
+Casa,paraiso,94.0,94.0,2,2,2,730000.0,7765.96
+Casa,paraiso,205.0,205.0,3,3,4,750000.0,3658.54
+Casa,paraiso,95.0,95.0,2,1,1,750000.0,7894.74
+Casa,paraiso,84.83,84.83,2,1,1,750000.0,8841.21
+Casa,paraiso,262.5,107.8,3,2,2,770000.0,7142.86
+Casa,paraiso,110.0,110.0,3,2,2,770000.0,7000.0
+Casa,paraiso,187.0,187.0,3,1,4,780000.0,4171.12
+Casa,paraiso,110.0,110.0,3,1,1,780000.0,7090.91
+Casa,paraiso,185.5,213.7,3,2,2,800000.0,3743.57
+Casa,paraiso,130.0,130.0,3,1,2,850000.0,6538.46
+Casa,paraiso,158.0,158.0,2,1,2,850000.0,5379.75
+Casa,paraiso,125.28,125.28,2,1,1,850000.0,6784.8
+Casa,paraiso,186.0,186.0,3,1,3,850000.0,4569.89
+Casa,paraiso,110.0,110.0,3,1,2,890000.0,8090.91
+Casa,paraiso,140.0,140.0,3,4,2,890000.0,6357.14
+Casa,paraiso,113.0,113.0,0,2,2,899000.0,7955.75
+Casa,paraiso,240.0,97.32,3,1,2,905000.0,9299.22
+Casa,paraiso,108.58,113.62,3,2,2,922500.0,8119.17
+Casa,paraiso,200.0,200.0,3,2,3,925000.0,4625.0
+Casa,paraiso,360.0,112.21,2,0,0,949900.0,8465.38
+Casa,paraiso,113.62,113.62,3,1,2,950000.0,8361.2
+Casa,paraiso,190.0,190.0,3,2,1,980000.0,5157.89
+Casa,paraiso,245.0,245.0,3,2,3,1099000.0,4485.71
+Casa,paraiso,163.8,163.8,3,1,2,1100000.0,6715.51
+Casa,paraiso,246.0,246.0,3,3,3,1164500.0,4733.74
+Casa,paraiso,120.0,245.0,3,3,3,1199000.0,4893.88
+Casa,paraiso,245.0,245.0,3,2,0,1199000.0,4893.88
+Casa,paraiso,245.0,245.0,3,0,3,1199000.0,4893.88
+Casa,paraiso,190.0,190.0,2,2,4,1200000.0,6315.79
+Casa,paraiso,145.0,300.0,3,1,2,1200000.0,4000.0
+Casa,paraiso,230.0,230.0,3,1,2,1200000.0,5217.39
+Casa,paraiso,200.0,200.0,4,3,2,1200000.0,6000.0
+Casa,paraiso,360.0,144.0,2,1,2,1200000.0,8333.33
+Casa,paraiso,360.0,360.0,3,3,4,1208000.0,3355.56
+Casa,paraiso,241.0,241.0,1,0,2,1250000.0,5186.72
+Casa,paraiso,295.0,241.0,3,4,4,1250000.0,5186.72
+Casa,paraiso,578.0,250.0,3,3,3,1250000.0,5000.0
+Casa,paraiso,300.0,145.07,3,3,0,1300000.0,8961.19
+Casa,paraiso,360.0,360.0,4,3,2,1300000.0,3611.11
+Casa,paraiso,170.0,360.95,3,1,2,1300000.0,3601.61
+Casa,paraiso,260.0,218.0,3,2,2,1390000.0,6376.15
+Casa,paraiso,160.0,160.0,2,1,2,1437000.0,8981.25
+Casa,paraiso,360.0,186.0,3,3,2,1480000.0,7956.99
+Casa,paraiso,386.25,203.95,3,4,2,1484125.67,7276.91
+Casa,paraiso,200.0,200.0,2,4,2,1500000.0,7500.0
+Casa,paraiso,232.0,360.1,3,1,2,1500000.0,4165.51
+Casa,paraiso,306.0,306.0,3,0,1,1500000.0,4901.96
+Casa,paraiso,402.0,450.0,3,1,4,1650000.0,3666.67
+Casa,paraiso,450.0,262.0,3,2,4,1650000.0,6297.71
+Casa,paraiso,260.0,260.0,2,2,2,1690000.0,6500.0
+Casa,paraiso,305.53,305.53,3,0,2,1970000.0,6447.81
+Casa,paraiso,254.0,254.0,3,0,4,2000000.0,7874.02
+Casa,paraiso,301.15,392.35,3,2,4,2490000.0,6346.37
+Casa,paraiso,392.35,301.0,3,3,4,2490000.0,8272.43
+Casa,paraiso,360.0,396.75,3,2,2,2500000.0,6301.2
+Casa,paraiso,549.0,360.0,3,1,8,2590000.0,7194.44
+Casa,paraiso,550.0,550.0,1,3,6,2590000.0,4709.09
+Casa,paraiso,360.0,549.0,4,2,6,2590000.0,4717.67
+Casa,paraiso,283.0,658.0,3,1,2,2670000.0,4057.75
+Casa,paraiso,550.0,550.0,3,2,3,2690000.0,4890.91
+Casa,paraiso,393.67,360.0,3,1,2,2700000.0,7500.0
+Casa,paraiso,360.0,398.0,0,4,0,2700000.0,6783.92
+Casa,paraiso,393.67,393.67,3,0,2,2750000.0,6985.55
+Casa,parque das palmeiras,90.0,90.0,2,1,2,480000.0,5333.33
+Casa,parque das palmeiras,150.0,150.0,3,1,2,615000.0,4100.0
+Casa,parque das palmeiras,250.0,130.0,3,1,1,620000.0,4769.23
+Casa,parque das palmeiras,375.0,375.0,0,0,0,700000.0,1866.67
+Casa,parque das palmeiras,211.0,250.0,3,1,2,745000.0,2980.0
+Casa,parque das palmeiras,128.86,513.0,3,1,2,750000.0,1461.99
+Casa,parque das palmeiras,131.0,131.0,3,1,1,750000.0,5725.19
+Casa,parque das palmeiras,440.0,199.54,3,2,0,999000.0,5006.51
+Casa,parque das palmeiras,199.54,440.1,3,1,2,1000000.0,2272.21
+Casa,parque das palmeiras,185.07,525.0,3,1,1,1150000.0,2190.48
+Casa,parque das palmeiras,525.0,185.0,3,2,0,1150718.71,6220.1
+Casa,parque das palmeiras,545.0,267.0,3,3,2,1300000.0,4868.91
+Casa,parque das palmeiras,450.0,233.0,3,2,3,1350000.0,5793.99
+Casa,parque das palmeiras,430.0,180.0,3,2,3,1450000.0,8055.56
+Casa,parque das palmeiras,424.2,240.0,3,3,0,1700000.0,7083.33
+Casa,parque das palmeiras,454.0,274.0,3,3,0,1795000.0,6551.09
+Casa,parque das palmeiras,454.5,274.0,3,2,2,1800000.0,6569.34
+Casa,passo dos fortes,360.0,85.0,2,1,2,380000.0,4470.59
+Casa,passo dos fortes,50.0,366.6,2,1,1,380000.0,1036.55
+Casa,passo dos fortes,360.0,65.0,2,1,1,381000.0,5861.54
+Casa,passo dos fortes,150.0,480.0,3,2,1,425000.0,885.42
+Casa,passo dos fortes,105.0,74.47,2,1,1,450000.0,6042.7
+Casa,passo dos fortes,92.0,92.0,3,1,2,500000.0,5434.78
+Casa,passo dos fortes,106.0,106.0,2,1,2,535000.0,5047.17
+Casa,passo dos fortes,390.0,390.0,0,0,0,550000.0,1410.26
+Casa,passo dos fortes,188.0,198.0,3,1,1,554500.0,2800.51
+Casa,passo dos fortes,200.0,200.0,2,1,2,575000.0,2875.0
+Casa,passo dos fortes,120.0,120.0,2,0,2,585000.0,4875.0
+Casa,passo dos fortes,360.0,360.0,3,1,0,595000.0,1652.78
+Casa,passo dos fortes,120.0,386.0,5,2,1,600000.0,1554.4
+Casa,passo dos fortes,378.0,378.0,4,0,1,600000.0,1587.3
+Casa,passo dos fortes,200.0,110.0,2,2,2,637000.0,5790.91
+Casa,passo dos fortes,360.0,166.85,3,2,4,638297.87,3825.58
+Casa,passo dos fortes,400.0,190.0,3,0,2,638297.87,3359.46
+Casa,passo dos fortes,120.0,120.0,3,0,2,690000.0,5750.0
+Casa,passo dos fortes,360.0,145.66,4,2,0,720000.0,4943.02
+Casa,passo dos fortes,127.0,127.0,3,2,2,740000.0,5826.77
+Casa,passo dos fortes,117.0,117.0,4,2,2,745000.0,6367.52
+Casa,passo dos fortes,140.0,140.0,3,2,1,750000.0,5357.14
+Casa,passo dos fortes,85.9,200.0,2,1,0,760000.0,3800.0
+Casa,passo dos fortes,400.94,215.0,4,3,3,770000.0,3581.4
+Casa,passo dos fortes,235.0,235.0,3,1,2,785000.0,3340.43
+Casa,passo dos fortes,282.0,235.0,3,3,2,785000.0,3340.43
+Casa,passo dos fortes,150.0,150.0,3,1,3,800000.0,5333.33
+Casa,passo dos fortes,110.0,274.5,3,1,1,800000.0,2914.39
+Casa,passo dos fortes,110.0,110.0,3,1,4,820000.0,7454.55
+Casa,passo dos fortes,165.0,367.5,3,1,1,831000.0,2261.22
+Casa,passo dos fortes,125.9,125.9,3,1,2,850000.0,6751.39
+Casa,passo dos fortes,125.9,125.9,3,2,2,850000.0,6751.39
+Casa,passo dos fortes,125.9,125.9,3,0,2,850000.0,6751.39
+Casa,passo dos fortes,240.0,130.0,3,3,3,899000.0,6915.38
+Casa,passo dos fortes,180.0,100.0,3,1,2,949000.0,9490.0
+Casa,passo dos fortes,26.0,26.0,3,1,2,950000.0,36538.46
+Casa,passo dos fortes,552.05,123.0,3,2,2,954000.0,7756.1
+Casa,passo dos fortes,100.0,306.0,3,1,2,958000.0,3130.72
+Casa,passo dos fortes,225.0,202.0,3,3,3,970000.0,4801.98
+Casa,passo dos fortes,177.84,271.4,3,2,1,1040000.0,3831.98
+Casa,passo dos fortes,230.0,225.0,3,1,2,1060000.0,4711.11
+Casa,passo dos fortes,133.0,305.9,3,1,1,1065000.0,3481.53
+Casa,passo dos fortes,200.0,169.9,3,3,2,1094761.91,6443.57
+Casa,passo dos fortes,225.0,200.79,3,4,2,1150000.0,5727.38
+Casa,passo dos fortes,600.0,90.0,3,1,1,1150000.0,12777.78
+Casa,passo dos fortes,200.0,139.8,3,0,0,1166000.0,8340.49
+Casa,passo dos fortes,220.0,220.0,3,1,2,1174000.0,5336.36
+Casa,passo dos fortes,125.0,125.0,3,1,2,1180000.0,9440.0
+Casa,passo dos fortes,150.0,150.0,2,1,2,1250000.0,8333.33
+Casa,passo dos fortes,139.8,200.0,3,1,2,1270000.0,6350.0
+Casa,passo dos fortes,293.44,470.26,3,2,3,1276000.0,2713.39
+Casa,passo dos fortes,202.0,433.5,3,2,1,1277000.0,2945.79
+Casa,passo dos fortes,364.0,364.0,3,0,0,1280000.0,3516.48
+Casa,passo dos fortes,280.0,280.0,3,5,2,1290000.0,4607.14
+Casa,passo dos fortes,343.0,170.0,6,1,2,1385000.0,8147.06
+Casa,passo dos fortes,360.0,360.0,3,0,4,1390000.0,3861.11
+Casa,passo dos fortes,169.81,352.0,5,2,2,1400000.0,3977.27
+Casa,passo dos fortes,168.49,200.0,3,2,2,1480000.0,7400.0
+Casa,passo dos fortes,215.0,400.94,6,2,2,1490000.0,3716.27
+Casa,passo dos fortes,868.0,868.0,0,0,0,1500000.0,1728.11
+Casa,passo dos fortes,192.0,192.0,3,2,2,1550000.0,8072.92
+Casa,passo dos fortes,796.44,460.0,6,3,0,1600000.0,3478.26
+Casa,passo dos fortes,285.0,450.0,3,1,2,1600000.0,3555.56
+Casa,passo dos fortes,400.0,400.0,4,6,2,1600000.0,4000.0
+Casa,passo dos fortes,290.0,290.0,3,0,3,1696000.0,5848.28
+Casa,passo dos fortes,403.2,237.96,4,3,0,1700000.0,7144.06
+Casa,passo dos fortes,403.0,235.0,4,5,3,1750000.0,7446.81
+Casa,passo dos fortes,365.96,255.0,3,0,4,1838000.0,7207.84
+Casa,passo dos fortes,360.0,264.0,3,2,2,1850000.0,7007.58
+Casa,passo dos fortes,275.0,402.0,3,1,2,1990000.0,4950.25
+Casa,passo dos fortes,450.0,232.88,3,3,2,2126595.74,9131.72
+Casa,passo dos fortes,365.97,256.13,3,6,4,2200000.0,8589.39
+Casa,passo dos fortes,435.3,307.85,4,4,2,2400000.0,7796.0
+Casa,passo dos fortes,457.0,261.0,3,2,4,2700000.0,10344.83
+Casa,passo dos fortes,366.0,398.31,3,5,4,2800000.0,7029.7
+Casa,passo dos fortes,400.0,300.0,3,2,2,3000000.0,10000.0
+Casa,passo dos fortes,900.0,273.0,4,2,4,3000000.0,10989.01
+Casa,passo dos fortes,284.0,284.0,3,0,3,3990000.0,14049.3
+Casa,passo dos fortes,1592.0,680.0,4,6,8,4500000.0,6617.65
+Casa,passo dos fortes,435.0,435.0,4,5,0,4500000.0,10344.83
+Casa,passo dos fortes,274.7,147.0,4,3,2,904256000.0,6151401.36
+Casa,pinheirinho,87.0,87.0,3,1,1,265000.0,3045.98
+Casa,pinheirinho,200.0,200.0,2,1,2,425600.0,2128.0
+Casa,pinheirinho,56.57,262.25,2,1,1,435000.0,1658.72
+Casa,pinheirinho,86.02,86.02,3,1,1,520000.0,6045.11
+Casa,pinheirinho,90.44,89.36,3,1,1,533000.0,5964.64
+Casa,pinheirinho,88.78,88.78,3,3,2,550000.0,6195.09
+Casa,pinheirinho,140.0,140.0,2,1,2,550000.0,3928.57
+Casa,pinheirinho,145.0,145.0,2,1,2,550000.0,3793.1
+Casa,pinheirinho,100.0,100.0,3,1,1,600000.0,6000.0
+Casa,pinheirinho,111.85,111.85,3,1,2,679000.0,6070.63
+Casa,pinheirinho,140.0,150.0,2,1,2,695000.0,4633.33
+Casa,pinheirinho,143.23,262.5,3,1,3,959000.0,3653.33
+Casa,pinheirinho,145.0,262.5,3,1,2,980000.0,3733.33
+Casa,pinheirinho,369.92,118.0,3,2,2,1100000.0,9322.03
+Casa,presidente medici,60.0,343.75,2,1,1,460000.0,1338.18
+Casa,presidente medici,397.5,120.0,3,2,0,530000.0,4416.67
+Casa,presidente medici,90.0,363.75,2,2,2,610000.0,1676.98
+Casa,presidente medici,110.0,110.0,2,2,2,640000.0,5818.18
+Casa,presidente medici,140.0,140.0,2,2,2,650000.0,4642.86
+Casa,presidente medici,393.75,393.75,2,2,3,650000.0,1650.79
+Casa,presidente medici,120.0,120.0,3,1,2,675000.0,5625.0
+Casa,presidente medici,393.75,393.75,2,2,1,700000.0,1777.78
+Casa,presidente medici,384.0,120.0,3,3,2,700000.0,5833.33
+Casa,presidente medici,150.0,385.5,2,1,1,700000.0,1815.82
+Casa,presidente medici,136.0,136.0,3,2,1,700000.0,5147.06
+Casa,presidente medici,287.0,397.5,4,2,6,799000.0,2010.06
+Casa,presidente medici,150.0,390.0,3,0,1,800000.0,2051.28
+Casa,presidente medici,306.0,131.0,3,0,0,850000.0,6488.55
+Casa,presidente medici,375.0,98.0,3,1,2,850000.0,8673.47
+Casa,presidente medici,131.0,131.0,2,1,2,850000.0,6488.55
+Casa,presidente medici,131.0,131.0,3,0,1,850000.0,6488.55
+Casa,presidente medici,500.0,500.0,0,0,0,860000.0,1720.0
+Casa,presidente medici,498.0,498.0,0,0,0,870000.0,1746.99
+Casa,presidente medici,421.2,178.28,2,1,0,870000.0,4879.96
+Casa,presidente medici,421.0,178.0,2,2,2,870000.0,4887.64
+Casa,presidente medici,100.0,306.0,3,1,1,880000.0,2875.82
+Casa,presidente medici,174.07,174.07,2,1,2,890000.0,5112.89
+Casa,presidente medici,215.0,215.0,4,3,3,890000.0,4139.53
+Casa,presidente medici,121.79,397.5,5,1,1,900000.0,2264.15
+Casa,presidente medici,390.0,85.0,3,3,4,914269.31,10756.11
+Casa,presidente medici,189.38,189.38,3,1,1,940000.0,4963.57
+Casa,presidente medici,160.0,397.0,3,2,2,950000.0,2392.95
+Casa,presidente medici,377.0,227.0,3,1,2,950000.0,4185.02
+Casa,presidente medici,377.0,227.93,3,2,3,975000.0,4277.63
+Casa,presidente medici,180.0,343.75,3,1,1,1030000.0,2996.36
+Casa,presidente medici,290.0,390.0,0,0,0,1064000.0,2728.21
+Casa,presidente medici,174.17,174.17,2,1,2,1090000.0,6258.25
+Casa,presidente medici,84.0,84.0,2,2,1,1100000.0,13095.24
+Casa,presidente medici,200.0,398.75,3,1,0,1100000.0,2758.62
+Casa,presidente medici,384.0,384.0,3,0,4,1100000.0,2864.58
+Casa,presidente medici,390.0,511.0,6,4,3,1100000.0,2152.64
+Casa,presidente medici,382.5,90.0,3,1,0,1150000.0,12777.78
+Casa,presidente medici,162.63,162.63,2,1,2,1170000.0,7194.24
+Casa,presidente medici,176.37,176.37,3,1,1,1190000.0,6747.18
+Casa,presidente medici,330.0,330.0,5,2,3,1190000.0,3606.06
+Casa,presidente medici,498.0,360.0,6,5,4,1200000.0,3333.33
+Casa,presidente medici,382.0,330.0,6,4,3,1250000.0,3787.88
+Casa,presidente medici,250.0,250.0,5,1,2,1272000.0,5088.0
+Casa,presidente medici,175.0,390.0,3,1,2,1280000.0,3282.05
+Casa,presidente medici,195.0,195.0,2,1,1,1290000.0,6615.38
+Casa,presidente medici,195.73,369.96,2,1,1,1290000.0,3486.86
+Casa,presidente medici,224.0,390.0,4,1,1,1300000.0,3333.33
+Casa,presidente medici,360.5,360.5,3,3,3,1350000.0,3744.8
+Casa,presidente medici,160.0,160.0,3,1,2,1350000.0,8437.5
+Casa,presidente medici,382.5,160.0,3,4,2,1350000.0,8437.5
+Casa,presidente medici,421.2,294.6,3,1,3,1350000.0,4582.48
+Casa,presidente medici,386.0,275.0,3,1,4,1380000.0,5018.18
+Casa,presidente medici,500.0,498.0,3,4,3,1400000.0,2811.24
+Casa,presidente medici,260.0,382.5,4,1,4,1400000.0,3660.13
+Casa,presidente medici,257.5,399.6,6,3,2,1400000.0,3503.5
+Casa,presidente medici,130.1,375.0,3,1,1,1450000.0,3866.67
+Casa,presidente medici,201.0,201.0,5,2,2,1485000.0,7388.06
+Casa,presidente medici,534.0,534.0,0,0,0,1490000.0,2790.26
+Casa,presidente medici,390.0,390.0,3,2,0,1500000.0,3846.15
+Casa,presidente medici,379.0,379.0,3,0,2,1596000.0,4211.08
+Casa,presidente medici,132.0,132.0,3,1,2,1600000.0,12121.21
+Casa,presidente medici,179.85,360.0,3,1,2,1600000.0,4444.44
+Casa,presidente medici,204.01,369.75,3,1,2,1667500.0,4509.8
+Casa,presidente medici,238.0,360.93,3,1,2,1690000.0,4682.35
+Casa,presidente medici,255.09,255.09,3,2,2,1700000.0,6664.31
+Casa,presidente medici,395.53,397.5,5,3,3,1750000.0,4402.52
+Casa,presidente medici,334.81,335.0,4,2,3,1800000.0,5373.13
+Casa,presidente medici,390.0,279.62,4,2,0,1800000.0,6437.31
+Casa,presidente medici,380.0,380.0,3,3,4,1800000.0,4736.84
+Casa,presidente medici,184.0,184.0,3,3,4,1800000.0,9782.61
+Casa,presidente medici,224.67,224.67,4,3,4,1800000.0,8011.75
+Casa,presidente medici,306.0,306.0,4,3,4,1800000.0,5882.35
+Casa,presidente medici,400.0,395.53,5,5,0,1850000.0,4677.27
+Casa,presidente medici,397.0,397.0,3,5,3,1850000.0,4659.95
+Casa,presidente medici,400.0,400.0,5,5,3,1874999.5,4687.5
+Casa,presidente medici,235.0,402.36,3,1,2,1890000.0,4697.29
+Casa,presidente medici,402.0,232.0,3,3,2,1890000.0,8146.55
+Casa,presidente medici,279.0,279.0,4,0,3,1900000.0,6810.04
+Casa,presidente medici,390.0,201.0,3,4,2,1940000.0,9651.74
+Casa,presidente medici,398.0,305.0,3,1,2,1950000.0,6393.44
+Casa,presidente medici,304.0,380.0,3,1,0,1980000.0,5210.53
+Casa,presidente medici,396.2,408.0,3,2,0,2000000.0,4901.96
+Casa,presidente medici,244.84,403.95,4,1,2,2021000.0,5003.09
+Casa,presidente medici,390.0,390.0,3,0,2,2022000.0,5184.62
+Casa,presidente medici,386.0,386.0,4,4,4,2100000.0,5440.41
+Casa,presidente medici,337.5,283.65,3,2,4,2185000.0,7703.16
+Casa,presidente medici,361.25,361.63,4,4,4,2220000.0,6138.87
+Casa,presidente medici,180.0,382.5,3,2,2,2280000.0,5960.78
+Casa,presidente medici,382.5,195.0,3,3,2,2280000.0,11692.31
+Casa,presidente medici,279.0,382.5,3,1,2,2300000.0,6013.07
+Casa,presidente medici,360.0,320.0,3,2,0,2499900.0,7812.19
+Casa,presidente medici,498.0,291.0,3,3,2,2500000.0,8591.07
+Casa,presidente medici,348.51,390.0,4,2,2,2700000.0,6923.08
+Casa,presidente medici,330.0,309.79,4,2,2,2999000.0,9680.75
+Casa,primo tacca,630.0,520.0,0,5,4,4664000.0,8969.23
+Casa,progresso,35.4,35.4,2,1,2,250000.0,7062.15
+Casa,progresso,320.0,320.0,3,0,3,3907000.0,12209.38
+Casa,quedas do palmital,375.0,90.0,3,1,1,580000.0,6444.44
+Casa,quedas do palmital,85.0,375.0,3,1,4,580000.0,1546.67
+Casa,quedas do palmital,560.0,200.0,3,2,0,600000.0,3000.0
+Casa,quedas do palmital,24200.0,260.0,4,3,2,5350000.0,20576.92
+Casa,real park,265.0,265.0,0,4,0,1950000.0,7358.49
+Casa,real park,360.0,267.0,0,4,2,2150000.0,8052.43
+Casa,saic,600.0,600.0,3,1,1,1.3,0.0
+Casa,saic,133.7,372.0,3,1,2,725000.0,1948.92
+Casa,saic,378.0,378.0,3,2,2,900000.0,2380.95
+Casa,saic,129.0,129.0,3,1,1,900000.0,6976.74
+Casa,saic,129.0,756.0,3,1,2,900000.0,1190.48
+Casa,saic,130.0,570.0,2,1,0,1000000.0,1754.39
+Casa,saic,406.0,228.0,3,2,3,1100000.0,4824.56
+Casa,saic,260.0,260.0,4,0,3,1200000.0,4615.38
+Casa,saic,430.0,266.7,3,3,0,1200000.0,4499.44
+Casa,saic,412.5,174.02,3,2,0,1500000.0,8619.7
+Casa,saic,260.0,550.0,3,3,2,1600000.0,2909.09
+Casa,saic,309.0,384.9,3,1,2,1750000.0,4546.64
+Casa,saic,384.42,550.0,9,1,3,2020000.0,3672.73
+Casa,saic,475.0,465.0,2,4,3,2600000.0,5591.4
+Casa,santa maria,427.5,427.5,3,2,1,1.28,0.0
+Casa,santa maria,561.0,561.0,3,3,3,1.52,0.0
+Casa,santa maria,130.0,382.5,0,0,0,600000.0,1568.63
+Casa,santa maria,100.0,100.0,3,1,0,615000.0,6150.0
+Casa,santa maria,195.0,200.06,3,1,2,720000.0,3598.92
+Casa,santa maria,262.5,240.0,3,1,2,750000.0,3125.0
+Casa,santa maria,147.0,147.0,3,1,2,750000.0,5102.04
+Casa,santa maria,147.0,147.0,3,2,2,800000.0,5442.18
+Casa,santa maria,198.17,360.0,4,1,2,850000.0,2361.11
+Casa,santa maria,105.73,98.51,3,3,2,850000.0,8628.57
+Casa,santa maria,306.0,158.55,3,0,0,900000.0,5676.44
+Casa,santa maria,90.0,90.0,2,1,1,900000.0,10000.0
+Casa,santa maria,230.0,459.0,3,1,3,900000.0,1960.78
+Casa,santa maria,382.5,155.5,3,1,1,970000.0,6237.94
+Casa,santa maria,549.25,110.0,3,1,1,1000000.0,9090.91
+Casa,santa maria,135.0,135.0,3,3,1,1090000.0,8074.07
+Casa,santa maria,427.5,135.0,3,2,0,1100000.0,8148.15
+Casa,santa maria,540.0,540.0,0,0,0,1100000.0,2037.04
+Casa,santa maria,445.2,330.0,0,4,0,1100000.0,3333.33
+Casa,santa maria,427.5,109.43,3,2,2,1100000.0,10052.09
+Casa,santa maria,200.0,200.0,3,2,2,1188000.0,5940.0
+Casa,santa maria,142.0,142.0,2,2,2,1200000.0,8450.7
+Casa,santa maria,135.0,135.0,3,1,1,1250000.0,9259.26
+Casa,santa maria,135.0,135.0,2,0,0,1272000.0,9422.22
+Casa,santa maria,300.0,300.0,3,0,2,1300000.0,4333.33
+Casa,santa maria,120.0,561.0,3,1,1,1385000.0,2468.81
+Casa,santa maria,335.0,247.9,5,2,4,1385000.0,5586.93
+Casa,santa maria,320.0,360.0,4,1,3,1400000.0,3888.89
+Casa,santa maria,220.0,220.0,4,0,4,1450000.0,6590.91
+Casa,santa maria,218.78,462.0,2,0,4,1475000.0,3192.64
+Casa,santa maria,330.0,330.0,4,1,2,1480000.0,4484.85
+Casa,santa maria,330.0,330.0,3,2,0,1499000.0,4542.42
+Casa,santa maria,360.0,273.0,4,3,0,1500000.0,5494.51
+Casa,santa maria,575.0,174.0,3,1,2,1520000.0,8735.63
+Casa,santa maria,397.5,219.0,3,3,2,1590000.0,7260.27
+Casa,santa maria,250.0,250.0,3,0,4,1590000.0,6360.0
+Casa,santa maria,382.0,259.0,3,2,2,1650000.0,6370.66
+Casa,santa maria,397.15,217.25,4,3,2,1665000.0,7663.98
+Casa,santa maria,226.0,226.0,3,1,2,1671000.0,7393.81
+Casa,santa maria,250.0,765.0,3,1,2,1770000.0,2313.73
+Casa,santa maria,247.0,247.0,3,0,2,1790000.0,7246.96
+Casa,santa maria,193.57,360.0,3,3,2,2128000.0,5911.11
+Casa,santa maria,423.0,345.5,3,2,2,2199500.0,6366.14
+Casa,santa maria,800.0,219.0,3,1,3,2630000.0,12009.13
+Casa,santa maria,285.0,285.0,3,2,2,2900000.0,10175.44
+Casa,santa maria,800.0,370.0,4,3,10,2968000.0,8021.62
+Casa,santa maria,360.0,314.85,3,3,0,3200000.0,10163.57
+Casa,santa maria,297.75,297.75,4,3,4,4895000.0,16439.97
+Casa,santa maria,1.12,740.0,5,3,3,6300000.0,8513.51
+Casa,santa maria,1600.0,784.44,0,6,0,9009999.99,11485.9
+Casa,santo antonio,216.5,200.0,3,1,1,400000.0,2000.0
+Casa,santo antonio,58.8,129.99,2,1,0,444000.0,3415.65
+Casa,santo antonio,58.39,58.39,2,1,2,444000.0,7604.04
+Casa,santo antonio,62.0,57.0,2,1,1,445000.0,7807.02
+Casa,santo antonio,45.0,300.0,3,1,1,460000.0,1533.33
+Casa,santo antonio,100.0,99.0,2,1,2,460000.0,4646.46
+Casa,santo antonio,94.0,94.0,2,1,1,470000.0,5000.0
+Casa,santo antonio,480.0,70.0,3,1,0,508000.0,7257.14
+Casa,santo antonio,80.0,400.0,2,1,1,535000.0,1337.5
+Casa,santo antonio,360.0,100.0,5,1,0,560000.0,5600.0
+Casa,santo antonio,100.0,90.0,2,1,0,600000.0,6666.67
+Casa,santo antonio,100.0,90.0,2,0,0,600000.0,6666.67
+Casa,santo antonio,400.0,110.0,2,2,4,600000.0,5454.55
+Casa,santo antonio,360.0,100.0,4,2,2,638000.0,6380.0
+Casa,santo antonio,58.0,58.0,2,1,0,650000.0,11206.9
+Casa,santo antonio,570.0,120.0,3,3,1,650000.0,5416.67
+Casa,santo antonio,86.0,86.0,3,1,2,650000.0,7558.14
+Casa,santo antonio,360.0,360.0,2,1,3,680000.0,1888.89
+Casa,santo antonio,81.0,536.0,3,1,1,680000.0,1268.66
+Casa,santo antonio,200.0,98.5,2,0,2,699000.0,7096.45
+Casa,santo antonio,200.0,98.0,2,3,2,700000.0,7142.86
+Casa,santo antonio,178.0,386.1,3,1,1,750000.0,1942.5
+Casa,santo antonio,570.0,570.0,3,2,2,950000.0,1666.67
+Casa,santo antonio,140.0,360.0,3,1,2,950000.0,2638.89
+Casa,santo antonio,360.0,360.0,3,0,2,950000.0,2638.89
+Casa,santo antonio,360.0,140.0,3,1,0,990000.0,7071.43
+Casa,santo antonio,141.0,141.0,3,2,0,990000.0,7021.28
+Casa,santo antonio,169.81,360.0,4,1,2,1545000.0,4291.67
+Casa,santo antonio,1080.0,250.0,3,2,3,1600000.0,6400.0
+Casa,santo antonio,250.0,250.0,3,1,3,1650000.0,6600.0
+Casa,santo antonio,505.88,505.88,3,4,1,1650000.0,3261.64
+Casa,santos dummond,93.18,93.18,2,1,1,369000.0,3960.08
+Casa,santos dumont,56.58,56.58,2,1,0,369000.0,6521.74
+Casa,santos dumont,56.58,56.58,2,1,3,369000.0,6521.74
+Casa,santos dumont,56.58,56.58,2,1,1,373000.0,6592.44
+Casa,santos dumont,93.18,56.58,2,1,0,392000.0,6928.24
+Casa,santos dumont,115.7,51.39,2,1,0,395000.0,7686.32
+Casa,santos dumont,88.63,79.82,2,1,0,399000.0,4998.75
+Casa,santos dumont,71.04,71.04,2,1,0,550000.0,7742.12
+Casa,santos dumont,86.0,86.0,2,1,0,580000.0,6744.19
+Casa,santos dumont,124.97,124.97,3,1,2,690000.0,5521.33
+Casa,santos dumont,159.0,159.0,3,1,1,700000.0,4402.52
+Casa,santos dumont,181.25,124.95,3,2,0,749000.0,5994.4
+Casa,santos dumont,214.62,214.62,4,2,3,895000.0,4170.16
+Casa,santos dumont,220.0,368.5,3,1,2,1050000.0,2849.39
+Casa,santos dumont,364.0,181.0,5,3,3,1280000.0,7071.82
+Casa,santos dumont,210.0,210.0,2,2,2,1380000.0,6571.43
+Casa,santos dumont,582.0,167.05,3,2,2,1490000.0,8919.49
+Casa,santos dumont,150.0,465.9,3,1,2,1550000.0,3326.89
+Casa,santos dumont,165.0,165.0,3,2,2,1550000.0,9393.94
+Casa,santos dumont,210.0,210.0,3,4,4,2150000.0,10238.1
+Casa,santos dumont,360.0,246.9,0,0,3,2450000.0,9923.05
+Casa,santos dumont,291.0,450.0,3,1,2,2800000.0,6222.22
+Casa,santos dumont,360.0,299.1,3,4,2,3000000.0,10030.09
+Casa,sao cristovao,122.0,122.0,3,0,1,550000.0,4508.2
+Casa,sao cristovao,122.0,120.0,3,1,1,550000.0,4583.33
+Casa,sao cristovao,88.0,450.0,2,1,1,620000.0,1377.78
+Casa,sao cristovao,235.0,235.0,3,2,2,850000.0,3617.02
+Casa,sao cristovao,450.0,450.0,4,2,1,860000.0,1911.11
+Casa,sao cristovao,450.0,154.0,3,1,0,900000.0,5844.16
+Casa,sao cristovao,450.0,343.0,4,2,2,1099000.0,3204.08
+Casa,sao cristovao,79.2,390.0,0,0,0,1166000.0,2989.74
+Casa,sao cristovao,300.0,390.0,3,1,2,1200000.0,3076.92
+Casa,sao cristovao,390.0,147.0,3,2,4,1250000.0,8503.4
+Casa,sao cristovao,147.0,147.0,3,1,3,1330000.0,9047.62
+Casa,sao cristovao,190.0,190.0,3,2,2,1350000.0,7105.26
+Casa,sao cristovao,130.0,130.0,3,2,1,1400000.0,10769.23
+Casa,sao cristovao,206.0,206.0,5,2,1,1400000.0,6796.12
+Casa,sao cristovao,138.0,138.0,3,1,4,1400000.0,10144.93
+Casa,sao cristovao,468.75,206.0,3,2,2,1500000.0,7281.55
+Casa,sao cristovao,180.63,390.0,5,2,2,1600000.0,4102.56
+Casa,sao cristovao,311.0,220.0,4,0,4,1600000.0,7272.73
+Casa,sao cristovao,360.0,135.0,3,0,2,1623749.79,12027.78
+Casa,sao cristovao,214.0,450.0,3,2,4,1650000.0,3666.67
+Casa,sao cristovao,30.0,401.35,4,5,2,1900000.0,4734.02
+Casa,sao cristovao,234.6,450.0,3,2,2,1900000.0,4222.22
+Casa,sao cristovao,395.0,325.0,3,1,2,2100000.0,6461.54
+Casa,sao cristovao,375.0,455.5,0,2,4,2200000.0,4829.86
+Casa,sao cristovao,360.0,360.0,3,2,2,2500000.0,6944.44
+Casa,sao cristovao,450.0,1100.0,0,0,0,4000000.0,3636.36
+Casa,sao lucas,56.0,56.0,2,1,1,390000.0,6964.29
+Casa,sao lucas,72.0,72.0,2,1,1,430000.0,5972.22
+Casa,sao lucas,115.0,115.0,3,2,2,430000.0,3739.13
+Casa,sao lucas,76.0,76.0,2,1,1,460000.0,6052.63
+Casa,sao lucas,102.0,102.0,3,1,2,550000.0,5392.16
+Casa,sao lucas,104.4,91.6,3,1,2,585000.0,6386.46
+Casa,sao lucas,115.0,115.0,2,1,1,586000.0,5095.65
+Casa,sao lucas,83.0,83.0,3,1,1,625000.0,7530.12
+Casa,sao lucas,120.0,120.0,2,1,1,640000.0,5333.33
+Casa,sao lucas,360.0,63.7,2,0,2,640000.0,10047.1
+Casa,sao lucas,360.0,120.0,2,2,2,640000.0,5333.33
+Casa,sao lucas,100.0,100.0,3,3,2,650000.0,6500.0
+Casa,sao lucas,93.0,93.0,3,2,1,675000.0,7258.06
+Casa,sao lucas,80.0,80.0,3,1,1,680000.0,8500.0
+Casa,sao lucas,120.0,120.0,2,2,2,700000.0,5833.33
+Casa,sao lucas,115.0,115.0,2,0,2,720000.0,6260.87
+Casa,sao lucas,178.0,178.0,2,0,1,750000.0,4213.48
+Casa,sao lucas,162.0,250.0,3,2,2,900000.0,3600.0
+Casa,sao lucas,182.0,182.0,3,0,2,1000000.0,5494.51
+Casa,sao lucas,150.0,150.0,3,2,2,1050000.0,7000.0
+Casa,sao lucas,243.97,170.0,3,4,2,1191575.67,7009.27
+Casa,sao lucas,182.0,360.0,3,1,2,1250000.0,3472.22
+Casa,sao lucas,360.0,155.8,3,4,2,1250000.0,8023.11
+Casa,sao lucas,160.0,160.0,3,3,2,1300000.0,8125.0
+Casa,sao lucas,250.0,250.0,3,0,2,1320000.0,5280.0
+Casa,sao lucas,360.0,336.0,2,1,4,1350000.0,4017.86
+Casa,sao lucas,170.3,207.03,3,0,2,2316529.63,11189.34
+Casa,sao pedro,155.81,155.81,0,1,0,195000.0,1251.52
+Casa,sao pedro,140.0,140.0,3,3,1,450000.0,3214.29
+Casa,seminario,375.0,82.0,2,1,2,446808.51,5448.88
+Casa,seminario,391.83,171.0,3,1,2,480000.0,2807.02
+Casa,seminario,360.0,164.0,4,2,2,550000.0,3353.66
+Casa,seminario,91.66,91.66,2,3,2,600000.0,6545.93
+Casa,seminario,573.75,120.0,3,1,1,650000.0,5416.67
+Casa,seminario,375.0,127.0,3,1,2,750000.0,5905.51
+Casa,seminario,127.0,375.0,3,1,1,755000.0,2013.33
+Casa,seminario,120.0,120.0,3,2,1,795000.0,6625.0
+Casa,seminario,127.69,127.69,3,2,1,799000.0,6257.34
+Casa,seminario,497.17,250.0,3,2,8,900000.0,3600.0
+Casa,seminario,133.0,133.0,3,0,2,930000.0,6992.48
+Casa,seminario,242.0,242.0,3,0,2,1190000.0,4917.36
+Casa,seminario,360.0,189.0,2,1,0,1200000.0,6349.21
+Casa,seminario,187.0,137.0,2,2,2,1300000.0,9489.05
+Casa,seminario,360.0,137.0,2,3,2,1300000.0,9489.05
+Casa,seminario,215.0,360.0,3,1,1,1550000.0,4305.56
+Casa,seminario,270.3,360.0,3,1,0,1596000.0,4433.33
+Casa,seminario,343.76,343.76,5,2,4,1700000.0,4945.31
+Casa,seminario,360.0,260.0,3,1,2,1850000.0,7115.38
+Casa,seminario,360.0,260.83,2,2,2,1861000.0,7134.92
+Casa,seminario,408.0,240.0,3,0,2,1920000.0,8000.0
+Casa,seminario,360.0,343.0,4,2,0,2000000.0,5830.9
+Casa,seminario,360.0,343.0,5,0,4,2000000.0,5830.9
+Casa,seminario,380.0,380.0,3,3,1,3000000.0,7894.74
+Casa,seminario,353.0,1111.0,3,1,2,3900000.0,3510.35
+Casa,seminario,1165.0,440.0,3,4,3,4250000.0,9659.09
+Casa,seminario,3.02,3.02,0,0,0,4500000.0,1490066.23
+Casa,seminario loteamento lodovico silvestri,360.81,176.0,3,3,0,1170000.0,6647.73
+Casa,seminario loteamento lodovico silvestri,360.0,133.0,3,0,0,1380000.0,10375.94
+Casa,trevo,105.0,105.0,2,3,2,580000.0,5523.81
+Casa,trevo,156.0,360.0,3,2,2,620000.0,1722.22
+Casa,trevo,140.0,360.0,3,1,2,720000.0,2000.0
+Casa,universitario,150.0,150.0,3,0,2,699000.0,4660.0
+Casa,universitario,200.0,200.0,4,1,3,700000.0,3500.0
+Casa,universitario,360.0,140.0,3,1,2,750000.0,5357.14
+Casa,universitario,380.0,126.0,2,1,3,899000.0,7134.92
+Casa,universitario,366.57,124.73,3,0,2,900000.0,7215.59
+Casa,universitario,350.0,350.0,4,4,3,904000.0,2582.86
+Casa,universitario,360.0,74.0,1,1,2,940000.0,12702.7
+Casa,universitario,379.63,126.0,2,2,3,960000.0,7619.05
+Casa,universitario,360.0,150.0,2,2,1,989361.7,6595.74
+Casa,universitario,140.0,371.25,3,1,1,990000.0,2666.67
+Casa,universitario,371.25,127.25,3,2,2,990000.0,7779.96
+Casa,universitario,132.0,132.0,3,1,2,990000.0,7500.0
+Casa,universitario,417.83,417.83,3,2,2,998000.0,2388.53
+Casa,universitario,220.0,220.0,3,0,2,999999.0,4545.45
+Casa,universitario,200.0,200.0,3,1,0,1100000.0,5500.0
+Casa,universitario,254.0,254.0,5,3,1,1180000.0,4645.67
+Casa,universitario,360.0,238.0,3,3,0,1250000.0,5252.1
+Casa,universitario,164.0,164.0,2,2,2,1300000.0,7926.83
+Casa,universitario,250.0,250.0,2,3,2,1350000.0,5400.0
+Casa,universitario,248.0,405.0,3,1,3,1350000.0,3333.33
+Casa,universitario,405.0,247.0,3,1,2,1380000.0,5587.04
+Casa,universitario,220.0,220.0,4,2,1,1390000.0,6318.18
+Casa,universitario,0.01,0.01,3,2,2,1390000.0,139000000.0
+Casa,universitario,360.59,185.0,3,2,2,1400000.0,7567.57
+Casa,universitario,217.72,402.0,3,3,2,1440000.0,3582.09
+Casa,universitario,218.0,218.0,3,2,2,1498000.0,6871.56
+Casa,universitario,202.0,202.0,3,3,4,1500000.0,7425.74
+Casa,universitario,450.0,220.0,5,0,5,1500000.0,6818.18
+Casa,universitario,250.0,371.25,2,1,2,1550000.0,4175.08
+Casa,universitario,498.0,300.0,3,2,0,1580000.0,5266.67
+Casa,universitario,498.0,300.0,3,4,2,1595744.68,5319.15
+Casa,universitario,191.36,191.36,4,3,1,1650000.0,8622.49
+Casa,universitario,368.0,210.0,3,3,4,1730000.0,8238.1
+Casa,universitario,260.0,260.0,3,1,4,1730000.0,6653.85
+Casa,universitario,385.28,271.41,3,1,2,1890000.0,6963.63
+Casa,universitario,369.87,415.0,5,2,2,2067000.0,4980.72
+Casa,universitario,385.28,271.39,3,5,2,2150000.0,7922.18
+Casa,universitario,450.0,250.0,3,3,2,2340425.53,9361.7
+Casa,universitario,314.99,314.99,3,2,2,2350000.0,7460.55
+Casa,universitario,460.0,460.0,5,0,4,2500000.0,5434.78
+Casa,universitario,360.0,259.0,0,1,3,3200000.0,12355.21
+Casa,universitario,540.4,299.95,0,0,0,3530000.0,11768.63
+Casa,universitario,498.0,489.0,6,4,0,4250000.0,8691.21
+Casa,universitario,520.0,520.0,4,2,4,5000000.0,9615.38
+Casa,vederti,180.05,50.7,2,1,0,325000.0,6410.26
+Casa,vederti,52.0,52.0,2,0,1,340000.0,6538.46
+Casa,vederti,51.94,51.94,2,1,1,340000.0,6546.01
+Casa,vederti,60.0,60.0,2,1,1,340000.0,5666.67
+Casa,vederti,47.95,60.17,2,1,1,342360.0,5689.88
+Casa,vederti,48.58,48.58,2,1,1,345000.0,7101.69
+Casa,vederti,98.0,98.0,2,1,1,370000.0,3775.51
+Casa,vederti,88.35,88.35,2,1,1,375000.0,4244.48
+Casa,vederti,47.77,68.57,2,1,1,379800.0,5538.87
+Casa,vederti,130.5,59.0,2,1,0,390000.0,6610.17
+Casa,vederti,180.05,180.05,2,2,2,415000.0,2304.92
+Casa,vederti,72.64,44.91,2,1,1,420000.0,9352.04
+Casa,vederti,68.0,68.0,2,1,0,425000.0,6250.0
+Casa,vederti,106.0,106.0,3,1,1,472500.0,4457.55
+Casa,vederti,82.09,82.09,0,2,2,480000.0,5847.24
+Casa,vederti,88.3,180.6,2,1,0,520000.0,2879.29
+Casa,vederti,203.0,110.0,3,2,2,590000.0,5363.64
+Casa,vederti,180.0,180.0,2,1,1,606000.0,3366.67
+Casa,vederti,195.26,195.26,2,3,2,650000.0,3328.89
+Casa,vederti,149.0,360.0,3,1,2,1400000.0,3888.89
+Casa,vederti,166.0,466.47,3,2,2,1600000.0,3430.02
+Casa,vederti ii,52.0,52.0,2,0,1,395000.0,7596.15
+Casa,vederti ii,180.0,82.0,3,1,1,535000.0,6524.39
+Casa,vederti ii,180.0,82.0,3,1,2,535000.0,6524.39
+Casa,vederti ii,90.0,90.0,2,2,1,550000.0,6111.11
+Casa,vederti ii,115.0,115.0,3,3,5,950000.0,8260.87
+Casa,veneza,715.0,200.0,3,3,2,850000.0,4250.0
+Casa,verdeti,180.0,180.0,3,2,2,550000.0,3055.56
+Casa,vila mantelli,200.0,200.0,4,3,2,700000.0,3500.0
+Casa,vila real,70.87,70.87,2,1,1,375000.0,5291.38
+Casa,vila real,130.0,130.0,3,1,2,480000.0,3692.31
+Casa,vila real,215.64,82.1,2,1,0,550000.0,6699.15
+Casa,vila real,300.0,135.0,2,2,0,560000.0,4148.15
+Casa,vila real,300.0,97.0,3,1,1,620000.0,6391.75
+Casa,vila real,360.39,320.19,3,3,2,648500.65,2025.36
+Casa,vila real,100.0,100.0,4,0,1,650000.0,6500.0
+Casa,vila real,120.0,120.0,3,0,1,660000.0,5500.0
+Casa,vila real,93.0,93.0,3,1,2,695000.0,7473.12
+Casa,vila real,105.0,300.0,3,1,0,700000.0,2333.33
+Casa,vila real,100.0,265.0,3,1,2,700000.0,2641.51
+Casa,vila real,180.0,134.0,3,2,1,740000.0,5522.39
+Casa,vila real,180.0,134.16,3,2,2,760000.0,5664.88
+Casa,vila real,173.0,173.0,3,0,0,850000.0,4913.29
+Casa,vila real,101.45,101.45,2,2,2,873000.0,8605.22
+Casa,vila real,173.0,377.0,3,1,1,950000.0,2519.89
+Casa,vila real,190.0,361.04,3,1,2,1100000.0,3046.75
+Casa,vila real,361.04,190.0,3,3,2,1100000.0,5789.47
+Casa,vila real,360.0,180.31,3,3,2,1300000.0,7209.81
+Casa,vila real,360.0,154.0,3,2,2,1350000.0,8766.23
+Casa,vila real,245.0,245.0,3,0,2,1500000.0,6122.45
+Casa,vila real,245.0,245.0,3,4,2,1595744.68,6513.24
+Casa,vila real,431.24,277.63,4,3,2,1599000.0,5759.46
+Casa,vila real,242.0,242.0,3,2,4,1690000.0,6983.47
+Casa,vilapore,397.79,278.6,0,5,0,2900000.0,10409.19
+Casa,villagos,250.0,250.0,3,3,0,2200000.0,8800.0
+Casa,villagos,2044.0,287.0,3,2,4,2225000.0,7752.61
+Casa,villagos,1290.63,450.99,0,3,3,4000000.0,8869.38
+Casa,villagos,1956.75,1000.0,0,0,5,9500000.0,9500.0
+Casa,walville,365.97,186.0,3,3,4,1380000.0,7419.35
+Casa,walville,336.0,231.0,3,4,2,1550000.0,6709.96
+Casa,walville,231.0,231.0,3,0,2,1700000.0,7359.31
+Casa,walville,366.0,246.0,0,3,2,2226000.0,9048.78
+Casa,walville,300.5,450.0,4,1,2,2580000.0,5733.33
+Casa,walville,460.0,592.0,0,8,7,3000000.0,5067.57
+Casa,walville,450.0,400.0,4,7,3,3800000.0,9500.0
+Casa,walville ii,450.0,450.0,3,4,4,3200000.0,7111.11
+Casa,walville iii,249.04,213.51,0,4,0,1272000.0,5957.57
+Casa,walville iii,202.0,202.0,3,4,2,1690000.0,8366.34

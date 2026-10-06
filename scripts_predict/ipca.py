@@ -59,6 +59,34 @@ def summarize(monthly, anos=ANOS_MEDIA):
     }
 
 
+def faixa_anual(cache_path=DEFAULT_CACHE, anos=ANOS_MEDIA, percentis=(10, 90)):
+    """Faixa do IPCA acumulado em 12 meses nos últimos `anos` anos (percentis, em %).
+
+    Mede o quanto a inflação anual variou: usada na projeção v2 para os cenários
+    pessimista e otimista.
+    """
+    cache_path = Path(cache_path)
+    if not cache_path.exists():
+        return None
+    monthly = json.loads(cache_path.read_text(encoding="utf-8"))
+    valores = [m["valor"] for m in monthly[-(12 * anos + 11):]]
+    if len(valores) < 24:
+        return None
+    janelas = sorted(
+        100 * (math.prod(1 + v / 100 for v in valores[i : i + 12]) - 1)
+        for i in range(len(valores) - 11)
+    )
+
+    def pct(p):
+        pos = (len(janelas) - 1) * p / 100
+        base = int(pos)
+        frac = pos - base
+        topo = janelas[min(base + 1, len(janelas) - 1)]
+        return janelas[base] + frac * (topo - janelas[base])
+
+    return pct(percentis[0]), pct(percentis[1])
+
+
 def load_ipca(cache_path=DEFAULT_CACHE, atualizar=True):
     """Resumo do IPCA: baixa do BCB (e atualiza o cache) ou usa o cache local."""
     cache_path = Path(cache_path)

@@ -13,6 +13,7 @@ import os
 import sys
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
@@ -21,9 +22,11 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "scripts_predict"))
 
 from imoveis_ml_hibrido import format_currency, input_warnings  # noqa: E402
+from modo_avancado import tela_avancada  # noqa: E402
 from imoveis_ml_hibrido import load_artifact as load_price_artifact  # noqa: E402
 from imoveis_projecao import (  # noqa: E402
     MAX_ANOS,
+    ajustar_ipca,
     annual_pct,
     bairros_por_tipo,
     load_projection_artifact,
@@ -43,6 +46,7 @@ PROJECTION_MODEL = Path(
 BAIRROS_JSON = PROJECT_ROOT / "dados" / "bairros.json"
 NORMALIZED_DB = PROJECT_ROOT / "imoveis_normalizados.db"
 TIPOS = ("Apartamento", "Casa")
+VERSOES = {"v2 — anúncios + IPCA (recomendada)": "v2", "v1 — só os anúncios": "v1"}
 
 # Paleta de referência (skill de visualização): série 1 = azul, série 2 = laranja.
 COR_CENTRAL = "#2a78d6"
@@ -196,6 +200,21 @@ def escolher_referencia(proj_art):
     return opcoes[escolha]
 
 
+def escolher_contagem(coluna, rotulo, price_art, tipo, campo, padrao):
+    """Lista suspensa de 0 até o máximo visto no treino para o tipo de imóvel."""
+    limites = price_art["segments"][tipo]["clip_bounds"].get(campo)
+    maximo = int(np.ceil(limites[1])) if limites else 10
+    opcoes = list(range(0, maximo + 1))
+    return coluna.selectbox(
+        rotulo,
+        opcoes,
+        index=min(padrao, maximo),
+        format_func=lambda v: "—" if v == 0 else str(v),
+        key=f"{campo}_{tipo}",
+        help=f"Até {maximo}: o máximo dos {tipo.lower()}s usados no treino. — = não informado.",
+    )
+
+
 # ------------------------------------------------------------------ telas
 def tela_estimativa(price_art, proj_art):
     bairros = carregar_bairros()
@@ -219,12 +238,21 @@ def tela_estimativa(price_art, proj_art):
             format="%.0f",
         )
         c1, c2, c3 = st.columns(3)
-        quartos = c1.number_input("Quartos", min_value=0, max_value=10, value=2)
-        banheiros = c2.number_input("Banheiros", min_value=0, max_value=10, value=2)
-        vagas = c3.number_input("Vagas", min_value=0, max_value=10, value=1)
+        quartos = escolher_contagem(c1, "Quartos", price_art, tipo, "quartos", padrao=2)
+        banheiros = escolher_contagem(c2, "Banheiros", price_art, tipo, "banheiros", padrao=2)
+        vagas = escolher_contagem(c3, "Vagas", price_art, tipo, "vagas", padrao=1)
 
         st.header("Projeção")
         anos = st.slider("Horizonte (anos)", min_value=1, max_value=MAX_ANOS, value=10)
+        versao_rotulo = st.radio(
+            "Valorização",
+            list(VERSOES),
+            help=(
+                "v2: combina a valorização medida nos anúncios com o IPCA, porque 5 meses de "
+                "preços quase parados medem pouco. v1: só o que os anúncios mostraram."
+            ),
+        )
+        versao = VERSOES[versao_rotulo]
         taxa_ref, rotulo_ref = escolher_referencia(proj_art)
         with st.expander("Opções avançadas"):
             usar_preco = st.checkbox("Informar o preço atual em vez de estimar")
@@ -254,6 +282,7 @@ def tela_estimativa(price_art, proj_art):
             anos=anos,
             preco_atual=preco_atual if usar_preco and preco_atual > 0 else None,
             taxa_referencia=taxa_ref,
+            versao=versao,
         )
     except ValueError as exc:
         st.error(str(exc))
@@ -300,6 +329,12 @@ def tela_estimativa(price_art, proj_art):
         pct(res["taxa_anual_central_pct"]),
         help=f"Faixa: {pct(res['taxa_anual_pessimista_pct'])} a {pct(res['taxa_anual_otimista_pct'])} ao ano.",
     )
+    if res["versao"] == "v2":
+        st.caption(
+            f"Valorização v2: {res['peso_dados'] * 100:.0f}% vem da variação medida nos anúncios "
+            f"({len(proj_art['meses'])} meses de coleta) e {(1 - res['peso_dados']) * 100:.0f}% do IPCA "
+            "dos últimos 10 anos. Com mais meses de coleta, o peso dos anúncios aumenta."
+        )
 
     if taxa_ref is not None:
         final_ref = final["referencia"]
@@ -336,8 +371,13 @@ def tela_estimativa(price_art, proj_art):
 2. **Valorização**: variação do preço anunciado dos *mesmos* imóveis entre as coletas
    ({", ".join(proj_art["meses"])}), anualizada. Bairros com poucos imóveis são aproximados da
    taxa do tipo de imóvel.
-3. **Faixa**: intervalo de 80% da taxa estimada por bootstrap (pessimista e otimista).
-4. **Referência**: IPCA oficial (IBGE, via Banco Central), que mostra quanto o imóvel valeria
+3. **Valorização v2** (padrão): como o preço anunciado quase não muda (96% dos anúncios ficam
+   iguais de um mês para o outro), 5 meses medem pouco. A v2 parte do IPCA médio de 10 anos e
+   dá à taxa medida um peso de T / (T + 12), em que T são os meses de coleta. A v1 usa só a
+   taxa medida.
+4. **Faixa**: v1, intervalo de 80% da taxa estimada por bootstrap; v2, a mesma faixa
+   combinada com a variação do IPCA em 12 meses (percentis 10 e 90 dos últimos 10 anos).
+5. **Referência**: IPCA oficial (IBGE, via Banco Central), que mostra quanto o imóvel valeria
    se apenas acompanhasse a inflação. Não há índice FipeZap para Chapecó.
 
 **Limitações**: poucos meses de coleta extrapolados para anos; preço anunciado não é preço de
@@ -356,6 +396,7 @@ def tela_bairros(proj_art):
                 "Bairro": rotulo_bairro(bairro) or "(sem bairro)",
                 "Tipo": tipo,
                 "Imóveis": r["imoveis"],
+                "Central v2 (%/ano)": round(annual_pct(ajustar_ipca(r, proj_art)[0]["mensal"]), 2),
                 "Central (%/ano)": round(annual_pct(r["mensal"]), 2),
                 "Pessimista (%/ano)": round(annual_pct(r["mensal_baixa"]), 2),
                 "Otimista (%/ano)": round(annual_pct(r["mensal_alta"]), 2),
@@ -364,12 +405,20 @@ def tela_bairros(proj_art):
     df = pd.DataFrame(rows)
     tipo = st.radio("Tipo", TIPOS, horizontal=True, key="tipo_bairros")
     df = df[df["Tipo"] == tipo].sort_values("Central (%/ano)", ascending=False)
-    for col in ("Central (%/ano)", "Pessimista (%/ano)", "Otimista (%/ano)"):
+    df = df.rename(
+        columns={
+            "Central (%/ano)": "Central v1 (%/ano)",
+            "Pessimista (%/ano)": "Pessimista v1 (%/ano)",
+            "Otimista (%/ano)": "Otimista v1 (%/ano)",
+        }
+    )
+    for col in ("Central v2 (%/ano)", "Central v1 (%/ano)", "Pessimista v1 (%/ano)", "Otimista v1 (%/ano)"):
         df[col] = df[col].map(pct)
     geral = proj_art["tipos"][tipo]
     st.caption(
         f"Taxa geral de {tipo.lower()}s: {pct(annual_pct(geral['mensal']))} ao ano "
-        f"({geral['imoveis']} imóveis acompanhados)."
+        f"({geral['imoveis']} imóveis acompanhados). v1 = só os anúncios; v2 = anúncios "
+        "combinados com o IPCA (ver \"Como a estimativa é feita\" na aba Estimativa)."
     )
     st.dataframe(df.drop(columns="Tipo"), hide_index=True, width="stretch")
 
@@ -418,8 +467,8 @@ def main():
         )
         return
 
-    aba1, aba2, aba3 = st.tabs(
-        ["Estimativa", "Valorização por bairro", "Sobre os modelos"]
+    aba1, aba2, aba3, aba4 = st.tabs(
+        ["Estimativa", "Valorização por bairro", "Sobre os modelos", "Modo avançado"]
     )
     with aba1:
         tela_estimativa(price_art, proj_art)
@@ -427,6 +476,8 @@ def main():
         tela_bairros(proj_art)
     with aba3:
         tela_modelos(price_art, proj_art)
+    with aba4:
+        tela_avancada()
 
 
 main()
