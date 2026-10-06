@@ -141,6 +141,27 @@ Por isso a interface mostra **os dois cenários lado a lado**: a tendência obse
 anúncios e a referência da inflação. Com mais meses de coleta, a taxa medida tende a
 ficar mais confiável.
 
+### Valorização v2: anúncios combinados com o IPCA
+
+A taxa acima (v1) usa só o que os anúncios mostraram em 5 meses. Por sugestão do
+orientador, a **v2** usa o IPCA como ponto de partida e dá à taxa medida um peso que
+cresce com o número de meses de coleta (detalhes no capítulo 8):
+
+```
+peso_dados = T / (T + 12)          T = meses de coleta (hoje, 5) → peso 29%
+taxa_v2    = peso_dados × taxa_medida + (1 − peso_dados) × IPCA médio de 10 anos
+```
+
+| Tipo | v1 central (faixa) | v2 central (faixa) |
+|---|---|---|
+| Apartamento | +0,89%/ano (+0,57% a +1,24%) | +3,70%/ano (+2,14% a +6,70%) |
+| Casa | +0,38%/ano (+0,01% a +0,75%) | +3,54%/ano (+1,97% a +6,55%) |
+
+No exemplo do apartamento no Centro, a v2 projeta R$ 900.322 em 10 anos (faixa de
+R$ 769.466 a R$ 1.202.309), contra R$ 672.838 na v1 e R$ 1.016.485 se o imóvel
+acompanhasse exatamente o IPCA. A v1 continua disponível no site e no comando
+`projetar --versao v1`.
+
 ## 5.4 Como reproduzir
 
 ```bash

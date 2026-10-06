@@ -9,12 +9,14 @@
 | [5. Valorização e projeção](05_valorizacao_e_projecao.md) | Previsão de 1 e 3 meses, taxa anual por bairro, cenários e IPCA |
 | [6. Interface](06_interface.md) | Telas da aplicação Streamlit, aviso de dados fora do padrão, publicação e decisões de projeto |
 | [7. Resultados e conclusões](07_resultados_e_conclusoes.md) | Principais descobertas, respostas às perguntas, limitações e trabalhos futuros |
+| [8. Versão 2: sugestões do orientador](08_versao_2_orientacao.md) | Idade pelas fotos, TabPFN 3.5, modo avançado, listas suspensas, experimento do preço v2 e valorização v2 com IPCA |
 
 ## Pastas
 
 - `figures/` — gráficos usados nos capítulos (`eda_*`: capítulo 2; `01`–`06`: capítulo 3;
   `11`–`14`: capítulos 4 e 5; `15`–`18`: capítulo 6).
-- `reports/` — relatórios gerados automaticamente pelos scripts de treino e benchmark.
+- `reports/` — relatórios gerados automaticamente pelos scripts de treino e benchmark
+  (inclui `experimento_preco_v2.md`, do capítulo 8).
 
 ## Como gerar novamente as figuras
 

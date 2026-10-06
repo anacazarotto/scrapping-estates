@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from model_io import load_model, save_model
-from tabpfn_model import TABPFN_NAME, make_tabpfn, tabpfn_enabled
+from tabpfn_model import TABPFN_VARIANTS, enabled_tabpfn_variants, make_tabpfn
 from sklearn.compose import ColumnTransformer, TransformedTargetRegressor
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.impute import SimpleImputer
@@ -291,8 +291,10 @@ def make_model_factories(seed=42):
             random_seed=seed,
             verbose=False,
         )
-    if tabpfn_enabled():
-        factories[TABPFN_NAME] = lambda: make_tabpfn(NUMERIC_COLUMNS, CATEGORICAL_COLUMNS, seed=seed)
+    for tabpfn_name in enabled_tabpfn_variants(verbose=False):
+        factories[tabpfn_name] = lambda version=TABPFN_VARIANTS[tabpfn_name]: make_tabpfn(
+            NUMERIC_COLUMNS, CATEGORICAL_COLUMNS, seed=seed, version=version
+        )
     return factories
 
 
@@ -300,7 +302,7 @@ def build_regressor(name, *, seed=42, use_log=True):
     factories = make_model_factories(seed=seed)
     if name not in factories:
         raise ValueError(f"Modelo não suportado: {name}")
-    if name == TABPFN_NAME:
+    if name in TABPFN_VARIANTS:
         # TabPFN faz a própria codificação (sem one-hot/padronização).
         pipeline = Pipeline([("model", factories[name]())])
     else:

@@ -14,8 +14,13 @@ python -m streamlit run interface/app.py     # abre em http://localhost:8501
 **Entrada (barra lateral):**
 
 - tipo (Apartamento ou Casa) e bairro (lista dos bairros com anúncios na base);
-- área privativa, área total, quartos, banheiros e vagas;
+- área privativa e área total (campos livres, com aviso fora da faixa de treino);
+- quartos, banheiros e vagas em **listas suspensas**, de 0 (não informado) até o máximo
+  visto no treino para o tipo (apartamento: 4 quartos, 4 banheiros, 3 vagas; casa: 5, 5
+  e 5);
 - horizonte da projeção (1 a 30 anos);
+- versão da valorização: **v2** (padrão, anúncios combinados com o IPCA) ou **v1** (só os
+  anúncios) — capítulo 8;
 - cenário de comparação: IPCA média de 10 anos (padrão), IPCA de 12 meses, outra taxa
   ou nenhum;
 - opções avançadas: informar o preço atual em vez de usar o valor estimado.
@@ -52,6 +57,27 @@ acompanhados e a faixa de incerteza, para apartamentos e para casas.
 
 Desempenho do modelo de preço no conjunto de teste (MAE, RMSE e R² por tipo) e os
 modelos que compõem o ensemble.
+
+## 6.4.1 Modo avançado
+
+Aba para quem quer ver os modelos por dentro, pedida pelo orientador. Tem três partes:
+
+- **Modelos**: o usuário escolhe o tipo de imóvel e qualquer um dos candidatos (os 9
+  algoritmos × 2 alvos, mais o ensemble usado no site e o TabPFN quando incluído). Para o
+  modelo escolhido, mostra família, ideia, parâmetros, pontos positivos e negativos;
+  métricas na validação cruzada e no teste (MAE, R², erro mediano, previsões a até ±20%);
+  o gráfico de preço previsto × real de cada imóvel do teste, com bairro e área no
+  cursor; e a distribuição do erro.
+- **Comparação**: todos os candidatos lado a lado pelo erro médio no teste, com o ensemble
+  em destaque, e a tabela completa de métricas.
+- **Dataset**: a base de casas e apartamentos, com filtros por tipo, bairro e faixa de
+  preço, mediana de preço e de preço/m² e botão para baixar em CSV. Não inclui código do
+  anúncio, endereço, foto nem imobiliária.
+
+Os dados vêm de `dados/resultados_modelos.json` e `dados/dataset_imoveis.csv`, gerados por
+`scripts_predict/resultados_modelos.py` (`make resultados-modelos`) com exatamente o
+protocolo de avaliação do capítulo 4. As descrições dos modelos ficam em
+`interface/modelos_info.py`.
 
 ## 6.5 Aviso de dados fora do padrão
 

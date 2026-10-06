@@ -80,6 +80,22 @@ Na primeira execução os pesos `Prior-Labs/TabPFN-v2-reg` são baixados do Hugg
 O modelo usa no máximo 10.000 linhas de treino (acima disso, subamostra) e recebe
 bairro/tipo como categorias (sem one-hot). Para rodar sem ele: `DISABLE_TABPFN=1`.
 
+**Versões novas (TabPFN 3.5).** Escolha as versões com `TABPFN_VERSIONS` (padrão `v2`):
+
+```bash
+TABPFN_VERSIONS=v2,v3.5,v3.5-fast make benchmark-models-hibrido
+```
+
+- `v3.5` e `v3.5-fast` rodam localmente com o mesmo pacote, mas exigem **aceitar a
+  licença uma vez** (conta em https://ux.priorlabs.ai; licença não comercial, que permite
+  uso acadêmico).
+  Faça um primeiro teste num terminal interativo para o login abrir no navegador; o token
+  fica salvo em `~/.cache/tabpfn/auth_token`. Sem o token, essas versões são puladas com
+  um aviso.
+- `thinking` (TabPFN-3.5-Thinking) **só existe pela API paga** da Prior Labs: instale
+  `pip install tabpfn-client` e defina `TABPFN_TOKEN`. Os dados de treino são enviados ao
+  servidor da Prior Labs.
+
 ### 5. Configuração (`.env`) e tokens
 
 Tokens das APIs das imobiliárias **não ficam mais no código**. Copie o exemplo e preencha:
@@ -257,6 +273,8 @@ em [`docs/`](docs/README.md). Para gerar as figuras:
 ```bash
 make eda                  # docs/figures/eda_*.png
 make figuras-resultados   # docs/figures/11 a 14
+make resultados-modelos   # dados/resultados_modelos.json e dataset_imoveis.csv (modo avançado)
+make experimento-v2       # docs/reports/experimento_preco_v2.md
 ```
 
 ### Como as métricas são medidas

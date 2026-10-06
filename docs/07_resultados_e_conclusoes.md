@@ -104,3 +104,8 @@ bairro como igual, o que é uma das principais fontes do erro que resta.
    agrupados certo ou errado (unidades iguais no mesmo prédio podem virar um só imóvel).
 8. **Ajustar os hiperparâmetros** do ensemble final e repetir a avaliação com outras
    divisões treino/teste, para medir a variação do resultado.
+9. **Estimar a idade do prédio pelas fotos.** Avaliado e deixado como trabalho futuro
+   (capítulo 8): os anúncios coletados não informam o ano de construção, então não há
+   gabarito para treinar nem para medir a precisão, e cada anúncio guardou uma única foto.
+   Exige coletar o ano de construção, onde a imobiliária o informar, e várias fotos por
+   imóvel.

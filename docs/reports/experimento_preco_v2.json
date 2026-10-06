@@ -1,0 +1,126 @@
+{
+ "Casa": {
+  "v1": {
+   "mae": 291216.3934016559,
+   "rmse": 430675.5463054353,
+   "r2": 0.5590945209932983,
+   "erro_mediano_pct": 19.576186864868934,
+   "mae_cv_melhor": 286418.3894720354,
+   "ensemble": [
+    "CatBoost",
+    "XGBoost",
+    "Random Forest"
+   ]
+  },
+  "bairro": {
+   "mae": 291375.7947291797,
+   "rmse": 422766.11756007065,
+   "r2": 0.5751404190157376,
+   "erro_mediano_pct": 19.412606054183495,
+   "mae_cv_melhor": 288238.341564784,
+   "ensemble": [
+    "CatBoost",
+    "Random Forest",
+    "XGBoost"
+   ]
+  },
+  "m2": {
+   "mae": 289732.185147575,
+   "rmse": 435071.6129458836,
+   "r2": 0.5500476080407621,
+   "erro_mediano_pct": 19.338495384713802,
+   "mae_cv_melhor": 281793.3867497798,
+   "ensemble": [
+    "CatBoost",
+    "XGBoost",
+    "Random Forest"
+   ]
+  },
+  "bairro+m2": {
+   "mae": 297547.3386758719,
+   "rmse": 439701.5395795537,
+   "r2": 0.5404200837273027,
+   "erro_mediano_pct": 18.19590992510544,
+   "mae_cv_melhor": 283983.03313358244,
+   "ensemble": [
+    "CatBoost",
+    "Random Forest",
+    "XGBoost"
+   ]
+  },
+  "ipca": {
+   "mae": 292025.7345287549,
+   "rmse": 431302.97387880646,
+   "r2": 0.5578089232144379,
+   "erro_mediano_pct": 19.397365883978736,
+   "mae_cv_melhor": 289863.49911690457,
+   "ensemble": [
+    "CatBoost",
+    "XGBoost",
+    "Random Forest"
+   ]
+  }
+ },
+ "Apartamento": {
+  "v1": {
+   "mae": 119639.88727285838,
+   "rmse": 166735.12623793702,
+   "r2": 0.7952103452286824,
+   "erro_mediano_pct": 14.807282041920168,
+   "mae_cv_melhor": 122256.19409343647,
+   "ensemble": [
+    "CatBoost (log)",
+    "XGBoost (log)",
+    "CatBoost"
+   ]
+  },
+  "bairro": {
+   "mae": 119468.20711133034,
+   "rmse": 166413.98958452206,
+   "r2": 0.7959984470855714,
+   "erro_mediano_pct": 15.153107675577859,
+   "mae_cv_melhor": 121387.86913214011,
+   "ensemble": [
+    "CatBoost (log)",
+    "CatBoost",
+    "XGBoost (log)"
+   ]
+  },
+  "m2": {
+   "mae": 119781.36767857047,
+   "rmse": 166818.69441540525,
+   "r2": 0.7950050113273021,
+   "erro_mediano_pct": 14.304513958575813,
+   "mae_cv_melhor": 122290.11697285196,
+   "ensemble": [
+    "Gradient Boosting (log)",
+    "CatBoost (log)",
+    "Gradient Boosting"
+   ]
+  },
+  "bairro+m2": {
+   "mae": 120152.13266825417,
+   "rmse": 164541.94591231825,
+   "r2": 0.800562387427497,
+   "erro_mediano_pct": 14.64841777991959,
+   "mae_cv_melhor": 121864.13975320895,
+   "ensemble": [
+    "Gradient Boosting (log)",
+    "CatBoost",
+    "CatBoost (log)"
+   ]
+  },
+  "ipca": {
+   "mae": 119984.69968940497,
+   "rmse": 167955.16495762745,
+   "r2": 0.7922023957557135,
+   "erro_mediano_pct": 14.100343691007405,
+   "mae_cv_melhor": 122588.08157066868,
+   "ensemble": [
+    "CatBoost (log)",
+    "Gradient Boosting (log)",
+    "XGBoost (log)"
+   ]
+  }
+ }
+}
