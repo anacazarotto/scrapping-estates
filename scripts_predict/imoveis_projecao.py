@@ -39,6 +39,7 @@ from imoveis_ml_hibrido import load_artifact as load_price_artifact
 from imoveis_ml_hibrido import predict_price
 from imoveis_valorizacao import ALLOWED_TYPES, MAX_ABS_MONTHLY_LOG_CHANGE, load_panel
 from ipca import faixa_anual, load_ipca
+from ivgr import load_ivgr
 from model_io import load_model, save_model
 
 DEFAULT_UNIFIED_DB = Path("imoveis_unificado.db")
@@ -56,8 +57,9 @@ BOOTSTRAP_SAMPLES = 1000
 INTERVAL = (10, 90)  # percentis do cenário pessimista / otimista
 MAX_ANOS = 30
 REFERENCIAS = ("ipca-media", "ipca-12m", "nenhuma")
-# v2: força do IPCA como ponto de partida, em "meses de dados equivalentes".
-IPCA_PRIOR_MESES = 12
+# v2: força do índice de referência como ponto de partida, em "meses de dados equivalentes".
+PRIOR_MESES = 12
+VERSOES_V2 = {"v2-ivgr": "ivgr", "v2": "ipca"}  # versão -> índice de referência
 
 
 # --------------------------------------------------------------------- taxas
@@ -161,17 +163,26 @@ def meses_observados(artifact):
     return max(1, (max(meses) - min(meses)).n)
 
 
-def ajustar_ipca(rate, artifact, prior_meses=IPCA_PRIOR_MESES):
-    """Taxa v2: combina a taxa medida nos anúncios com o IPCA (média de 10 anos).
-
-    O IPCA entra como ponto de partida ("a priori") e a taxa medida ganha peso conforme
-    há mais meses de dados: peso_dados = T / (T + prior_meses). Com 5 meses de coleta e
-    prior de 12 meses, a taxa medida pesa 29% e o IPCA 71%. Mais meses de coleta movem a
-    taxa para o que os dados mostram. As diferenças entre bairros são mantidas,
-    reduzidas pelo mesmo peso.
-    """
+def resumo_referencia(artifact, base):
+    """Resumo do índice usado como ponto de partida da v2: "ivgr" (imóveis) ou "ipca"."""
+    if base == "ivgr":
+        return load_ivgr(atualizar=False)
     ipca = artifact.get("ipca")
-    if not ipca:
+    return {**ipca, "faixa_12m_pct": faixa_anual()} if ipca else None
+
+
+def ajustar_referencia(rate, artifact, base="ivgr", prior_meses=PRIOR_MESES):
+    """Taxa v2: combina a taxa medida nos anúncios com um índice de referência.
+
+    O índice (IVG-R, de imóveis, ou IPCA, inflação geral; média anual de 10 anos) é o
+    ponto de partida ("a priori"), e a taxa medida ganha peso conforme há mais meses de
+    dados: peso_dados = T / (T + prior_meses). Com 5 meses de coleta e prior de 12
+    meses, a taxa medida pesa 29% e o índice 71%. As diferenças entre bairros são
+    mantidas, reduzidas pelo mesmo peso. A faixa combina o intervalo da taxa medida com
+    a variação do índice em 12 meses (percentis 10 e 90 dos últimos 10 anos).
+    """
+    ref = resumo_referencia(artifact, base)
+    if not ref:
         return rate, None
     t = meses_observados(artifact)
     w = t / (t + prior_meses)
@@ -179,8 +190,8 @@ def ajustar_ipca(rate, artifact, prior_meses=IPCA_PRIOR_MESES):
     def mensal(pct_anual):
         return float(np.log1p(pct_anual / 100.0) / 12.0)
 
-    central = mensal(ipca["media_anual_pct"])
-    faixa = faixa_anual()  # IPCA 12 meses, percentis 10 e 90 dos últimos 10 anos
+    central = mensal(ref["media_anual_pct"])
+    faixa = ref.get("faixa_12m_pct")
     baixa, alta = (mensal(faixa[0]), mensal(faixa[1])) if faixa else (central, central)
     ajustada = {
         "mensal": w * float(rate["mensal"]) + (1 - w) * central,
@@ -188,6 +199,11 @@ def ajustar_ipca(rate, artifact, prior_meses=IPCA_PRIOR_MESES):
         "mensal_alta": w * float(rate["mensal_alta"]) + (1 - w) * alta,
     }
     return {**rate, **ajustada}, w
+
+
+def ajustar_ipca(rate, artifact, prior_meses=PRIOR_MESES):
+    """Valorização v2 com o IPCA como ponto de partida (mantida para comparação)."""
+    return ajustar_referencia(rate, artifact, base="ipca", prior_meses=prior_meses)
 
 
 def project(
@@ -210,8 +226,8 @@ def project(
 
     `preco_atual` (opcional) substitui o valor estimado pelo modelo de preço.
     `taxa_referencia` (opcional, % ao ano) adiciona um cenário de referência (IPCA).
-    `versao`: "v1" usa só a taxa medida nos anúncios; "v2" a combina com o IPCA
-    (`ajustar_ipca`).
+    `versao`: "v1" usa só a taxa medida nos anúncios; "v2-ivgr" a combina com o IVG-R
+    (índice de imóveis do BCB) e "v2" com o IPCA (`ajustar_referencia`).
     """
     bairro = unify_bairro(bairro)
     tipo = canonical_tipo(tipo_imovel)
@@ -234,8 +250,8 @@ def project(
     valor_hoje = float(preco_atual) if preco_atual else float(valor_modelo)
     rate, origem = lookup_rate(artifact, bairro, tipo)
     peso_dados = 1.0
-    if versao == "v2":
-        rate, peso = ajustar_ipca(rate, artifact)
+    if versao in VERSOES_V2:
+        rate, peso = ajustar_referencia(rate, artifact, base=VERSOES_V2[versao])
         if peso is not None:
             peso_dados = peso
 
@@ -533,9 +549,12 @@ def build_parser():
     )
     p.add_argument(
         "--versao",
-        choices=("v1", "v2"),
+        choices=("v1", "v2-ivgr", "v2"),
         default="v1",
-        help="v1: taxa medida nos anúncios; v2: taxa medida combinada com o IPCA.",
+        help=(
+            "v1: taxa medida nos anúncios; v2-ivgr: combinada com o IVG-R (índice de "
+            "imóveis do BCB); v2: combinada com o IPCA."
+        ),
     )
     p.set_defaults(func=cmd_predict)
     return parser

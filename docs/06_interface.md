@@ -19,7 +19,8 @@ python -m streamlit run interface/app.py     # abre em http://localhost:8501
   visto no treino para o tipo (apartamento: 4 quartos, 4 banheiros, 3 vagas; casa: 5, 5
   e 5);
 - horizonte da projeção (1 a 30 anos);
-- versão da valorização: **v2** (padrão, anúncios combinados com o IPCA) ou **v1** (só os
+- versão da valorização: **v2 com IVG-R** (padrão, anúncios combinados com o índice de
+  imóveis do Banco Central), **v2 com IPCA** ou **v1** (só os
   anúncios) — capítulo 8;
 - cenário de comparação: IPCA média de 10 anos (padrão), IPCA de 12 meses, outra taxa
   ou nenhum;

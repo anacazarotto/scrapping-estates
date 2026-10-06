@@ -10,7 +10,7 @@ números e as telas anteriores continuam disponíveis.
 | Treinar também com TabPFN v3, Fast e Thinking | Suporte às versões 3.5, 3.5-Fast e 3.5-Thinking (8.2) | Pronto no código; depende do aceite da licença e do token da Prior Labs |
 | Modo avançado no site, com todos os modelos e o dataset | Nova aba "Modo avançado" (8.3 e capítulo 6) | Publicado |
 | Listas suspensas nos campos com restrição | Quartos, banheiros e vagas viraram listas (8.3) | Publicado |
-| Aproximar o valor, usando o IPCA no treino, numa v2 | Experimento no modelo de preço (8.4) e valorização v2 (8.5) | Valorização v2 publicada; modelo de preço mantido no v1 |
+| Aproximar o valor, usando o IPCA no treino, numa v2 | Experimento no modelo de preço (8.4) e valorização v2 com IPCA (8.5) e com o IVG-R, índice de imóveis (8.6) | Valorização v2 com IVG-R publicada como padrão; modelo de preço mantido no v1 |
 
 ## 8.1 Idade do prédio pelas fotos
 
@@ -19,8 +19,8 @@ com a foto **e** o ano de construção conhecido, para aprender e para medir o e
 
 - Nenhum dos 8 robôs de coleta captura o ano de construção, e ele não aparece nos campos
   dos anúncios salvos.
-- Cada anúncio guardou só a foto principal, que muitas vezes é da fachada, da sala ou da
-  vista, sem padrão.
+- Nenhuma foto foi guardada: o link da foto principal entrou nos robôs depois das 12
+  coletas (seção 1.4). E mesmo a foto principal varia sem padrão (fachada, sala, vista).
 - Um modelo de imagem pronto (que classifica fotos sem treino específico) daria uma
   resposta, mas sem gabarito não haveria como dizer se ela está certa. Um número sem
   medida de erro não pode entrar no modelo de preço nem no TCC.
@@ -60,8 +60,8 @@ modo avançado.
 - **Listas suspensas**: quartos, banheiros e vagas só aceitam valores de 0 até o máximo
   visto no treino para o tipo de imóvel. As áreas continuam livres, porque um valor fora
   da faixa ainda pode ser real; nesse caso o site mostra o aviso da seção 6.5.
-- **Versão da valorização**: v2 (padrão) ou v1, na barra lateral; a aba de bairros mostra
-  as duas taxas.
+- **Versão da valorização**: v2 com IVG-R (padrão), v2 com IPCA ou v1, na barra lateral; a
+  aba de bairros mostra as três taxas.
 
 ## 8.4 Experimento: o modelo de preço pode ficar mais próximo?
 
@@ -143,11 +143,49 @@ meses de coleta, o peso dos anúncios cresce sozinho e a comparação passa a se
 **Limitação:** o número 12 é uma escolha, não algo medido. Com 12 meses de coleta, vale
 repetir a análise e verificar se a taxa medida se aproxima do IPCA.
 
-## 8.6 Como reproduzir
+## 8.6 Valorização v2 com o IVG-R (padrão do site)
+
+O IPCA mede a inflação em geral, não o preço de imóveis. O Banco Central publica um
+índice de imóveis, o **IVG-R** (Índice de Valores de Garantia de Imóveis Residenciais
+Financiados, série SGS 21340), calculado a partir das avaliações feitas pelos bancos nos
+financiamentos. Ele passou a ser o ponto de partida padrão da v2, com a mesma fórmula da
+seção 8.5 (o IPCA continua disponível como alternativa).
+
+| Índice (BCB) | Últimos 12 meses | Média de 10 anos | Faixa de 12 meses (p10 a p90) |
+|---|---:|---:|---|
+| IPCA (inflação) | +4,22% | +4,89%/ano | +2,80% a +9,06% |
+| **IVG-R (imóveis)** | **+5,28%** | **+3,99%/ano** | **−2,04% a +8,23%** |
+
+Dados até jul/2026 (IVG-R) e ago/2026 (IPCA); `scripts_predict/ivgr.py` baixa a série e
+guarda uma cópia em `dados/ivgr.json`.
+
+| Tipo | v1 | v2 com IPCA | **v2 com IVG-R** |
+|---|---|---|---|
+| Apartamento | +0,89%/ano | +3,70% (+2,14% a +6,70%) | **+3,07% (−1,28% a +6,13%)** |
+| Casa | +0,38%/ano | +3,54% (+1,97% a +6,55%) | **+2,92% (−1,45% a +5,98%)** |
+
+No apartamento de exemplo (R$ 630.776 hoje), a v2 com IVG-R projeta **R$ 847.541 em 10
+anos** (+3,00% ao ano no Centro; faixa de R$ 547.286 a R$ 1.139.090).
+
+**Por que o IVG-R é melhor que o IPCA aqui:**
+
+- **Mede o que o trabalho quer medir:** valor de imóveis, não preço de alimentos,
+  transporte e serviços.
+- **Reforça um achado do TCC:** em 10 anos, os imóveis financiados no Brasil valorizaram
+  +3,99% ao ano, menos que a inflação (+4,89%). A valorização baixa vista nos anúncios de
+  Chapecó vai na mesma direção.
+- **Faixa mais honesta:** o cenário pessimista pode ser de queda, porque o próprio índice
+  caiu em alguns períodos da última década.
+
+**Limitação:** o IVG-R é nacional; não existe recorte para Chapecó nem para Santa Catarina
+nessa série. Ele mede o valor de avaliação bancária, que também não é o preço de venda.
+
+## 8.7 Como reproduzir
 
 ```bash
 make experimento-v2         # docs/reports/experimento_preco_v2.md
 make resultados-modelos     # dados do modo avançado
 python scripts_predict/imoveis_projecao.py projetar --bairro Centro --tipo-imovel Apartamento \
-    --area-privada 80 --area-total 100 --quartos 2 --banheiros 2 --vagas 1 --anos 10 --versao v2
+    --area-privada 80 --area-total 100 --quartos 2 --banheiros 2 --vagas 1 --anos 10 --versao v2-ivgr
+python scripts_predict/ivgr.py   # atualiza dados/ivgr.json
 ```
