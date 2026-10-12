@@ -27,6 +27,7 @@ Exemplo: TABPFN_VERSIONS=v2,v3.5,v3.5-fast,thinking
 """
 
 import os
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -87,9 +88,19 @@ def requested_versions():
 
 def enabled_tabpfn_variants(verbose=True):
     """Nomes das variantes do TabPFN que entram no benchmark nesta execução."""
+    names, avisos = _variantes_ativas()
+    if verbose:
+        for aviso in avisos:
+            print(aviso)
+    return list(names)
+
+
+@lru_cache(maxsize=None)
+def _variantes_ativas():
+    """Calculado uma vez por processo (lê variáveis de ambiente e arquivos de token)."""
     if os.getenv("DISABLE_TABPFN"):
-        return []
-    names = []
+        return (), ()
+    names, avisos = [], []
     for name, version in TABPFN_VARIANTS.items():
         if version not in requested_versions():
             continue
@@ -104,9 +115,9 @@ def enabled_tabpfn_variants(verbose=True):
             motivo = "aceite a licença em https://ux.priorlabs.ai (token da Prior Labs)"
         if ok:
             names.append(name)
-        elif verbose:
-            print(f"[aviso] {name} pulado: {motivo}.")
-    return names
+        else:
+            avisos.append(f"[aviso] {name} pulado: {motivo}.")
+    return tuple(names), tuple(avisos)
 
 
 def make_tabpfn(numeric_columns, categorical_columns, seed=42, output_type="mean", version="v2"):
@@ -147,11 +158,8 @@ class TabPFNv2Regressor(RegressorMixin, BaseEstimator):
             if _TabPFNClientRegressor is None:
                 raise ImportError("Instale o cliente da API: pip install tabpfn-client")
             # Thinking só existe na API (modelos v3); o servidor escolhe o modelo padrão.
-            return _TabPFNClientRegressor(
-                thinking_mode=True,
-                categorical_features_indices=categorical_indices,
-                random_state=self.random_state,
-            )
+            # Só o parâmetro documentado no README do tabpfn-client (thinking_mode).
+            return _TabPFNClientRegressor(thinking_mode=True)
         if _TabPFNRegressor is None:
             raise ImportError(
                 "TabPFN não instalado. Rode: pip install -r requirements-tabpfn.txt"
@@ -165,6 +173,10 @@ class TabPFNv2Regressor(RegressorMixin, BaseEstimator):
             # sem isto o TabPFN recusa > 1000 linhas quando roda em CPU.
             "ignore_pretraining_limits": True,
         }
+        if self.version != "v2":
+            # v3.5 exige licença aceita: sem token válido, o pacote abriria o navegador
+            # no meio do treino. Assim ele falha com uma mensagem clara.
+            os.environ.setdefault("TABPFN_NO_BROWSER", "1")
         if _ModelVersion is not None:
             versions = {
                 "v2": _ModelVersion.V2,

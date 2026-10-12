@@ -29,6 +29,7 @@ import argparse
 import json
 import sqlite3
 from datetime import datetime
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -61,7 +62,7 @@ REFERENCIAS = ("ipca-media", "ipca-12m", "nenhuma")
 # v2: força do índice de referência como ponto de partida, em "meses de dados equivalentes".
 PRIOR_MESES = 12
 # versão -> índice de referência (v3: IPCA+INCC, `indice_ipca_incc.py`)
-VERSOES_V2 = {"v3": "ipca_incc", "v2-ivgr": "ivgr", "v2": "ipca"}
+VERSOES_INDICE = {"v3": "ipca_incc", "v2-ivgr": "ivgr", "v2": "ipca"}
 
 
 # --------------------------------------------------------------------- taxas
@@ -165,14 +166,22 @@ def meses_observados(artifact):
     return max(1, (max(meses) - min(meses)).n)
 
 
-def resumo_referencia(artifact, base):
-    """Índice de partida: "ipca_incc" (v3), "ivgr" (imóveis) ou "ipca"."""
+@lru_cache(maxsize=None)
+def _resumo_indice(base):
+    """Resumo de um índice a partir da cópia local (lida uma vez por processo)."""
     if base == "ipca_incc":
         return resumo_ipca_incc()
     if base == "ivgr":
         return load_ivgr(atualizar=False)
+    return {"faixa_12m_pct": faixa_anual()}  # ipca: a média vem do artefato
+
+
+def resumo_referencia(artifact, base):
+    """Índice de partida: "ipca_incc" (v3), "ivgr" (imóveis) ou "ipca"."""
+    if base in ("ipca_incc", "ivgr"):
+        return _resumo_indice(base)
     ipca = artifact.get("ipca")
-    return {**ipca, "faixa_12m_pct": faixa_anual()} if ipca else None
+    return {**ipca, **_resumo_indice("ipca")} if ipca else None
 
 
 def ajustar_referencia(rate, artifact, base="ivgr", prior_meses=PRIOR_MESES):
@@ -254,8 +263,8 @@ def project(
     valor_hoje = float(preco_atual) if preco_atual else float(valor_modelo)
     rate, origem = lookup_rate(artifact, bairro, tipo)
     peso_dados = 1.0
-    if versao in VERSOES_V2:
-        rate, peso = ajustar_referencia(rate, artifact, base=VERSOES_V2[versao])
+    if versao in VERSOES_INDICE:
+        rate, peso = ajustar_referencia(rate, artifact, base=VERSOES_INDICE[versao])
         if peso is not None:
             peso_dados = peso
 
@@ -285,7 +294,7 @@ def project(
         "taxa_anual_otimista_pct": annual_pct(rate["mensal_alta"]),
         "taxa_referencia_pct": taxa_referencia,
         "versao": versao,
-        "peso_dados": peso_dados,  # v2: peso da taxa medida (o resto é IPCA)
+        "peso_dados": peso_dados,  # v2/v3: peso da taxa medida (o resto é o índice)
         "dados_ate": artifact["ultimo_mes"],
         "projecao": pd.DataFrame(rows),
     }

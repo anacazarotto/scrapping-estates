@@ -16,8 +16,8 @@ python -m streamlit run interface/app.py     # abre em http://localhost:8501
 - tipo (Apartamento ou Casa) e bairro (lista dos bairros com anúncios na base);
 - área privativa e área total (campos livres, com aviso fora da faixa de treino);
 - quartos, banheiros e vagas em **listas suspensas**, de 0 (não informado) até o máximo
-  visto no treino para o tipo (apartamento: 4 quartos, 4 banheiros, 3 vagas; casa: 5, 5
-  e 5);
+  visto no treino para o tipo (apartamento: 4 quartos, 4 banheiros, 3 vagas; casa: 5
+  quartos, 5 banheiros, 4 vagas);
 - horizonte da projeção (1 a 30 anos);
 - versão da valorização: **v2 com IVG-R** (padrão, anúncios combinados com o índice de
   imóveis do Banco Central), **v2 com IPCA** ou **v1** (só os

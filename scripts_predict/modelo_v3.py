@@ -61,6 +61,7 @@ DEFAULT_REPORT = Path("docs/reports/modelo_v3.md")
 DEFAULT_DATASET_DB = Path("imoveis_simulados_v3.db")  # fora do padrão das coletas
 DEFAULT_DATASET_CSV = Path("dados/dataset_simulado_v3.csv")
 ANOS_SIMULADOS = list(range(2016, 2026))
+MEIO_DO_ANO = 5.5 / 12  # meio de junho, na mesma convenção dos reais: ano + (mês - 0,5) / 12
 NUM_V3 = NUMERIC_COLUMNS + ["ano"]
 FEATURES_V3 = NUM_V3 + CATEGORICAL_COLUMNS
 # Random Forest e MLP/SVM ficam de fora: com ~15 mil linhas, o Random Forest gera um
@@ -100,7 +101,7 @@ def simular(reais, anos=ANOS_SIMULADOS):
         bloco = reais.copy()
         f = np.array([fator(f"{ano}-06", m, indice) for m in bloco["mes"]])
         bloco["preco"] = bloco["preco"] / f
-        bloco["ano"] = ano + 0.5
+        bloco["ano"] = ano + MEIO_DO_ANO
         bloco["mes"] = f"{ano}-06"
         bloco["simulado"] = 1
         linhas.append(bloco)
@@ -179,7 +180,7 @@ def segmento(df, tipo, seed=42):
     # Coerência com o índice (NÃO é medida de acerto): quanto o modelo diz que os imóveis
     # de teste valiam em jun/2021, comparado ao que o índice diria.
     hoje = prever(entradas, teste_tip)
-    em2021 = prever(entradas, teste_tip.assign(ano=2021.5))
+    em2021 = prever(entradas, teste_tip.assign(ano=2021 + MEIO_DO_ANO))
     indice = nivel()
     esperado = np.array([1 / fator("2021-06", m, indice) for m in teste_tip["mes"]])
     coerencia = {
@@ -215,7 +216,7 @@ def load_v3(path=DEFAULT_MODEL_PATH):
 
 
 def prever_preco_v3(art, *, ano, area_total, area_privada, bairro, tipo_imovel, quartos, banheiros, vagas):
-    """Preço estimado do imóvel no ano informado (ex.: 2021.5 = meio de 2021)."""
+    """Preço estimado do imóvel no ano informado (ano + MEIO_DO_ANO = jun daquele ano)."""
     tipo = canonical_tipo(tipo_imovel)
     seg = art["segments"][tipo]
     linha = pd.DataFrame(

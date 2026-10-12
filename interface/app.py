@@ -24,7 +24,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts_predict"))
 from imoveis_ml_hibrido import format_currency, input_warnings  # noqa: E402
 from indice_ipca_incc import resumo as resumo_ipca_incc  # noqa: E402
 from ivgr import load_ivgr  # noqa: E402
-from modelo_v3 import load_v3, prever_preco_v3  # noqa: E402
+from modelo_v3 import MEIO_DO_ANO, load_v3, prever_preco_v3  # noqa: E402
 from modo_avancado import tela_avancada  # noqa: E402
 from imoveis_ml_hibrido import load_artifact as load_price_artifact  # noqa: E402
 from imoveis_projecao import (  # noqa: E402
@@ -188,7 +188,7 @@ def grafico_passado(passado):
         go.Scatter(
             x=passado["Ano"], y=passado["Valor estimado"], mode="lines+markers",
             line=dict(color=COR_CENTRAL, width=2, dash="dot"), marker=dict(size=8),
-            hovertemplate="Meio de %{x}: R$ %{y:,.0f}<extra></extra>",
+            hovertemplate="Jun/%{x}: R$ %{y:,.0f}<extra></extra>",
         )
     )
     fig.update_layout(
@@ -267,7 +267,8 @@ def escolher_referencia(proj_art, versao="v1"):
 def escolher_contagem(coluna, rotulo, price_art, tipo, campo, padrao):
     """Lista suspensa de 0 até o máximo visto no treino para o tipo de imóvel."""
     limites = price_art["segments"][tipo]["clip_bounds"].get(campo)
-    maximo = int(np.ceil(limites[1])) if limites else 10
+    # floor: o máximo oferecido nunca passa do limite de treino (ex.: 4,64 vagas -> 4).
+    maximo = max(1, int(np.floor(limites[1]))) if limites else 10
     opcoes = list(range(0, maximo + 1))
     return coluna.selectbox(
         rotulo,
@@ -433,7 +434,10 @@ def tela_estimativa(price_art, proj_art):
                 tipo_imovel=tipo, quartos=quartos, banheiros=banheiros, vagas=vagas,
             )
             passado = pd.DataFrame(
-                {"Ano": ANOS_PASSADO, "Valor estimado": [prever_preco_v3(art_v3, ano=a + 0.5, **dados) for a in ANOS_PASSADO]}
+                {
+                    "Ano": ANOS_PASSADO,
+                    "Valor estimado": [prever_preco_v3(art_v3, ano=a + MEIO_DO_ANO, **dados) for a in ANOS_PASSADO],
+                }
             )
             st.plotly_chart(grafico_passado(passado), width="stretch")
             st.dataframe(
@@ -444,7 +448,7 @@ def tela_estimativa(price_art, proj_art):
                 "Modelo v3, treinado com os anúncios reais e com um passado SIMULADO para cada imóvel: o "
                 "preço anunciado levado a cada ano pelo índice IPCA+INCC realizado. É uma estimativa "
                 "coerente com a inflação e o custo da construção, não um preço observado. Valores de "
-                "meio de cada ano."
+                "junho de cada ano."
             )
 
     with st.expander("Ver tabela ano a ano"):
@@ -486,6 +490,7 @@ def tela_bairros(proj_art):
                 "Bairro": rotulo_bairro(bairro) or "(sem bairro)",
                 "Tipo": tipo,
                 "Imóveis": r["imoveis"],
+                "Central v3 IPCA+INCC (%/ano)": round(annual_pct(ajustar_referencia(r, proj_art, "ipca_incc")[0]["mensal"]), 2),
                 "Central v2 IVG-R (%/ano)": round(annual_pct(ajustar_referencia(r, proj_art, "ivgr")[0]["mensal"]), 2),
                 "Central v2 IPCA (%/ano)": round(annual_pct(ajustar_referencia(r, proj_art, "ipca")[0]["mensal"]), 2),
                 "Central (%/ano)": round(annual_pct(r["mensal"]), 2),
@@ -504,6 +509,7 @@ def tela_bairros(proj_art):
         }
     )
     for col in (
+        "Central v3 IPCA+INCC (%/ano)",
         "Central v2 IVG-R (%/ano)",
         "Central v2 IPCA (%/ano)",
         "Central v1 (%/ano)",
@@ -514,9 +520,10 @@ def tela_bairros(proj_art):
     geral = proj_art["tipos"][tipo]
     st.caption(
         f"Taxa geral de {tipo.lower()}s: {pct(annual_pct(geral['mensal']))} ao ano "
-        f"({geral['imoveis']} imóveis acompanhados). v1 = só os anúncios; v2 = anúncios "
-        "combinados com o IVG-R (índice de imóveis) ou com o IPCA (ver \"Como a estimativa é "
-        "feita\" na aba Estimativa)."
+        f"({geral['imoveis']} imóveis acompanhados). v1 = só os anúncios; v3 = anúncios "
+        "combinados com o índice IPCA+INCC (padrão do site); v2 = anúncios combinados com o "
+        "IVG-R (índice de imóveis) ou com o IPCA (ver \"Como a estimativa é feita\" na aba "
+        "Estimativa)."
     )
     st.dataframe(df.drop(columns="Tipo"), hide_index=True, width="stretch")
 

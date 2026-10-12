@@ -14,9 +14,9 @@ hoje, com validação no tempo em três cortes (treino até 2016, 2018 e 2020, t
 meses seguintes), contra três referências simples: "repete os últimos 12 meses", "média
 dos últimos 10 anos" e "IPCA dos últimos 12 meses".
 
-Resultado (docs/reports/valorizacao_macro.md): inconsistente. O melhor modelo muda a
-cada corte (Gradient Boosting em 2016, a referência "média de 10 anos" em 2018, Ridge em
-2020), e nenhum supera as referências nos três. A projeção do site continua usando a
+Resultado (docs/reports/valorizacao_macro.md): os modelos com juros só vencem no corte
+de 2016 (Random Forest); em 2018 e em 2020 a referência "média dos últimos 10 anos"
+é a melhor. Nenhum modelo supera as referências de forma consistente. A projeção do site continua usando a
 média de longo prazo do IVG-R (valorização v2).
 
     python scripts_predict/valorizacao_macro.py          # baixa as séries, treina, salva
@@ -107,10 +107,15 @@ def candidatos(seed=42):
 
 
 def avaliar(base, fim_treino=FIM_TREINO):
-    """Treina até `fim_treino` e testa nos meses seguintes (com alvo conhecido)."""
+    """Testa nos meses depois de `fim_treino`, treinando só com alvos já conhecidos nele.
+
+    O alvo de cada mês é a valorização dos 12 meses SEGUINTES. Por isso o treino termina
+    12 meses antes do corte: assim nenhum alvo de treino usa preços do período de teste.
+    """
     completo = base.dropna(subset=FEATURES + ["alvo"])
     corte = pd.Period(fim_treino, freq="M")
-    treino, teste = completo[completo.index <= corte], completo[completo.index > corte]
+    treino = completo[completo.index <= corte - 12]
+    teste = completo[completo.index > corte]
     y_te = teste["alvo"].to_numpy()
 
     def metricas(pred):

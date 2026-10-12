@@ -128,17 +128,22 @@ R$ 1.397.788).
 `scripts_predict/valorizacao_macro.py` testou modelos (Regressão Linear, Ridge, Random
 Forest, Gradient Boosting) para prever a valorização do IVG-R nos 12 meses seguintes a
 partir de Selic, variação da Selic, IPCA, INCC e valorização passada, com 25 anos de dados
-mensais reais e três cortes de validação no tempo.
+mensais reais e três cortes de validação no tempo. Como o alvo de cada mês é a
+valorização dos 12 meses seguintes, o treino termina 12 meses antes de cada corte, para
+nenhum alvo de treino usar preços do período de teste.
 
-| Treino até | Melhor | Melhor referência simples |
+| Teste a partir de | Melhor | Melhor modelo com juros |
 |---|---|---|
-| dez/2016 | Gradient Boosting (2,93 p.p.) | repete os últimos 12 meses (3,08 p.p.) |
-| dez/2018 | **média de 10 anos (2,31 p.p.)** | — (os modelos perderam) |
-| dez/2020 | Ridge (1,85 p.p.) | média de 10 anos (2,22 p.p.) |
+| jan/2017 | **Random Forest (2,67 p.p.)** | — |
+| jan/2019 | **média de 10 anos (2,31 p.p.)** | Gradient Boosting (3,57 p.p.) |
+| jan/2021 | **média de 10 anos (2,22 p.p.)** | Ridge (2,24 p.p.) |
 
-O melhor modelo muda a cada período, e nenhum vence as referências nos três. Conclusão:
-com esses dados, os juros não melhoram a previsão de forma consistente, e o site não usa
-cenários de juros. Relatório completo em `docs/reports/valorizacao_macro.md`.
+Os modelos com juros só vencem no primeiro período; nos dois mais recentes, a média de 10
+anos do IVG-R é a melhor. Conclusão: com esses dados, os juros não melhoram a previsão de
+forma consistente, e o site não usa cenários de juros. Relatório completo em
+`docs/reports/valorizacao_macro.md`. (A primeira versão desta avaliação não separava os 12
+meses finais do treino e mostrava o Ridge vencendo a partir de 2021; o vazamento foi
+corrigido na revisão do código.)
 
 ## 9.8 Como reproduzir
 
