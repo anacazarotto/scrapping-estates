@@ -12,7 +12,7 @@ R$ 160 mil há 5 anos foi avaliado por um correspondente bancário em cerca de R
 |---|---:|---:|---:|
 | v1 (só anúncios) | +0,89% | R$ 167 mil | −29% |
 | v2 com IVG-R | +3,07% | R$ 186 mil | −21% |
-| v2 com IPCA | +3,70% | R$ 192 mil | −18% |
+| v2 com IPCA | +3,75% | R$ 192 mil | −18% |
 | IVG-R realizado nos últimos 5 anos | +4,42% | R$ 198 mil | −16% |
 | IPCA realizado nos últimos 5 anos | +5,30% | R$ 207 mil | −12% |
 | **IPCA+INCC realizado nos últimos 5 anos** | **+5,95%** | **R$ 214 mil** | **−9%** |
@@ -33,7 +33,7 @@ peso 50% cada. Séries reais do Banco Central (SGS 433 e 192), em
 | | IPCA | INCC | **IPCA+INCC** |
 |---|---:|---:|---:|
 | Últimos 5 anos | +5,30%/ano | +6,60%/ano | **+5,95%/ano** |
-| Últimos 10 anos | +4,89%/ano | — | **+5,80%/ano** |
+| Últimos 10 anos | +4,96%/ano | — | **+5,80%/ano** |
 | Faixa de 12 meses (p10 a p90, 10 anos) | — | — | **+3,52% a +11,42%** |
 
 Variação do índice em cada ano: 2016 +6,20%; 2017 +3,60%; 2018 +3,79%; 2019 +4,23%;

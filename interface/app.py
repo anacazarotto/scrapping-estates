@@ -22,6 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "scripts_predict"))
 
 from imoveis_ml_hibrido import format_currency, input_warnings  # noqa: E402
+from indice_ipca_incc import resumo as resumo_ipca_incc  # noqa: E402
 from ivgr import load_ivgr  # noqa: E402
 from modelo_v3 import load_v3, prever_preco_v3  # noqa: E402
 from modo_avancado import tela_avancada  # noqa: E402
@@ -216,11 +217,26 @@ def carregar_ivgr():
     return load_ivgr(atualizar=False)
 
 
-def escolher_referencia(proj_art):
-    """Seletor do cenário de referência: IPCA (padrão), IVG-R, outra taxa ou nenhum."""
+@st.cache_data(show_spinner=False)
+def carregar_ipca_incc():
+    return resumo_ipca_incc()
+
+
+def escolher_referencia(proj_art, versao="v1"):
+    """Seletor do cenário de referência: IPCA+INCC, IPCA, IVG-R, outra taxa ou nenhum.
+
+    O índice da versão escolhida aparece primeiro (padrão): IPCA+INCC na v3, IVG-R na
+    v2-ivgr e IPCA nas demais.
+    """
     ipca = proj_art.get("ipca")
     ivgr = carregar_ivgr()
+    combinado = carregar_ipca_incc()
     opcoes = {}
+    if combinado:
+        opcoes[f"IPCA+INCC média 10 anos ({pct(combinado['media_anual_pct'])} ao ano)"] = (
+            combinado["media_anual_pct"],
+            "IPCA+INCC média 10 anos",
+        )
     if ipca:
         for escolha in ("ipca-media", "ipca-12m"):
             taxa, rotulo = reference_rate(proj_art, escolha)
@@ -230,11 +246,15 @@ def escolher_referencia(proj_art):
             opcoes[f"{nome} ({pct(ivgr[chave])} ao ano)"] = (ivgr[chave], nome)
     opcoes["Outra taxa"] = None
     opcoes["Nenhuma"] = (None, None)
+    prefixo = {"v3": "IPCA+INCC", "v2-ivgr": "IVG-R"}.get(versao, "IPCA média")
+    padrao = next((i for i, rotulo in enumerate(opcoes) if rotulo.startswith(prefixo)), 0)
     escolha = st.selectbox(
         "Comparar com",
         list(opcoes),
+        index=padrao,
         help=(
-            (f"IPCA: {ipca['fonte']}, {ipca['inicio']} a {ipca['fim']}. " if ipca else "")
+            (f"IPCA+INCC: {combinado['fonte']}, {combinado['inicio']} a {combinado['fim']}. " if combinado else "")
+            + (f"IPCA: {ipca['fonte']}, {ipca['inicio']} a {ipca['fim']}. " if ipca else "")
             + (f"IVG-R: {ivgr['fonte']}, {ivgr['inicio']} a {ivgr['fim']}." if ivgr else "")
         ),
     )
@@ -298,7 +318,7 @@ def tela_estimativa(price_art, proj_art):
             ),
         )
         versao = VERSOES[versao_rotulo]
-        taxa_ref, rotulo_ref = escolher_referencia(proj_art)
+        taxa_ref, rotulo_ref = escolher_referencia(proj_art, versao)
         with st.expander("Opções avançadas"):
             usar_preco = st.checkbox("Informar o preço atual em vez de estimar")
             preco_atual = st.number_input(
