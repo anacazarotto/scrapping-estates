@@ -17,6 +17,7 @@ from modelos_info import ALVOS, info
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RESULTADOS_JSON = PROJECT_ROOT / "dados" / "resultados_modelos.json"
 DATASET_CSV = PROJECT_ROOT / "dados" / "dataset_imoveis.csv"
+DATASET_V3_CSV = PROJECT_ROOT / "dados" / "dataset_simulado_v3.csv"
 TIPOS = ("Apartamento", "Casa")
 
 COR_DESTAQUE = "#2a78d6"
@@ -41,7 +42,17 @@ def carregar_resultados():
 
 
 @st.cache_data(show_spinner=False)
-def carregar_dataset():
+def carregar_dataset(com_simulados=False):
+    """Base real; com `com_simulados`, a base v3 (reais + histórico simulado IPCA+INCC)."""
+    if com_simulados:
+        if not DATASET_V3_CSV.exists():
+            return None
+        df = pd.read_csv(DATASET_V3_CSV)
+        area = df["area_privada"].where(df["area_privada"] > 0, df["area_total"])
+        df["preco_m2"] = (df["preco"] / area.where(area > 0)).round(0)
+        df["origem"] = df["simulado"].map({0: "real", 1: "simulado"})
+        df["ano"] = df["ano"].round(2)
+        return df.drop(columns=["simulado", "mes", "imovel"])
     if not DATASET_CSV.exists():
         return None
     return pd.read_csv(DATASET_CSV)
@@ -219,7 +230,14 @@ def aba_comparacao(resultados):
 
 
 def aba_dataset():
-    df = carregar_dataset()
+    base = st.radio(
+        "Base",
+        ["Anúncios reais", "Reais + histórico simulado (v3)"],
+        horizontal=True,
+        help="v3: para cada imóvel real, um registro por ano de 2016 a 2025 com o preço levado a "
+        "cada ano pelo índice IPCA+INCC realizado. Os simulados são uma hipótese, não preços observados.",
+    )
+    df = carregar_dataset(com_simulados=base != "Anúncios reais")
     if df is None:
         st.info("Dataset não encontrado. Gere com: `python scripts_predict/resultados_modelos.py`")
         return
@@ -257,6 +275,8 @@ def aba_dataset():
             "vagas": "Vagas",
             "preco": st.column_config.NumberColumn("Preço (R$)", format="localized"),
             "preco_m2": st.column_config.NumberColumn("Preço/m² (R$)", format="%.0f"),
+            "ano": st.column_config.NumberColumn("Ano", format="%.1f"),
+            "origem": "Origem",
         },
     )
     st.download_button(

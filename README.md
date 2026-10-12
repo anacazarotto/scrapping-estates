@@ -275,6 +275,9 @@ make eda                  # docs/figures/eda_*.png
 make figuras-resultados   # docs/figures/11 a 14
 make resultados-modelos   # dados/resultados_modelos.json e dataset_imoveis.csv (modo avançado)
 make experimento-v2       # docs/reports/experimento_preco_v2.md
+make valorizacao-macro    # séries do BCB e estudo dos juros (docs/reports/valorizacao_macro.md)
+make modelo-v3            # histórico simulado (IPCA+INCC) + modelo de preço v3
+make retreinar-tudo       # retreina todos os modelos atuais em sequência
 ```
 
 ### Como as métricas são medidas

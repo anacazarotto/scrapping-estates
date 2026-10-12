@@ -112,3 +112,23 @@ resultados-modelos:
 
 experimento-v2:
 	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/experimento_preco_v2.py
+
+modelo-v3:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/modelo_v3.py
+
+valorizacao-macro:
+	$(PYTHON) scripts_predict/valorizacao_macro.py
+
+# Retreina todos os modelos atuais na ordem certa (os modelos antigos do capítulo 3 ficam
+# como registro histórico). Com TabPFN v2: cerca de 1 hora em CPU.
+retreinar-tudo:
+	$(PYTHON) scripts_predict/valorizacao_macro.py
+	$(PYTHON) scripts_predict/ivgr.py
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/imoveis_ml_hibrido.py train-hibrido --normalized-db imoveis_normalizados.db --model-path modelos/preco_imovel_modelo_hibrido_rapido.pkl
+	$(PYTHON) scripts_predict/imoveis_ml_hibrido.py benchmark-hibrido --normalized-db imoveis_normalizados.db --report-path docs/reports/modelo_hibrido.md
+	$(PYTHON) scripts_predict/imoveis_projecao.py train-projecao --unified-db imoveis_unificado.db
+	$(PYTHON) scripts_predict/imoveis_valorizacao.py benchmark-valorizacao --unified-db imoveis_unificado.db --horizonte 1 --report-path docs/reports/modelo_valorizacao_h1.md
+	$(PYTHON) scripts_predict/imoveis_valorizacao.py benchmark-valorizacao --unified-db imoveis_unificado.db --horizonte 3 --report-path docs/reports/modelo_valorizacao_h3.md
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/modelo_v3.py
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/resultados_modelos.py
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/experimento_preco_v2.py

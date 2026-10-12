@@ -39,6 +39,7 @@ from imoveis_ml_hibrido import load_artifact as load_price_artifact
 from imoveis_ml_hibrido import predict_price
 from imoveis_valorizacao import ALLOWED_TYPES, MAX_ABS_MONTHLY_LOG_CHANGE, load_panel
 from ipca import faixa_anual, load_ipca
+from indice_ipca_incc import resumo as resumo_ipca_incc
 from ivgr import load_ivgr
 from model_io import load_model, save_model
 
@@ -59,7 +60,8 @@ MAX_ANOS = 30
 REFERENCIAS = ("ipca-media", "ipca-12m", "nenhuma")
 # v2: força do índice de referência como ponto de partida, em "meses de dados equivalentes".
 PRIOR_MESES = 12
-VERSOES_V2 = {"v2-ivgr": "ivgr", "v2": "ipca"}  # versão -> índice de referência
+# versão -> índice de referência (v3: IPCA+INCC, `indice_ipca_incc.py`)
+VERSOES_V2 = {"v3": "ipca_incc", "v2-ivgr": "ivgr", "v2": "ipca"}
 
 
 # --------------------------------------------------------------------- taxas
@@ -164,7 +166,9 @@ def meses_observados(artifact):
 
 
 def resumo_referencia(artifact, base):
-    """Resumo do índice usado como ponto de partida da v2: "ivgr" (imóveis) ou "ipca"."""
+    """Índice de partida: "ipca_incc" (v3), "ivgr" (imóveis) ou "ipca"."""
+    if base == "ipca_incc":
+        return resumo_ipca_incc()
     if base == "ivgr":
         return load_ivgr(atualizar=False)
     ipca = artifact.get("ipca")
@@ -549,11 +553,11 @@ def build_parser():
     )
     p.add_argument(
         "--versao",
-        choices=("v1", "v2-ivgr", "v2"),
+        choices=("v1", "v3", "v2-ivgr", "v2"),
         default="v1",
         help=(
-            "v1: taxa medida nos anúncios; v2-ivgr: combinada com o IVG-R (índice de "
-            "imóveis do BCB); v2: combinada com o IPCA."
+            "v1: taxa medida nos anúncios; v3: combinada com o índice IPCA+INCC; v2-ivgr: "
+            "combinada com o IVG-R (índice de imóveis do BCB); v2: combinada com o IPCA."
         ),
     )
     p.set_defaults(func=cmd_predict)

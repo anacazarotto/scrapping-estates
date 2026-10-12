@@ -43,6 +43,8 @@ modelos/*
 !modelos/preco_imovel_modelo_hibrido_rapido.pkl.sig
 !modelos/projecao_modelo.pkl
 !modelos/projecao_modelo.pkl.sig
+!modelos/preco_imovel_modelo_v3.pkl
+!modelos/preco_imovel_modelo_v3.pkl.sig
 catboost_info/
 
 # Logs and temp files

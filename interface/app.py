@@ -23,6 +23,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts_predict"))
 
 from imoveis_ml_hibrido import format_currency, input_warnings  # noqa: E402
 from ivgr import load_ivgr  # noqa: E402
+from modelo_v3 import load_v3, prever_preco_v3  # noqa: E402
 from modo_avancado import tela_avancada  # noqa: E402
 from imoveis_ml_hibrido import load_artifact as load_price_artifact  # noqa: E402
 from imoveis_projecao import (  # noqa: E402
@@ -48,11 +49,18 @@ BAIRROS_JSON = PROJECT_ROOT / "dados" / "bairros.json"
 NORMALIZED_DB = PROJECT_ROOT / "imoveis_normalizados.db"
 TIPOS = ("Apartamento", "Casa")
 VERSOES = {
-    "v2 — anúncios + IVG-R, índice de imóveis (recomendada)": "v2-ivgr",
+    "v3 — anúncios + IPCA/INCC (recomendada)": "v3",
+    "v2 — anúncios + IVG-R, índice de imóveis": "v2-ivgr",
     "v2 — anúncios + IPCA": "v2",
     "v1 — só os anúncios": "v1",
 }
-NOME_INDICE = {"v2-ivgr": "IVG-R (índice de imóveis do Banco Central)", "v2": "IPCA"}
+NOME_INDICE = {
+    "v3": "índice IPCA+INCC (inflação e custo da construção)",
+    "v2-ivgr": "IVG-R (índice de imóveis do Banco Central)",
+    "v2": "IPCA",
+}
+MODELO_V3 = PROJECT_ROOT / "modelos" / "preco_imovel_modelo_v3.pkl"
+ANOS_PASSADO = list(range(2016, 2027))  # meio de cada ano, até o ano das coletas (2026)
 
 # Paleta de referência (skill de visualização): série 1 = azul, série 2 = laranja.
 COR_CENTRAL = "#2a78d6"
@@ -65,6 +73,12 @@ st.set_page_config(
 
 
 # ------------------------------------------------------------------ dados
+@st.cache_resource(show_spinner="Carregando modelo v3...")
+def carregar_v3():
+    """Modelo v3 (histórico simulado), opcional: sem ele o site funciona sem o passado."""
+    return load_v3(MODELO_V3) if MODELO_V3.exists() else None
+
+
 @st.cache_resource(show_spinner="Carregando modelos...")
 def carregar_modelos():
     faltando = [p.name for p in (PRICE_MODEL, PROJECTION_MODEL) if not p.exists()]
@@ -164,6 +178,22 @@ def grafico_projecao(tabela, taxa_referencia, rotulo_referencia):
             tickformat=",.0f",
             gridcolor="rgba(128,128,128,0.2)",
         ),
+    )
+    return fig
+
+
+def grafico_passado(passado):
+    fig = go.Figure(
+        go.Scatter(
+            x=passado["Ano"], y=passado["Valor estimado"], mode="lines+markers",
+            line=dict(color=COR_CENTRAL, width=2, dash="dot"), marker=dict(size=8),
+            hovertemplate="Meio de %{x}: R$ %{y:,.0f}<extra></extra>",
+        )
+    )
+    fig.update_layout(
+        height=320, margin=dict(l=10, r=10, t=10, b=10), separators=",.", showlegend=False,
+        xaxis=dict(title="Ano", dtick=1, showgrid=False),
+        yaxis=dict(title="Valor estimado (R$)", tickprefix="R$ ", tickformat=",.0f", gridcolor="rgba(128,128,128,0.2)"),
     )
     return fig
 
@@ -346,7 +376,7 @@ def tela_estimativa(price_art, proj_art):
     )
     if res["versao"] in NOME_INDICE:
         st.caption(
-            f"Valorização v2: {res['peso_dados'] * 100:.0f}% vem da variação medida nos anúncios "
+            f"Valorização {res['versao'].split('-')[0]}: {res['peso_dados'] * 100:.0f}% vem da variação medida nos anúncios "
             f"({len(proj_art['meses'])} meses de coleta) e {(1 - res['peso_dados']) * 100:.0f}% do "
             f"{NOME_INDICE[res['versao']]} dos últimos 10 anos. Com mais meses de coleta, o peso "
             "dos anúncios aumenta."
@@ -374,6 +404,28 @@ def tela_estimativa(price_art, proj_art):
         )
 
     st.plotly_chart(grafico_projecao(tabela, taxa_ref, rotulo_ref), width="stretch")
+
+    art_v3 = carregar_v3()
+    if art_v3 is not None:
+        with st.expander("Quanto este imóvel valia nos anos anteriores (estimativa v3, histórico simulado)"):
+            dados = dict(
+                area_total=area_total, area_privada=area_privada, bairro=bairro,
+                tipo_imovel=tipo, quartos=quartos, banheiros=banheiros, vagas=vagas,
+            )
+            passado = pd.DataFrame(
+                {"Ano": ANOS_PASSADO, "Valor estimado": [prever_preco_v3(art_v3, ano=a + 0.5, **dados) for a in ANOS_PASSADO]}
+            )
+            st.plotly_chart(grafico_passado(passado), width="stretch")
+            st.dataframe(
+                passado.assign(**{"Valor estimado": passado["Valor estimado"].map(format_currency)}),
+                hide_index=True, width="stretch",
+            )
+            st.caption(
+                "Modelo v3, treinado com os anúncios reais e com um passado SIMULADO para cada imóvel: o "
+                "preço anunciado levado a cada ano pelo índice IPCA+INCC realizado. É uma estimativa "
+                "coerente com a inflação e o custo da construção, não um preço observado. Valores de "
+                "meio de cada ano."
+            )
 
     with st.expander("Ver tabela ano a ano"):
         st.dataframe(

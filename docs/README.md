@@ -10,6 +10,7 @@
 | [6. Interface](06_interface.md) | Telas da aplicação Streamlit, aviso de dados fora do padrão, publicação e decisões de projeto |
 | [7. Resultados e conclusões](07_resultados_e_conclusoes.md) | Principais descobertas, respostas às perguntas, limitações e trabalhos futuros |
 | [8. Versão 2: sugestões do orientador](08_versao_2_orientacao.md) | Idade pelas fotos, TabPFN 3.5, modo avançado, listas suspensas, experimento do preço v2 e valorização v2 com IPCA |
+| [9. Versão 3: histórico simulado e IPCA+INCC](09_versao_3_ipca_incc.md) | Caso real de validação, índice IPCA+INCC, histórico simulado, modelo de preço v3, valorização v3 e estudo dos juros |
 
 ## Pastas
 
