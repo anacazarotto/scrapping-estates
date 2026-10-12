@@ -7,9 +7,9 @@
 
 ## Referência: IPCA
 
-- Fonte: IBGE/BCB — IPCA mensal, série SGS 433 (01/09/2016 a 01/08/2026).
-- Média anual dos últimos 10 anos: +4.89% (padrão da projeção).
-- Acumulado dos últimos 12 meses: +4.22%.
+- Fonte: IBGE/BCB — IPCA mensal, série SGS 433 (01/10/2016 a 01/09/2026).
+- Média anual dos últimos 10 anos: +4.96% (padrão da projeção).
+- Acumulado dos últimos 12 meses: +4.58%.
 - Não há índice de preços de imóveis (FipeZap) para Chapecó; o IPCA indica
   quanto o imóvel valeria se apenas acompanhasse a inflação.
 
