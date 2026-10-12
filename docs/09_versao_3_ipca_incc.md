@@ -12,7 +12,7 @@ R$ 160 mil há 5 anos foi avaliado por um correspondente bancário em cerca de R
 |---|---:|---:|---:|
 | v1 (só anúncios) | +0,89% | R$ 167 mil | −29% |
 | v2 com IVG-R | +3,07% | R$ 186 mil | −21% |
-| v2 com IPCA | +3,70% | R$ 192 mil | −18% |
+| v2 com IPCA | +3,75% | R$ 192 mil | −18% |
 | IVG-R realizado nos últimos 5 anos | +4,42% | R$ 198 mil | −16% |
 | IPCA realizado nos últimos 5 anos | +5,30% | R$ 207 mil | −12% |
 | **IPCA+INCC realizado nos últimos 5 anos** | **+5,95%** | **R$ 214 mil** | **−9%** |
@@ -33,7 +33,7 @@ peso 50% cada. Séries reais do Banco Central (SGS 433 e 192), em
 | | IPCA | INCC | **IPCA+INCC** |
 |---|---:|---:|---:|
 | Últimos 5 anos | +5,30%/ano | +6,60%/ano | **+5,95%/ano** |
-| Últimos 10 anos | +4,89%/ano | — | **+5,80%/ano** |
+| Últimos 10 anos | +4,96%/ano | — | **+5,80%/ano** |
 | Faixa de 12 meses (p10 a p90, 10 anos) | — | — | **+3,52% a +11,42%** |
 
 Variação do índice em cada ano: 2016 +6,20%; 2017 +3,60%; 2018 +3,79%; 2019 +4,23%;
@@ -128,17 +128,22 @@ R$ 1.397.788).
 `scripts_predict/valorizacao_macro.py` testou modelos (Regressão Linear, Ridge, Random
 Forest, Gradient Boosting) para prever a valorização do IVG-R nos 12 meses seguintes a
 partir de Selic, variação da Selic, IPCA, INCC e valorização passada, com 25 anos de dados
-mensais reais e três cortes de validação no tempo.
+mensais reais e três cortes de validação no tempo. Como o alvo de cada mês é a
+valorização dos 12 meses seguintes, o treino termina 12 meses antes de cada corte, para
+nenhum alvo de treino usar preços do período de teste.
 
-| Treino até | Melhor | Melhor referência simples |
+| Teste a partir de | Melhor | Melhor modelo com juros |
 |---|---|---|
-| dez/2016 | Gradient Boosting (2,93 p.p.) | repete os últimos 12 meses (3,08 p.p.) |
-| dez/2018 | **média de 10 anos (2,31 p.p.)** | — (os modelos perderam) |
-| dez/2020 | Ridge (1,85 p.p.) | média de 10 anos (2,22 p.p.) |
+| jan/2017 | **Random Forest (2,67 p.p.)** | — |
+| jan/2019 | **média de 10 anos (2,31 p.p.)** | Gradient Boosting (3,57 p.p.) |
+| jan/2021 | **média de 10 anos (2,22 p.p.)** | Ridge (2,24 p.p.) |
 
-O melhor modelo muda a cada período, e nenhum vence as referências nos três. Conclusão:
-com esses dados, os juros não melhoram a previsão de forma consistente, e o site não usa
-cenários de juros. Relatório completo em `docs/reports/valorizacao_macro.md`.
+Os modelos com juros só vencem no primeiro período; nos dois mais recentes, a média de 10
+anos do IVG-R é a melhor. Conclusão: com esses dados, os juros não melhoram a previsão de
+forma consistente, e o site não usa cenários de juros. Relatório completo em
+`docs/reports/valorizacao_macro.md`. (A primeira versão desta avaliação não separava os 12
+meses finais do treino e mostrava o Ridge vencendo a partir de 2021; o vazamento foi
+corrigido na revisão do código.)
 
 ## 9.8 Como reproduzir
 

@@ -94,20 +94,20 @@ valorização estimada nos dados, e apresenta **cenários**, não uma previsão 
 5. **Projeção**: valor(ano) = valor hoje × exp(12 × taxa mensal × ano).
 6. **Referência: IPCA**. Não existe índice de preços de imóveis (FipeZap) para Chapecó;
    o IPCA oficial (IBGE, série 433 do Banco Central) mostra quanto o imóvel valeria se
-   apenas acompanhasse a inflação. Padrão: **média anual dos últimos 10 anos (+4,89%)**;
-   alternativa: acumulado de 12 meses (+4,22%, até agosto/2026).
+   apenas acompanhasse a inflação. Padrão: **média anual dos últimos 10 anos (+4,96%)**;
+   alternativa: acumulado de 12 meses (+4,58%, até setembro/2026).
 
 ### Taxas encontradas
 
 | Tipo | Imóveis | Pessimista | **Central** | Otimista | IPCA (média 10 anos) |
 |---|---:|---:|---:|---:|---:|
-| Apartamento | 2.010 | +0,57%/ano | **+0,89%/ano** | +1,24%/ano | +4,89%/ano |
-| Casa | 1.458 | +0,01%/ano | **+0,38%/ano** | +0,75%/ano | +4,89%/ano |
+| Apartamento | 2.010 | +0,57%/ano | **+0,89%/ano** | +1,24%/ano | +4,96%/ano |
+| Casa | 1.458 | +0,01%/ano | **+0,38%/ano** | +0,75%/ano | +4,96%/ano |
 
 ![Valorização por bairro x IPCA](figures/14_valorizacao_anual_bairros_ipca.png)
 
 - **A valorização do preço anunciado ficou muito abaixo da inflação** em todos os bairros:
-  mesmo no cenário otimista, nenhum bairro com 15 ou mais imóveis chega a 4,89% ao ano.
+  mesmo no cenário otimista, nenhum bairro com 15 ou mais imóveis chega a 4,96% ao ano.
 - Os bairros com maior valorização de apartamentos foram Líder, Maria Goretti,
   Pinheirinho e Efapi (cerca de +2% ao ano); Santa Maria, Saic e Esplanada ficaram
   próximos de zero ou negativos.
@@ -121,7 +121,7 @@ Apartamento no Centro, 80 m² privativos, 2 quartos, 2 banheiros, 1 vaga:
 | | Hoje | Em 10 anos |
 |---|---:|---:|
 | Cenário central (+0,65%/ano) | R$ 630.776 | R$ 672.838 |
-| Acompanhando o IPCA (+4,89%/ano) | R$ 630.776 | R$ 1.016.485 |
+| Acompanhando o IPCA (+4,96%/ano) | R$ 630.776 | R$ 1.024.001 |
 
 ### Por que a valorização medida é tão baixa
 
@@ -154,11 +154,11 @@ taxa_v2    = peso_dados × taxa_medida + (1 − peso_dados) × IPCA médio de 10
 
 | Tipo | v1 central (faixa) | v2 central (faixa) |
 |---|---|---|
-| Apartamento | +0,89%/ano (+0,57% a +1,24%) | +3,70%/ano (+2,14% a +6,70%) |
-| Casa | +0,38%/ano (+0,01% a +0,75%) | +3,54%/ano (+1,97% a +6,55%) |
+| Apartamento | +0,89%/ano (+0,57% a +1,24%) | +3,75%/ano (+2,14% a +6,70%) |
+| Casa | +0,38%/ano (+0,01% a +0,75%) | +3,59%/ano (+1,97% a +6,55%) |
 
-No exemplo do apartamento no Centro, a v2 projeta R$ 900.322 em 10 anos (faixa de
-R$ 769.466 a R$ 1.202.309), contra R$ 672.838 na v1 e R$ 1.016.485 se o imóvel
+No exemplo do apartamento no Centro, a v2 projeta R$ 905.016 em 10 anos (faixa de
+R$ 769.466 a R$ 1.202.309), contra R$ 672.838 na v1 e R$ 1.024.001 se o imóvel
 acompanhasse exatamente o IPCA. A v1 continua disponível no site e no comando
 `projetar --versao v1`.
 

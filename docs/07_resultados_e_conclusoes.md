@@ -15,7 +15,7 @@ modelos. Os detalhes de cada parte estão nos capítulos 1 a 6.
 | Variação de preço em 3 meses | CatBoost supera a referência (−6,7% de erro; R² 0,20) |
 | Chance de redução de preço em 3 meses | Gradient Boosting, AUC 0,73 |
 | Valorização anual do preço anunciado | Apartamentos +0,89%/ano; casas +0,38%/ano |
-| Inflação (IPCA, média de 10 anos) | +4,89%/ano |
+| Inflação (IPCA, média de 10 anos) | +4,96%/ano |
 
 ## 7.2 Principais descobertas
 
@@ -60,7 +60,7 @@ mais chance de baixar o preço (AUC 0,73).
 ### 6. A valorização medida nos anúncios ficou muito abaixo da inflação
 
 Entre março e agosto de 2026, os mesmos imóveis se valorizaram, em média, 0,89% ao ano
-(apartamentos) e 0,38% ao ano (casas), contra 4,89% de IPCA médio. As explicações mais
+(apartamentos) e 0,38% ao ano (casas), contra 4,96% de IPCA médio. As explicações mais
 prováveis são a rigidez do preço anunciado, o viés de sobrevivência (os imóveis vendidos
 saem da base) e a janela curta de observação. Por isso a projeção mostra a tendência
 observada **e** o cenário da inflação.

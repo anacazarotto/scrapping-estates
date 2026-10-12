@@ -258,9 +258,19 @@ def aba_dataset():
     sub = df[filtro]
 
     k1, k2, k3 = st.columns(3)
-    k1.metric("Imóveis", f"{len(sub):,}".replace(",", "."))
-    k2.metric("Preço mediano", reais(sub["preco"].median()) if len(sub) else "—")
-    k3.metric("Preço/m² mediano", reais(sub["preco_m2"].median()) if len(sub) else "—")
+    if "origem" in sub:
+        # Base v3: cada imóvel aparece uma vez por ano; as medianas usam só os reais.
+        reais_sub = sub[sub["origem"] == "real"]
+        k1.metric(
+            "Imóveis",
+            f"{len(reais_sub):,}".replace(",", "."),
+            help=f"{len(sub):,} registros: cada imóvel real + 1 simulado por ano.".replace(",", "."),
+        )
+    else:
+        reais_sub = sub
+        k1.metric("Imóveis", f"{len(sub):,}".replace(",", "."))
+    k2.metric("Preço mediano (reais)", reais(reais_sub["preco"].median()) if len(reais_sub) else "—")
+    k3.metric("Preço/m² mediano (reais)", reais(reais_sub["preco_m2"].median()) if len(reais_sub) else "—")
     st.dataframe(
         sub,
         hide_index=True,

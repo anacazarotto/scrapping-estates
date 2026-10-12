@@ -8,43 +8,43 @@ os meses até a data e testa nos meses seguintes, que o modelo nunca viu.
 
 ## Treino até 2016-12
 
-Treino: 2002-03 a 2016-12 (178 meses). Teste: 2017-01 a 2025-07 (103 meses).
+Treino: 2002-03 a 2015-12 (166 meses). Teste: 2017-01 a 2025-07 (103 meses).
 
 | Modelo | RMSE (p.p.) | MAE (p.p.) | Acerto da direção |
 |---|---:|---:|---:|
-| Gradient Boosting | 2.93 | 2.45 | 95% |
-| Random Forest | 3.06 | 2.55 | 87% |
+| Random Forest | 2.67 | 2.22 | 94% |
 | Referência: repete os últimos 12 meses | 3.08 | 2.67 | 88% |
+| Gradient Boosting | 3.18 | 2.56 | 95% |
 | Referência: IPCA dos últimos 12 meses | 4.25 | 3.17 | 95% |
 | Referência: média dos últimos 10 anos | 4.74 | 3.55 | 95% |
-| Ridge | 5.71 | 4.69 | 45% |
-| Regressão Linear | 5.91 | 4.85 | 43% |
+| Ridge | 5.75 | 4.73 | 45% |
+| Regressão Linear | 5.95 | 4.89 | 43% |
 
 ## Treino até 2018-12
 
-Treino: 2002-03 a 2018-12 (202 meses). Teste: 2019-01 a 2025-07 (79 meses).
+Treino: 2002-03 a 2017-12 (190 meses). Teste: 2019-01 a 2025-07 (79 meses).
 
 | Modelo | RMSE (p.p.) | MAE (p.p.) | Acerto da direção |
 |---|---:|---:|---:|
 | Referência: média dos últimos 10 anos | 2.31 | 2.11 | 100% |
-| Gradient Boosting | 3.07 | 2.80 | 100% |
 | Referência: repete os últimos 12 meses | 3.16 | 2.63 | 100% |
-| Random Forest | 3.29 | 2.99 | 95% |
-| Ridge | 4.13 | 3.57 | 78% |
-| Regressão Linear | 4.25 | 3.67 | 78% |
+| Gradient Boosting | 3.57 | 3.30 | 100% |
+| Random Forest | 3.81 | 3.17 | 99% |
 | Referência: IPCA dos últimos 12 meses | 4.63 | 3.55 | 100% |
+| Ridge | 5.19 | 4.26 | 66% |
+| Regressão Linear | 5.34 | 4.38 | 65% |
 
 ## Treino até 2020-12
 
-Treino: 2002-03 a 2020-12 (226 meses). Teste: 2021-01 a 2025-07 (55 meses).
+Treino: 2002-03 a 2019-12 (214 meses). Teste: 2021-01 a 2025-07 (55 meses).
 
 | Modelo | RMSE (p.p.) | MAE (p.p.) | Acerto da direção |
 |---|---:|---:|---:|
-| Ridge | 1.85 | 1.53 | 100% |
-| Regressão Linear | 1.88 | 1.58 | 100% |
 | Referência: média dos últimos 10 anos | 2.22 | 2.04 | 100% |
-| Random Forest | 2.48 | 2.07 | 96% |
-| Gradient Boosting | 2.61 | 2.24 | 100% |
+| Ridge | 2.24 | 2.02 | 85% |
+| Regressão Linear | 2.33 | 2.10 | 82% |
+| Random Forest | 2.64 | 2.20 | 95% |
+| Gradient Boosting | 2.78 | 2.11 | 100% |
 | Referência: repete os últimos 12 meses | 3.03 | 2.41 | 100% |
 | Referência: IPCA dos últimos 12 meses | 4.52 | 3.12 | 100% |
 
