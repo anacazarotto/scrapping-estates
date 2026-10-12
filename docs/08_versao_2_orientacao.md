@@ -107,7 +107,7 @@ proporção da informação que têm (uma média ponderada no estilo bayesiano, 
 
 ```
 peso_dados = T / (T + 12)
-taxa_v2    = peso_dados × taxa_medida + (1 − peso_dados) × IPCA médio de 10 anos (+4,89%)
+taxa_v2    = peso_dados × taxa_medida + (1 − peso_dados) × IPCA médio de 10 anos (+4,96%)
 ```
 
 - **T** são os meses de coleta (março a agosto de 2026: 5). Hoje a taxa medida pesa
@@ -123,16 +123,16 @@ taxa_v2    = peso_dados × taxa_medida + (1 − peso_dados) × IPCA médio de 10
 
 | Tipo | v1 central (faixa) | v2 central (faixa) |
 |---|---|---|
-| Apartamento | +0,89%/ano (+0,57% a +1,24%) | +3,70%/ano (+2,14% a +6,70%) |
-| Casa | +0,38%/ano (+0,01% a +0,75%) | +3,54%/ano (+1,97% a +6,55%) |
+| Apartamento | +0,89%/ano (+0,57% a +1,24%) | +3,75%/ano (+2,14% a +6,70%) |
+| Casa | +0,38%/ano (+0,01% a +0,75%) | +3,59%/ano (+1,97% a +6,55%) |
 
 Exemplo, apartamento de 80 m² no Centro, valor hoje R$ 630.776:
 
 | Em 10 anos | Valor |
 |---|---:|
 | v1 (só os anúncios, +0,65%/ano no bairro) | R$ 672.838 |
-| **v2 (anúncios + IPCA, +3,62%/ano)** | **R$ 900.322** (faixa R$ 769.466 a R$ 1.202.309) |
-| Só o IPCA (+4,89%/ano) | R$ 1.016.485 |
+| **v2 (anúncios + IPCA, +3,68%/ano)** | **R$ 905.016** (faixa R$ 769.466 a R$ 1.202.309) |
+| Só o IPCA (+4,96%/ano) | R$ 1.024.001 |
 
 **Como explicar:** a v2 não "inventa" valorização: ela assume, como hipótese declarada, que
 imóveis tendem a acompanhar a inflação no longo prazo, e usa os anúncios para ajustar essa
@@ -153,16 +153,16 @@ seção 8.5 (o IPCA continua disponível como alternativa).
 
 | Índice (BCB) | Últimos 12 meses | Média de 10 anos | Faixa de 12 meses (p10 a p90) |
 |---|---:|---:|---|
-| IPCA (inflação) | +4,22% | +4,89%/ano | +2,80% a +9,06% |
+| IPCA (inflação) | +4,58% | +4,96%/ano | +2,80% a +9,06% |
 | **IVG-R (imóveis)** | **+5,28%** | **+3,99%/ano** | **−2,04% a +8,23%** |
 
-Dados até jul/2026 (IVG-R) e ago/2026 (IPCA); `scripts_predict/ivgr.py` baixa a série e
+Dados até jul/2026 (IVG-R) e set/2026 (IPCA); `scripts_predict/ivgr.py` baixa a série e
 guarda uma cópia em `dados/ivgr.json`.
 
 | Tipo | v1 | v2 com IPCA | **v2 com IVG-R** |
 |---|---|---|---|
-| Apartamento | +0,89%/ano | +3,70% (+2,14% a +6,70%) | **+3,07% (−1,28% a +6,13%)** |
-| Casa | +0,38%/ano | +3,54% (+1,97% a +6,55%) | **+2,92% (−1,45% a +5,98%)** |
+| Apartamento | +0,89%/ano | +3,75% (+2,14% a +6,70%) | **+3,07% (−1,28% a +6,13%)** |
+| Casa | +0,38%/ano | +3,59% (+1,97% a +6,55%) | **+2,92% (−1,45% a +5,98%)** |
 
 No apartamento de exemplo (R$ 630.776 hoje), a v2 com IVG-R projeta **R$ 847.541 em 10
 anos** (+3,00% ao ano no Centro; faixa de R$ 547.286 a R$ 1.139.090).
@@ -172,7 +172,7 @@ anos** (+3,00% ao ano no Centro; faixa de R$ 547.286 a R$ 1.139.090).
 - **Mede o que o trabalho quer medir:** valor de imóveis, não preço de alimentos,
   transporte e serviços.
 - **Reforça um achado do TCC:** em 10 anos, os imóveis financiados no Brasil valorizaram
-  +3,99% ao ano, menos que a inflação (+4,89%). A valorização baixa vista nos anúncios de
+  +3,99% ao ano, menos que a inflação (+4,96%). A valorização baixa vista nos anúncios de
   Chapecó vai na mesma direção.
 - **Faixa mais honesta:** o cenário pessimista pode ser de queda, porque o próprio índice
   caiu em alguns períodos da última década.
