@@ -180,7 +180,18 @@ anos** (+3,00% ao ano no Centro; faixa de R$ 547.286 a R$ 1.139.090).
 **Limitação:** o IVG-R é nacional; não existe recorte para Chapecó nem para Santa Catarina
 nessa série. Ele mede o valor de avaliação bancária, que também não é o preço de venda.
 
-## 8.7 Como reproduzir
+## 8.7 Fotos no modelo de preço: avaliado e deixado para trabalhos futuros
+
+Depois do experimento da seção 8.4, a única ideia com chance real de baixar o erro do
+modelo de preço é trazer informação nova, e a mais promissora é a foto do anúncio
+(padrão de acabamento). Diferente da idade do prédio (8.1), aqui o gabarito existe: o
+próprio preço. Por isso, daria para medir se ajuda.
+
+A ideia não foi executada porque as 12 coletas não guardaram o link das fotos. Seria
+preciso rodar os robôs de novo, e só viriam fotos dos anúncios ainda ativos, com viés para
+os imóveis não vendidos. O plano está no item 4 dos trabalhos futuros (capítulo 7).
+
+## 8.8 Como reproduzir
 
 ```bash
 make experimento-v2         # docs/reports/experimento_preco_v2.md
