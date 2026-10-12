@@ -18,7 +18,8 @@ um banco SQLite datado (`imoveis_DD_MM_AAAA.db`).
 | Katedral | `katedral_v2.py` | HTML | `K-` |
 
 Campos coletados: preço, bairro, cidade, tipo de imóvel, área total, área privativa,
-quartos, banheiros, vagas, endereço (quando a fonte expõe), imagem principal e datas.
+quartos, banheiros, vagas, endereço (quando a fonte expõe) e datas. O link da foto principal
+foi incluído nos robôs depois das 12 coletas, por isso nenhum banco do TCC tem fotos.
 
 Os tokens das APIs não ficam no código: são lidos do arquivo `.env` (ver `.env.example`).
 
@@ -62,10 +63,12 @@ mesmo imóvel:
    vagas, combinadas com o bairro ou com o endereço/logradouro (quando existe). Os
    grupos são formados por *union-find*: se A combina com B e B com C, os três viram um
    grupo só.
-2. **Comparação por imagem**: a foto principal (até 5 MB) é reduzida a 9 × 8 pixels em
-   tons de cinza, e cada pixel é comparado com o vizinho, gerando uma "impressão digital"
-   de 64 bits (*difference hash*). Dois anúncios são o mesmo imóvel se as impressões
-   diferem em até 8 bits, as áreas em até 18% e os preços em até 25%.
+2. **Comparação por imagem (implementada, mas sem efeito nesta base)**: o código reduz a
+   foto principal a 9 × 8 pixels em tons de cinza e compara cada pixel com o vizinho,
+   gerando uma "impressão digital" de 64 bits (*difference hash*); dois anúncios seriam o
+   mesmo imóvel se as impressões diferissem em até 8 bits, as áreas em até 18% e os preços
+   em até 25%. Como as coletas não guardaram o link das fotos, esta etapa não agrupou
+   nenhum anúncio: toda a deduplicação desta base veio das chaves do passo 1.
 3. **Consolidação**: preço e áreas pela mediana do grupo; bairro, cidade e tipo pelo
    valor mais frequente; guarda os códigos e imobiliárias de origem.
 4. **Padronização do tipo**: textos livres ("Sobrado", "Apto", "Casa geminada"...) são
@@ -86,7 +89,8 @@ mesmo imóvel:
 | Casas e apartamentos com preço e área plausíveis | 3.242 |
 
 Dos 4.266 imóveis normalizados, 3.815 (89%) vieram de uma única imobiliária e 451
-foram encontrados em 2 ou mais anúncios diferentes e consolidados.
+foram encontrados em 2 ou mais anúncios diferentes e consolidados (todos pelas chaves de
+agrupamento).
 
 ## 1.6 Como reproduzir
 
