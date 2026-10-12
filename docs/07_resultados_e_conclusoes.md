@@ -96,7 +96,13 @@ bairro como igual, o que é uma das principais fontes do erro que resta.
 2. **Corrigir a escala dos preços na coleta** (valores em milhões) e padronizar cidades.
 3. **Enriquecer a localização**: geocodificação, distância ao centro e a serviços.
 4. **Extrair variáveis do texto e das fotos do anúncio** (padrão de acabamento, piscina,
-   condomínio, estado de conservação).
+   condomínio, estado de conservação). É a ideia com mais chance de baixar o erro do
+   modelo de preço, porque traz informação que hoje falta. Plano avaliado (capítulo 8):
+   coletar o link das fotos (os robôs já fazem isso desde a versão atual), transformar cada
+   foto em números com um modelo de imagem pré-treinado (CLIP), testá-los como variáveis no
+   mesmo protocolo de avaliação e, se melhorarem, oferecer no site um campo "padrão de
+   acabamento" aprendido das fotos. A mesma coleta ativa a deduplicação por imagem, que já
+   está no código.
 5. **Obter preços de venda reais** (ITBI da prefeitura, cartórios) para comparar com os
    preços anunciados.
 6. **Modelar terrenos** separadamente, com preço por m² de terreno.
