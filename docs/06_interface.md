@@ -7,6 +7,22 @@ características de um imóvel e recebe o valor estimado hoje e a projeção ano
 python -m streamlit run interface/app.py     # abre em http://localhost:8501
 ```
 
+## 6.0 Interface atual: só a versão 3
+
+Depois da versão 3, o site passou a usar **somente a v3**, sem seletor de versões. Tem
+quatro abas:
+
+| Aba | O que mostra |
+|---|---|
+| Estimativa | valor de hoje (modelo de preço v3), projeção ano a ano com a valorização v3 (anúncios + IPCA+INCC) e o valor nos anos anteriores (2016 a 2026) |
+| Valorização por bairro | taxa v3 central, pessimista e otimista de cada bairro |
+| Modelos | todos os candidatos treinados no protocolo da v3, cada um com a explicação de como funciona e do porquê do resultado com os nossos dados; comparação lado a lado |
+| Dataset | o dataset de treino da v3 (3.283 imóveis reais + 32.830 registros simulados), com filtros e download |
+
+As seções 6.1 a 6.7 registram como a interface evoluiu nas versões 1 e 2 (seletor de
+versões, aba "Sobre os modelos" e modo avançado, que deram origem às abas atuais).
+Detalhes da v3 no capítulo 9.
+
 ## 6.1 Tela de estimativa
 
 ![Tela de estimativa](figures/15_interface_estimativa.png)

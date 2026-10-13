@@ -116,6 +116,9 @@ experimento-v2:
 modelo-v3:
 	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/modelo_v3.py
 
+resultados-v3:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/resultados_v3.py
+
 valorizacao-macro:
 	$(PYTHON) scripts_predict/valorizacao_macro.py
 
@@ -131,5 +134,6 @@ retreinar-tudo:
 	$(PYTHON) scripts_predict/imoveis_valorizacao.py benchmark-valorizacao --unified-db imoveis_unificado.db --horizonte 3 --report-path docs/reports/modelo_valorizacao_h3.md
 	$(PYTHON) scripts_predict/imoveis_valorizacao.py train-valorizacao --unified-db imoveis_unificado.db --model-path modelos/valorizacao_modelo.pkl
 	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/modelo_v3.py
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/resultados_v3.py
 	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/resultados_modelos.py
 	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/experimento_preco_v2.py
