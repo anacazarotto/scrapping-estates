@@ -277,6 +277,7 @@ make resultados-modelos   # dados/resultados_modelos.json e dataset_imoveis.csv 
 make experimento-v2       # docs/reports/experimento_preco_v2.md
 make valorizacao-macro    # séries do BCB e estudo dos juros (docs/reports/valorizacao_macro.md)
 make modelo-v3            # histórico simulado (IPCA+INCC) + modelo de preço v3
+make resultados-v3        # todos os candidatos no protocolo da v3 (aba Modelos do site)
 make retreinar-tudo       # retreina todos os modelos atuais em sequência
 ```
 

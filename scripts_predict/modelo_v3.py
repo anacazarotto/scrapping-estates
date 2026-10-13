@@ -85,9 +85,16 @@ def carregar_reais(normalized_db):
     df = df[(df["area_total"] > 0) | (df["area_privada"] > 0)].copy()
     df["bairro"] = df["bairro"].fillna("").map(normalize_text)
     df["tipo_imovel"] = df["tipo_imovel"].fillna("").map(canonical_tipo)
+    # Todos os preços reais são levados ao mês da última coleta (ago/2026) pelo índice.
+    # Sem isso, o modelo confundia a diferença entre imóveis anunciados em meses diferentes
+    # de 2026 (composição) com valorização. O ajuste é pequeno (no máximo ~2,5%).
     mes = pd.to_datetime(df["data_insercao"]).dt.to_period("M")
-    df["mes"] = mes.astype(str)
-    df["ano"] = mes.dt.year + (mes.dt.month - 0.5) / 12
+    referencia = mes.max()
+    indice = nivel()
+    df["mes_anuncio"] = mes.astype(str)
+    df["preco"] = df["preco"] * np.array([fator(m, str(referencia), indice) for m in df["mes_anuncio"]])
+    df["mes"] = str(referencia)
+    df["ano"] = referencia.year + (referencia.month - 0.5) / 12
     df["simulado"] = 0
     df["imovel"] = np.arange(len(df))
     return df.drop(columns="data_insercao")
@@ -243,10 +250,20 @@ def exportar_dataset(df, db_path, csv_path):
     """Dataset v3 completo (reais + simulados) em SQLite e, para o site, em CSV."""
     base = df[df["tipo_imovel"].isin(SEGMENT_TYPES)]
     completo = pd.concat([base, simular(base)], ignore_index=True)
+    # Preço anunciado original (só nos reais) ao lado do preço no mês de referência.
+    indice = nivel()
+    reais = completo["simulado"] == 0
+    completo["preco_anunciado"] = np.where(
+        reais,
+        completo["preco"] / np.array([fator(m, r, indice) for m, r in zip(completo["mes_anuncio"], completo["mes"])]),
+        np.nan,
+    )
+    completo.loc[~reais, "mes_anuncio"] = None
     colunas = ["imovel", "simulado", "ano", "mes", "tipo_imovel", "bairro", "area_total",
-               "area_privada", "quartos", "banheiros", "vagas", "preco"]
+               "area_privada", "quartos", "banheiros", "vagas", "preco", "mes_anuncio", "preco_anunciado"]
     completo = completo[colunas].sort_values(["imovel", "ano"])
     completo["preco"] = completo["preco"].round(0)
+    completo["preco_anunciado"] = completo["preco_anunciado"].round(0)
     with sqlite3.connect(db_path) as conn:
         completo.to_sql("imoveis_v3", conn, if_exists="replace", index=False)
     Path(csv_path).parent.mkdir(parents=True, exist_ok=True)

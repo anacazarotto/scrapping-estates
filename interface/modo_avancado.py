@@ -1,8 +1,10 @@
-"""Modo avançado da interface: todos os modelos candidatos e o dataset de treino.
+"""Abas "Modelos" e "Dataset" da interface (versão 3).
 
-Lê dois arquivos gerados por `scripts_predict/resultados_modelos.py`:
-- `dados/resultados_modelos.json`: métricas e previsões no teste de cada candidato;
-- `dados/dataset_imoveis.csv`: casas e apartamentos usados no treino.
+Lê:
+- `dados/resultados_modelos_v3.json` (`scripts_predict/resultados_v3.py`): métricas e
+  previsões no teste de todos os candidatos treinados no protocolo da v3;
+- `dados/dataset_simulado_v3.csv` (`scripts_predict/modelo_v3.py`): o dataset usado no
+  treino, com os anúncios reais e o histórico simulado.
 """
 
 import json
@@ -12,10 +14,10 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-from modelos_info import ALVOS, info
+from modelos_info import ALVOS, POR_QUE_GERAL, info
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-RESULTADOS_JSON = PROJECT_ROOT / "dados" / "resultados_modelos.json"
+RESULTADOS_JSON = PROJECT_ROOT / "dados" / "resultados_modelos_v3.json"
 DATASET_CSV = PROJECT_ROOT / "dados" / "dataset_imoveis.csv"
 DATASET_V3_CSV = PROJECT_ROOT / "dados" / "dataset_simulado_v3.csv"
 TIPOS = ("Apartamento", "Casa")
@@ -51,8 +53,9 @@ def carregar_dataset(com_simulados=False):
         area = df["area_privada"].where(df["area_privada"] > 0, df["area_total"])
         df["preco_m2"] = (df["preco"] / area.where(area > 0)).round(0)
         df["origem"] = df["simulado"].map({0: "real", 1: "simulado"})
-        df["ano"] = df["ano"].round(2)
-        return df.drop(columns=["simulado", "mes", "imovel"])
+        colunas = ["imovel", "origem", "mes", "tipo_imovel", "bairro", "area_total", "area_privada",
+                   "quartos", "banheiros", "vagas", "preco", "preco_m2", "mes_anuncio", "preco_anunciado"]
+        return df[colunas]
     if not DATASET_CSV.exists():
         return None
     return pd.read_csv(DATASET_CSV)
@@ -61,7 +64,23 @@ def carregar_dataset(com_simulados=False):
 def rotulo_modelo(m):
     if m["modelo"] == "Ensemble":
         return "Ensemble (o modelo usado no site)"
-    return f"{m['modelo']} — alvo {m['alvo']} · {m['posicao_cv']}º na validação cruzada"
+    return f"{m['posicao_cv']}º · {m['modelo']} — alvo {m['alvo']}"
+
+
+def por_que_resultado(seg, modelo, dados):
+    """Texto do resultado do modelo: posição, distância para o melhor e o porquê."""
+    if modelo["modelo"] == "Ensemble":
+        return dados.get("resultado", "")
+    candidatos = [m for m in seg["modelos"] if m["modelo"] != "Ensemble"]
+    melhor = min(candidatos, key=lambda m: m["cv"]["mae"])
+    dif = (modelo["cv"]["mae"] / melhor["cv"]["mae"] - 1) * 100
+    posicao = (
+        f"Ficou em **{modelo['posicao_cv']}º de {len(candidatos)}** na validação cruzada"
+        + (" (o melhor)." if modelo is melhor else f", com erro {num(dif, 1)}% maior que o melhor ({melhor['modelo']}, alvo {melhor['alvo']}).")
+    )
+    alvo = dados.get("resultado_log" if modelo["alvo"] == "log(preco)" else "resultado_preco", "")
+    site = "" if modelo.get("no_site", True) else " " + dados.get("fora_do_site", "")
+    return " ".join(p for p in (posicao, dados.get("resultado", ""), alvo, site) if p)
 
 
 def marcas_log(lo, hi):
@@ -186,6 +205,7 @@ def aba_modelos(resultados):
     modelo = modelos[escolha]
     dados = info(modelo["modelo"]) or {}
 
+    st.info(por_que_resultado(seg, modelo, dados), icon="💡")
     e, d = st.columns(2)
     with e:
         st.markdown(f"**{modelo['modelo']}** · {dados.get('familia', '')}")
@@ -225,21 +245,24 @@ def aba_comparacao(resultados):
     tipo = st.radio("Tipo", TIPOS, horizontal=True, key="av_tipo_comp")
     seg = resultados["segmentos"][tipo]
     st.plotly_chart(grafico_comparacao(seg), width="stretch", config=SEM_BARRA)
-    st.caption("★ = ensemble usado no site. Todos medidos no mesmo teste, que nenhum modelo viu no treino.")
+    st.caption(
+        "★ = ensemble usado no site. Todos treinados com os mesmos dados (reais + histórico simulado) "
+        "e medidos no mesmo teste com preços reais, que nenhum modelo viu."
+    )
     st.dataframe(tabela_modelos(seg), hide_index=True, width="stretch")
 
 
 def aba_dataset():
     base = st.radio(
-        "Base",
-        ["Anúncios reais", "Reais + histórico simulado (v3)"],
+        "Registros",
+        ["Reais + histórico simulado (dataset de treino da v3)", "Só os anúncios reais"],
         horizontal=True,
-        help="v3: para cada imóvel real, um registro por ano de 2016 a 2025 com o preço levado a "
-        "cada ano pelo índice IPCA+INCC realizado. Os simulados são uma hipótese, não preços observados.",
+        help="Simulados: para cada imóvel real, um registro por ano de 2016 a 2025 com o preço levado "
+        "a junho de cada ano pelo índice IPCA+INCC realizado. São uma hipótese, não preços observados.",
     )
-    df = carregar_dataset(com_simulados=base != "Anúncios reais")
+    df = carregar_dataset(com_simulados=base != "Só os anúncios reais")
     if df is None:
-        st.info("Dataset não encontrado. Gere com: `python scripts_predict/resultados_modelos.py`")
+        st.info("Dataset não encontrado. Gere com: `python scripts_predict/modelo_v3.py`")
         return
     df = df.assign(bairro=df["bairro"].fillna("").map(lambda b: b.title() if b else "(sem bairro)"))
     c1, c2, c3 = st.columns([1, 2, 2])
@@ -285,7 +308,14 @@ def aba_dataset():
             "vagas": "Vagas",
             "preco": st.column_config.NumberColumn("Preço (R$)", format="localized"),
             "preco_m2": st.column_config.NumberColumn("Preço/m² (R$)", format="%.0f"),
-            "ano": st.column_config.NumberColumn("Ano", format="%.1f"),
+            "imovel": st.column_config.NumberColumn("Imóvel (nº)", format="%d"),
+            "mes": "Mês do preço",
+            "mes_anuncio": "Mês do anúncio",
+            "preco_anunciado": st.column_config.NumberColumn(
+                "Preço anunciado (R$)", format="localized",
+                help="Preço do anúncio no mês em que foi coletado (só nos reais). A coluna Preço traz o "
+                "valor levado a ago/2026 pelo índice IPCA+INCC, como no treino.",
+            ),
             "origem": "Origem",
         },
     )
@@ -299,18 +329,28 @@ def aba_dataset():
     )
 
 
-def tela_avancada():
-    st.subheader("Modo avançado")
+def tela_modelos():
+    st.subheader("Modelos de preço treinados (versão 3)")
     resultados = carregar_resultados()
     if resultados is None:
-        st.info("Resultados dos modelos não encontrados. Gere com: `python scripts_predict/resultados_modelos.py`")
-        aba_dataset()
+        st.info("Resultados não encontrados. Gere com: `python scripts_predict/resultados_v3.py`")
         return
+    st.markdown(POR_QUE_GERAL)
     st.caption(f"Resultados gerados em {resultados['gerado_em'][:10]}. Protocolo: {resultados['protocolo']}.")
-    a1, a2, a3 = st.tabs(["Modelos", "Comparação", "Dataset"])
+    a1, a2 = st.tabs(["Um modelo por vez", "Todos lado a lado"])
     with a1:
         aba_modelos(resultados)
     with a2:
         aba_comparacao(resultados)
-    with a3:
-        aba_dataset()
+
+
+def tela_dataset():
+    st.subheader("Dataset usado no treino")
+    st.markdown(
+        "Anúncios de casas e apartamentos coletados de 8 imobiliárias de Chapecó em 12 coletas "
+        "(mar a ago/2026), depois de unificados, sem duplicados e padronizados: **3.283 imóveis "
+        "reais**. Na versão 3, cada imóvel ganha 10 registros **simulados** (2016 a 2025), com o "
+        "preço levado a cada ano pelo índice IPCA+INCC. Os modelos são treinados com reais + "
+        "simulados e avaliados **só com os reais**."
+    )
+    aba_dataset()

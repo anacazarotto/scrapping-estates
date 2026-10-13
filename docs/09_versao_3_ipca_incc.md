@@ -145,11 +145,34 @@ forma consistente, e o site não usa cenários de juros. Relatório completo em
 meses finais do treino e mostrava o Ridge vencendo a partir de 2021; o vazamento foi
 corrigido na revisão do código.)
 
-## 9.8 Como reproduzir
+## 9.8 Interface final: só a versão 3
+
+A pedido da orientação, o site passou a mostrar **somente a v3**:
+
+- **Estimativa:** o valor de hoje, o passado (2016 a 2026) e a projeção vêm todos do
+  modelo v3 e da valorização v3. Não há mais seletor de versões.
+- **Modelos:** todos os candidatos treinados no protocolo da v3 (9 algoritmos × 2 alvos,
+  `scripts_predict/resultados_v3.py`), cada um com a explicação de como funciona e do porquê
+  do resultado com os nossos dados, e a comparação lado a lado.
+- **Dataset:** o dataset de treino da v3, com os imóveis reais e o histórico simulado, o
+  mês e o preço originais de cada anúncio, filtros e download.
+
+**Correção feita ao montar a interface:** os anúncios reais foram coletados de março a
+agosto de 2026, e o modelo usava o mês do anúncio como "ano". Com isso, ele confundia a
+diferença entre os imóveis anunciados em cada mês com valorização (somava de 4% a 6% entre
+março e agosto). Agora, todos os preços reais são levados a ago/2026 pelo próprio índice
+IPCA+INCC (ajuste de no máximo cerca de 2,5%) antes de simular o passado. Assim, o único
+efeito do tempo que o modelo aprende vem do índice. O dataset mostra o preço anunciado
+original e o preço no mês de referência.
+
+PREENCHER_RESULTADOS_V3
+
+## 9.9 Como reproduzir
 
 ```bash
 make valorizacao-macro      # baixa as séries do BCB (dados/series_macro.json) e avalia os juros
 make modelo-v3              # histórico simulado + modelo de preço v3
+make resultados-v3          # todos os candidatos no protocolo da v3 (aba Modelos)
 make retreinar-tudo         # retreina todos os modelos atuais (cerca de 1 hora com TabPFN)
 python scripts_predict/imoveis_projecao.py projetar --bairro Centro --tipo-imovel Apartamento \
     --area-privada 80 --area-total 100 --quartos 2 --banheiros 2 --vagas 1 --anos 10 --versao v3

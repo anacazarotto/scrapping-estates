@@ -234,13 +234,17 @@ def project(
     preco_atual=None,
     taxa_referencia=None,
     versao="v1",
+    valor_estimado=None,
 ):
     """Valor estimado hoje e ano a ano. Função pensada para ser usada pela interface.
 
     `preco_atual` (opcional) substitui o valor estimado pelo modelo de preço.
     `taxa_referencia` (opcional, % ao ano) adiciona um cenário de referência (IPCA).
-    `versao`: "v1" usa só a taxa medida nos anúncios; "v2-ivgr" a combina com o IVG-R
-    (índice de imóveis do BCB) e "v2" com o IPCA (`ajustar_referencia`).
+    `versao`: "v1" usa só a taxa medida nos anúncios; "v3" a combina com o índice
+    IPCA+INCC, "v2-ivgr" com o IVG-R (índice de imóveis do BCB) e "v2" com o IPCA
+    (`ajustar_referencia`).
+    `valor_estimado` (opcional): valor de hoje já calculado por outro modelo (ex.: o
+    modelo de preço v3); nesse caso `price_artifact` só fornece o erro típico.
     """
     bairro = unify_bairro(bairro)
     tipo = canonical_tipo(tipo_imovel)
@@ -250,16 +254,19 @@ def project(
     if not 1 <= anos <= MAX_ANOS:
         raise ValueError(f"Horizonte deve estar entre 1 e {MAX_ANOS} anos.")
 
-    valor_modelo = predict_price(
-        price_artifact,
-        area_total=area_total,
-        area_privada=area_privada,
-        bairro=bairro,
-        tipo_imovel=tipo,
-        quartos=quartos,
-        banheiros=banheiros,
-        vagas=vagas,
-    )
+    if valor_estimado is not None:
+        valor_modelo = float(valor_estimado)
+    else:
+        valor_modelo = predict_price(
+            price_artifact,
+            area_total=area_total,
+            area_privada=area_privada,
+            bairro=bairro,
+            tipo_imovel=tipo,
+            quartos=quartos,
+            banheiros=banheiros,
+            vagas=vagas,
+        )
     valor_hoje = float(preco_atual) if preco_atual else float(valor_modelo)
     rate, origem = lookup_rate(artifact, bairro, tipo)
     peso_dados = 1.0
