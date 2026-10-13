@@ -117,7 +117,7 @@ RESULTADOS = {
             "em log tende a prever o valor típico e subestima as casas caras, que pesam muito no "
             "erro em reais."
         ),
-        "resultado_preco": "Com o alvo em reais, foi o melhor em casas e o 3º em apartamentos.",
+        "resultado_preco": "Com o alvo em reais, foi o melhor em casas e o 4º em apartamentos.",
     },
     "XGBoost": {
         "resultado": (
@@ -157,12 +157,12 @@ RESULTADOS = {
             "Com o alvo em log, falhou de forma grave em casas: pequenos erros no logaritmo viram "
             "erros enormes em reais quando convertidos de volta."
         ),
-        "resultado_preco": "Com o alvo em reais, ficou atrás de todos os modelos de árvore.",
+        "resultado_preco": "Com o alvo em reais, ficou atrás dos modelos de árvore com o mesmo alvo.",
         "fora_do_site": "Não entra no site: ficou atrás dos modelos de árvore.",
     },
     "Regressão Linear Múltipla": {
         "resultado": (
-            "Cerca de 15% a 20% pior que os melhores: o preço não é uma soma de pesos fixos. A EDA "
+            "Cerca de 14% a 22% pior que os melhores: o preço não é uma soma de pesos fixos. A EDA "
             "mostrou que o preço/m² não sobe com o número de quartos e que o efeito da área muda "
             "conforme o bairro, e uma reta não capta isso."
         ),
@@ -195,8 +195,9 @@ RESULTADOS = {
     "Ensemble": {
         "resultado": (
             "É o modelo do site: a média ponderada dos 3 melhores da validação cruzada entre os que "
-            "cabem no site. Erra um pouco menos que o melhor modelo sozinho, porque os erros de "
-            "modelos diferentes se compensam em parte."
+            "cabem no site. Em apartamentos erra um pouco menos que o melhor modelo sozinho; em casas "
+            "empata com o CatBoost (diferença de 0,3%). A vantagem é a estabilidade: os erros de "
+            "modelos diferentes se compensam em parte, e a média não depende de um modelo só."
         ),
     },
 }
@@ -216,8 +217,8 @@ POR_QUE_GERAL = """
 - **Em casas, prever o logaritmo do preço piora todos os modelos.** O modelo em log
   tende a prever o valor típico e subestima as casas caras, que dominam o erro em reais.
 - **O histórico simulado não muda quem é o melhor.** Ele ensina ao modelo o efeito do tempo
-  (coerente com o IPCA+INCC), não qual imóvel vale mais. Por isso o erro de hoje fica
-  igual ao da versão anterior.
+  (coerente com o IPCA+INCC), não qual imóvel vale mais. Por isso a precisão de hoje fica
+  praticamente igual à da versão anterior (R² 0,80 e 0,58).
 - **Todos os erros são medidos só em preços reais**, de imóveis que nenhum modelo viu.
 - **O TabPFN não entra na v3:** aceita no máximo 10 mil linhas de treino e, com o histórico
   simulado, levaria horas no computador. Na v1 ele empatou com o ensemble.

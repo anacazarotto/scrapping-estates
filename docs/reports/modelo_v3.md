@@ -7,8 +7,8 @@ medidos só nos preços reais do teste, que o modelo nunca viu.
 
 | Tipo | Linhas reais (treino) | Linhas simuladas (treino) | MAE v3 | MAE v1 | R² v3 | R² v1 | Erro mediano v3 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Casa | 1038 | 10380 | R$ 290.535 | R$ 291.216 | 0.571 | 0.559 | 19.2% |
-| Apartamento | 1400 | 14000 | R$ 118.600 | R$ 119.640 | 0.800 | 0.795 | 15.0% |
+| Casa | 1039 | 10390 | R$ 296.373 | R$ 291.216 | 0.576 | 0.559 | 19.2% |
+| Apartamento | 1400 | 14000 | R$ 121.523 | R$ 119.640 | 0.799 | 0.795 | 14.5% |
 
 ## Coerência com o índice (não é medida de acerto)
 
@@ -17,10 +17,10 @@ de hoje (mediana), e quanto o índice diria:
 
 | Tipo | Modelo | Índice IPCA+INCC |
 |---|---:|---:|
-| Casa | 0.755 | 0.754 |
-| Apartamento | 0.757 | 0.754 |
+| Casa | 0.737 | 0.735 |
+| Apartamento | 0.736 | 0.735 |
 
 ## Ensemble escolhido (validação cruzada por imóvel, erro só nas linhas reais)
 
-- **Casa:** CatBoost (preco, peso 0.34), XGBoost (preco, peso 0.33), Gradient Boosting (preco, peso 0.33)
-- **Apartamento:** CatBoost (log(preco), peso 0.34), XGBoost (log(preco), peso 0.33), CatBoost (preco, peso 0.33)
+- **Casa:** CatBoost (preco, peso 0.34), Gradient Boosting (preco, peso 0.33), XGBoost (preco, peso 0.33)
+- **Apartamento:** CatBoost (log(preco), peso 0.34), XGBoost (log(preco), peso 0.33), XGBoost (preco, peso 0.33)

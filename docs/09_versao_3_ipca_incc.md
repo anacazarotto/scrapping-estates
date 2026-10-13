@@ -76,22 +76,23 @@ histórico simulado, com o ano como variável a mais (`scripts_predict/modelo_v3
 
 | Tipo | Linhas no treino (reais + simuladas) | MAE v3 | MAE v1 | R² v3 | R² v1 | Erro mediano v3 |
 |---|---:|---:|---:|---:|---:|---:|
-| Apartamento | 1.400 + 14.000 | R$ 118.600 | R$ 119.640 | 0,800 | 0,795 | 15,0% |
-| Casa | 1.038 + 10.380 | R$ 290.535 | R$ 291.216 | 0,571 | 0,559 | 19,2% |
+| Apartamento | 1.400 + 14.000 | R$ 121.523 | R$ 119.640 | 0,799 | 0,795 | 14,5% |
+| Casa | 1.038 + 10.380 | R$ 296.373 | R$ 291.216 | 0,576 | 0,559 | 19,2% |
 
-Ensembles: apartamento = CatBoost (log), XGBoost (log) e CatBoost; casa = CatBoost, XGBoost
-e Gradient Boosting.
+Ensembles: apartamento = CatBoost (log), XGBoost (log) e XGBoost; casa = CatBoost, Gradient
+Boosting e XGBoost. Na v3 os preços reais do teste estão levados a ago/2026 (seção 9.8),
+então o MAE em reais fica um pouco maior; o R² e o erro percentual, que não dependem da
+escala, são praticamente os mesmos do v1.
 
-**Leitura:** no preço de hoje, o v3 empata com o v1 (diferença de 1%, dentro da variação
-normal). Era o esperado: o histórico simulado não traz informação nova sobre *qual*
+**Leitura:** no preço de hoje, o v3 empata com o v1 (R² 0,799 contra 0,795 em
+apartamentos; 0,576 contra 0,559 em casas). Era o esperado: o histórico simulado não traz informação nova sobre *qual*
 imóvel vale mais. O ganho do v3 é outro: ele sabe responder **quanto o imóvel valia em
 anos anteriores**, de forma coerente com o índice. Os imóveis de teste valiam, em
-jun/2021, 75,7% do valor de hoje segundo o modelo, contra 75,4% pelo índice. Essa conta
+jun/2021, 73,7% do valor de hoje (ago/2026) segundo o modelo, contra 73,5% pelo índice. Essa conta
 mostra coerência, não acerto, porque o passado foi gerado pelo próprio índice.
 
-No site, o valor de hoje continua vindo do modelo v1, que foi validado com mais
-candidatos e tem o mesmo desempenho. O v3 aparece no quadro "Quanto este imóvel valia nos
-anos anteriores". Relatório: `docs/reports/modelo_v3.md`.
+No site, o valor de hoje, o passado e a projeção vêm do modelo v3 (seção 9.8). Relatório:
+`docs/reports/modelo_v3.md`.
 
 ## 9.5 A valorização v3
 
@@ -165,7 +166,34 @@ IPCA+INCC (ajuste de no máximo cerca de 2,5%) antes de simular o passado. Assim
 efeito do tempo que o modelo aprende vem do índice. O dataset mostra o preço anunciado
 original e o preço no mês de referência.
 
-PREENCHER_RESULTADOS_V3
+**Todos os candidatos no protocolo da v3** (`dados/resultados_modelos_v3.json`, aba
+Modelos do site). Posição na validação cruzada (agrupada por imóvel, erro só nas linhas
+reais) e R² no teste com preços reais:
+
+| Posição | Apartamento | R² teste | Casa | R² teste |
+|---:|---|---:|---|---:|
+| 1 | CatBoost (log) | 0,794 | CatBoost (preço) | 0,583 |
+| 2 | XGBoost (log) | 0,788 | Gradient Boosting (preço) | 0,569 |
+| 3 | XGBoost (preço) | 0,796 | XGBoost (preço) | 0,546 |
+| 4 | CatBoost (preço) | 0,796 | Random Forest (preço) | 0,481 |
+| 5 | Gradient Boosting (log) | 0,774 | Rede Neural (preço) | 0,416 |
+| últimos | SVM (preço) | −0,333 | Rede Neural (log) | −15,7 |
+
+O que os resultados mostram, com os nossos dados:
+
+- **Árvores em sequência (CatBoost, XGBoost, Gradient Boosting) são as melhores:** o preço
+  não é uma soma simples (o bairro muda o efeito da área; o preço/m² não sobe com os
+  quartos), e o CatBoost trata o bairro melhor que os outros.
+- **Lineares ficam de 14% a 22% piores**, pelo mesmo motivo; Lasso e Ridge ficam iguais à
+  regressão linear.
+- **Em casas, o alvo em log piora todos os algoritmos:** o modelo em log prevê o valor
+  típico e subestima as casas caras, que dominam o erro em reais. Em apartamentos, o log
+  ajuda um pouco.
+- **Rede Neural e SVM ficam entre os piores:** precisam de mais imóveis do que temos e de
+  ajuste fino; o SVM é sensível à escala do alvo (com o preço em reais, R² negativo), e a
+  Rede Neural em log explode ao converter de volta para reais.
+- **Random Forest** é estável, mas atrás do boosting, e não entra no site porque o arquivo
+  ficaria com centenas de MB.
 
 ## 9.9 Como reproduzir
 

@@ -292,8 +292,9 @@ def aba_dataset():
     else:
         reais_sub = sub
         k1.metric("Imóveis", f"{len(sub):,}".replace(",", "."))
-    k2.metric("Preço mediano (reais)", reais(reais_sub["preco"].median()) if len(reais_sub) else "—")
-    k3.metric("Preço/m² mediano (reais)", reais(reais_sub["preco_m2"].median()) if len(reais_sub) else "—")
+    sufixo = " (reais, em ago/2026)" if "origem" in sub else ""
+    k2.metric("Preço mediano" + sufixo, reais(reais_sub["preco"].median()) if len(reais_sub) else "—")
+    k3.metric("Preço/m² mediano" + sufixo, reais(reais_sub["preco_m2"].median()) if len(reais_sub) else "—")
     st.dataframe(
         sub,
         hide_index=True,
