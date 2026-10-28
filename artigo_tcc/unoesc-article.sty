@@ -1,0 +1,437 @@
+%% Identificação e modificações
+\NeedsTeXFormat{LaTeX2e}[2023/03/03]
+\ProvidesPackage{unoesc-article}[2023/03/03 v1.2 unoesc-article package]
+
+%% Opções do pacote
+\newif\if@biburlslinks%
+\DeclareOption{BibURLs=true}{\@biburlslinkstrue}
+\DeclareOption{BibURLs=false}{\@biburlslinksfalse}
+\DeclareOption{BibURLs}{\ExecuteOptions{BibURLs = true}}
+\newif\if@useabntnum%
+\newif\if@useabntnumbrkt%
+\DeclareOption{ABNTNum=none}{%
+  \@useabntnumfalse%
+  \@useabntnumbrktfalse%
+}
+\DeclareOption{ABNTNum=dflt}{%
+  \@useabntnumtrue%
+  \@useabntnumbrktfalse%
+}
+\DeclareOption{ABNTNum=brkt}{%
+  \@useabntnumtrue%
+  \@useabntnumbrkttrue%
+}
+\DeclareOption*{\PackageWarning{unoesc-article}{Unknown option `\CurrentOption'}}
+\ExecuteOptions{BibURLs = false, ABNTNum = none}
+\ProcessOptions\relax%
+
+%% Pacotes utilizados
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+\RequirePackage{textcomp}
+\RequirePackage{fontawesome}
+\RequirePackage{microtype}
+\RequirePackage{xcolor}
+% \RequirePackage[showframe]{geometry}
+\RequirePackage{geometry}
+\RequirePackage{afterpage}
+\RequirePackage{indentfirst}
+\RequirePackage{amsmath}
+\RequirePackage{icomma}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{environ}
+\RequirePackage{titling}
+\RequirePackage[flushmargin, hang]{footmisc}
+\RequirePackage{fnpos}
+\RequirePackage{csquotes}
+\RequirePackage{xpatch}
+\if@useabntnum%
+  \RequirePackage[%
+    style      = abnt-numeric,%
+    \if@useabntnumbrkt%
+      citestyle = abnt-num-brkt,%
+    \fi%
+    natbib     = true,%
+    sorting    = none,%
+    uniquename = init,%
+    giveninits = true,%
+    comp       = true,%
+  ]{biblatex}
+\else%
+  \RequirePackage[%
+    style      = abnt,%
+    natbib     = true,%
+    uniquename = init,%
+    giveninits = true,%
+  ]{biblatex}
+\fi%
+
+%% Fontes
+\renewcommand*{\ABNTEXpartfont}{\normalfont}
+\renewcommand*{\ABNTEXpartfontsize}{\normalsize}
+
+\renewcommand*{\ABNTEXchapterfont}{\ABNTEXpartfont}
+\renewcommand*{\ABNTEXchapterfontsize}{\ABNTEXpartfontsize}
+
+\renewcommand*{\ABNTEXsectionfont}{\ABNTEXpartfont\bfseries}
+\renewcommand*{\ABNTEXsectionfontsize}{\ABNTEXpartfontsize}
+
+\renewcommand*{\ABNTEXsubsectionfont}{\ABNTEXpartfont}
+\renewcommand*{\ABNTEXsubsectionfontsize}{\ABNTEXpartfontsize}
+
+\renewcommand*{\ABNTEXsubsubsectionfont}{\ABNTEXpartfont\bfseries}
+\renewcommand*{\ABNTEXsubsubsectionfontsize}{\ABNTEXpartfontsize}
+
+%% Cores
+\definecolor{ADarkBlue}{RGB}{0, 0, 85}
+\definecolor{unoescBlack}{RGB}{55, 52, 53}
+\definecolor{unoescYellow}{RGB}{254, 203, 41}
+
+%% Hiperlinks e urls
+\hypersetup{%
+  breaklinks         = true,%
+  colorlinks         = true,%
+  allcolors          = ADarkBlue,%
+  bookmarksdepth     = 3,%
+  bookmarksopen      = true,%
+  bookmarksnumbered  = true,%
+  pdfdisplaydoctitle = true,%
+  pdfpagelayout      = SinglePage,%
+}
+\DeclareUrlCommand\URL{%
+  \renewcommand*{\UrlFont}{\ttfamily\color{ADarkBlue}}%
+  \renewcommand*{\UrlLeft}{<}%
+  \renewcommand*{\UrlRight}{>}%
+}
+\g@addto@macro\UrlBreaks{\UrlOrds}
+
+%% Variáveis dependentes do idioma
+\iflanguage{english}{%
+  \RequirePackage[english, nameinlink, capitalise]{cleveref}
+  \newcommand*{\mecname}{Ministry of Education}%
+  \newcommand*{\unoescname}{Federal University of Technology --- Paraná}%
+  \newcommand*{\sourcename}{Source}%
+  \Crefname{table}{Table}{Tables}%
+  \if@cref@capitalise%
+    \if@cref@abbrev%
+      \crefname{table}{Tab.}{Tabs.}%
+    \else%
+      \crefname{table}{Table}{Tables}%
+    \fi%
+  \else%
+    \if@cref@abbrev%
+      \crefname{table}{tab.}{tabs.}%
+    \else%
+      \crefname{table}{table}{tables}%
+    \fi%
+  \fi%
+}{%
+  \RequirePackage[brazilian, nameinlink, capitalise]{cleveref}
+  \newcommand*{\mecname}{Ministério da Educação}%
+  \newcommand*{\unoescname}{Universidade Tecnológica Federal do Paraná}%
+  \newcommand*{\sourcename}{Fonte}%
+  \Crefname{table}{Tabela}{Tabelas}%
+  \if@cref@capitalise%
+    \if@cref@abbrev%
+      \crefname{table}{Tab.}{Tabs.}%
+    \else%
+      \crefname{table}{Tabela}{Tabelas}%
+    \fi%
+  \else%
+    \if@cref@abbrev%
+      \crefname{table}{tab.}{tabs.}%
+    \else%
+      \crefname{table}{tabela}{tabelas}%
+    \fi%
+  \fi%
+  \AtBeginDocument{\frenchspacing}%
+}
+
+%% Definições de comandos
+\newcommand*{\cmd@ifnotempty}[3][]{%
+  \ifx#2\@empty%
+    #1%
+  \else%
+    #3%
+  \fi%
+}
+\newbox{\orcidiconbox}
+%\sbox{\orcidiconbox}{\footnotesize\includegraphics[height = 1.7ex]{./Logos/orcid-id}}
+\newcommand*{\orcid}[1]{\href{https://orcid.org/#1}{\usebox{\orcidiconbox}~https://orcid.org/#1}}
+\newcommand*{\email}[1]{\href{mailto:#1}{\faEnvelopeO~#1}}
+\newcommand*{\affil}[1]{\faInstitution~#1}
+\newcommand*{\linkicon}{{\footnotesize\faExternalLink}}
+\instituicao{\unoescname}
+\newcommand*{\campusacr}{}
+\newcommand*{\campusname}{}
+\newcommand*{\campus}[2]{%
+  \renewcommand*{\campusacr}{#1}%
+  \renewcommand*{\campusname}{#2}%
+}
+\newcommand*{\deptlogo}{}
+\newcommand*{\deptacr}{}
+\newcommand*{\deptname}{}
+\newcommand*{\departamento}[3][]{%
+  \renewcommand*{\deptlogo}{#1}%
+  \renewcommand*{\deptacr}{#2}%
+  \renewcommand*{\deptname}{#3}%
+}
+\newcommand*{\nextline}{\protect\\}
+\newcommand*{\sep}{\unskip;\space}
+\let\oldand\and%
+\renewcommand*{\and}{\unskip,\oldand}
+\pdfstringdefDisableCommands{%
+  \renewcommand*{\\}{ }%
+  \renewcommand*{\unskip}{}%
+  \renewcommand*{\and}{, }%
+}
+
+%% Texto
+\newgeometry{%
+  top         = 0mm,%
+  left        = 20mm,%
+  right       = 20mm,%
+  bottom      = 20mm,%
+  head        = 15mm,%
+  headsep     = 0mm,%
+  footskip    = 5mm,%
+  includehead = true,%
+}
+\savegeometry{title}
+\newgeometry{%
+  top      = 20mm,%
+  left     = 20mm,%
+  right    = 20mm,%
+  bottom   = 20mm,%
+  head     = 5mm,%
+  headsep  = 5mm,%
+  footskip = 5mm,%
+}%
+\savegeometry{standard}
+\loadgeometry{title}
+\setlength{\parskip}{\z@}
+\setlength{\parindent}{6mm}
+\if@fleqn%
+  \mathindent\parindent%
+\fi%
+\SingleSpacing%
+
+%% Cabeçalhos e rodapés
+\newcommand*{\lunoesctitleheader}{%
+  \begin{minipage}[c][][c]{35mm}%
+  \begin{flushleft}%
+  \includegraphics[width = 30mm]{./Logos/unoesc}%
+  \end{flushleft}%
+  \end{minipage}%
+}
+\newcommand*{\cunoesctitleheader}{%
+  \cmd@ifnotempty[{\color{unoescBlack}\vrule width 0.5pt}\hskip6pt]{\deptlogo}{}%
+  \begin{minipage}[c][][c]{100mm}%
+  \cmd@ifnotempty{\deptlogo}{\centering}%
+  {\footnotesize\sffamily\mecname}\vskip-2pt%
+  {\footnotesize\sffamily\bfseries\unoescname}\vskip-2pt%
+  {\footnotesize\sffamily\campusname}\vskip-2pt%
+  {\footnotesize\sffamily\deptname}%
+  \end{minipage}%
+}
+\newcommand*{\runoesctitleheader}{%
+  \cmd@ifnotempty{\deptlogo}{%
+    \begin{minipage}[c][][c]{35mm}%
+    \begin{flushright}%
+    \includegraphics[width = 30mm]{./Logos/\deptlogo}%
+    \end{flushright}%
+    \end{minipage}%
+  }%
+}
+\newcommand*{\unoescheadrule}{%
+  \vskip2pt%
+  {\color{unoescBlack}\hrule height 0.5pt}\vskip\p@%
+  {\color{unoescYellow}\hrule height 0.5pt}\vskip\p@%
+}
+\newcommand*{\lunoescheader}{%
+  \footnotesize\sffamily \cmd@ifnotempty{\campusacr}{{-}\campusacr}\cmd@ifnotempty{\deptacr}{{/}\deptacr}%
+}
+\newcommand*{\cunoescheader}{}
+\newcommand*{\runoescheader}{%
+  \footnotesize\sffamily\thepage%
+}
+% \makepagestyle{title}
+% \makeevenhead{title}{\lunoesctitleheader}{\cunoesctitleheader}{\runoesctitleheader}
+% \makeoddhead{title}{\lunoesctitleheader}{\cunoesctitleheader}{\runoesctitleheader}
+\makeheadfootruleprefix{title}{\unoescheadrule}{}
+\makepagestyle{standard}
+\makeevenhead{standard}{\lunoescheader}{}{\runoescheader}
+\makeoddhead{standard}{\lunoescheader}{}{\runoescheader}
+
+%% Página de título
+\titulo{}
+\autor{}
+\newcommand*{\theforeigntitle}{}
+\newcommand*{\titleinenglish}[1]{\renewcommand*{\theforeigntitle}{#1}}
+\renewcommand*{\maketitlehookb}{%
+  \cmd@ifnotempty{\theforeigntitle}{\centering{\LARGE\bfseries\itshape\MakeUppercase\theforeigntitle}}%
+  \vskip\baselineskip%
+}
+\pretitle{%
+  \begin{center}%
+  \LARGE\bfseries\MakeUppercase%
+}
+\posttitle{%
+  \end{center}%
+}
+\predate{%
+  \begin{center}%
+  \normalsize%
+}
+\postdate{%
+  \end{center}%
+  \vskip-\baselineskip%
+}
+\NewEnviron{paginadetitulo}{%
+  \hypersetup{%
+    pdftitle  = {\thetitle},%
+    pdfauthor = {\theauthor},%
+  }%
+  \if@twocolumn%
+    \twocolumn[%
+      \maketitle%
+      \BODY%
+    ]%
+    \saythanks%
+  \else%
+    \maketitle%
+    \BODY%
+  \fi%
+}
+
+%% Resumo
+\setlength{\abstitleskip}{-\baselineskip}
+\setlength{\absleftindent}{10mm}
+\setlength{\absrightindent}{10mm}
+\newenvironment{ambienteresumo}[1][RESUMO]{%
+  \renewcommand*{\resumoname}{#1}%
+  \begin{resumoumacoluna}%
+}{%
+  \end{resumoumacoluna}%
+}
+\newcommand*{\palavraschave}[2][Palavras-chave]{%
+  \vskip\baselineskip%
+  \noindent{\bfseries#1:}\space{#2}%
+}
+
+%% Capítulos, seções, subseções e subsubseções
+\let\oldtextual\textual%
+\renewcommand*{\textual}{%
+  \oldtextual%
+  \pagestyle{standard}%
+  \afterpage{%
+    \globaldefs=1%
+    \loadgeometry{standard}%
+  }%
+}
+\renewcommand*{\chapterheadstart}{\vskip\baselineskip}
+\setlength{\beforechapskip}{\baselineskip}
+\setlength{\afterchapskip}{\baselineskip}
+\setlength{\beforesecskip}{\beforechapskip}
+\setlength{\aftersecskip}{\afterchapskip}
+\setlength{\beforesubsecskip}{\beforesecskip}
+\setlength{\aftersubsecskip}{\aftersecskip}
+\setlength{\beforesubsubsecskip}{\beforesubsecskip}
+\setlength{\aftersubsubsecskip}{\aftersubsecskip}
+
+%% Notas de rodapé
+\makeFNbottom%
+\setlength{\footnotemargin}{1em}
+\let\oldfootnotetext\footnotetext%
+\renewcommand*{\footnotetext}[2][]{\oldfootnotetext[#1]{#2\@addpunct{.}}}
+\renewcommand*{\makethanksmark}{%
+  \sbox\@tempboxa{%
+    \ifdim\footnotemargin>\z@%
+      \hb@xt@\footnotemargin{\thanksfootmark\hss}%
+    \else%
+      \thanksfootmark%
+    \fi%
+  }%
+  \leftmargin\wd\@tempboxa%
+  \rightmargin\z@%
+  \linewidth\columnwidth%
+  \advance\linewidth-\leftmargin%
+  \parshape\@ne\leftmargin\linewidth%
+  \footnotesize%
+  \@setpar{\@@par}%
+  \leavevmode\raggedright%
+  \llap{\box\@tempboxa}%
+  \parskip\hangfootparskip\relax%
+  \parindent\hangfootparindent\relax%
+}
+\renewcommand*{\thanksfootmark}{\thanksscript{\tamark}}
+
+%% Equações
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{-0.25\baselineskip}%
+  \setlength{\belowdisplayskip}{0.5\baselineskip}%
+  \setlength{\abovedisplayshortskip}{\abovedisplayskip}%
+  \setlength{\belowdisplayshortskip}{\belowdisplayskip}%
+}
+
+%% Legendas
+\captiontitlefont{\footnotesize\bfseries}
+\captionnamefont{\footnotesize\bfseries}
+\setlength{\abovecaptionskip}{\p@}
+\setlength{\belowcaptionskip}{\p@}
+
+%% Citações e referências
+\@ifpackagelater{biblatex}{2016/12/06}{%
+  \DeclareLanguageMapping{brazilian}{brazilian-abnt}%
+  \DeclareLanguageMapping{english}{english-abnt}%
+  \DeclareLanguageMappingSuffix{}%
+  \NewBibliographyString{sheettotal, sheettotals}%
+  \DefineBibliographyStrings{english}{sheettotal = {s\adddot}, sheettotals = {s\adddot}}%
+}{%
+  \DeclareLanguageMapping{brazilian}{abnt-brazilian}%
+  \DeclareLanguageMapping{english}{abnt-english}%
+  \NewBibliographyString{urlfrom}%
+  \DefineBibliographyStrings{brazilian}{urlfrom = {disponível em}}%
+}
+\if@biburlslinks%
+\else%
+  \DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\space\href{#1}{\linkicon}}
+\fi%
+
+%% Apêndices
+\newenvironment{ambienteapendices}{\apendices}{}
+
+%% Anexos
+\newenvironment{ambienteanexos}{\anexos}{}
+
+
+
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{colortbl}
+\usepackage{arydshln}
+% listagens
+\definecolor{corComentario}{RGB}{150,150,150}
+\definecolor{corString}{RGB}{206,123,0}
+\definecolor{corPalavraChave}{RGB}{0,0,230}
+
+%configuracao de algoritmos
+\lstset{
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberstyle=\footnotesize,
+	extendedchars=true,
+	breaklines=true,
+	lineskip=0pt,
+	frame=tb,
+	basicstyle=\ttfamily\footnotesize,
+	showstringspaces=false,
+	stringstyle=\color{corString},
+	commentstyle=\color{corComentario},
+	keywordstyle=\color{corPalavraChave}
+}

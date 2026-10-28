@@ -56,3 +56,6 @@ catboost_info/
 .env
 .env.*
 !.env.example
+
+# Pacote do artigo para subir no Overleaf (gerado a partir de artigo_tcc/)
+artigo_tcc/*.zip
