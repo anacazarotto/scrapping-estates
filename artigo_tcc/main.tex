@@ -22,6 +22,13 @@
 \microtypesetup{expansion=false}
 \DeclareUnicodeCharacter{00B2}{\textsuperscript{2}}
 
+%% Citações no padrão (HASTIE; TIBSHIRANI; FRIEDMAN, 2009), sem iniciais extras
+\ExecuteBibliographyOptions{uniquename=false, uniquelist=false}
+
+%% Espaço acima e abaixo das equações (o modelo deixa zero)
+\AtBeginEnvironment{equation}{\vspace{6pt}}
+\AfterEndEnvironment{equation}{\vspace{2pt}}
+
 %% Níveis de título pedidos na estrutura do artigo (UNOESC):
 %% 1 MAIÚSCULO NEGRITO; 1.1 MAIÚSCULO ITÁLICO; 1.1.1 minúsculo itálico
 \renewcommand*{\ABNTEXsubsectionfont}{\ABNTEXpartfont\itshape}
@@ -133,9 +140,10 @@ As doze coletas somaram 46.383 registros e foram unificadas em uma única base, 
 A análise começou pela estatística descritiva e pela análise exploratória \cite{tukey1977}, que orientaram as decisões de modelagem. Em seguida, casas e apartamentos foram modelados separadamente. Para cada tipo, os dados foram divididos por imóvel em 80\% para treino e 20\% para teste, com semente aleatória fixa, antes de qualquer tratamento. As regras de limpeza foram aprendidas somente no treino: bairros com menos de dez imóveis foram agrupados em ``outros'', as variáveis numéricas foram limitadas aos percentis de 2\% e 98\% e os valores atípicos de preço e de preço por m² foram removidos pelo critério do intervalo interquartil (1,5 vez).
 
 Para estimar a valorização ao longo dos anos, foi construído um índice com a média simples das variações mensais do IPCA e do INCC. A lógica é que o terreno e o imóvel como um todo tendem a acompanhar a inflação geral, enquanto a construção tende a acompanhar o custo de construir. Com esse índice, todos os preços reais foram levados ao mês de referência (agosto de 2026) e, para cada imóvel, foram gerados dez registros simulados, um para junho de cada ano entre 2016 e 2025:
-\[
+\begin{equation}
 P_{\text{jun}/Y} = \frac{P_{\text{ref}}}{I_{\text{ref}} / I_{\text{jun}/Y}}
-\]
+\label{eq:simulacao}
+\end{equation}
 em que $P_{\text{ref}}$ é o preço no mês de referência e $I$ é o nível do índice. Assim, a base de modelagem passou a ter 3.283 linhas reais e 32.830 simuladas, e o ano foi incluído como variável. Os índices são valores oficiais, mas o passado de cada imóvel é uma hipótese: supõe-se que ele tenha acompanhado o índice.
 
 Foram comparados nove algoritmos (Regressão Linear, Ridge, Lasso, Random Forest, Gradient Boosting, XGBoost, CatBoost, rede neural MLP e SVM), cada um com o alvo em preço e em logaritmo do preço, totalizando 18 candidatos, implementados com scikit-learn \cite{pedregosa2011}, XGBoost e CatBoost. O ranking foi feito por validação cruzada de cinco partes agrupada por imóvel, de modo que o preço real e os simulados de um mesmo imóvel ficassem sempre juntos, e o erro foi medido apenas nas linhas reais. Os três melhores candidatos foram combinados em um \textit{ensemble} com pesos inversamente proporcionais ao erro. A avaliação final usou o conjunto de teste, que não participou de nenhuma escolha, com MAE, RMSE, R² e erro percentual mediano. O MAPE foi descartado porque erros de cadastro, como uma casa anunciada por ``R\$ 1,35'', geram erros de milhões de por cento. O TabPFN foi avaliado em uma etapa anterior do trabalho, mas não foi mantido na comparação final porque cada previsão levava cerca de dois minutos em processador comum e o ganho de precisão não se confirmou no teste.
