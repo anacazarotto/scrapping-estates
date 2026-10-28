@@ -17,6 +17,11 @@
   ABNTNum = none,
 ]{unoesc-article}
 
+%% Compilação mais rápida (limite de tempo do Overleaf gratuito):
+%% sem expansão de fonte do microtype e "²" sem carregar a fonte cm-super
+\microtypesetup{expansion=false}
+\DeclareUnicodeCharacter{00B2}{\textsuperscript{2}}
+
 %% Níveis de título pedidos na estrutura do artigo (UNOESC):
 %% 1 MAIÚSCULO NEGRITO; 1.1 MAIÚSCULO ITÁLICO; 1.1.1 minúsculo itálico
 \renewcommand*{\ABNTEXsubsectionfont}{\ABNTEXpartfont\itshape}
