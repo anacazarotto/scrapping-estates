@@ -13,7 +13,7 @@
 ]{abntex2}
 
 \usepackage[
-  BibURLs = false,
+  BibURLs = true,%% endereço escrito por extenso nas referências (ABNT)
   ABNTNum = none,
 ]{unoesc-article}
 
@@ -36,7 +36,11 @@
 
 \addbibresource{referencias.bib}
 
-\titulo{Modelagem preditiva da valorização imobiliária em Chapecó/SC: comparação de algoritmos de aprendizado de máquina}
+%% Mesmo título do TCC I; o subtítulo vai em linha menor, sem maiúsculas, para o título ocupar menos linhas
+\titulo{\texorpdfstring{%
+  Modelagem preditiva da valorização imobiliária em Chapecó/SC\\[2pt]%
+  \NoCaseChange{\large Comparação de algoritmos de aprendizado de máquina}%
+}{Modelagem preditiva da valorização imobiliária em Chapecó/SC: comparação de algoritmos de aprendizado de máquina}}
 
 \makeatletter
 \let\@fnsymbol\@arabic
@@ -61,6 +65,9 @@
 \pretextual
 
 \begin{paginadetitulo}
+
+    %% Título nas propriedades do PDF: o modelo usa \thetitle, que traria o "\\" do subtítulo
+    \hypersetup{pdftitle={Modelagem preditiva da valorização imobiliária em Chapecó/SC: comparação de algoritmos de aprendizado de máquina}}
 
     \begin{ambienteresumo}
     Este trabalho investigou se é possível estimar o valor de casas e apartamentos em Chapecó/SC, hoje e ao longo dos anos, com aprendizado de máquina aplicado a anúncios públicos. Foram coletados, por \textit{web scraping}, 46.383 registros de oito imobiliárias locais entre março e agosto de 2026, que resultaram em 3.242 casas e apartamentos válidos após unificação, deduplicação e limpeza. A análise exploratória mostrou preços muito assimétricos, a área e o bairro como principais determinantes e preços anunciados rígidos: 95,9\% não mudaram entre coletas consecutivas. Como cinco meses de anúncios não medem valorização, foi construído um histórico simulado de 2016 a 2025 com um índice que combina a inflação (IPCA) e o custo da construção (INCC), a partir de séries oficiais do Banco Central. Dezoito combinações de algoritmo e alvo foram comparadas com validação cruzada agrupada por imóvel, e o erro foi medido apenas nos preços reais. Os modelos de \textit{boosting} (CatBoost, XGBoost e Gradient Boosting) foram os melhores; o \textit{ensemble} final obteve R² de 0,799 e erro percentual mediano de 14,5\% em apartamentos, e R² de 0,576 e 19,2\% em casas. A valorização estimada foi de +4,33\% ao ano para apartamentos e +4,17\% para casas. Os resultados foram publicados em uma interface web. Conclui-se que a abordagem é viável como apoio à decisão, mas a valorização passada é uma hipótese que precisa ser validada com dados de transações reais.
@@ -125,7 +132,7 @@ Além dos anúncios, foram obtidas as séries mensais oficiais do Índice Nacion
 
 \subsection{TABULAÇÃO DOS DADOS}
 
-As doze coletas somaram 46.383 registros e foram unificadas em uma única base, com uma tabela de imóveis identificados pelo código do anúncio e uma tabela com o histórico de preços de cada imóvel em cada coleta. Grafias diferentes do mesmo bairro foram padronizadas. Como uma mesma casa pode ser anunciada por mais de uma imobiliária, os anúncios foram agrupados por cidade, tipo, área arredondada, quartos, banheiros, vagas e bairro, e cada grupo foi consolidado pela mediana do preço e das áreas. Os tipos de imóvel, escritos livremente pelas imobiliárias, foram mapeados para um catálogo fixo. O processo resultou em 4.266 imóveis únicos, dos quais 3.354 eram casas ou apartamentos e 3.242 tinham preço entre R\$ 50 mil e R\$ 20 milhões e área entre 20 m² e 2.000 m² (Figura~\ref{fig:funil}). A manipulação foi feita com a biblioteca pandas \cite{mckinney2017}.
+As doze coletas somaram 46.383 registros e foram unificadas em uma única base, com uma tabela de imóveis identificados pelo código do anúncio e uma tabela com o histórico de preços de cada imóvel em cada coleta. Grafias diferentes do mesmo bairro foram padronizadas. Como uma mesma casa pode ser anunciada por mais de uma imobiliária, os anúncios foram agrupados por cidade, tipo, área arredondada, quartos, banheiros, vagas e bairro, e cada grupo foi consolidado pela mediana do preço e das áreas. Os tipos de imóvel, escritos livremente pelas imobiliárias, foram mapeados para um catálogo fixo. O processo resultou em 4.266 imóveis únicos, dos quais 3.354 eram casas ou apartamentos e 3.283 tinham preço e área informados. Para a análise exploratória, foram mantidos os 3.242 com preço entre R\$ 50 mil e R\$ 20 milhões e área entre 20 m² e 2.000 m² (Figura~\ref{fig:funil}). Na modelagem, partiu-se dos 3.283, e a remoção dos valores atípicos foi feita dentro do treino, como descrito a seguir. A manipulação foi feita com a biblioteca pandas \cite{mckinney2017}.
 
 \begin{figure}[!htb]
   \caption{Funil de dados, da coleta à base de modelagem}
@@ -144,7 +151,7 @@ Para estimar a valorização ao longo dos anos, foi construído um índice com a
 P_{\text{jun}/Y} = \frac{P_{\text{ref}}}{I_{\text{ref}} / I_{\text{jun}/Y}}
 \label{eq:simulacao}
 \end{equation}
-em que $P_{\text{ref}}$ é o preço no mês de referência e $I$ é o nível do índice. Assim, a base de modelagem passou a ter 3.283 linhas reais e 32.830 simuladas, e o ano foi incluído como variável. Os índices são valores oficiais, mas o passado de cada imóvel é uma hipótese: supõe-se que ele tenha acompanhado o índice.
+em que $P_{\text{ref}}$ é o preço no mês de referência e $I$ é o nível do índice. Assim, a base de modelagem passou a ter 3.283 linhas reais (as casas e apartamentos com preço e área informados) e 32.830 simuladas, e o ano foi incluído como variável. Os índices são valores oficiais, mas o passado de cada imóvel é uma hipótese: supõe-se que ele tenha acompanhado o índice.
 
 Foram comparados nove algoritmos (Regressão Linear, Ridge, Lasso, Random Forest, Gradient Boosting, XGBoost, CatBoost, rede neural MLP e SVM), cada um com o alvo em preço e em logaritmo do preço, totalizando 18 candidatos, implementados com scikit-learn \cite{pedregosa2011}, XGBoost e CatBoost. O ranking foi feito por validação cruzada de cinco partes agrupada por imóvel, de modo que o preço real e os simulados de um mesmo imóvel ficassem sempre juntos, e o erro foi medido apenas nas linhas reais. Os três melhores candidatos foram combinados em um \textit{ensemble} com pesos inversamente proporcionais ao erro. A avaliação final usou o conjunto de teste, que não participou de nenhuma escolha, com MAE, RMSE, R² e erro percentual mediano. O MAPE foi descartado porque erros de cadastro, como uma casa anunciada por ``R\$ 1,35'', geram erros de milhões de por cento. O TabPFN foi avaliado em uma etapa anterior do trabalho, mas não foi mantido na comparação final porque cada previsão levava cerca de dois minutos em processador comum e o ganho de precisão não se confirmou no teste.
 
