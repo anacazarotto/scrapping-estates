@@ -1,11 +1,13 @@
-"""Gera as figuras do artigo a partir dos resultados da v3.
+"""Gera as figuras do artigo a partir dos resultados da v3 e dos bancos locais (análise exploratória).
 
 Uso: python artigo_tcc/gerar_figuras.py
 """
 import json
+import sys
 from pathlib import Path
 
 import matplotlib
+import numpy as np
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
@@ -18,7 +20,10 @@ CINZA = "#9aa3ad"
 CLARO = "#d5dae0"
 TINTA = "#222222"
 
-plt.rcParams.update({
+LARANJA = "#e07b39"
+COR_TIPO = {"Apartamento": AZUL, "Casa": LARANJA}
+
+ESTILO = {
     "font.family": "serif",
     "font.size": 10,
     "axes.edgecolor": "#888888",
@@ -28,13 +33,25 @@ plt.rcParams.update({
     "axes.spines.top": False,
     "axes.spines.right": False,
     "axes.formatter.use_locale": False,
-})
+    "axes.titleweight": "normal",
+    "figure.dpi": 100,
+    "savefig.bbox": "standard",
+}
+plt.rcParams.update(ESTILO)
 VIRGULA = FuncFormatter(lambda v, _: f"{v:g}".replace(".", ",").replace("-", "−"))
 
 NOMES = {
     "Redes Neurais Artificiais (MLP)": "Rede Neural (MLP)",
     "Máquinas de Vetores de Suporte (SVM)": "SVM",
     "Regressão Linear Múltipla": "Regressão Linear",
+}
+
+# Os bairros vêm sem acento da base (mesmo tratamento dos modelos); na figura, com a grafia correta
+BAIRROS = {
+    "jardim italia": "Jardim Itália", "lider": "Líder", "paraiso": "Paraíso",
+    "passo dos fortes": "Passo dos Fortes", "presidente medici": "Presidente Médici",
+    "santo antonio": "Santo Antônio", "sao cristovao": "São Cristóvão", "sao lucas": "São Lucas",
+    "seminario": "Seminário", "universitario": "Universitário",
 }
 
 # Variação anual do índice IPCA+INCC (docs/09, seção 9.2)
@@ -127,12 +144,81 @@ def indice():
     plt.close(fig)
 
 
+def imoveis_tipicos():
+    """Casas e apartamentos com preço e área plausíveis (mesma base da análise exploratória)."""
+    sys.path.insert(0, str(RAIZ / "scripts_predict"))
+    import eda  # noqa: E402 - precisa dos bancos locais (imoveis_*.db)
+
+    eda.UNIFIED_DB = RAIZ / "imoveis_unificado.db"
+    eda.NORMALIZED_DB = RAIZ / "imoveis_normalizados.db"
+    plt.rcParams.update(ESTILO)  # o eda.py troca o estilo ao ser importado
+    norm, _, _ = eda.carregar()
+    return eda.casas_aptos(norm)
+
+
+def reais(v):
+    if v >= 1e6:
+        return f"R$ {v / 1e6:.2f}".replace(".", ",") + (" milhão" if v < 2e6 else " milhões")
+    return f"R$ {v / 1e3:.0f} mil"
+
+
+def distribuicao_precos(ca):
+    fig, eixos = plt.subplots(1, 2, figsize=(9, 3.6))
+    faixas = np.logspace(np.log10(5e4), np.log10(2e7), 45)
+    for tipo, cor in COR_TIPO.items():
+        g = ca[ca["tipo_imovel"] == tipo]
+        eixos[0].hist(g["preco"], bins=faixas, color=cor, alpha=0.55,
+                      label=f"{tipo} (mediana {reais(g['preco'].median())})")
+        m2 = g["preco_m2"].median()
+        eixos[1].hist(g["preco_m2"].clip(upper=25_000), bins=45, color=cor, alpha=0.55,
+                      label=f"{tipo} (mediana R$ {m2:,.0f}/m²)".replace(",", "."))
+    eixos[0].set_xscale("log")
+    eixos[0].set_xticks([1e5, 1e6, 1e7], ["R$ 100 mil", "R$ 1 milhão", "R$ 10 milhões"])
+    eixos[0].xaxis.set_minor_formatter(FuncFormatter(lambda *_: ""))
+    eixos[0].set_title("Preço anunciado (escala logarítmica)", fontsize=10)
+    eixos[1].set_title("Preço por m² (acima de R$ 25 mil agrupados)", fontsize=10)
+    eixos[1].set_xticks(range(0, 25_001, 5000), ["0", "5", "10", "15", "20", "25+"])
+    eixos[0].set_xlabel("Preço anunciado")
+    eixos[1].set_xlabel("Preço por m² (R$ mil)")
+    eixos[0].legend(frameon=False, fontsize=8, loc="upper left")
+    eixos[1].legend(frameon=False, fontsize=8, loc="upper right")
+    for ax in eixos:
+        ax.set_ylabel("Quantidade de imóveis")
+        ax.set_ylim(0, ax.get_ylim()[1] * 1.25)  # espaço para a legenda acima das barras
+    fig.tight_layout()
+    fig.savefig(SAIDA / "eda_04_distribuicao_precos.png", dpi=200)
+    plt.close(fig)
+
+
+def bairros(ca):
+    fig, eixos = plt.subplots(1, 2, figsize=(9, 4.6))
+    for ax, (tipo, cor) in zip(eixos, COR_TIPO.items()):
+        g = ca[(ca["tipo_imovel"] == tipo) & (ca["bairro"] != "")]
+        stats = g.groupby("bairro")["preco_m2"].agg(["median", "size"])
+        stats = stats[stats["size"] >= 20].sort_values("median").tail(15)
+        nomes = [BAIRROS.get(b, b.title()) for b in stats.index]
+        ax.barh(nomes, stats["median"], color=cor, height=0.65)
+        for y, (v, n) in enumerate(zip(stats["median"], stats["size"])):
+            ax.text(v, y, f"  {v:,.0f} (n={n})".replace(",", "."), va="center", fontsize=8, color=TINTA)
+        ax.set_xlim(0, stats["median"].max() * 1.4)
+        ax.set_xticks([0, 4000, 8000], ["0", "4.000", "8.000"])
+        ax.tick_params(axis="y", labelsize=8.5)
+        ax.set_title(tipo, fontsize=10)
+        ax.set_xlabel("Preço mediano por m² (R$)")
+    fig.tight_layout()
+    fig.savefig(SAIDA / "eda_08_preco_m2_bairros.png", dpi=200)
+    plt.close(fig)
+
+
 def main():
     dados = json.loads((RAIZ / "dados" / "resultados_modelos_v3.json").read_text(encoding="utf-8"))
     SAIDA.mkdir(exist_ok=True)
     ranking_mdape(dados)
     previsto_real(dados)
     indice()
+    ca = imoveis_tipicos()
+    distribuicao_precos(ca)
+    bairros(ca)
 
 
 if __name__ == "__main__":
