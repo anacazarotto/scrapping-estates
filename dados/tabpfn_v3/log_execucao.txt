@@ -1,0 +1,71 @@
+[Casa] TabPFN v2: tentativa com todas linhas (corte 60.0 min)
+  [Casa] TabPFN v2 (todas linhas): parte 1/5 em 17.9 min
+  [Casa] TabPFN v2 (todas linhas): parte 2/5 em 36.2 min
+  [Casa] TabPFN v2 (todas linhas): parte 3/5 em 55.1 min
+[Casa] TabPFN v2 (todas linhas): cortado em 60.0 min não terminou em 60.0 minutos
+[Casa] TabPFN v2: tentativa com 10000 linhas (corte 60.0 min)
+  [Casa] TabPFN v2 (10000 linhas): parte 1/5 em 19.2 min
+[Casa] TabPFN v2: tentativa com 3000 linhas (corte 60.0 min)
+  [Casa] TabPFN v2 (3000 linhas): parte 1/5 em 3.0 min
+  [Casa] TabPFN v2 (3000 linhas): parte 2/5 em 6.0 min
+  [Casa] TabPFN v2 (3000 linhas): parte 3/5 em 9.0 min
+  [Casa] TabPFN v2 (3000 linhas): parte 4/5 em 12.0 min
+  [Casa] TabPFN v2 (3000 linhas): parte 5/5 em 15.0 min
+[Casa] TabPFN v2 (3000 linhas): ok em 18.6 min 
+[Apartamento] TabPFN v2: tentativa com todas linhas (corte 60.0 min)
+  [Apartamento] TabPFN v2 (todas linhas): parte 1/5 em 30.4 min
+[Apartamento] TabPFN v2 (todas linhas): cortado em 60.0 min não terminou em 60.0 minutos
+[Apartamento] TabPFN v2: tentativa com 10000 linhas (corte 60.0 min)
+  [Apartamento] TabPFN v2 (10000 linhas): parte 1/5 em 20.8 min
+  [Apartamento] TabPFN v2 (10000 linhas): parte 2/5 em 41.8 min
+[Apartamento] TabPFN v2 (10000 linhas): cortado em 60.0 min não terminou em 60.0 minutos
+[Apartamento] TabPFN v2: tentativa com 3000 linhas (corte 60.0 min)
+  [Apartamento] TabPFN v2 (3000 linhas): parte 1/5 em 2.8 min
+  [Apartamento] TabPFN v2 (3000 linhas): parte 2/5 em 5.6 min
+  [Apartamento] TabPFN v2 (3000 linhas): parte 3/5 em 8.4 min
+  [Apartamento] TabPFN v2 (3000 linhas): parte 4/5 em 11.2 min
+  [Apartamento] TabPFN v2 (3000 linhas): parte 5/5 em 13.9 min
+[Apartamento] TabPFN v2 (3000 linhas): ok em 16.9 min 
+[Casa] TabPFN v3.5: tentativa com todas linhas (corte 60.0 min)
+  [Casa] TabPFN v3.5 (todas linhas): parte 1/5 em 14.3 min
+  [Casa] TabPFN v3.5 (todas linhas): parte 2/5 em 28.5 min
+  [Casa] TabPFN v3.5 (todas linhas): parte 3/5 em 42.6 min
+  [Casa] TabPFN v3.5 (todas linhas): parte 4/5 em 56.6 min
+[Casa] TabPFN v3.5 (todas linhas): cortado em 60.0 min não terminou em 60.0 minutos
+[Casa] TabPFN v3.5: tentativa com 3000 linhas (corte 60.0 min)
+  [Casa] TabPFN v3.5 (3000 linhas): parte 1/5 em 2.9 min
+  [Casa] TabPFN v3.5 (3000 linhas): parte 2/5 em 5.9 min
+  [Casa] TabPFN v3.5 (3000 linhas): parte 3/5 em 8.8 min
+  [Casa] TabPFN v3.5 (3000 linhas): parte 4/5 em 11.7 min
+  [Casa] TabPFN v3.5 (3000 linhas): parte 5/5 em 14.6 min
+[Casa] TabPFN v3.5 (3000 linhas): ok em 17.7 min 
+[Casa] TabPFN v3.5 Fast: tentativa com todas linhas (corte 60.0 min)
+  [Casa] TabPFN v3.5 Fast (todas linhas): parte 1/5 em 5.4 min
+  [Casa] TabPFN v3.5 Fast (todas linhas): parte 2/5 em 10.7 min
+  [Casa] TabPFN v3.5 Fast (todas linhas): parte 3/5 em 15.9 min
+  [Casa] TabPFN v3.5 Fast (todas linhas): parte 4/5 em 21.2 min
+  [Casa] TabPFN v3.5 Fast (todas linhas): parte 5/5 em 26.5 min
+[Casa] TabPFN v3.5 Fast (todas linhas): ok em 34.0 min 
+[Apartamento] TabPFN v3.5: tentativa com todas linhas (corte 60.0 min)
+  [Apartamento] TabPFN v3.5 (todas linhas): parte 1/5 em 23.2 min
+  [Apartamento] TabPFN v3.5 (todas linhas): parte 2/5 em 46.2 min
+[Apartamento] TabPFN v3.5 (todas linhas): cortado em 60.0 min não terminou em 60.0 minutos
+[Apartamento] TabPFN v3.5: tentativa com 10000 linhas (corte 60.0 min)
+  [Apartamento] TabPFN v3.5 (10000 linhas): parte 1/5 em 16.3 min
+  [Apartamento] TabPFN v3.5 (10000 linhas): parte 2/5 em 32.8 min
+  [Apartamento] TabPFN v3.5 (10000 linhas): parte 3/5 em 49.1 min
+[Apartamento] TabPFN v3.5 (10000 linhas): cortado em 60.0 min não terminou em 60.0 minutos
+[Apartamento] TabPFN v3.5: tentativa com 3000 linhas (corte 60.0 min)
+  [Apartamento] TabPFN v3.5 (3000 linhas): parte 1/5 em 3.0 min
+  [Apartamento] TabPFN v3.5 (3000 linhas): parte 2/5 em 6.0 min
+  [Apartamento] TabPFN v3.5 (3000 linhas): parte 3/5 em 9.0 min
+  [Apartamento] TabPFN v3.5 (3000 linhas): parte 4/5 em 12.0 min
+  [Apartamento] TabPFN v3.5 (3000 linhas): parte 5/5 em 15.0 min
+[Apartamento] TabPFN v3.5 (3000 linhas): ok em 18.2 min 
+[Apartamento] TabPFN v3.5 Fast: tentativa com todas linhas (corte 60.0 min)
+  [Apartamento] TabPFN v3.5 Fast (todas linhas): parte 1/5 em 8.5 min
+  [Apartamento] TabPFN v3.5 Fast (todas linhas): parte 2/5 em 16.9 min
+  [Apartamento] TabPFN v3.5 Fast (todas linhas): parte 3/5 em 25.3 min
+  [Apartamento] TabPFN v3.5 Fast (todas linhas): parte 4/5 em 33.7 min
+  [Apartamento] TabPFN v3.5 Fast (todas linhas): parte 5/5 em 42.2 min
+[Apartamento] TabPFN v3.5 Fast (todas linhas): ok em 54.6 min 

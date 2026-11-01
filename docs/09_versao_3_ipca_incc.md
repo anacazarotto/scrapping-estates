@@ -60,8 +60,10 @@ uma **hipótese** (o imóvel teria acompanhado o índice), não um preço observ
 
 ## 9.4 O modelo de preço v3
 
-O modelo v3 é o mesmo tipo de ensemble do v1, treinado com os anúncios reais **e** o
-histórico simulado, com o ano como variável a mais (`scripts_predict/modelo_v3.py`).
+O modelo v3 é treinado com os anúncios reais **e** o histórico simulado, com o ano como
+variável a mais (`scripts_predict/modelo_v3.py`). O modelo publicado é escolhido pelo
+**MdAPE** (erro percentual absoluto mediano) na validação cruzada; em empate (mesmo MdAPE
+com 1 casa decimal), vence o de menor MAE. O ensemble concorre como mais um candidato.
 
 **Como foi treinado e avaliado sem se enganar:**
 
@@ -69,18 +71,22 @@ histórico simulado, com o ano como variável a mais (`scripts_predict/modelo_v3
    (semente 42): os simulados de um imóvel de teste nunca entram no treino.
 2. Validação cruzada agrupada por imóvel (`GroupKFold`): o real e os simulados de um mesmo
    imóvel ficam sempre na mesma parte. O erro da validação é medido **só nas linhas reais**.
-3. Candidatos: CatBoost, XGBoost, Gradient Boosting e Ridge, com alvo em preço e em log.
-   Random Forest, MLP e SVM ficaram de fora: com cerca de 15 mil linhas, o Random Forest
-   geraria um arquivo de centenas de MB, e MLP e SVM foram os piores no v1.
+3. Candidatos que cabem no site: CatBoost, XGBoost, Gradient Boosting e Ridge, com alvo em
+   preço e em log, mais o ensemble dos 3 melhores deles (peso 1/MdAPE). Random Forest, MLP,
+   SVM, regressões lineares e TabPFN também entram no ranking (`resultados_v3.py` e seção
+   9.8), mas não podem ser publicados: o Random Forest gera um arquivo de 180 a 240 MB por
+   tipo, e o TabPFN precisa de PyTorch e leva minutos por previsão.
 4. Erro final medido **só nos preços reais do teste**.
 
-| Tipo | Linhas no treino (reais + simuladas) | MAE v3 | MAE v1 | R² v3 | R² v1 | Erro mediano v3 |
+| Tipo | Linhas no treino (reais + simuladas) | MAE v3 | MAE v1 | R² v3 | R² v1 | MdAPE v3 |
 |---|---:|---:|---:|---:|---:|---:|
-| Apartamento | 1.400 + 14.000 | R$ 121.523 | R$ 119.640 | 0,799 | 0,795 | 14,5% |
-| Casa | 1.038 + 10.380 | R$ 296.373 | R$ 291.216 | 0,576 | 0,559 | 19,2% |
+| Apartamento | 1.400 + 14.000 | R$ 121.532 | R$ 119.640 | 0,799 | 0,795 | 14,5% |
+| Casa | 1.039 + 10.390 | R$ 296.426 | R$ 291.216 | 0,576 | 0,559 | 19,2% |
 
-Ensembles: apartamento = CatBoost (log), XGBoost (log) e XGBoost; casa = CatBoost, Gradient
-Boosting e XGBoost. Na v3 os preços reais do teste estão levados a ago/2026 (seção 9.8),
+Pelo MdAPE, o ensemble venceu os modelos únicos do site nos dois tipos (validação cruzada:
+13,3% em apartamentos e 20,1% em casas). Ensembles: apartamento = XGBoost (log), XGBoost e
+CatBoost (log); casa = CatBoost, XGBoost e Gradient Boosting, com pesos quase iguais
+(cerca de 1/3 cada). Na v3 os preços reais do teste estão levados a ago/2026 (seção 9.8),
 então o MAE em reais fica um pouco maior; o R² e o erro percentual, que não dependem da
 escala, são praticamente os mesmos do v1.
 
@@ -167,33 +173,62 @@ efeito do tempo que o modelo aprende vem do índice. O dataset mostra o preço a
 original e o preço no mês de referência.
 
 **Todos os candidatos no protocolo da v3** (`dados/resultados_modelos_v3.json`, aba
-Modelos do site). Posição na validação cruzada (agrupada por imóvel, erro só nas linhas
-reais) e R² no teste com preços reais:
+Modelos do site). Posição pelo MdAPE na validação cruzada (agrupada por imóvel, erro só
+nas linhas reais), com MdAPE e R² no teste com preços reais (★ = publicado):
 
-| Posição | Apartamento | R² teste | Casa | R² teste |
-|---:|---|---:|---|---:|
-| 1 | CatBoost (log) | 0,794 | CatBoost (preço) | 0,583 |
-| 2 | XGBoost (log) | 0,788 | Gradient Boosting (preço) | 0,569 |
-| 3 | XGBoost (preço) | 0,796 | XGBoost (preço) | 0,546 |
-| 4 | CatBoost (preço) | 0,796 | Random Forest (preço) | 0,481 |
-| 5 | Gradient Boosting (log) | 0,774 | Rede Neural (preço) | 0,416 |
-| últimos | SVM (preço) | −0,333 | Rede Neural (log) | −15,7 |
+| Posição | Apartamento | MdAPE CV | MdAPE teste | R² teste |
+|---:|---|---:|---:|---:|
+| 1 | Random Forest (preço) | 13,0% | 13,8% | 0,767 |
+| 2 | Random Forest (log) | 13,1% | 12,9% | 0,753 |
+| 3 | ★ Ensemble | 13,3% | 14,5% | 0,799 |
+| 4 | TabPFN 3.5 (3 mil linhas) | 13,4% | 13,6% | 0,799 |
+| 5 | XGBoost (log) | 13,5% | 14,4% | 0,788 |
+| último | SVM (preço) | 37,1% | 39,3% | −0,333 |
+
+| Posição | Casa | MdAPE CV | MdAPE teste | R² teste |
+|---:|---|---:|---:|---:|
+| 1 | TabPFN 3.5 (3 mil linhas) | 18,6% | 18,0% | 0,559 |
+| 2 | TabPFN 3.5 Fast (todas as linhas) | 19,8% | 19,5% | 0,512 |
+| 3 | Random Forest (preço) | 19,8% | 19,4% | 0,481 |
+| 4 | ★ Ensemble | 20,1% | 19,2% | 0,576 |
+| 5 | CatBoost (preço) | 20,2% | 19,8% | 0,583 |
+| último | Rede Neural (log) | 45,8% | 45,2% | −15,7 |
+
+**TabPFN com corte de tempo** (`scripts_predict/tabpfn_v3.py`, `make tabpfn-v3`). O TabPFN
+foi pré-treinado com até cerca de 10 mil linhas, e o treino da v3 tem 11.429 (casas) e
+15.400 (apartamentos). Cada variante (v2, 3.5 e 3.5 Fast, locais, em CPU) rodou no mesmo
+protocolo, em tentativas cada vez menores (todas as linhas, 10 mil, 3 mil sorteadas), com
+corte de 60 minutos cada:
+
+| Variante | Casa | Apartamento |
+|---|---|---|
+| v2 | todas: cortado; 3 mil: 19 min | todas e 10 mil: cortados; 3 mil: 17 min |
+| 3.5 | todas: cortado; 3 mil: 18 min | todas e 10 mil: cortados; 3 mil: 18 min |
+| 3.5 Fast | todas: 34 min | todas: 55 min |
+
+Nas casas, o degrau de 10 mil foi pulado: cada parte da validação já treina com 9.143
+linhas. O TabPFN 3.5 foi o melhor em casas mesmo com só 3 mil linhas, mas não pode ir ao
+site.
 
 O que os resultados mostram, com os nossos dados:
 
-- **Árvores em sequência (CatBoost, XGBoost, Gradient Boosting) são as melhores:** o preço
-  não é uma soma simples (o bairro muda o efeito da área; o preço/m² não sobe com os
-  quartos), e o CatBoost trata o bairro melhor que os outros.
-- **Lineares ficam de 14% a 22% piores**, pelo mesmo motivo; Lasso e Ridge ficam iguais à
-  regressão linear.
+- **Árvores (CatBoost, XGBoost, Gradient Boosting, Random Forest) e TabPFN são os
+  melhores:** o preço não é uma soma simples (o bairro muda o efeito da área; o preço/m²
+  não sobe com os quartos). Os primeiros ficam a menos de 1 ponto percentual de MdAPE uns
+  dos outros.
+- **O Random Forest acerta bem o imóvel típico** (melhor MdAPE em apartamentos), mas tem
+  R² menor, porque erra mais nos imóveis caros.
+- **Lineares erram de 2 a 8 pontos percentuais a mais** (MdAPE), pelo mesmo motivo; Lasso
+  e Ridge ficam iguais à regressão linear.
 - **Em casas, o alvo em log piora todos os algoritmos:** o modelo em log prevê o valor
   típico e subestima as casas caras, que dominam o erro em reais. Em apartamentos, o log
   ajuda um pouco.
 - **Rede Neural e SVM ficam entre os piores:** precisam de mais imóveis do que temos e de
   ajuste fino; o SVM é sensível à escala do alvo (com o preço em reais, R² negativo), e a
   Rede Neural em log explode ao converter de volta para reais.
-- **Random Forest** é estável, mas atrás do boosting, e não entra no site porque o arquivo
-  ficaria com centenas de MB.
+- **Random Forest e TabPFN não entram no site:** o arquivo do Random Forest ficaria com 180
+  a 240 MB por tipo, e o TabPFN precisa de PyTorch e leva minutos por previsão. O site usa
+  o melhor entre os que cabem nele (o ensemble).
 
 ## 9.9 Como reproduzir
 

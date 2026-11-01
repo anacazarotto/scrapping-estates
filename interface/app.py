@@ -50,6 +50,7 @@ NORMALIZED_DB = PROJECT_ROOT / "imoveis_normalizados.db"
 TIPOS = ("Apartamento", "Casa")
 VERSAO = "v3"
 ANOS_PASSADO = list(range(2016, 2026))  # junho de cada ano simulado; o último ponto é hoje
+MESES = ("jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez")
 
 # Paleta de referência (skill de visualização): série 1 = azul, série 2 = laranja.
 COR_CENTRAL = "#2a78d6"
@@ -101,6 +102,17 @@ def pct(valor, casas=2):
 
 def rotulo_bairro(bairro):
     return bairro.title() if bairro else bairro
+
+
+def descrever_modelo(art, tipo):
+    """Modelo publicado para o tipo: um modelo só ou a média ponderada (ensemble)."""
+    membros = art["segments"][tipo]["selected"]
+    if len(membros) == 1:
+        return f"{membros[0]['model_name']} (alvo {membros[0]['target']})."
+    partes = "; ".join(
+        f"{m['model_name']} ({m['target']}, peso {m['weight']:.2f})".replace(".", ",") for m in membros
+    )
+    return f"média ponderada (ensemble) de {partes}."
 
 
 # --------------------------------------------------------------- gráficos
@@ -329,7 +341,8 @@ def tela_estimativa(art, proj_art):
         "Valor estimado hoje",
         format_currency(res["valor_hoje"]),
         help=(
-            "Modelo de preço v3: média ponderada dos 3 melhores modelos de cada tipo de imóvel (veja a aba Modelos)."
+            f"Modelo de preço v3: {descrever_modelo(art, tipo)} Escolhido pelo menor erro percentual "
+            "mediano (MdAPE) na validação cruzada; veja a aba Modelos."
             if not res["usou_preco_informado"]
             else "Preço informado por você."
         ),
@@ -441,6 +454,32 @@ def tela_bairros(proj_art):
     st.dataframe(df.drop(columns="Tipo"), hide_index=True, width="stretch")
 
 
+def mes_ano(periodo):
+    """'2016-10' -> 'out/2016'."""
+    mes = pd.Period(periodo, freq="M")
+    return f"{MESES[mes.month - 1]}/{mes.year}"
+
+
+def explicar_indice(proj_art):
+    """Qual índice o site usa e para quê, logo na primeira tela."""
+    idx = carregar_ipca_incc()
+    if not idx:
+        return
+    st.info(
+        f"**Índice usado em todo o site: IPCA+INCC.** É a média, mês a mês, de dois índices "
+        "oficiais publicados pelo Banco Central: o **IPCA** (inflação oficial ao consumidor, do IBGE; "
+        "série SGS 433) e o **INCC** (Índice Nacional de Custo da Construção, da FGV; série SGS 192), "
+        "com peso de 50% cada. Ideia: o terreno acompanha a inflação, e a construção acompanha o custo "
+        f"de construir. De {mes_ano(idx['inicio'])} a {mes_ano(idx['fim'])}, ele subiu em média "
+        f"**{pct(idx['media_anual_pct']).lstrip('+')} ao ano**.\n\n"
+        "Ele é usado para: (1) levar os preços dos anúncios ao mês da última coleta "
+        f"({mes_ano(proj_art['ultimo_mes'])}); (2) simular quanto cada imóvel valia de 2016 a 2025; "
+        "(3) servir de base para a valorização futura. Em \"Comparar com\", na barra lateral, dá para "
+        "ver outros índices (IPCA sozinho, IVG-R) apenas como linha de comparação no gráfico.",
+        icon="📈",
+    )
+
+
 def main():
     st.title("🏠 Quanto o imóvel pode valer ao longo dos anos")
     st.caption(
@@ -460,6 +499,7 @@ def main():
         )
         return
 
+    explicar_indice(proj_art)
     aba1, aba2, aba3, aba4 = st.tabs(["Estimativa", "Valorização por bairro", "Modelos", "Dataset"])
     with aba1:
         tela_estimativa(art, proj_art)

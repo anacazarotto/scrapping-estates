@@ -62,22 +62,28 @@ def carregar_dataset(com_simulados=False):
 
 
 def rotulo_modelo(m):
+    marca = "★ " if m.get("escolhido") else ""
     if m["modelo"] == "Ensemble":
-        return "Ensemble (o modelo usado no site)"
-    return f"{m['posicao_cv']}º · {m['modelo']} — alvo {m['alvo']}"
+        return f"{marca}{m['posicao_cv']}º · Ensemble (3 melhores que cabem no site)"
+    return f"{marca}{m['posicao_cv']}º · {m['modelo']} — alvo {m['alvo']}"
+
+
+def nome_curto(m):
+    return f"{m['modelo']} ({'3 melhores' if m['modelo'] == 'Ensemble' else m['alvo']})"
 
 
 def por_que_resultado(seg, modelo, dados):
-    """Texto do resultado do modelo: posição, distância para o melhor e o porquê."""
-    if modelo["modelo"] == "Ensemble":
-        return dados.get("resultado", "")
-    candidatos = [m for m in seg["modelos"] if m["modelo"] != "Ensemble"]
-    melhor = min(candidatos, key=lambda m: m["cv"]["mae"])
-    dif = (modelo["cv"]["mae"] / melhor["cv"]["mae"] - 1) * 100
+    """Texto do resultado do modelo: posição no critério (MdAPE), distância para o melhor e o porquê."""
+    candidatos = seg["modelos"]
+    melhor = candidatos[0]  # já ordenados pelo critério
+    dif = modelo["cv"]["mdape"] - melhor["cv"]["mdape"]
     posicao = (
-        f"Ficou em **{modelo['posicao_cv']}º de {len(candidatos)}** na validação cruzada"
-        + (" (o melhor)." if modelo is melhor else f", com erro {num(dif, 1)}% maior que o melhor ({melhor['modelo']}, alvo {melhor['alvo']}).")
+        f"Ficou em **{modelo['posicao_cv']}º de {len(candidatos)}** na validação cruzada pelo erro "
+        f"percentual mediano (MdAPE {num(modelo['cv']['mdape'])}%)"
+        + (" (o melhor)." if modelo is melhor else f", {num(dif)} ponto(s) percentual(is) acima do melhor ({nome_curto(melhor)}).")
     )
+    if modelo.get("escolhido"):
+        posicao += " **É o modelo usado no site.**"
     alvo = dados.get("resultado_log" if modelo["alvo"] == "log(preco)" else "resultado_preco", "")
     site = "" if modelo.get("no_site", True) else " " + dados.get("fora_do_site", "")
     return " ".join(p for p in (posicao, dados.get("resultado", ""), alvo, site) if p)
@@ -157,24 +163,28 @@ def grafico_erros(seg, modelo):
 
 
 def grafico_comparacao(seg):
-    modelos = sorted(seg["modelos"], key=lambda m: m["teste_tipico"]["mae"], reverse=True)
-    # MLP e SVM chegam a milhões de erro: corta o eixo e mostra o valor no rótulo.
-    teto = float(np.percentile([m["teste_tipico"]["mae"] for m in modelos], 85)) * 1.15
-    nomes = [("★ " if m["modelo"] == "Ensemble" else "") + f"{m['modelo']} ({m['alvo'] if m['modelo'] != 'Ensemble' else 'site'})" for m in modelos]
-    maes = [m["teste_tipico"]["mae"] for m in modelos]
-    cores = [COR_DESTAQUE if m["modelo"] == "Ensemble" else COR_NEUTRA for m in modelos]
+    # Mesma ordem do critério de escolha (MdAPE na validação cruzada); o melhor fica no topo.
+    modelos = list(reversed(seg["modelos"]))
+    # MLP e SVM chegam a erros enormes: corta o eixo e mostra o valor no rótulo.
+    valores = [m["cv"]["mdape"] for m in modelos]
+    teto = float(np.percentile(valores, 85)) * 1.15
+    nomes = [("★ " if m.get("escolhido") else "") + nome_curto(m) for m in modelos]
+    cores = [COR_DESTAQUE if m.get("escolhido") else COR_NEUTRA for m in modelos]
     fig = go.Figure(
         go.Bar(
-            x=[min(v, teto) for v in maes], y=nomes, orientation="h",
+            x=[min(v, teto) for v in valores], y=nomes, orientation="h",
             marker=dict(color=cores, cornerradius=4),
-            text=[reais(v) + (" (fora da escala)" if v > teto else "") for v in maes],
+            text=[num(v) + "%" + (" (fora da escala)" if v > teto else "") for v in valores],
             textposition="outside", cliponaxis=False,
-            customdata=[m["teste_tipico"]["r2"] for m in modelos],
-            hovertemplate="%{y}<br>Erro médio (MAE): %{text}<br>R²: %{customdata:.3f}<extra></extra>",
+            customdata=[[reais(m["cv"]["mae"]), num(m["teste_tipico"]["erro_mediano_pct"]) + "%"] for m in modelos],
+            hovertemplate=(
+                "%{y}<br>MdAPE validação cruzada: %{text}<br>MAE validação cruzada: %{customdata[0]}"
+                "<br>MdAPE teste: %{customdata[1]}<extra></extra>"
+            ),
         )
     )
-    layout_base(fig, 28 * len(modelos) + 60, "Erro médio no teste (MAE, R$) — menor é melhor", "")
-    fig.update_xaxes(range=[0, teto * 1.35], tickprefix="R$ ", tickformat=",.0f")
+    layout_base(fig, 28 * len(modelos) + 60, "Erro percentual mediano na validação cruzada (MdAPE) — menor é melhor", "")
+    fig.update_xaxes(range=[0, teto * 1.35], ticksuffix="%")
     return fig
 
 
@@ -183,15 +193,32 @@ def tabela_modelos(seg):
     for m in seg["modelos"]:
         t, c, f = m["teste_tipico"], m["cv"], m["teste_completo"]
         linhas.append({
-            "Modelo": m["modelo"],
-            "Alvo": "—" if m["modelo"] == "Ensemble" else m["alvo"],
-            "Posição na validação cruzada": str(m["posicao_cv"] or "—"),
-            "MAE validação cruzada": reais(c["mae"]) if c else "—",
+            "Modelo": ("★ " if m.get("escolhido") else "") + m["modelo"],
+            "Alvo": "3 melhores" if m["modelo"] == "Ensemble" else m["alvo"],
+            "Posição": str(m["posicao_cv"]),
+            "No site": "sim" if m["no_site"] else "não",
+            "MdAPE validação cruzada": num(c["mdape"]) + "%",
+            "MAE validação cruzada": reais(c["mae"]),
+            "MdAPE teste": num(t["erro_mediano_pct"]) + "%",
             "MAE teste": reais(t["mae"]),
             "R² teste": num(t["r2"], 3),
-            "Erro mediano": num(t["erro_mediano_pct"]) + "%",
             "Até ±20%": num(t["ate_20_pct"], 0) + "%",
             "R² teste completo": num(f["r2"], 3),
+        })
+    return pd.DataFrame(linhas)
+
+
+def tabela_tabpfn(tentativas):
+    status = {"ok": "terminou", "cortado": "cortado por tempo", "erro": "erro", "pulado": "não rodou"}
+    linhas = []
+    for t in tentativas:
+        linhas.append({
+            "Variante": t["modelo"],
+            "Linhas de treino": "—" if t["linhas"] is None else (
+                "todas" if t["linhas"] == "todas" else f"{t['linhas']:,}".replace(",", ".")
+            ),
+            "Resultado": status[t["status"]] + (f" ({t['detalhe']})" if t["detalhe"] else ""),
+            "Tempo": f"{t['minutos']:.0f} min" if t["minutos"] else "—",
         })
     return pd.DataFrame(linhas)
 
@@ -220,15 +247,19 @@ def aba_modelos(resultados):
 
     t = modelo["teste_tipico"]
     k1, k2, k3, k4 = st.columns(4)
-    k1.metric("Erro médio (MAE)", reais(t["mae"]), help="Em média, quanto a previsão erra em reais, no teste.")
-    k2.metric("R²", num(t["r2"], 3), help="Quanto da diferença de preço entre imóveis o modelo explica (1 = tudo).")
-    k3.metric("Erro mediano", num(t["erro_mediano_pct"]) + "%", help="Metade das previsões erra menos que isso.")
+    k1.metric(
+        "Erro mediano (MdAPE)", num(t["erro_mediano_pct"]) + "%",
+        help="Metade das previsões erra menos que isso, no teste. É o critério de escolha do modelo.",
+    )
+    k2.metric("Erro médio (MAE)", reais(t["mae"]), help="Em média, quanto a previsão erra em reais, no teste.")
+    k3.metric("R²", num(t["r2"], 3), help="Quanto da diferença de preço entre imóveis o modelo explica (1 = tudo).")
     k4.metric("Previsões a até ±20%", num(t["ate_20_pct"], 0) + "%")
     cv = modelo["cv"]
+    treino = f" Treinado com {modelo['linhas_treino']:,} linhas.".replace(",", ".") if "linhas_treino" in modelo else ""
     st.caption(
-        (f"Validação cruzada no treino: MAE {reais(cv['mae'])}, R² {num(cv['r2'], 3)}. " if cv else "")
+        f"Validação cruzada no treino: MdAPE {num(cv['mdape'])}%, MAE {reais(cv['mae'])}, R² {num(cv['r2'], 3)}. "
         + f"Teste completo (com os anúncios fora do padrão): R² {num(modelo['teste_completo']['r2'], 3)}. "
-        + f"Teste com {seg['linhas_teste_tipico']} {tipo.lower()}s que o modelo nunca viu."
+        + f"Teste com {seg['linhas_teste_tipico']} {tipo.lower()}s que o modelo nunca viu.{treino}"
     )
 
     st.markdown("**Preço previsto x preço real no teste**")
@@ -246,10 +277,21 @@ def aba_comparacao(resultados):
     seg = resultados["segmentos"][tipo]
     st.plotly_chart(grafico_comparacao(seg), width="stretch", config=SEM_BARRA)
     st.caption(
-        "★ = ensemble usado no site. Todos treinados com os mesmos dados (reais + histórico simulado) "
-        "e medidos no mesmo teste com preços reais, que nenhum modelo viu."
+        "★ = modelo usado no site: o de menor erro percentual mediano (MdAPE) na validação cruzada "
+        "entre os que cabem no site, com o ensemble concorrendo como mais um candidato; em caso de "
+        "empate (mesmo MdAPE com 1 casa decimal), vence o de menor MAE. Todos treinados com os mesmos "
+        "dados (reais + histórico simulado) e medidos só em preços reais."
     )
     st.dataframe(tabela_modelos(seg), hide_index=True, width="stretch")
+    if seg.get("tabpfn_tentativas"):
+        st.markdown("**Tentativas do TabPFN**")
+        st.caption(
+            "O TabPFN foi pré-treinado com até cerca de 10 mil linhas, e o treino da v3 tem mais que isso. "
+            "Cada tentativa (todas as linhas, depois 10 mil e 3 mil sorteadas) teve um corte de "
+            "tempo; vale a primeira que terminou. Mesmo quando termina, ele não vai para o site: precisa "
+            "de PyTorch e leva minutos por previsão sem placa de vídeo."
+        )
+        st.dataframe(tabela_tabpfn(seg["tabpfn_tentativas"]), hide_index=True, width="stretch")
 
 
 def aba_dataset():

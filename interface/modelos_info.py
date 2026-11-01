@@ -68,7 +68,7 @@ MODELOS = {
         "familia": "Modelo de fundação (transformer)",
         "ideia": "Pré-treinado em milhões de tabelas sintéticas; prevê pelo contexto, sem treino nos nossos dados (Nature, 2025).",
         "parametros": "nenhum ajuste",
-        "pros": "Venceu a validação cruzada sem nenhuma configuração.",
+        "pros": "Bons resultados sem nenhuma configuração.",
         "contras": "Lento em CPU (cerca de 2 min por previsão), arquivo de 179 MB.",
     },
     "TabPFN v3.5": {
@@ -94,9 +94,9 @@ MODELOS = {
     },
     "Ensemble": {
         "familia": "Combinação de modelos",
-        "ideia": "Média ponderada dos 3 melhores candidatos da validação cruzada; quem erra menos pesa mais (peso = 1/MAE).",
-        "parametros": "3 modelos, pesos por 1/MAE",
-        "pros": "Reduz a variação de um modelo isolado; é o modelo usado no site.",
+        "ideia": "Média ponderada dos 3 melhores candidatos da validação cruzada; quem erra menos pesa mais (peso = 1/MdAPE). Concorre com os outros modelos pelo mesmo critério.",
+        "parametros": "3 modelos, pesos por 1/MdAPE",
+        "pros": "Reduz a variação de um modelo isolado.",
         "contras": "Mais difícil de interpretar que um modelo só.",
     },
 }
@@ -107,26 +107,25 @@ MODELOS = {
 RESULTADOS = {
     "CatBoost": {
         "resultado": (
-            "É o melhor nos dois tipos de imóvel. O preço depende muito do bairro (até 70% de "
-            "diferença no preço/m²), e o CatBoost trata categorias como o bairro melhor que os "
-            "outros. Também capta efeitos que não são somas simples, como o preço/m² que não sobe "
-            "com o número de quartos."
+            "Está entre os melhores que cabem no site e entra no ensemble dos dois tipos. O preço "
+            "depende muito do bairro (até 70% de diferença no preço/m²), e o CatBoost trata "
+            "categorias como o bairro melhor que os outros. Também capta efeitos que não são somas "
+            "simples, como o preço/m² que não sobe com o número de quartos."
         ),
         "resultado_log": (
-            "Com o alvo em log, foi o melhor em apartamentos, mas caiu bastante em casas: o modelo "
-            "em log tende a prever o valor típico e subestima as casas caras, que pesam muito no "
-            "erro em reais."
+            "Com o alvo em log, foi bem em apartamentos (entrou no ensemble), mas caiu em casas: o "
+            "modelo em log tende a prever o valor típico e subestima as casas caras."
         ),
-        "resultado_preco": "Com o alvo em reais, foi o melhor em casas e o 4º em apartamentos.",
+        "resultado_preco": "Com o alvo em reais, foi o melhor modelo único do site em casas.",
     },
     "XGBoost": {
         "resultado": (
-            "Fica logo atrás do CatBoost: é o mesmo tipo de modelo (árvores em sequência), mas "
-            "trata o bairro como colunas separadas, o que funciona um pouco pior com bairros que "
-            "têm poucos anúncios."
+            "Fica colado no CatBoost: é o mesmo tipo de modelo (árvores em sequência). Em "
+            "apartamentos foi o melhor modelo único do site pelo MdAPE e entra duas vezes no "
+            "ensemble (alvo em reais e em log)."
         ),
-        "resultado_log": "Com o alvo em log, foi bem em apartamentos e mal em casas, pelo mesmo motivo do CatBoost.",
-        "resultado_preco": "Com o alvo em reais, ficou entre os 3 primeiros em casas.",
+        "resultado_log": "Com o alvo em log, foi o melhor modelo único do site em apartamentos e foi mal em casas.",
+        "resultado_preco": "Com o alvo em reais, entrou no ensemble dos dois tipos.",
     },
     "Gradient Boosting": {
         "resultado": (
@@ -134,17 +133,18 @@ RESULTADOS = {
             "o que mostra que, para estes dados, o tipo de modelo (árvores em sequência) importa "
             "mais que a implementação."
         ),
-        "resultado_log": "Com o alvo em log, ficou instável em casas (validação cruzada com R² perto de zero).",
+        "resultado_log": "Com o alvo em log, ficou atrás em casas (MdAPE 22,3%).",
         "resultado_preco": "Com o alvo em reais, entrou no ensemble de casas.",
     },
     "Random Forest": {
         "resultado": (
-            "Bom e estável, mas atrás dos modelos de boosting: tira a média de árvores independentes "
-            "e não corrige os próprios erros como o boosting."
+            "Pelo MdAPE, foi o melhor em apartamentos e o 3º em casas: acerta bem o imóvel típico. "
+            "Mas tem R² menor que os modelos de boosting, porque erra mais nos imóveis caros (tira "
+            "a média de árvores e não corrige os próprios erros)."
         ),
         "fora_do_site": (
-            "Não entra no site: com o histórico simulado (cerca de 15 mil linhas), o arquivo do modelo "
-            "passaria de centenas de MB."
+            "Não entra no site: com o histórico simulado (11 a 15 mil linhas), o arquivo do modelo "
+            "fica com 180 a 240 MB por tipo de imóvel, acima do limite do GitHub e do site gratuito."
         ),
     },
     "Redes Neurais Artificiais (MLP)": {
@@ -162,9 +162,9 @@ RESULTADOS = {
     },
     "Regressão Linear Múltipla": {
         "resultado": (
-            "Cerca de 14% a 22% pior que os melhores: o preço não é uma soma de pesos fixos. A EDA "
-            "mostrou que o preço/m² não sobe com o número de quartos e que o efeito da área muda "
-            "conforme o bairro, e uma reta não capta isso."
+            "Erra de 2 a 8 pontos percentuais a mais (MdAPE) que os melhores: o preço não é uma "
+            "soma de pesos fixos. A EDA mostrou que o preço/m² não sobe com o número de quartos e "
+            "que o efeito da área muda conforme o bairro, e uma reta não capta isso."
         ),
         "fora_do_site": "Não entra no site: ficou atrás dos modelos de árvore.",
     },
@@ -173,7 +173,7 @@ RESULTADOS = {
             "Praticamente igual à regressão linear: a penalização ajuda quando as variáveis andam "
             "juntas (área e quartos), mas não resolve o problema principal, que é a relação não linear."
         ),
-        "fora_do_site": "Foi testado para o site, mas não ficou entre os 3 melhores.",
+        "fora_do_site": "Foi testado para o site, mas ficou entre os últimos.",
     },
     "Lasso": {
         "resultado": (
@@ -192,12 +192,24 @@ RESULTADOS = {
         "resultado_preco": "Com o alvo em reais, errou mais do que prever sempre a média (R² negativo).",
         "fora_do_site": "Não entra no site: ficou entre os piores.",
     },
+    "TabPFN": {
+        "resultado": (
+            "Testado em três versões (v2, 3.5 e 3.5 Fast), no mesmo protocolo dos outros. O 3.5 foi "
+            "o melhor de todos em casas (MdAPE 18,6%) e o 4º em apartamentos, mesmo treinando com "
+            "só 3 mil linhas sorteadas: com todas as linhas não terminou em 1 hora. O 3.5 Fast "
+            "conseguiu usar todas as linhas, mas errou um pouco mais."
+        ),
+        "fora_do_site": (
+            "Não entra no site: precisa do PyTorch e leva vários minutos por previsão no "
+            "computador, o que o site gratuito não comporta."
+        ),
+    },
     "Ensemble": {
         "resultado": (
-            "É o modelo do site: a média ponderada dos 3 melhores da validação cruzada entre os que "
-            "cabem no site. Em apartamentos erra um pouco menos que o melhor modelo sozinho; em casas "
-            "empata com o CatBoost (diferença de 0,3%). A vantagem é a estabilidade: os erros de "
-            "modelos diferentes se compensam em parte, e a média não depende de um modelo só."
+            "É o modelo do site: a média ponderada dos 3 melhores, entre os que cabem no site. "
+            "Concorreu com os outros pelo MdAPE e foi o melhor publicável nos dois tipos (20,1% "
+            "em casas e 13,3% em apartamentos, na validação cruzada). Os erros de modelos "
+            "diferentes se compensam em parte, e a média não depende de um modelo só."
         ),
     },
 }
@@ -205,23 +217,24 @@ RESULTADOS = {
 POR_QUE_GERAL = """
 **Por que os resultados são esses, com os dados que temos**
 
-- **Os modelos de árvores em sequência (CatBoost, XGBoost, Gradient Boosting) são os
-  melhores.** O preço não é uma soma simples: o bairro muda o efeito da área, e o preço/m²
-  não sobe com o número de quartos. Árvores captam isso; modelos lineares não.
+- **O melhor modelo é escolhido pelo MdAPE** (o erro percentual típico: metade dos imóveis
+  erra menos que ele) na validação cruzada; em empate, ganha o menor MAE. O ensemble
+  concorre como mais um modelo.
+- **Os modelos de árvores (CatBoost, XGBoost, Gradient Boosting, Random Forest) e o
+  TabPFN são os melhores.** O preço não é uma soma simples: o bairro muda o efeito da
+  área, e o preço/m² não sobe com o número de quartos. Modelos lineares não captam isso.
 - **Os melhores ficam muito perto uns dos outros.** Quando algoritmos diferentes chegam ao
   mesmo erro, o limite está na informação disponível: os anúncios não têm endereço, idade
   nem padrão de acabamento.
-- **Apartamentos (R² ≈ 0,80) são bem mais previsíveis que casas (R² ≈ 0,57).** A
+- **Alguns dos melhores não cabem no site.** O TabPFN e o Random Forest ficaram à frente do
+  ensemble em um dos tipos, mas são pesados demais para o site gratuito. O site usa o melhor
+  entre os que cabem nele.
+- **Apartamentos (R² ≈ 0,80) são bem mais previsíveis que casas (R² ≈ 0,58).** A
   correlação entre área e preço é 0,86 nos apartamentos e 0,69 nas casas, e a categoria
   "casa" mistura padrões muito diferentes.
-- **Em casas, prever o logaritmo do preço piora todos os modelos.** O modelo em log
-  tende a prever o valor típico e subestima as casas caras, que dominam o erro em reais.
 - **O histórico simulado não muda quem é o melhor.** Ele ensina ao modelo o efeito do tempo
-  (coerente com o IPCA+INCC), não qual imóvel vale mais. Por isso a precisão de hoje fica
-  praticamente igual à da versão anterior (R² 0,80 e 0,58).
+  (coerente com o IPCA+INCC), não qual imóvel vale mais.
 - **Todos os erros são medidos só em preços reais**, de imóveis que nenhum modelo viu.
-- **O TabPFN não entra na v3:** aceita no máximo 10 mil linhas de treino e, com o histórico
-  simulado, levaria horas no computador. Na v1 ele empatou com o ensemble.
 """
 
 ALVOS = {
@@ -237,4 +250,6 @@ def info(nome):
     base = nome if nome in MODELOS else next((b for b in MODELOS if nome.startswith(b)), None)
     if base is None:
         return None
-    return {**MODELOS[base], **RESULTADOS.get(base, {})}
+    # As variantes do TabPFN dividem o mesmo texto de resultado.
+    resultado = RESULTADOS.get(base) or next((v for k, v in RESULTADOS.items() if base.startswith(k)), {})
+    return {**MODELOS[base], **resultado}

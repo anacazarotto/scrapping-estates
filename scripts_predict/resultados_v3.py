@@ -7,10 +7,10 @@ Mesmo protocolo de `modelo_v3.py`:
 - teste só com preços reais, que nenhum modelo viu.
 
 Grava `dados/resultados_modelos_v3.json` no mesmo formato de `resultados_modelos.py`,
-lido pelo modo avançado do site. O "Ensemble" é o mesmo do modelo publicado: os 3
-melhores entre os candidatos que cabem no site (CatBoost, XGBoost, Gradient Boosting e
-Ridge). O TabPFN fica de fora: aceita no máximo 10 mil linhas de treino e, com o
-histórico simulado, levaria horas em CPU.
+lido pelo modo avançado do site. Ranking e escolha como em `modelo_v3.py`: menor MdAPE
+na validação cruzada (empate decidido pelo MAE), com o "Ensemble" (os 3 melhores que
+cabem no site: CatBoost, XGBoost, Gradient Boosting e Ridge) como mais um candidato. O
+TabPFN entra com as previsões de `tabpfn_v3.py` (rodado antes, com corte de tempo).
 
     DISABLE_TABPFN=1 python scripts_predict/resultados_v3.py
 """
@@ -21,18 +21,20 @@ from datetime import datetime
 from pathlib import Path
 
 import numpy as np
-import pandas as pd
-from imoveis_ml_hibrido import SEGMENT_TYPES, make_model_factories, split_and_prepare_segment
+from imoveis_ml_hibrido import SEGMENT_TYPES, make_model_factories
 from modelo_v3 import (
     CANDIDATOS,
     DEFAULT_NORMALIZED_DB,
+    ENSEMBLE,
     FEATURES_V3,
     avaliar,
     carregar_reais,
+    chave,
+    dados_segmento,
+    linha_ensemble,
+    mdape,
     montar,
-    prever,
-    simular,
-    treinar_ensemble,
+    resultados_tabpfn,
 )
 from sklearn.model_selection import GroupKFold, cross_val_predict
 from tabpfn_model import TABPFN_VARIANTS
@@ -51,16 +53,33 @@ def avaliar_completo(y, pred):
 
 
 def segmento(df, tipo, seed=42):
-    split = split_and_prepare_segment(df, tipo, seed=seed)
+    split, treino, grupos, real = dados_segmento(df, tipo, seed)
     treino_real = split["train"]
-    treino = pd.concat([treino_real, simular(treino_real)], ignore_index=True)
-    grupos = treino["imovel"].to_numpy()
-    real = (treino["simulado"] == 0).to_numpy()
     y = treino["preco"].to_numpy()
+    yr = y[real]
     teste_tip, teste_comp = split["test_typical"], split["test_full"]
+    y_tip, y_comp = teste_tip["preco"].to_numpy(), teste_comp["preco"].to_numpy()
+
+    def linha(nome, alvo, pred_cv, pred_tip, pred_comp, no_site, **extra):
+        erro = pred_cv - yr
+        return {
+            "modelo": nome,
+            "alvo": alvo,
+            "no_site": no_site,
+            "cv": {
+                "mdape": mdape(yr, pred_cv),
+                "mae": float(np.mean(np.abs(erro))),
+                "rmse": float(np.sqrt(np.mean(erro**2))),
+                "r2": float(1 - np.sum(erro**2) / np.sum((yr - yr.mean()) ** 2)),
+            },
+            "teste_tipico": avaliar_completo(y_tip, pred_tip),
+            "teste_completo": avaliar_completo(y_comp, pred_comp),
+            "previsto": [round(float(v)) for v in pred_tip],
+            **extra,
+        }
 
     nomes = [n for n in make_model_factories(seed=seed) if n not in TABPFN_VARIANTS]
-    linhas = []
+    linhas, previsoes_cv, previsoes_teste = [], {}, {}
     for nome in nomes:
         for usa_log in (False, True):
             alvo = "log(preco)" if usa_log else "preco"
@@ -68,53 +87,43 @@ def segmento(df, tipo, seed=42):
             try:
                 pred_cv = cross_val_predict(
                     montar(nome, usa_log, seed), treino[FEATURES_V3], y, cv=GroupKFold(n_splits=5), groups=grupos
-                )
+                )[real]
                 modelo = montar(nome, usa_log, seed).fit(treino[FEATURES_V3], y)
                 pred_tip = np.asarray(modelo.predict(teste_tip[FEATURES_V3]), dtype=float)
                 pred_comp = np.asarray(modelo.predict(teste_comp[FEATURES_V3]), dtype=float)
             except (RuntimeError, ValueError) as exc:
                 print(f"[aviso] {nome} ({alvo}) ignorado: {exc}")
                 continue
-            erro = pred_cv[real] - y[real]
-            linhas.append(
-                {
-                    "modelo": nome,
-                    "alvo": alvo,
-                    "no_site": nome in CANDIDATOS,
-                    "cv": {
-                        "mae": float(np.mean(np.abs(erro))),
-                        "rmse": float(np.sqrt(np.mean(erro**2))),
-                        "r2": float(1 - np.sum(erro**2) / np.sum((y[real] - y[real].mean()) ** 2)),
-                    },
-                    "teste_tipico": avaliar_completo(teste_tip["preco"].to_numpy(), pred_tip),
-                    "teste_completo": avaliar_completo(teste_comp["preco"].to_numpy(), pred_comp),
-                    "previsto": [round(float(v)) for v in pred_tip],
-                }
-            )
-    linhas.sort(key=lambda m: m["cv"]["mae"])
+            previsoes_cv[(nome, alvo)] = pred_cv
+            previsoes_teste[(nome, alvo)] = (pred_tip, pred_comp)
+            linhas.append(linha(nome, alvo, pred_cv, pred_tip, pred_comp, nome in CANDIDATOS))
+
+    # TabPFN: previsões das tentativas que terminaram dentro do corte (tabpfn_v3.py).
+    tentativas, tabpfn = resultados_tabpfn(tipo, treino.loc[real, "imovel"])
+    for nome, dados in tabpfn.items():
+        linhas.append(
+            linha(nome, "preco", np.asarray(dados["cv_previsto"]), np.asarray(dados["teste_tipico"]),
+                  np.asarray(dados["teste_completo"]), False, linhas_treino=dados["linhas_treino"],
+                  minutos=dados["minutos"])
+        )
+
+    # Ensemble: os 3 melhores (por MdAPE) entre os que cabem no site, como em modelo_v3.py.
+    # No teste, a média ponderada dos mesmos modelos treinados acima.
+    ranking = [{"model": m["modelo"], "target": m["alvo"], "no_site": m["no_site"], **m["cv"]} for m in linhas]
+    ens, pred_cv = linha_ensemble(ranking, previsoes_cv, yr)
+    pred_tip = sum(e["weight"] * previsoes_teste[(e["model"], e["target"])][0] for e in ens["membros"])
+    pred_comp = sum(e["weight"] * previsoes_teste[(e["model"], e["target"])][1] for e in ens["membros"])
+    composicao = " + ".join(f"{e['model']} ({e['target']}, peso {e['weight']:.2f})" for e in ens["membros"])
+    linhas.append(linha(ENSEMBLE, composicao, pred_cv, pred_tip, pred_comp, True))
+
+    def chave_linha(m):
+        return chave({"mdape": m["cv"]["mdape"], "mae": m["cv"]["mae"]})
+
+    linhas.sort(key=chave_linha)
+    escolhido = min((m for m in linhas if m["no_site"]), key=chave_linha)
     for pos, m in enumerate(linhas, start=1):
         m["posicao_cv"] = pos
-
-    # Ensemble publicado: 3 melhores (na validação cruzada) entre os que cabem no site.
-    ranking_site = [
-        {"model": m["modelo"], "target": m["alvo"], "mae": m["cv"]["mae"]} for m in linhas if m["no_site"]
-    ]
-    entradas = treinar_ensemble(treino, ranking_site, seed)
-    ens_tip = prever(entradas, teste_tip)
-    ens_comp = prever(entradas, teste_comp)
-    linhas.insert(
-        0,
-        {
-            "modelo": "Ensemble",
-            "alvo": " + ".join(f"{e['model_name']} ({e['target']}, peso {e['weight']:.2f})" for e in entradas),
-            "no_site": True,
-            "posicao_cv": 0,
-            "cv": None,
-            "teste_tipico": avaliar_completo(teste_tip["preco"].to_numpy(), ens_tip),
-            "teste_completo": avaliar_completo(teste_comp["preco"].to_numpy(), ens_comp),
-            "previsto": [round(float(v)) for v in ens_tip],
-        },
-    )
+        m["escolhido"] = m is escolhido
     area = teste_tip["area_privada"].where(teste_tip["area_privada"] > 0, teste_tip["area_total"])
     return {
         "linhas_treino": int(len(treino_real)),
@@ -122,6 +131,7 @@ def segmento(df, tipo, seed=42):
         "linhas_teste_tipico": int(len(teste_tip)),
         "linhas_teste_completo": int(len(teste_comp)),
         "folds": 5,
+        "tabpfn_tentativas": tentativas,
         "real": [round(float(v)) for v in teste_tip["preco"]],
         "bairro": teste_tip["bairro"].tolist(),
         "area": area.round(1).tolist(),
@@ -146,7 +156,8 @@ def main():
         print(f"== {tipo}")
         for m in s["modelos"]:
             t = m["teste_tipico"]
-            print(f"   {m['posicao_cv']:>2} {m['modelo'][:34]:<34} {m['alvo'][:10]:<10} MAE teste {t['mae']:>10,.0f}  R2 {t['r2']:.3f}")
+            print(f"   {m['posicao_cv']:>2}{'*' if m['escolhido'] else ' '} {m['modelo'][:34]:<34} {m['alvo'][:10]:<10} "
+                  f"MdAPE CV {m['cv']['mdape']:5.1f}%  MdAPE teste {t['erro_mediano_pct']:5.1f}%  R2 {t['r2']:.3f}")
     print(f"Resultados salvos em {DEFAULT_OUTPUT}")
 
 

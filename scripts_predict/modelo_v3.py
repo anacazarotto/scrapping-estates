@@ -17,7 +17,9 @@ Cuidados (para a banca):
   nunca entram no treino;
 - o erro é medido SÓ nos preços reais coletados; medir nos simulados seria circular (o
   modelo acertaria a própria regra que gerou os dados);
-- a validação cruzada agrupa por imóvel (GroupKFold) e mede o erro só nas linhas reais.
+- a validação cruzada agrupa por imóvel (GroupKFold) e mede o erro só nas linhas reais;
+- o modelo publicado é o de menor erro percentual mediano (MdAPE) na validação cruzada,
+  com o ensemble concorrendo como mais um candidato; empate é desempatado pelo MAE.
 
     python scripts_predict/modelo_v3.py
 """
@@ -68,6 +70,8 @@ FEATURES_V3 = NUM_V3 + CATEGORICAL_COLUMNS
 # arquivo de centenas de MB (inviável no site) e MLP/SVM foram os piores no v1.
 CANDIDATOS = ["CatBoost", "XGBoost", "Gradient Boosting", "Ridge"]
 KIND = "preco_v3_historico_simulado"
+TOP_ENSEMBLE = 3
+ENSEMBLE = "Ensemble"
 
 
 # ------------------------------------------------------------------ dados
@@ -134,14 +138,12 @@ def montar(nome, usa_log, seed=42):
     return pipe
 
 
-def treinar_ensemble(treino, ranking, seed=42):
-    top = ranking[:3]
-    pesos = np.array([1 / r["mae"] for r in top])
-    pesos = pesos / pesos.sum()
+def treinar_ensemble(treino, membros, seed=42):
+    """Treina os membros escolhidos (um só, com peso 1, quando o melhor é um modelo isolado)."""
     entradas = []
-    for peso, r in zip(pesos, top):
+    for r in membros:
         modelo = montar(r["model"], r["target"] == "log(preco)", seed).fit(treino[FEATURES_V3], treino["preco"])
-        entradas.append({"model_name": r["model"], "target": r["target"], "weight": float(peso), "estimator": modelo})
+        entradas.append({"model_name": r["model"], "target": r["target"], "weight": float(r["weight"]), "estimator": modelo})
     return entradas
 
 
@@ -149,37 +151,108 @@ def prever(entradas, X):
     return sum(e["weight"] * np.asarray(e["estimator"].predict(X[FEATURES_V3]), dtype=float) for e in entradas)
 
 
+def mdape(y, pred):
+    """Erro percentual absoluto mediano (MdAPE): metade das previsões erra menos que isso."""
+    return float(np.median(np.abs(np.asarray(pred) - y) / y) * 100)
+
+
 def avaliar(y, pred):
     m = calculate_metrics(y, pred)
     m.pop("mape", None)
-    m["erro_mediano_pct"] = float(np.median(np.abs(pred - y) / y) * 100)
+    m["erro_mediano_pct"] = mdape(y, pred)
     return m
 
 
-def segmento(df, tipo, seed=42):
-    split = split_and_prepare_segment(df, tipo, seed=seed)
-    treino_real = split["train"]
-    treino = pd.concat([treino_real, simular(treino_real)], ignore_index=True)
-    grupos = treino["imovel"].to_numpy()
-    real = (treino["simulado"] == 0).to_numpy()
+# ------------------------------------------------------------- escolha
+def chave(r):
+    """Critério de escolha: menor MdAPE na validação cruzada (só linhas reais).
 
-    ranking = []
+    Empate = mesmo MdAPE com 1 casa decimal (como aparece nas tabelas); desempata o menor MAE.
+    """
+    return (round(r["mdape"], 1), r["mae"])
+
+
+def linha_cv(nome, alvo, y, pred, no_site=True):
+    return {"model": nome, "target": alvo, "mdape": mdape(y, pred),
+            "mae": float(np.mean(np.abs(pred - y))), "no_site": no_site}
+
+
+def linha_ensemble(ranking, previsoes, y):
+    """Ensemble dos 3 melhores (por MdAPE) entre os que cabem no site, como mais um candidato.
+
+    Peso de cada membro = 1/MdAPE (normalizado). A previsão do ensemble na validação cruzada
+    é a média ponderada das previsões fora da amostra dos membros, então ele é comparado
+    com os modelos isolados nas mesmas linhas.
+    """
+    top = sorted((r for r in ranking if r["no_site"]), key=chave)[:TOP_ENSEMBLE]
+    pesos = np.array([1 / r["mdape"] for r in top])
+    pesos = pesos / pesos.sum()
+    pred = sum(p * previsoes[(r["model"], r["target"])] for p, r in zip(pesos, top))
+    linha = linha_cv(ENSEMBLE, "ensemble", y, pred)
+    linha["membros"] = [{"model": r["model"], "target": r["target"], "weight": float(p)} for p, r in zip(pesos, top)]
+    return linha, pred
+
+
+def escolher(ranking):
+    """Modelo publicado: o melhor pelo critério entre os que cabem no site (inclui o ensemble)."""
+    melhor = min((r for r in ranking if r["no_site"]), key=chave)
+    if melhor["model"] == ENSEMBLE:
+        return melhor, melhor["membros"]
+    return melhor, [{"model": melhor["model"], "target": melhor["target"], "weight": 1.0}]
+
+
+def resultados_tabpfn(tipo, imoveis_reais):
+    """Tentativas do TabPFN (`tabpfn_v3.py`) e as previsões das que terminaram dentro do corte."""
+    from tabpfn_v3 import RESUMO, arquivo
+
+    if not RESUMO.exists():
+        return [], {}
+    resumo = json.loads(RESUMO.read_text(encoding="utf-8"))
+    tentativas = [t for t in resumo["tentativas"] if t["tipo"] == tipo]
+    previsoes = {}
+    for t in tentativas:
+        caminho = arquivo(tipo, t["modelo"])
+        if t["status"] != "ok" or not caminho.exists():
+            continue
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+        if dados["cv_imovel"] != [int(i) for i in imoveis_reais]:
+            raise SystemExit(f"Previsões do {t['modelo']} ({tipo}) não batem com a separação atual: rode tabpfn_v3.py.")
+        previsoes[t["modelo"]] = dados
+    return tentativas, previsoes
+
+
+def dados_segmento(df, tipo, seed=42):
+    """Separação treino/teste do tipo e treino com o histórico simulado (igual em todos os scripts)."""
+    split = split_and_prepare_segment(df, tipo, seed=seed)
+    treino = pd.concat([split["train"], simular(split["train"])], ignore_index=True)
+    return split, treino, treino["imovel"].to_numpy(), (treino["simulado"] == 0).to_numpy()
+
+
+def segmento(df, tipo, seed=42):
+    split, treino, grupos, real = dados_segmento(df, tipo, seed)
+    treino_real = split["train"]
+
+    y = treino["preco"].to_numpy()[real]
+    ranking, previsoes = [], {}
     cv = GroupKFold(n_splits=5)
     for nome in CANDIDATOS:
         for usa_log in (False, True):
+            alvo = "log(preco)" if usa_log else "preco"
             pred = cross_val_predict(montar(nome, usa_log, seed), treino[FEATURES_V3], treino["preco"], cv=cv, groups=grupos)
-            y = treino["preco"].to_numpy()
-            ranking.append(
-                {
-                    "model": nome,
-                    "target": "log(preco)" if usa_log else "preco",
-                    "mae": float(np.mean(np.abs(pred[real] - y[real]))),  # só linhas reais
-                }
-            )
-            print(f"  [{tipo}] {nome} ({ranking[-1]['target']}): MAE CV real {ranking[-1]['mae']:,.0f}", flush=True)
-    ranking.sort(key=lambda r: r["mae"])
+            previsoes[(nome, alvo)] = pred[real]  # erro só nas linhas reais
+            ranking.append(linha_cv(nome, alvo, y, pred[real]))
+            print(f"  [{tipo}] {nome} ({alvo}): MdAPE CV {ranking[-1]['mdape']:.2f}% MAE {ranking[-1]['mae']:,.0f}", flush=True)
+    tentativas_tabpfn, tabpfn = resultados_tabpfn(tipo, treino.loc[real, "imovel"])
+    for nome, dados in tabpfn.items():
+        ranking.append(linha_cv(nome, "preco", y, np.asarray(dados["cv_previsto"]), no_site=False))
+        ranking[-1]["linhas_treino"] = dados["linhas_treino"]
+    ensemble, _ = linha_ensemble(ranking, previsoes, y)
+    ranking.append(ensemble)
+    ranking.sort(key=chave)
+    escolhido, membros = escolher(ranking)
+    print(f"  [{tipo}] escolhido: {escolhido['model']} ({escolhido['target']}), MdAPE CV {escolhido['mdape']:.2f}%", flush=True)
 
-    entradas = treinar_ensemble(treino, ranking, seed)
+    entradas = treinar_ensemble(treino, membros, seed)
     teste_tip, teste_comp = split["test_typical"], split["test_full"]
     metricas = avaliar(teste_tip["preco"].to_numpy(), prever(entradas, teste_tip))
     metricas_comp = avaliar(teste_comp["preco"].to_numpy(), prever(entradas, teste_comp))
@@ -198,12 +271,14 @@ def segmento(df, tipo, seed=42):
     # Modelo final: todos os imóveis do tipo (limpeza com a base inteira) + simulados.
     final_real, rare, clip = prepare_segment_frame(df, tipo)
     final = pd.concat([final_real, simular(final_real)], ignore_index=True)
-    entradas_finais = treinar_ensemble(final, ranking, seed)
+    entradas_finais = treinar_ensemble(final, membros, seed)
     return {
         "linhas_reais_treino": int(len(treino_real)),
         "linhas_simuladas_treino": int((treino["simulado"] == 1).sum()),
         "teste_tipico": int(len(teste_tip)),
         "ranking": ranking,
+        "escolhido": {k: escolhido[k] for k in ("model", "target", "mdape", "mae")},
+        "tabpfn_tentativas": tentativas_tabpfn,
         "metrics": metricas,
         "metrics_full": metricas_comp,
         "coerencia_indice": coerencia,
@@ -281,7 +356,7 @@ def relatorio(art, v1):
         f"IPCA+INCC realizado (média de 10 anos: {idx['media_anual_pct']:.2f}% ao ano). Erros",
         "medidos só nos preços reais do teste, que o modelo nunca viu.",
         "",
-        "| Tipo | Linhas reais (treino) | Linhas simuladas (treino) | MAE v3 | MAE v1 | R² v3 | R² v1 | Erro mediano v3 |",
+        "| Tipo | Linhas reais (treino) | Linhas simuladas (treino) | MAE v3 | MAE v1 | R² v3 | R² v1 | MdAPE v3 |",
         "|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for tipo, s in art["segments"].items():
@@ -299,9 +374,33 @@ def relatorio(art, v1):
     for tipo, s in art["segments"].items():
         c = s["coerencia_indice"]
         linhas.append(f"| {tipo} | {c['razao_modelo_2021_sobre_hoje']:.3f} | {c['razao_indice_2021_sobre_hoje']:.3f} |")
-    linhas += ["", "## Ensemble escolhido (validação cruzada por imóvel, erro só nas linhas reais)", ""]
+    linhas += ["", "## Escolha do modelo (validação cruzada por imóvel, erro só nas linhas reais)", "",
+               "Critério: menor erro percentual mediano (MdAPE). Empate (mesmo MdAPE com 1 casa",
+               "decimal) é decidido pelo menor MAE. O ensemble (média ponderada dos 3 melhores que",
+               "cabem no site, peso 1/MdAPE) concorre como mais um candidato. O TabPFN entra no",
+               "ranking, mas não pode ser publicado: precisa de PyTorch e leva minutos por previsão",
+               "em CPU, o que o site gratuito não comporta.", ""]
     for tipo, s in art["segments"].items():
-        linhas.append(f"- **{tipo}:** " + ", ".join(f"{e['model_name']} ({e['target']}, peso {e['weight']:.2f})" for e in s["selected"]))
+        e = s["escolhido"]
+        linhas += [f"### {tipo}", "", "| Posição | Modelo | Alvo | MdAPE CV | MAE CV | No site |",
+                   "|---:|---|---|---:|---:|---|"]
+        for pos, r in enumerate(s["ranking"], start=1):
+            nome = r["model"] + (" ★" if (r["model"], r["target"]) == (e["model"], e["target"]) else "")
+            if "linhas_treino" in r:
+                nome += f" ({r['linhas_treino']:,} linhas de treino)".replace(",", ".")
+            linhas.append(f"| {pos} | {nome} | {r['target']} | {r['mdape']:.1f}% | "
+                          f"R$ {r['mae']:,.0f} | {'sim' if r['no_site'] else 'não'} |".replace(",", "."))
+        linhas += ["", "Publicado (★): " + ", ".join(
+            f"{x['model_name']} ({x['target']}, peso {x['weight']:.2f})" for x in s["selected"]), ""]
+        if s["tabpfn_tentativas"]:
+            linhas += ["Tentativas do TabPFN (`tabpfn_v3.py`):", "",
+                       "| Variante | Linhas de treino | Resultado | Tempo |", "|---|---|---|---:|"]
+            for t in s["tabpfn_tentativas"]:
+                status = {"ok": "terminou", "cortado": "cortado por tempo", "erro": "erro", "pulado": "pulado"}[t["status"]]
+                if t["detalhe"]:
+                    status += f": {t['detalhe']}"
+                linhas.append(f"| {t['modelo']} | {t['linhas'] or '—'} | {status} | {t['minutos']:.0f} min |")
+            linhas.append("")
     return "\n".join(linhas) + "\n"
 
 
