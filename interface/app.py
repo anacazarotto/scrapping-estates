@@ -40,7 +40,7 @@ from imoveis_projecao import (  # noqa: E402
 )
 from indice_ipca_incc import resumo as resumo_ipca_incc  # noqa: E402
 from ivgr import load_ivgr  # noqa: E402
-from modelo_v3 import MEIO_DO_ANO, load_v3, prever_preco_v3  # noqa: E402
+from modelo_v3 import MEIO_DO_ANO, carregar_segmento, load_v3, modelo_api, prever_precos_v3  # noqa: E402
 from modo_avancado import tela_dataset, tela_modelos  # noqa: E402
 
 MODELO_V3 = Path(os.getenv("MODELO_PRECO_V3", PROJECT_ROOT / "modelos" / "preco_imovel_modelo_v3.pkl"))
@@ -67,6 +67,46 @@ def carregar_modelos():
     if faltando:
         return None, None, faltando
     return load_v3(MODELO_V3), load_projection_artifact(PROJECTION_MODEL), []
+
+
+def token_tabpfn():
+    """Chave da API da Prior Labs: Secrets do Streamlit (site publicado), variável de ambiente ou,
+    no computador, o token salvo ao aceitar a licença."""
+    try:
+        token = st.secrets.get("TABPFN_TOKEN")
+    except Exception:  # noqa: BLE001 - sem secrets.toml
+        token = None
+    if token:
+        return token
+    from tabpfn_model import prior_labs_token
+
+    return prior_labs_token()
+
+
+@st.cache_resource(show_spinner="Conectando ao TabPFN (API da Prior Labs)...")
+def modelo_tabpfn(_art, tipo):
+    """TabPFN pela API, ajustado com o treino do tipo; None se não houver chave ou a API falhar."""
+    seg = carregar_segmento(_art, tipo)
+    token = token_tabpfn()
+    if not seg.get("api") or not token:
+        return None
+    os.environ["TABPFN_TOKEN"] = token
+    try:
+        return modelo_api(seg["api"]["treino"])
+    except Exception as exc:  # noqa: BLE001 - sem a API, o site usa a reserva
+        print(f"[aviso] TabPFN pela API indisponível: {exc}", flush=True)
+        return None
+
+
+@st.cache_data(show_spinner="Estimando o valor...", max_entries=500)
+def estimar_precos(_art, anos, **dados):
+    """Preços do imóvel em cada ano e o modelo usado. Guardado em cache: cada consulta nova
+    ao TabPFN gasta cota da API."""
+    api = modelo_tabpfn(_art, dados["tipo_imovel"])
+    precos, usado = prever_precos_v3(_art, list(anos), api=api, **dados)
+    if api is not None and usado != carregar_segmento(_art, dados["tipo_imovel"])["api"]["model"]:
+        modelo_tabpfn.clear()  # o modelo na API pode ter expirado: ajusta de novo na próxima vez
+    return precos, usado
 
 
 @st.cache_data(show_spinner=False)
@@ -104,9 +144,12 @@ def rotulo_bairro(bairro):
     return bairro.title() if bairro else bairro
 
 
-def descrever_modelo(art, tipo):
-    """Modelo publicado para o tipo: um modelo só ou a média ponderada (ensemble)."""
-    membros = art["segments"][tipo]["selected"]
+def descrever_modelo(art, tipo, usado=None):
+    """Modelo que fez a estimativa: o TabPFN pela API, um modelo só ou a média ponderada (ensemble)."""
+    seg = art["segments"][tipo]
+    if seg.get("api") and usado == seg["api"]["model"]:
+        return f"{usado}, rodando no servidor da Prior Labs."
+    membros = seg["selected"]
     if len(membros) == 1:
         return f"{membros[0]['model_name']} (alvo {membros[0]['target']})."
     partes = "; ".join(
@@ -309,6 +352,10 @@ def tela_estimativa(art, proj_art):
         banheiros=banheiros,
         vagas=vagas,
     )
+    # Uma consulta só para os anos anteriores (junho) e hoje: no TabPFN pela API, cada consulta gasta cota.
+    precos, usado = estimar_precos(art, tuple([a + MEIO_DO_ANO for a in ANOS_PASSADO] + [ano_hoje(proj_art)]), **dados)
+    seg = art["segments"][tipo]
+    na_api = bool(seg.get("api")) and usado == seg["api"]["model"]
     try:
         res = project(
             proj_art,
@@ -317,7 +364,7 @@ def tela_estimativa(art, proj_art):
             preco_atual=preco_atual if usar_preco and preco_atual > 0 else None,
             taxa_referencia=taxa_ref,
             versao=VERSAO,
-            valor_estimado=prever_preco_v3(art, ano=ano_hoje(proj_art), **dados),
+            valor_estimado=precos[-1],
             **dados,
         )
     except ValueError as exc:
@@ -341,7 +388,7 @@ def tela_estimativa(art, proj_art):
         "Valor estimado hoje",
         format_currency(res["valor_hoje"]),
         help=(
-            f"Modelo de preço v3: {descrever_modelo(art, tipo)} Escolhido pelo menor erro percentual "
+            f"Modelo de preço v3: {descrever_modelo(art, tipo, usado)} Escolhido pelo menor erro percentual "
             "mediano (MdAPE) na validação cruzada; veja a aba Modelos."
             if not res["usou_preco_informado"]
             else "Preço informado por você."
@@ -369,10 +416,23 @@ def tela_estimativa(art, proj_art):
             f"valeria {format_currency(final['referencia'])} em {anos} ano(s)."
         )
     if not res["usou_preco_informado"]:
+        erro = seg["metrics"]["mae"] if na_api or not seg.get("api") else seg["metrics_reserva"]["mae"]
         st.caption(
-            f"Erro típico do modelo de preço para {tipo.lower()}s: "
-            f"± {format_currency(res['erro_tipico_modelo_preco'])} (MAE no teste com preços reais)."
+            f"Modelo usado: {descrever_modelo(art, tipo, usado)} Erro típico para {tipo.lower()}s: "
+            f"± {format_currency(erro)} (MAE no teste com preços reais)."
         )
+        if na_api:
+            st.caption(
+                "As características informadas (sem nenhum dado pessoal) e os anúncios de treino são "
+                "enviados ao servidor da Prior Labs, que roda o TabPFN."
+            )
+        elif seg.get("api"):
+            st.info(
+                f"O modelo escolhido para {tipo.lower()}s é o {seg['api']['model']}, que roda no servidor "
+                "da Prior Labs, mas ele não respondeu agora. A estimativa usa o melhor modelo que roda no "
+                "próprio site.",
+                icon="ℹ️",
+            )
     else:
         st.caption(f"O modelo estimaria {format_currency(res['valor_modelo_hoje'])} para este imóvel.")
     if res["taxa_origem"] == "tipo":
@@ -390,8 +450,7 @@ def tela_estimativa(art, proj_art):
     passado = pd.DataFrame(
         {
             "Ano": [f"jun/{a}" for a in ANOS_PASSADO] + [f"{mes_hoje.strftime('%m/%Y')} (hoje)"],
-            "Valor estimado": [prever_preco_v3(art, ano=a + MEIO_DO_ANO, **dados) for a in ANOS_PASSADO]
-            + [res["valor_modelo_hoje"]],
+            "Valor estimado": precos[:-1] + [res["valor_modelo_hoje"]],
         }
     )
     st.plotly_chart(grafico_passado(passado), width="stretch")

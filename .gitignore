@@ -45,6 +45,8 @@ modelos/*
 !modelos/projecao_modelo.pkl.sig
 !modelos/preco_imovel_modelo_v3.pkl
 !modelos/preco_imovel_modelo_v3.pkl.sig
+# Estimadores do modelo v3 (um arquivo comprimido por estimador, todos abaixo de 25 MB)
+!modelos/v3/
 catboost_info/
 
 # Logs and temp files

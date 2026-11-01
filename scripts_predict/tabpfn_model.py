@@ -44,7 +44,10 @@ TABPFN_VARIANTS = {
     "TabPFN v3.5": "v3.5",
     "TabPFN v3.5 Fast": "v3.5-fast",
     "TabPFN 3.5 Thinking (API)": "thinking",
+    "TabPFN 3.5 (API)": "api",
 }
+# Modelo da API da Prior Labs usado pela variante "api" (o mesmo 3.5 local, rodando no servidor).
+TABPFN_API_MODEL = "v3.5_default"
 
 try:  # pragma: no cover - cliente da API, opcional
     from tabpfn_client import TabPFNRegressor as _TabPFNClientRegressor
@@ -71,14 +74,20 @@ def tabpfn_enabled():
     return tabpfn_available() and not os.getenv("DISABLE_TABPFN")
 
 
-def _has_prior_labs_token():
-    """Token da Prior Labs já salvo (licença aceita) ou na variável TABPFN_TOKEN."""
+def prior_labs_token():
+    """Token da Prior Labs: variável TABPFN_TOKEN ou o arquivo salvo ao aceitar a licença."""
     if os.getenv("TABPFN_TOKEN"):
-        return True
+        return os.environ["TABPFN_TOKEN"]
     for path in (Path.home() / ".cache" / "tabpfn" / "auth_token", Path.home() / ".tabpfn" / "token"):
-        if path.is_file() and path.read_text(encoding="utf-8", errors="ignore").strip():
-            return True
-    return False
+        if path.is_file():
+            token = path.read_text(encoding="utf-8", errors="ignore").strip()
+            if token:
+                return token
+    return None
+
+
+def _has_prior_labs_token():
+    return prior_labs_token() is not None
 
 
 def requested_versions():
@@ -104,7 +113,7 @@ def _variantes_ativas():
     for name, version in TABPFN_VARIANTS.items():
         if version not in requested_versions():
             continue
-        if version == "thinking":
+        if version in ("thinking", "api"):
             ok = _TabPFNClientRegressor is not None and _has_prior_labs_token()
             motivo = "instale tabpfn-client e defina TABPFN_TOKEN"
         elif version == "v2":
@@ -160,6 +169,16 @@ class TabPFNv2Regressor(RegressorMixin, BaseEstimator):
             # Thinking só existe na API (modelos v3); o servidor escolhe o modelo padrão.
             # Só o parâmetro documentado no README do tabpfn-client (thinking_mode).
             return _TabPFNClientRegressor(thinking_mode=True)
+        if self.version == "api":
+            if _TabPFNClientRegressor is None:
+                raise ImportError("Instale o cliente da API: pip install tabpfn-client")
+            # O cliente lê o token da variável TABPFN_TOKEN.
+            os.environ.setdefault("TABPFN_TOKEN", prior_labs_token() or "")
+            return _TabPFNClientRegressor(
+                model_path=TABPFN_API_MODEL,
+                random_state=self.random_state,
+                categorical_features_indices=categorical_indices,
+            )
         if _TabPFNRegressor is None:
             raise ImportError(
                 "TabPFN não instalado. Rode: pip install -r requirements-tabpfn.txt"

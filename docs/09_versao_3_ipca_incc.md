@@ -71,31 +71,48 @@ com 1 casa decimal), vence o de menor MAE. O ensemble concorre como mais um cand
    (semente 42): os simulados de um imóvel de teste nunca entram no treino.
 2. Validação cruzada agrupada por imóvel (`GroupKFold`): o real e os simulados de um mesmo
    imóvel ficam sempre na mesma parte. O erro da validação é medido **só nas linhas reais**.
-3. Candidatos que cabem no site: CatBoost, XGBoost, Gradient Boosting e Ridge, com alvo em
-   preço e em log, mais o ensemble dos 3 melhores deles (peso 1/MdAPE). Random Forest, MLP,
-   SVM, regressões lineares e TabPFN também entram no ranking (`resultados_v3.py` e seção
-   9.8), mas não podem ser publicados: o Random Forest gera um arquivo de 180 a 240 MB por
-   tipo, e o TabPFN precisa de PyTorch e leva minutos por previsão.
+3. Candidatos que podem ir ao site:
+   - CatBoost, XGBoost, Gradient Boosting, Random Forest e Ridge, com alvo em preço e em log;
+   - o ensemble dos 3 melhores deles (peso 1/MdAPE);
+   - o TabPFN 3.5 pela API da Prior Labs (seção 9.8).
+
+   O Random Forest usa 100 árvores (e não 400): o MdAPE mudou menos de 0,2 ponto percentual
+   e o modelo ficou 4 vezes menor, com cerca de 20 MB por arquivo comprimido e cerca de
+   230 MB de memória somando os dois tipos.
+
+   MLP, SVM, regressões lineares sem penalização e o TabPFN rodando no computador também
+   entram no ranking (`resultados_v3.py`), mas não podem ser publicados.
 4. Erro final medido **só nos preços reais do teste**.
 
-| Tipo | Linhas no treino (reais + simuladas) | MAE v3 | MAE v1 | R² v3 | R² v1 | MdAPE v3 |
-|---|---:|---:|---:|---:|---:|---:|
-| Apartamento | 1.400 + 14.000 | R$ 121.532 | R$ 119.640 | 0,799 | 0,795 | 14,5% |
-| Casa | 1.039 + 10.390 | R$ 296.426 | R$ 291.216 | 0,576 | 0,559 | 19,2% |
+| Tipo | Modelo do site | Linhas no treino (reais + simuladas) | MAE v3 | MAE v1 | R² v3 | R² v1 | MdAPE v3 |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Apartamento | Ensemble | 1.400 + 14.000 | R$ 123.858 | R$ 119.640 | 0,781 | 0,795 | 13,1% |
+| Casa | TabPFN 3.5 (API) | 1.039 + 10.390 | R$ 302.336 | R$ 291.216 | 0,540 | 0,559 | 18,7% |
 
-Pelo MdAPE, o ensemble venceu os modelos únicos do site nos dois tipos (validação cruzada:
-13,3% em apartamentos e 20,1% em casas). Ensembles: apartamento = XGBoost (log), XGBoost e
-CatBoost (log); casa = CatBoost, XGBoost e Gradient Boosting, com pesos quase iguais
-(cerca de 1/3 cada). Na v3 os preços reais do teste estão levados a ago/2026 (seção 9.8),
-então o MAE em reais fica um pouco maior; o R² e o erro percentual, que não dependem da
-escala, são praticamente os mesmos do v1.
+Escolha pelo MdAPE na validação cruzada:
 
-**Leitura:** no preço de hoje, o v3 empata com o v1 (R² 0,799 contra 0,795 em
-apartamentos; 0,576 contra 0,559 em casas). Era o esperado: o histórico simulado não traz informação nova sobre *qual*
-imóvel vale mais. O ganho do v3 é outro: ele sabe responder **quanto o imóvel valia em
-anos anteriores**, de forma coerente com o índice. Os imóveis de teste valiam, em
-jun/2021, 73,7% do valor de hoje (ago/2026) segundo o modelo, contra 73,5% pelo índice. Essa conta
-mostra coerência, não acerto, porque o passado foi gerado pelo próprio índice.
+- **Casa:** o TabPFN 3.5 pela API ficou com 19,2%. A reserva é o ensemble de Random Forest,
+  CatBoost e XGBoost (19,6%), que roda no próprio site e é usado se a API não responder.
+- **Apartamento:** o ensemble de Random Forest (preço e log) e XGBoost (log) ficou com 12,9%.
+
+Os pesos ficaram em cerca de 1/3 cada. Na v3 os preços reais do teste estão levados a
+ago/2026 (seção 9.8), então o MAE em reais fica um pouco maior.
+
+**Leitura:** pelo MdAPE do teste, os modelos escolhidos erram menos no imóvel típico que a
+escolha anterior, que só considerava CatBoost, XGBoost, Gradient Boosting e Ridge:
+
+- **Apartamentos:** 13,1% contra 14,5%.
+- **Casas:** 18,7% contra 19,2%.
+
+O R² ficou um pouco menor (0,781 contra 0,799; 0,540 contra 0,576), porque o Random Forest e
+o TabPFN erram mais nos imóveis caros, que pesam muito no R². É a troca esperada ao escolher
+pelo MdAPE.
+
+O histórico simulado não traz informação nova sobre *qual* imóvel vale mais. O ganho do v3
+é outro: ele sabe responder **quanto o imóvel valia em anos anteriores**, de forma coerente
+com o índice. Segundo o modelo, os imóveis de teste valiam em jun/2021 cerca de 74% do
+valor de hoje (ago/2026), contra 73,5% pelo índice. Essa conta mostra coerência, não acerto,
+porque o passado foi gerado pelo próprio índice.
 
 No site, o valor de hoje, o passado e a projeção vêm do modelo v3 (seção 9.8). Relatório:
 `docs/reports/modelo_v3.md`.
@@ -178,20 +195,22 @@ nas linhas reais), com MdAPE e R² no teste com preços reais (★ = publicado):
 
 | Posição | Apartamento | MdAPE CV | MdAPE teste | R² teste |
 |---:|---|---:|---:|---:|
-| 1 | Random Forest (preço) | 13,0% | 13,8% | 0,767 |
-| 2 | Random Forest (log) | 13,1% | 12,9% | 0,753 |
-| 3 | ★ Ensemble | 13,3% | 14,5% | 0,799 |
-| 4 | TabPFN 3.5 (3 mil linhas) | 13,4% | 13,6% | 0,799 |
+| 1 | ★ Ensemble (Random Forest preço e log, XGBoost log) | 12,9% | 13,1% | 0,781 |
+| 2 | Random Forest (preço) | 13,1% | 13,8% | 0,767 |
+| 3 | Random Forest (log) | 13,1% | 13,5% | 0,752 |
+| 4 | TabPFN 3.5 no computador (3 mil linhas) | 13,4% | 13,6% | 0,799 |
 | 5 | XGBoost (log) | 13,5% | 14,4% | 0,788 |
+| 9 | TabPFN 3.5 pela API (todas as linhas) | 13,9% | 14,0% | 0,800 |
 | último | SVM (preço) | 37,1% | 39,3% | −0,333 |
 
 | Posição | Casa | MdAPE CV | MdAPE teste | R² teste |
 |---:|---|---:|---:|---:|
-| 1 | TabPFN 3.5 (3 mil linhas) | 18,6% | 18,0% | 0,559 |
-| 2 | TabPFN 3.5 Fast (todas as linhas) | 19,8% | 19,5% | 0,512 |
-| 3 | Random Forest (preço) | 19,8% | 19,4% | 0,481 |
-| 4 | ★ Ensemble | 20,1% | 19,2% | 0,576 |
-| 5 | CatBoost (preço) | 20,2% | 19,8% | 0,583 |
+| 1 | TabPFN 3.5 no computador (3 mil linhas, fora do site) | 18,6% | 18,0% | 0,559 |
+| 2 | ★ TabPFN 3.5 pela API (todas as linhas) | 19,2% | 18,7% | 0,540 |
+| 3 | Ensemble (Random Forest, CatBoost, XGBoost; reserva) | 19,6% | 18,9% | 0,558 |
+| 4 | Random Forest (preço) | 19,6% | 19,6% | 0,478 |
+| 5 | TabPFN 3.5 Fast no computador (todas as linhas) | 19,8% | 19,5% | 0,512 |
+| 6 | CatBoost (preço) | 20,2% | 19,8% | 0,583 |
 | último | Rede Neural (log) | 45,8% | 45,2% | −15,7 |
 
 **TabPFN com corte de tempo** (`scripts_predict/tabpfn_v3.py`, `make tabpfn-v3`). O TabPFN
@@ -207,8 +226,20 @@ corte de 60 minutos cada:
 | 3.5 Fast | todas: 34 min | todas: 55 min |
 
 Nas casas, o degrau de 10 mil foi pulado: cada parte da validação já treina com 9.143
-linhas. O TabPFN 3.5 foi o melhor em casas mesmo com só 3 mil linhas, mas não pode ir ao
-site.
+linhas. O TabPFN 3.5 foi o melhor em casas mesmo com só 3 mil linhas, mas no computador
+ele não pode ir ao site.
+
+**TabPFN 3.5 pela API** (`TABPFN_VERSIONS=api`, pacote `tabpfn-client`). O mesmo modelo
+3.5 roda no servidor da Prior Labs:
+- usa todas as linhas de treino;
+- cada parte da validação levou cerca de 6 segundos, e uma consulta do site leva cerca de
+  9 segundos;
+- cada consulta gasta 10 mil créditos de uma cota mensal de 20 milhões, ou seja, cerca de
+  2 mil consultas por mês.
+
+No site, as estimativas ficam em cache, para a mesma consulta não gastar cota de novo. A
+chave fica nos Secrets do Streamlit (`TABPFN_TOKEN`). Sem chave, sem internet ou sem cota,
+o site usa a reserva e avisa o visitante.
 
 O que os resultados mostram, com os nossos dados:
 
@@ -226,9 +257,9 @@ O que os resultados mostram, com os nossos dados:
 - **Rede Neural e SVM ficam entre os piores:** precisam de mais imóveis do que temos e de
   ajuste fino; o SVM é sensível à escala do alvo (com o preço em reais, R² negativo), e a
   Rede Neural em log explode ao converter de volta para reais.
-- **Random Forest e TabPFN não entram no site:** o arquivo do Random Forest ficaria com 180
-  a 240 MB por tipo, e o TabPFN precisa de PyTorch e leva minutos por previsão. O site usa
-  o melhor entre os que cabem nele (o ensemble).
+- **MdAPE e R² medem coisas diferentes:** o Random Forest e o TabPFN acertam melhor o
+  imóvel típico (MdAPE), e o CatBoost acerta melhor os imóveis caros (R²). O critério do
+  trabalho é o MdAPE.
 
 ## 9.9 Como reproduzir
 
@@ -236,6 +267,8 @@ O que os resultados mostram, com os nossos dados:
 make valorizacao-macro      # baixa as séries do BCB (dados/series_macro.json) e avalia os juros
 make modelo-v3              # histórico simulado + modelo de preço v3
 make resultados-v3          # todos os candidatos no protocolo da v3 (aba Modelos)
+make tabpfn-v3             # TabPFN no computador, com corte de 60 min (várias horas)
+TABPFN_VERSIONS=api python scripts_predict/tabpfn_v3.py   # TabPFN 3.5 pela API (TABPFN_TOKEN)
 make retreinar-tudo         # retreina todos os modelos atuais (cerca de 1 hora com TabPFN)
 python scripts_predict/imoveis_projecao.py projetar --bairro Centro --tipo-imovel Apartamento \
     --area-privada 80 --area-total 100 --quartos 2 --banheiros 2 --vagas 1 --anos 10 --versao v3

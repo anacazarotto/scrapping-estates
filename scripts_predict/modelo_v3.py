@@ -66,9 +66,15 @@ ANOS_SIMULADOS = list(range(2016, 2026))
 MEIO_DO_ANO = 5.5 / 12  # meio de junho, na mesma convenção dos reais: ano + (mês - 0,5) / 12
 NUM_V3 = NUMERIC_COLUMNS + ["ano"]
 FEATURES_V3 = NUM_V3 + CATEGORICAL_COLUMNS
-# Random Forest e MLP/SVM ficam de fora: com ~15 mil linhas, o Random Forest gera um
-# arquivo de centenas de MB (inviável no site) e MLP/SVM foram os piores no v1.
-CANDIDATOS = ["CatBoost", "XGBoost", "Gradient Boosting", "Ridge"]
+# MLP/SVM e as regressões lineares sem penalização ficam de fora (piores no v1). O Random
+# Forest completo passa de 200 MB em memória, mas comprimido fica abaixo de 80 MB por arquivo.
+CANDIDATOS = ["CatBoost", "XGBoost", "Gradient Boosting", "Random Forest", "Ridge"]
+# Cada estimador do site fica num arquivo próprio e comprimido (o GitHub aceita até 100 MB por
+# arquivo); o arquivo principal guarda só o resto do artefato.
+PASTA_ESTIMADORES = "v3"
+# Random Forest com 100 árvores (em vez de 400): o MdAPE na validação cruzada mudou menos de
+# 0,2 ponto percentual e o modelo ocupa 1/4 da memória, o que cabe no site gratuito.
+ARVORES_RF = 100
 KIND = "preco_v3_historico_simulado"
 TOP_ENSEMBLE = 3
 ENSEMBLE = "Ensemble"
@@ -132,7 +138,10 @@ def preprocessador():
 
 
 def montar(nome, usa_log, seed=42):
-    pipe = Pipeline([("pre", preprocessador()), ("modelo", make_model_factories(seed=seed)[nome]())])
+    modelo = make_model_factories(seed=seed)[nome]()
+    if nome == "Random Forest":
+        modelo.set_params(n_estimators=ARVORES_RF)
+    pipe = Pipeline([("pre", preprocessador()), ("modelo", modelo)])
     if usa_log:
         return TransformedTargetRegressor(regressor=pipe, func=np.log1p, inverse_func=safe_expm1, check_inverse=False)
     return pipe
@@ -184,7 +193,7 @@ def linha_ensemble(ranking, previsoes, y):
     é a média ponderada das previsões fora da amostra dos membros, então ele é comparado
     com os modelos isolados nas mesmas linhas.
     """
-    top = sorted((r for r in ranking if r["no_site"]), key=chave)[:TOP_ENSEMBLE]
+    top = sorted((r for r in ranking if r["no_site"] and not r.get("api")), key=chave)[:TOP_ENSEMBLE]
     pesos = np.array([1 / r["mdape"] for r in top])
     pesos = pesos / pesos.sum()
     pred = sum(p * previsoes[(r["model"], r["target"])] for p, r in zip(pesos, top))
@@ -193,16 +202,24 @@ def linha_ensemble(ranking, previsoes, y):
     return linha, pred
 
 
-def escolher(ranking):
-    """Modelo publicado: o melhor pelo critério entre os que cabem no site (inclui o ensemble)."""
-    melhor = min((r for r in ranking if r["no_site"]), key=chave)
+def escolher(ranking, api=True):
+    """Modelo publicado: o melhor pelo critério entre os que cabem no site (inclui o ensemble).
+
+    Com `api=False`, só os modelos que rodam no próprio site: é a reserva usada quando o
+    escolhido é o TabPFN pela API e a API não responde.
+    """
+    melhor = min((r for r in ranking if r["no_site"] and (api or not r.get("api"))), key=chave)
     if melhor["model"] == ENSEMBLE:
         return melhor, melhor["membros"]
     return melhor, [{"model": melhor["model"], "target": melhor["target"], "weight": 1.0}]
 
 
 def resultados_tabpfn(tipo, imoveis_reais):
-    """Tentativas do TabPFN (`tabpfn_v3.py`) e as previsões das que terminaram dentro do corte."""
+    """Tentativas do TabPFN (`tabpfn_v3.py`) e as previsões das que terminaram dentro do corte.
+
+    Cada previsão traz `api=True` quando a variante roda pela API da Prior Labs (cabe no site).
+    """
+    from tabpfn_model import TABPFN_VARIANTS
     from tabpfn_v3 import RESUMO, arquivo
 
     if not RESUMO.exists():
@@ -217,7 +234,7 @@ def resultados_tabpfn(tipo, imoveis_reais):
         dados = json.loads(caminho.read_text(encoding="utf-8"))
         if dados["cv_imovel"] != [int(i) for i in imoveis_reais]:
             raise SystemExit(f"Previsões do {t['modelo']} ({tipo}) não batem com a separação atual: rode tabpfn_v3.py.")
-        previsoes[t["modelo"]] = dados
+        previsoes[t["modelo"]] = {**dados, "api": TABPFN_VARIANTS.get(t["modelo"]) == "api"}
     return tentativas, previsoes
 
 
@@ -244,23 +261,34 @@ def segmento(df, tipo, seed=42):
             print(f"  [{tipo}] {nome} ({alvo}): MdAPE CV {ranking[-1]['mdape']:.2f}% MAE {ranking[-1]['mae']:,.0f}", flush=True)
     tentativas_tabpfn, tabpfn = resultados_tabpfn(tipo, treino.loc[real, "imovel"])
     for nome, dados in tabpfn.items():
-        ranking.append(linha_cv(nome, "preco", y, np.asarray(dados["cv_previsto"]), no_site=False))
+        ranking.append(linha_cv(nome, "preco", y, np.asarray(dados["cv_previsto"]), no_site=dados["api"]))
         ranking[-1]["linhas_treino"] = dados["linhas_treino"]
+        if dados["api"]:
+            ranking[-1]["api"] = True
     ensemble, _ = linha_ensemble(ranking, previsoes, y)
     ranking.append(ensemble)
     ranking.sort(key=chave)
-    escolhido, membros = escolher(ranking)
+    escolhido, _ = escolher(ranking)
+    reserva, membros = escolher(ranking, api=False)
     print(f"  [{tipo}] escolhido: {escolhido['model']} ({escolhido['target']}), MdAPE CV {escolhido['mdape']:.2f}%", flush=True)
 
     entradas = treinar_ensemble(treino, membros, seed)
     teste_tip, teste_comp = split["test_typical"], split["test_full"]
-    metricas = avaliar(teste_tip["preco"].to_numpy(), prever(entradas, teste_tip))
-    metricas_comp = avaliar(teste_comp["preco"].to_numpy(), prever(entradas, teste_comp))
+    metricas_reserva = avaliar(teste_tip["preco"].to_numpy(), prever(entradas, teste_tip))
+    metricas, metricas_comp = metricas_reserva, avaliar(teste_comp["preco"].to_numpy(), prever(entradas, teste_comp))
 
     # Coerência com o índice (NÃO é medida de acerto): quanto o modelo diz que os imóveis
     # de teste valiam em jun/2021, comparado ao que o índice diria.
     hoje = prever(entradas, teste_tip)
     em2021 = prever(entradas, teste_tip.assign(ano=2021 + MEIO_DO_ANO))
+    if escolhido.get("api"):
+        # Teste do TabPFN pela API: previsões já gravadas por tabpfn_v3.py (treino completo).
+        dados = tabpfn[escolhido["model"]]
+        metricas = avaliar(teste_tip["preco"].to_numpy(), np.asarray(dados["teste_tipico"]))
+        metricas_comp = avaliar(teste_comp["preco"].to_numpy(), np.asarray(dados["teste_completo"]))
+        api = modelo_api(treino)
+        hoje = np.asarray(dados["teste_tipico"])
+        em2021 = api.predict(teste_tip.assign(ano=2021 + MEIO_DO_ANO))
     indice = nivel()
     esperado = np.array([1 / fator("2021-06", m, indice) for m in teste_tip["mes"]])
     coerencia = {
@@ -273,11 +301,16 @@ def segmento(df, tipo, seed=42):
     final = pd.concat([final_real, simular(final_real)], ignore_index=True)
     entradas_finais = treinar_ensemble(final, membros, seed)
     return {
+        # Treino do TabPFN pela API (enviado ao servidor da Prior Labs na hora da previsão).
+        "api": {"model": escolhido["model"], "treino": final[FEATURES_V3 + ["preco"]].reset_index(drop=True)}
+        if escolhido.get("api") else None,
+        "metrics_reserva": metricas_reserva,
         "linhas_reais_treino": int(len(treino_real)),
         "linhas_simuladas_treino": int((treino["simulado"] == 1).sum()),
         "teste_tipico": int(len(teste_tip)),
         "ranking": ranking,
         "escolhido": {k: escolhido[k] for k in ("model", "target", "mdape", "mae")},
+        "reserva": {k: reserva[k] for k in ("model", "target", "mdape", "mae")},
         "tabpfn_tentativas": tentativas_tabpfn,
         "metrics": metricas,
         "metrics_full": metricas_comp,
@@ -290,18 +323,48 @@ def segmento(df, tipo, seed=42):
 
 
 # ---------------------------------------------------------------- previsão
+def modelo_api(treino):
+    """TabPFN 3.5 pela API da Prior Labs, com todas as linhas de treino (token em TABPFN_TOKEN)."""
+    from tabpfn_model import TABPFN_VARIANTS, make_tabpfn
+
+    versao = next(v for v in TABPFN_VARIANTS.values() if v == "api")
+    modelo = make_tabpfn(NUM_V3, CATEGORICAL_COLUMNS, version=versao)
+    modelo.max_train_rows = len(treino)
+    return modelo.fit(treino, treino["preco"].to_numpy())
+
+
+def separar_estimadores(art, pasta):
+    """Grava cada estimador num arquivo comprimido e deixa no artefato só o nome do arquivo."""
+    pasta = Path(pasta)
+    for antigo in pasta.glob("*.pkl*"):
+        antigo.unlink()
+    for tipo, seg in art["segments"].items():
+        for i, e in enumerate(seg["ensemble"]):
+            nome = f"{tipo.lower()}_{i}.pkl"
+            save_model(e.pop("estimator"), pasta / nome, compress=3)
+            e["arquivo"] = nome
+
+
 def load_v3(path=DEFAULT_MODEL_PATH):
+    """Artefato sem os estimadores; `carregar_segmento` lê os de um tipo quando precisa."""
     art = load_model(path)
     if not isinstance(art, dict) or art.get("kind") != KIND:
         raise SystemExit("Arquivo do modelo v3 inválido. Rode: python scripts_predict/modelo_v3.py")
+    art["pasta_estimadores"] = Path(path).parent / PASTA_ESTIMADORES
     return art
 
 
-def prever_preco_v3(art, *, ano, area_total, area_privada, bairro, tipo_imovel, quartos, banheiros, vagas):
-    """Preço estimado do imóvel no ano informado (ano + MEIO_DO_ANO = jun daquele ano)."""
+def carregar_segmento(art, tipo):
+    seg = art["segments"][canonical_tipo(tipo)]
+    for e in seg["ensemble"]:
+        if "estimator" not in e:
+            e["estimator"] = load_model(art["pasta_estimadores"] / e["arquivo"])
+    return seg
+
+
+def linhas_imovel(seg, anos, *, area_total, area_privada, bairro, tipo_imovel, quartos, banheiros, vagas):
     tipo = canonical_tipo(tipo_imovel)
-    seg = art["segments"][tipo]
-    linha = pd.DataFrame(
+    linhas = pd.DataFrame(
         [
             {
                 "area_total": float(area_total or 0),
@@ -313,11 +376,33 @@ def prever_preco_v3(art, *, ano, area_total, area_privada, bairro, tipo_imovel, 
                 "tipo_imovel": tipo,
                 "ano": float(ano),
             }
+            for ano in anos
         ]
     )
-    linha = apply_rare_bairros(linha, set(seg["rare_bairros"]))
-    linha = apply_numeric_clip_bounds(linha, {k: tuple(v) for k, v in seg["clip_bounds"].items()})
-    return float(prever(seg["ensemble"], linha)[0])
+    linhas = apply_rare_bairros(linhas, set(seg["rare_bairros"]))
+    return apply_numeric_clip_bounds(linhas, {k: tuple(v) for k, v in seg["clip_bounds"].items()})
+
+
+def prever_precos_v3(art, anos, api=None, **dados):
+    """Preços estimados do imóvel em cada ano (ano + MEIO_DO_ANO = jun daquele ano).
+
+    Se o modelo escolhido para o tipo é o TabPFN pela API, `api` é ele já ajustado
+    (`modelo_api(seg["api"]["treino"])`). Sem `api`, ou se a API falhar, usa a reserva que
+    roda no site. Retorna (preços, nome do modelo usado).
+    """
+    seg = carregar_segmento(art, dados["tipo_imovel"])
+    linhas = linhas_imovel(seg, anos, **dados)
+    if seg.get("api") and api is not None:
+        try:
+            return [float(v) for v in api.predict(linhas)], seg["api"]["model"]
+        except Exception as exc:  # noqa: BLE001 - qualquer falha da API cai na reserva
+            print(f"[aviso] TabPFN pela API falhou, usando a reserva: {exc}", flush=True)
+    return [float(v) for v in prever(seg["ensemble"], linhas)], seg["reserva"]["model"]
+
+
+def prever_preco_v3(art, *, ano, **dados):
+    """Preço estimado do imóvel no ano informado, com o modelo que roda no site."""
+    return prever_precos_v3(art, [ano], **dados)[0][0]
 
 
 # ------------------------------------------------------------------ saídas
@@ -377,9 +462,10 @@ def relatorio(art, v1):
     linhas += ["", "## Escolha do modelo (validação cruzada por imóvel, erro só nas linhas reais)", "",
                "Critério: menor erro percentual mediano (MdAPE). Empate (mesmo MdAPE com 1 casa",
                "decimal) é decidido pelo menor MAE. O ensemble (média ponderada dos 3 melhores que",
-               "cabem no site, peso 1/MdAPE) concorre como mais um candidato. O TabPFN entra no",
-               "ranking, mas não pode ser publicado: precisa de PyTorch e leva minutos por previsão",
-               "em CPU, o que o site gratuito não comporta.", ""]
+               "rodam no site, peso 1/MdAPE) concorre como mais um candidato. O TabPFN local entra",
+               "no ranking, mas não pode ser publicado (PyTorch, minutos por previsão em CPU); o",
+               "TabPFN 3.5 pela API da Prior Labs pode. Se a API não responder, o site usa a reserva:",
+               "o melhor entre os que rodam no próprio site.", ""]
     for tipo, s in art["segments"].items():
         e = s["escolhido"]
         linhas += [f"### {tipo}", "", "| Posição | Modelo | Alvo | MdAPE CV | MAE CV | No site |",
@@ -390,7 +476,9 @@ def relatorio(art, v1):
                 nome += f" ({r['linhas_treino']:,} linhas de treino)".replace(",", ".")
             linhas.append(f"| {pos} | {nome} | {r['target']} | {r['mdape']:.1f}% | "
                           f"R$ {r['mae']:,.0f} | {'sim' if r['no_site'] else 'não'} |".replace(",", "."))
-        linhas += ["", "Publicado (★): " + ", ".join(
+        if s.get("api"):
+            linhas += ["", f"Publicado (★): {s['api']['model']}, com reserva {s['reserva']['model']}."]
+        linhas += ["", "Roda no site (★ ou reserva): " + ", ".join(
             f"{x['model_name']} ({x['target']}, peso {x['weight']:.2f})" for x in s["selected"]), ""]
         if s["tabpfn_tentativas"]:
             linhas += ["Tentativas do TabPFN (`tabpfn_v3.py`):", "",
@@ -423,6 +511,7 @@ def main():
         "segments": segmentos,
         "trained_at": datetime.now().isoformat(),
     }
+    separar_estimadores(art, Path(args.model_path).parent / PASTA_ESTIMADORES)
     save_model(art, Path(args.model_path))
     reais, simulados = exportar_dataset(df, DEFAULT_DATASET_DB, DEFAULT_DATASET_CSV)
 

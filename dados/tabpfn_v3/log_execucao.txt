@@ -69,3 +69,17 @@
   [Apartamento] TabPFN v3.5 Fast (todas linhas): parte 4/5 em 33.7 min
   [Apartamento] TabPFN v3.5 Fast (todas linhas): parte 5/5 em 42.2 min
 [Apartamento] TabPFN v3.5 Fast (todas linhas): ok em 54.6 min 
+[Casa] TabPFN 3.5 (API): tentativa com todas linhas (corte 60.0 min)
+  [Casa] TabPFN 3.5 (API) (todas linhas): parte 1/5 em 0.1 min
+  [Casa] TabPFN 3.5 (API) (todas linhas): parte 2/5 em 0.2 min
+  [Casa] TabPFN 3.5 (API) (todas linhas): parte 3/5 em 0.3 min
+  [Casa] TabPFN 3.5 (API) (todas linhas): parte 4/5 em 0.4 min
+  [Casa] TabPFN 3.5 (API) (todas linhas): parte 5/5 em 0.5 min
+[Casa] TabPFN 3.5 (API) (todas linhas): ok em 0.7 min 
+[Apartamento] TabPFN 3.5 (API): tentativa com todas linhas (corte 60.0 min)
+  [Apartamento] TabPFN 3.5 (API) (todas linhas): parte 1/5 em 0.2 min
+  [Apartamento] TabPFN 3.5 (API) (todas linhas): parte 2/5 em 0.2 min
+  [Apartamento] TabPFN 3.5 (API) (todas linhas): parte 3/5 em 0.3 min
+  [Apartamento] TabPFN 3.5 (API) (todas linhas): parte 4/5 em 0.4 min
+  [Apartamento] TabPFN 3.5 (API) (todas linhas): parte 5/5 em 0.5 min
+[Apartamento] TabPFN 3.5 (API) (todas linhas): ok em 0.7 min 

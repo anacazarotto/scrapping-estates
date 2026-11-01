@@ -51,10 +51,10 @@ def _compute_signature(data: bytes) -> str:
     return "sha256:" + hashlib.sha256(data).hexdigest()
 
 
-def save_model(obj, model_path):
+def save_model(obj, model_path, compress=0):
     model_path = Path(model_path)
     model_path.parent.mkdir(parents=True, exist_ok=True)
-    joblib.dump(obj, model_path)
+    joblib.dump(obj, model_path, compress=compress)
     signature = _compute_signature(model_path.read_bytes())
     _signature_path(model_path).write_text(signature + "\n", encoding="utf-8")
 
