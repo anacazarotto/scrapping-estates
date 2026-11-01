@@ -125,6 +125,24 @@
    "minutos": 54.58703351020813,
    "detalhe": "",
    "em": "2026-11-01T07:43:11"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN 3.5 (API)",
+   "linhas": "todas",
+   "status": "ok",
+   "minutos": 0.6660898367563883,
+   "detalhe": "",
+   "em": "2026-11-01T10:42:51"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN 3.5 (API)",
+   "linhas": "todas",
+   "status": "ok",
+   "minutos": 0.7038315733273824,
+   "detalhe": "",
+   "em": "2026-11-01T10:43:35"
   }
  ],
  "corte_min": 60.0

@@ -103,13 +103,14 @@ def segmento(df, tipo, seed=42):
     for nome, dados in tabpfn.items():
         linhas.append(
             linha(nome, "preco", np.asarray(dados["cv_previsto"]), np.asarray(dados["teste_tipico"]),
-                  np.asarray(dados["teste_completo"]), False, linhas_treino=dados["linhas_treino"],
-                  minutos=dados["minutos"])
+                  np.asarray(dados["teste_completo"]), dados["api"], linhas_treino=dados["linhas_treino"],
+                  minutos=dados["minutos"], api=dados["api"])
         )
 
     # Ensemble: os 3 melhores (por MdAPE) entre os que cabem no site, como em modelo_v3.py.
     # No teste, a média ponderada dos mesmos modelos treinados acima.
-    ranking = [{"model": m["modelo"], "target": m["alvo"], "no_site": m["no_site"], **m["cv"]} for m in linhas]
+    ranking = [{"model": m["modelo"], "target": m["alvo"], "no_site": m["no_site"], "api": m.get("api", False), **m["cv"]}
+               for m in linhas]
     ens, pred_cv = linha_ensemble(ranking, previsoes_cv, yr)
     pred_tip = sum(e["weight"] * previsoes_teste[(e["model"], e["target"])][0] for e in ens["membros"])
     pred_comp = sum(e["weight"] * previsoes_teste[(e["model"], e["target"])][1] for e in ens["membros"])

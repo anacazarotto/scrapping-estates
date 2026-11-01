@@ -44,9 +44,11 @@ INDICE = {2016: 6.20, 2017: 3.60, 2018: 3.79, 2019: 4.23, 2020: 6.65,
 
 def rotulo(m):
     if m["modelo"] == "Ensemble":
-        return "Ensemble (site)"
+        return "Ensemble"
+    if m.get("api"):
+        return f"{m['modelo'].replace(' (API)', '')} pela API ({m['linhas_treino']:,} linhas)".replace(",", ".")
     if m["modelo"].startswith("TabPFN"):
-        return f"{m['modelo']} ({m['linhas_treino']:,} linhas)".replace(",", ".")
+        return f"{m['modelo'].replace('v3.5', '3.5')} local ({m['linhas_treino']:,} linhas)".replace(",", ".")
     alvo = "log" if m["alvo"].startswith("log") else "preço"
     return f"{NOMES.get(m['modelo'], m['modelo'])} ({alvo})"
 
@@ -72,9 +74,9 @@ def ranking_mdape(dados):
         ax.set_xlabel("MdAPE na validação cruzada (%)")
         ax.grid(axis="x", color="#e5e5e5", linewidth=0.6)
         ax.set_axisbelow(True)
-    fig.text(0.01, 0.005, "Ordem: MdAPE na validação cruzada (empate decidido pelo MAE). Azul: modelo do site; cinza-escuro: "
-             "candidatos do site; cinza-claro: fora do site. Barras acima de 30% foram cortadas.", fontsize=7.5, color="#555555")
-    fig.tight_layout(rect=(0, 0.03, 1, 1))
+    fig.text(0.01, 0.005, "Ordem: MdAPE na validação cruzada (empate decidido pelo MAE). Barras acima de 30% foram cortadas.\n"
+             "Azul: modelo do site; cinza-escuro: candidatos do site; cinza-claro: fora do site.", fontsize=7.5, color="#555555")
+    fig.tight_layout(rect=(0, 0.05, 1, 1))
     fig.savefig(SAIDA / "v3_ranking_mdape.png", dpi=200)
     plt.close(fig)
 
@@ -83,9 +85,10 @@ def previsto_real(dados):
     fig, eixos = plt.subplots(1, 2, figsize=(9, 4.2))
     for ax, seg in zip(eixos, ["Apartamento", "Casa"]):
         segmento = dados["segmentos"][seg]
-        ens = next(m for m in segmento["modelos"] if m["modelo"] == "Ensemble")
+        # Modelo publicado no site (o ensemble em apartamentos, o TabPFN pela API em casas)
+        escolhido = next(m for m in segmento["modelos"] if m.get("escolhido"))
         real = [v / 1e6 for v in segmento["real"]]
-        prev = [v / 1e6 for v in ens["previsto"]]
+        prev = [v / 1e6 for v in escolhido["previsto"]]
         pares = [(r, p) for r, p in zip(real, prev) if r > 0.05]
         ax.scatter([r for r, _ in pares], [p for _, p in pares], s=10, color=AZUL, alpha=0.55,
                    edgecolors="none")
@@ -93,7 +96,7 @@ def previsto_real(dados):
         ax.plot([0, lim], [0, lim], color="#555555", linewidth=1, linestyle="--")
         ax.set_xlim(0, lim)
         ax.set_ylim(0, lim)
-        ax.set_title(seg, fontsize=10)
+        ax.set_title(f"{seg}: {rotulo(escolhido)}", fontsize=10)
         ax.xaxis.set_major_formatter(VIRGULA)
         ax.yaxis.set_major_formatter(VIRGULA)
         ax.set_xlabel("Preço anunciado (R$ milhões)")

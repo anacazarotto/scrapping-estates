@@ -64,7 +64,7 @@ def carregar_dataset(com_simulados=False):
 def rotulo_modelo(m):
     marca = "★ " if m.get("escolhido") else ""
     if m["modelo"] == "Ensemble":
-        return f"{marca}{m['posicao_cv']}º · Ensemble (3 melhores que cabem no site)"
+        return f"{marca}{m['posicao_cv']}º · Ensemble (3 melhores que rodam no site)"
     return f"{marca}{m['posicao_cv']}º · {m['modelo']} — alvo {m['alvo']}"
 
 
@@ -85,7 +85,7 @@ def por_que_resultado(seg, modelo, dados):
     if modelo.get("escolhido"):
         posicao += " **É o modelo usado no site.**"
     alvo = dados.get("resultado_log" if modelo["alvo"] == "log(preco)" else "resultado_preco", "")
-    site = "" if modelo.get("no_site", True) else " " + dados.get("fora_do_site", "")
+    site = dados.get("site" if modelo.get("no_site", True) else "fora_do_site", "")
     return " ".join(p for p in (posicao, dados.get("resultado", ""), alvo, site) if p)
 
 
@@ -278,7 +278,8 @@ def aba_comparacao(resultados):
     st.plotly_chart(grafico_comparacao(seg), width="stretch", config=SEM_BARRA)
     st.caption(
         "★ = modelo usado no site: o de menor erro percentual mediano (MdAPE) na validação cruzada "
-        "entre os que cabem no site, com o ensemble concorrendo como mais um candidato; em caso de "
+        "entre os que podem ser usados no site (inclui o TabPFN pela API da Prior Labs), com o ensemble "
+        "concorrendo como mais um candidato; em caso de "
         "empate (mesmo MdAPE com 1 casa decimal), vence o de menor MAE. Todos treinados com os mesmos "
         "dados (reais + histórico simulado) e medidos só em preços reais."
     )
@@ -288,8 +289,9 @@ def aba_comparacao(resultados):
         st.caption(
             "O TabPFN foi pré-treinado com até cerca de 10 mil linhas, e o treino da v3 tem mais que isso. "
             "Cada tentativa (todas as linhas, depois 10 mil e 3 mil sorteadas) teve um corte de "
-            "tempo; vale a primeira que terminou. Mesmo quando termina, ele não vai para o site: precisa "
-            "de PyTorch e leva minutos por previsão sem placa de vídeo."
+            "tempo; vale a primeira que terminou. No computador, ele não vai para o site: precisa de "
+            "PyTorch e leva minutos por previsão. Já o TabPFN 3.5 pela API roda no servidor da Prior Labs, "
+            "usa todas as linhas e responde em segundos, por isso pode ser usado no site."
         )
         st.dataframe(tabela_tabpfn(seg["tabpfn_tentativas"]), hide_index=True, width="stretch")
 
