@@ -8,9 +8,11 @@ TCC de Sistemas de Informação (UNOESC Chapecó) da Ana Carla Londero Cazarotto
 - Modelo v3 (`scripts_predict/modelo_v3.py`):
   - preços reais levados a ago/2026 pelo índice IPCA+INCC, com histórico simulado de 2016 a 2025;
   - erro medido só nos preços reais.
-- Resultados v3:
-  - apartamento: R² 0,799, erro mediano 14,5%;
-  - casa: R² 0,576, erro mediano 19,2%;
+- Escolha do modelo: menor MdAPE na validação cruzada; empate (mesmo MdAPE com 1 casa) decidido pelo menor MAE. O ensemble (3 melhores que cabem no site, peso 1/MdAPE) concorre como candidato e venceu nos dois tipos.
+- TabPFN (v2, 3.5, 3.5 Fast) testado com corte de 60 min por tentativa (`scripts_predict/tabpfn_v3.py`, resultados em `dados/tabpfn_v3/`); entra no ranking, mas não no site. O 3.5 (3 mil linhas) foi o 1º em casas; o Random Forest foi o 1º em apartamentos (também fora do site, arquivo de 180–240 MB).
+- Resultados v3 (teste, ensemble do site):
+  - apartamento: R² 0,799, MdAPE 14,5%;
+  - casa: R² 0,576, MdAPE 19,2%;
   - valorização: +4,33%/ano (apartamento) e +4,17%/ano (casa).
 - Documentação técnica em `docs/01`–`docs/09` (a v3 está no `docs/09`).
 

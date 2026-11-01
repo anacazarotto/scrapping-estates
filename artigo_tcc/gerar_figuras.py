@@ -15,6 +15,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 SAIDA = Path(__file__).resolve().parent / "Figuras"
 AZUL = "#2a6fb0"
 CINZA = "#9aa3ad"
+CLARO = "#d5dae0"
 TINTA = "#222222"
 
 plt.rcParams.update({
@@ -44,36 +45,37 @@ INDICE = {2016: 6.20, 2017: 3.60, 2018: 3.79, 2019: 4.23, 2020: 6.65,
 def rotulo(m):
     if m["modelo"] == "Ensemble":
         return "Ensemble (site)"
+    if m["modelo"].startswith("TabPFN"):
+        return f"{m['modelo']} ({m['linhas_treino']:,} linhas)".replace(",", ".")
     alvo = "log" if m["alvo"].startswith("log") else "preço"
     return f"{NOMES.get(m['modelo'], m['modelo'])} ({alvo})"
 
 
-def ranking_r2(dados):
-    fig, eixos = plt.subplots(1, 2, figsize=(9, 5.6))
+def ranking_mdape(dados):
+    corte = 30
+    fig, eixos = plt.subplots(1, 2, figsize=(9, 6.2))
     for ax, seg in zip(eixos, ["Apartamento", "Casa"]):
         modelos = sorted(dados["segmentos"][seg]["modelos"], key=lambda m: m["posicao_cv"])
         nomes = [rotulo(m) for m in modelos]
-        r2 = [m["teste_tipico"]["r2"] for m in modelos]
-        cores = [AZUL if m["posicao_cv"] <= 3 else CINZA for m in modelos]
+        mdape = [m["cv"]["mdape"] for m in modelos]
+        cores = [AZUL if m.get("escolhido") else (CINZA if m.get("no_site", True) else CLARO) for m in modelos]
         y = range(len(modelos))
-        ax.barh(y, [max(v, -0.5) for v in r2], color=cores, height=0.7)
-        for i, v in enumerate(r2):
-            texto = f"{v:.3f}".replace(".", ",")
-            x = max(v, -0.5)
-            ax.text(x + 0.02 if x >= 0 else 0.02, i, texto, va="center", fontsize=7.5, color=TINTA)
+        ax.barh(y, [min(v, corte) for v in mdape], color=cores, height=0.7)
+        for i, v in enumerate(mdape):
+            texto = f"{v:.1f}%".replace(".", ",")
+            ax.text(min(v, corte) + 0.3, i, texto, va="center", fontsize=7.5, color=TINTA)
         ax.set_yticks(list(y), nomes, fontsize=7.5)
         ax.invert_yaxis()
-        ax.set_xlim(-0.5, 1.0)
-        ax.axvline(0, color="#888888", linewidth=0.8)
+        ax.set_xlim(0, corte + 6)
         ax.xaxis.set_major_formatter(VIRGULA)
         ax.set_title(seg, fontsize=10)
-        ax.set_xlabel("R² no teste (preços reais)")
+        ax.set_xlabel("MdAPE na validação cruzada (%)")
         ax.grid(axis="x", color="#e5e5e5", linewidth=0.6)
         ax.set_axisbelow(True)
-    fig.text(0.01, 0.005, "Ordem: posição na validação cruzada. Barras azuis: o ensemble do site e os três modelos que o compõem. "
-             "Valores abaixo de −0,5 foram cortados no gráfico.", fontsize=7.5, color="#555555")
+    fig.text(0.01, 0.005, "Ordem: MdAPE na validação cruzada (empate decidido pelo MAE). Azul: modelo do site; cinza-escuro: "
+             "candidatos do site; cinza-claro: fora do site. Barras acima de 30% foram cortadas.", fontsize=7.5, color="#555555")
     fig.tight_layout(rect=(0, 0.03, 1, 1))
-    fig.savefig(SAIDA / "v3_ranking_r2.png", dpi=200)
+    fig.savefig(SAIDA / "v3_ranking_mdape.png", dpi=200)
     plt.close(fig)
 
 
@@ -125,7 +127,7 @@ def indice():
 def main():
     dados = json.loads((RAIZ / "dados" / "resultados_modelos_v3.json").read_text(encoding="utf-8"))
     SAIDA.mkdir(exist_ok=True)
-    ranking_r2(dados)
+    ranking_mdape(dados)
     previsto_real(dados)
     indice()
 

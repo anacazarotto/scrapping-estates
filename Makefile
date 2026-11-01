@@ -119,6 +119,10 @@ modelo-v3:
 resultados-v3:
 	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/resultados_v3.py
 
+# TabPFN v2, 3.5 e 3.5 Fast no protocolo da v3, com corte de 60 min por tentativa (várias horas).
+tabpfn-v3:
+	$(PYTHON) scripts_predict/tabpfn_v3.py --corte 60
+
 valorizacao-macro:
 	$(PYTHON) scripts_predict/valorizacao_macro.py
 
