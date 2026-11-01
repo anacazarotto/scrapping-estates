@@ -48,7 +48,7 @@ def rotulo(m):
     if m.get("api"):
         return f"{m['modelo'].replace(' (API)', '')} pela API ({m['linhas_treino']:,} linhas)".replace(",", ".")
     if m["modelo"].startswith("TabPFN"):
-        return f"{m['modelo']} local ({m['linhas_treino']:,} linhas)".replace(",", ".")
+        return f"{m['modelo'].replace('v3.5', '3.5')} local ({m['linhas_treino']:,} linhas)".replace(",", ".")
     alvo = "log" if m["alvo"].startswith("log") else "preço"
     return f"{NOMES.get(m['modelo'], m['modelo'])} ({alvo})"
 
