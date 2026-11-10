@@ -210,6 +210,28 @@ def bairros(ca):
     plt.close(fig)
 
 
+def correlacoes(ca):
+    """Correlação de Spearman entre as variáveis numéricas (campos vazios ignorados)."""
+    cols = {"preco": "Preço", "area_ref": "Área", "quartos": "Quartos", "banheiros": "Banheiros", "vagas": "Vagas"}
+    fig, eixos = plt.subplots(1, 2, figsize=(9, 3.9), gridspec_kw={"wspace": 0.4})
+    for ax, tipo in zip(eixos, COR_TIPO):
+        g = ca[ca["tipo_imovel"] == tipo][list(cols)].replace(0, np.nan)
+        corr = g.corr("spearman").rename(index=cols, columns=cols)
+        im = ax.imshow(corr.values, cmap="Blues", vmin=0, vmax=1)
+        ax.set_xticks(range(len(cols)), corr.columns, rotation=30, ha="right")
+        ax.set_yticks(range(len(cols)), corr.index)
+        for i in range(len(cols)):
+            for j in range(len(cols)):
+                v = corr.values[i, j]
+                ax.text(j, i, f"{v:.2f}".replace(".", ","), ha="center", va="center", fontsize=8.5,
+                        color="white" if v > 0.6 else TINTA)
+        ax.set_title(tipo, fontsize=10)
+        ax.spines[:].set_visible(False)
+    fig.colorbar(im, ax=eixos, shrink=0.85, label="Correlação de Spearman", format=VIRGULA)
+    fig.savefig(SAIDA / "eda_07_correlacoes.png", dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+
 def main():
     dados = json.loads((RAIZ / "dados" / "resultados_modelos_v3.json").read_text(encoding="utf-8"))
     SAIDA.mkdir(exist_ok=True)
@@ -219,6 +241,7 @@ def main():
     ca = imoveis_tipicos()
     distribuicao_precos(ca)
     bairros(ca)
+    correlacoes(ca)
 
 
 if __name__ == "__main__":

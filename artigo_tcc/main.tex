@@ -34,6 +34,12 @@
 \renewcommand*{\ABNTEXsubsectionfont}{\ABNTEXpartfont\itshape}
 \renewcommand*{\ABNTEXsubsubsectionfont}{\ABNTEXpartfont\itshape}
 
+%% Quadros (tabelas de texto, como pede a ABNT), numerados à parte das tabelas
+\newfloat{quadro}{loq}{Quadro}
+
+%% \FloatBarrier: as figuras de uma seção não passam para a seguinte
+\usepackage{placeins}
+
 \addbibresource{referencias.bib}
 
 %% Mesmo título do TCC I; o subtítulo vai em linha menor, sem maiúsculas, para o título ocupar menos linhas
@@ -88,7 +94,7 @@ Diante disso, este trabalho parte de duas questões: é possível construir, a p
 
 A pesquisa se justifica pela ausência de um indicador de preços para o município, pela relevância econômica do setor imobiliário local e pela possibilidade de oferecer uma ferramenta gratuita e transparente de apoio à decisão. Do ponto de vista acadêmico, o trabalho aplica e compara técnicas de aprendizado de máquina em uma base regional construída do zero, documentando também as limitações encontradas, como a rigidez do preço anunciado.
 
-O objetivo geral é comparar algoritmos de aprendizado de máquina para estimar o valor atual e projetar a valorização de casas e apartamentos em Chapecó/SC. Os objetivos específicos são: coletar e organizar anúncios de imobiliárias locais; realizar a limpeza e a análise exploratória dos dados; treinar e comparar modelos de regressão com métricas adequadas; construir uma estimativa de valorização baseada em índices oficiais; e disponibilizar os resultados em uma interface web.
+O objetivo geral é comparar algoritmos de aprendizado de máquina para estimar o valor atual e projetar a valorização de casas e apartamentos em Chapecó/SC. Os objetivos específicos são: coletar e organizar anúncios de imobiliárias locais; realizar a limpeza e a análise exploratória dos dados; treinar e comparar modelos de regressão com métricas adequadas; construir uma estimativa de valorização baseada em índices oficiais; e disponibilizar os resultados em uma interface web. O trabalho seguiu as fases do CRISP-DM, que também organizam a descrição do método e dos resultados, do entendimento do problema e dos dados até a publicação dos modelos.
 
 %% ===================================================================
 \section{REVISÃO BIBLIOGRÁFICA}\label{sec:revisao}
@@ -122,36 +128,145 @@ As métricas usuais em regressão são o erro médio absoluto (MAE), que express
 
 \subsection{TIPO E ABORDAGEM DA PESQUISA}
 
-Quanto à natureza, a pesquisa é aplicada, pois busca resolver um problema prático: estimar o valor de imóveis em um município específico. Quanto à abordagem, é quantitativa, uma vez que se baseia em dados numéricos e em técnicas estatísticas e computacionais. Quanto aos objetivos, é exploratória e descritiva, por investigar um tema pouco estudado no contexto local e descrever os padrões encontrados nos dados \cite{gil2002}. Quanto aos procedimentos, trata-se de pesquisa documental, por usar anúncios publicados na internet e séries oficiais de índices econômicos, e experimental, por comparar modelos sob as mesmas condições controladas \cite{prodanov2013}. O desenvolvimento seguiu as fases do CRISP-DM: entendimento do problema, entendimento dos dados, preparação, modelagem, avaliação e implantação \cite{chapman2000,shearer2000}.
+Quanto à natureza, a pesquisa é aplicada, pois busca resolver um problema prático: estimar o valor de imóveis em um município específico. Quanto à abordagem, é quantitativa, uma vez que se baseia em dados numéricos e em técnicas estatísticas e computacionais. Quanto aos objetivos, é exploratória e descritiva, por investigar um tema pouco estudado no contexto local e descrever os padrões encontrados nos dados \cite{gil2002}. Quanto aos procedimentos, trata-se de pesquisa documental, por usar anúncios publicados na internet e séries oficiais de índices econômicos, e experimental, por comparar modelos sob as mesmas condições controladas \cite{prodanov2013}.
 
-\subsection{INSTRUMENTO DE COLETA DE DADOS}
+O desenvolvimento seguiu o CRISP-DM (\textit{Cross-Industry Standard Process for Data Mining}), modelo de processo que divide um projeto de mineração de dados em seis fases: entendimento do negócio, entendimento dos dados, preparação dos dados, modelagem, avaliação e implantação \cite{chapman2000,shearer2000}. As fases não são lineares, e o resultado de uma delas pode exigir o retorno a uma anterior. Foi o que aconteceu neste trabalho: a avaliação das primeiras versões mostrou que os anúncios não permitiam medir a valorização, e a preparação dos dados precisou ser refeita. O Quadro~\ref{qua:crisp} relaciona cada fase às atividades realizadas e às seções em que elas são descritas.
 
-O instrumento de coleta foi um conjunto de programas em Python que extraem automaticamente os anúncios de venda de oito imobiliárias de Chapecó. Quatro delas tiveram as páginas HTML lidas diretamente e quatro forneceram os dados por meio de interfaces de programação (APIs) usadas pelos próprios sites \cite{mitchell2018}. Foram feitas doze coletas entre 23 de março e 2 de agosto de 2026, cada uma gravada em um banco SQLite datado. Os campos coletados foram preço, bairro, cidade, tipo de imóvel, área total, área privativa, quartos, banheiros, vagas e data da coleta. Nenhuma imobiliária disponibilizou o endereço de forma utilizável, de modo que a localização ficou restrita ao bairro.
-
-Além dos anúncios, foram obtidas as séries mensais oficiais do Índice Nacional de Preços ao Consumidor Amplo (IPCA, série 433) e do Índice Nacional de Custo da Construção (INCC, série 192) no Sistema Gerenciador de Séries Temporais do Banco Central do Brasil \cite{bcbsgs}.
-
-\subsection{TABULAÇÃO DOS DADOS}
-
-As doze coletas somaram 46.383 registros e foram unificadas em uma única base, com uma tabela de imóveis identificados pelo código do anúncio e uma tabela com o histórico de preços de cada imóvel em cada coleta. Grafias diferentes do mesmo bairro foram padronizadas. Como uma mesma casa pode ser anunciada por mais de uma imobiliária, os anúncios foram agrupados por cidade, tipo, área arredondada, quartos, banheiros, vagas e bairro, e cada grupo foi consolidado pela mediana do preço e das áreas. Os tipos de imóvel, escritos livremente pelas imobiliárias, foram mapeados para um catálogo fixo. O processo resultou em 4.266 imóveis únicos, dos quais 3.354 eram casas ou apartamentos e 3.283 tinham preço e área informados. Para a análise exploratória, foram mantidos os 3.242 com preço entre R\$ 50 mil e R\$ 20 milhões e área entre 20 m² e 2.000 m² (Figura~\ref{fig:funil}). Na modelagem, partiu-se dos 3.283, e a remoção dos valores atípicos foi feita dentro do treino, como descrito a seguir. A manipulação foi feita com a biblioteca pandas \cite{mckinney2017}.
-
-\begin{figure}[!htb]
-  \caption{Funil de dados, da coleta à base de modelagem}
-  \label{fig:funil}
+\begin{quadro}[!htb]
+  \caption{Fases do CRISP-DM e atividades realizadas neste trabalho}
+  \label{qua:crisp}
   \centering
-  \includegraphics[width=0.85\linewidth]{Figuras/eda_01_funil_dados.png}
+  \small
+  \begin{tabular}{|p{3.3cm}|p{9.2cm}|p{1.9cm}|}
+    \hline
+    \textbf{Fase} & \textbf{Atividades realizadas} & \textbf{Seções} \\
+    \hline
+    Entendimento do negócio & Definição do problema, das perguntas de pesquisa, dos critérios de sucesso e das restrições & \ref{sec:negocio} \\
+    \hline
+    Entendimento dos dados & Coleta por \textit{web scraping}, descrição dos campos, identificação das lacunas e análise exploratória & \ref{sec:coleta} e \ref{sec:eda} \\
+    \hline
+    Preparação dos dados & Unificação, padronização, deduplicação, limpeza, divisão em treino e teste e construção do histórico simulado & \ref{sec:preparacao} e \ref{sec:indice} \\
+    \hline
+    Modelagem & Treino de 22 candidatos e de um \textit{ensemble}, com escolha por validação cruzada & \ref{sec:tecnica} e \ref{sec:modelos} \\
+    \hline
+    Avaliação & Medida do erro no teste com preços reais, coerência com o índice e projeção da valorização & \ref{sec:modelos} e \ref{sec:valorizacao} \\
+    \hline
+    Implantação & Publicação dos modelos em uma interface web & \ref{sec:interface} \\
+    \hline
+  \end{tabular}
+  \fonte{Elaborado pela autora (2026), com base em \textcite{chapman2000}.}
+\end{quadro}
+
+\subsection{ENTENDIMENTO DO NEGÓCIO}\label{sec:negocio}
+
+O problema de negócio é a falta de uma referência de preços de imóveis em Chapecó: quem compra, vende ou investe depende da opinião de corretores, e os índices de preços existentes não cobrem o município. Traduzido para a mineração de dados, o problema tem duas partes. A primeira é uma regressão: estimar o preço de uma casa ou de um apartamento a partir de suas características. A segunda é temporal: estimar quanto esse imóvel valia nos anos anteriores e quanto pode valer nos próximos. Como critérios de sucesso, definiu-se que o erro deveria ser medido em termos percentuais, para ser comparável entre imóveis baratos e caros, e que os resultados deveriam ser publicados em uma interface gratuita e de fácil uso. As restrições conhecidas desde o início eram a ausência de dados de vendas efetivas, que não são públicos, o prazo de poucos meses para a coleta e a hospedagem gratuita, que limita o tamanho dos modelos publicados.
+
+\subsection{ENTENDIMENTO DOS DADOS: INSTRUMENTO DE COLETA}\label{sec:coleta}
+
+O instrumento de coleta foi um conjunto de programas em Python que extraem automaticamente os anúncios de venda de oito imobiliárias de Chapecó. Quatro delas tiveram as páginas HTML lidas diretamente e quatro forneceram os dados por meio de interfaces de programação (APIs) usadas pelos próprios sites \cite{mitchell2018}. Foram feitas doze coletas entre 23 de março e 2 de agosto de 2026, cada uma gravada em um banco SQLite datado. Além dos anúncios, foram obtidas as séries mensais oficiais do Índice Nacional de Preços ao Consumidor Amplo (IPCA, série 433) e do Índice Nacional de Custo da Construção (INCC, série 192) no Sistema Gerenciador de Séries Temporais do Banco Central do Brasil \cite{bcbsgs}.
+
+O Quadro~\ref{qua:campos} descreve os campos coletados, com a proporção de casas e apartamentos em que cada um estava vazio e o uso que teve no trabalho. Os campos de texto, como o bairro e o tipo, foram preenchidos livremente por cada imobiliária, o que exigiu padronização.
+
+\begin{quadro}[!htb]
+  \caption{Campos coletados nos anúncios de casas e apartamentos}
+  \label{qua:campos}
+  \centering
+  \small
+  \begin{tabular}{|p{2.6cm}|p{6.4cm}|p{1.3cm}|p{3.9cm}|}
+    \hline
+    \textbf{Campo} & \textbf{Descrição} & \textbf{Vazio} & \textbf{Uso} \\
+    \hline
+    Preço & Valor pedido no anúncio, em reais & 0,0\%$^{*}$ & Variável a prever (alvo) \\
+    \hline
+    Bairro & Texto livre, com grafias diferentes entre as imobiliárias & 1,8\% & Entrada (categórica) \\
+    \hline
+    Tipo & Texto livre, como ``Apto'' ou ``Sobrado'' & -- & Separa casas e apartamentos \\
+    \hline
+    Área total e privativa & Em m² & 2,1\% & Entrada (numérica) \\
+    \hline
+    Quartos, banheiros e vagas & Quantidades & 2,9\%, 9,1\% e 12,5\% & Entrada (numérica) \\
+    \hline
+    Data da coleta & Data do banco de cada coleta & 0,0\% & Acompanhamento do preço no tempo \\
+    \hline
+    Endereço & Rua e número & 100\% & Não utilizado \\
+    \hline
+  \end{tabular}
+
+  \footnotesize{$^{*}$Anúncios sem preço foram descartados na preparação.}
+  \fonte{Elaborado pela autora (2026).}
+\end{quadro}
+
+Já nessa fase ficaram claras as lacunas da base, isto é, informações que influenciam o preço, mas não puderam ser obtidas: o endereço, ausente em todos os anúncios, o que restringe a localização ao bairro; a idade, o padrão de acabamento e o estado de conservação, que as imobiliárias não publicam de forma estruturada; as fotos, cujo endereço não foi guardado nas coletas; e o preço efetivo de venda, já que o anúncio mostra apenas o valor pedido. Além disso, as coletas cobrem de março a agosto de 2026, e não há nenhum preço anterior a esse período. A análise exploratória (seção~\ref{sec:eda}) mostrou ainda que o preço anunciado quase não muda entre as coletas, o que tornou essa lacuna temporal o principal obstáculo do trabalho.
+
+\subsection{PREPARAÇÃO DOS DADOS: TABULAÇÃO}\label{sec:preparacao}
+
+\subsubsection{Unificação, padronização e limpeza}
+
+A Tabela~\ref{tab:preparacao} apresenta as etapas da preparação na ordem em que foram aplicadas, com a técnica usada e a quantidade de imóveis restante. As etapas 1 a 5 não dependem da distribuição dos preços e foram aplicadas à base inteira. As etapas 8 a 10, ao contrário, usam limites calculados a partir dos dados e, por isso, foram aprendidas somente no treino e depois aplicadas ao teste. Na primeira versão do trabalho, os valores atípicos eram removidos antes da divisão, o que deixava o teste artificialmente ``limpo'' e o erro menor do que o real; essa falha foi corrigida com a ordem descrita. A manipulação foi feita com a biblioteca pandas \cite{mckinney2017}.
+
+\begin{table}[!htb]
+  \caption{Etapas da preparação dos dados}
+  \label{tab:preparacao}
+  \centering
+  \footnotesize
+  \begin{tabular}{p{2.7cm}p{8.1cm}p{3.9cm}}
+    \hline
+    \textbf{Etapa} & \textbf{Técnica aplicada} & \textbf{Resultado} \\
+    \hline
+    1. Unificação & Junção dos 12 bancos; cada imóvel identificado pelo código do anúncio, com uma tabela do preço em cada coleta & 46.383 registros $\rightarrow$ 4.971 imóveis \\
+    2. Padronização & Grafias de bairro e de cidade unificadas; tipos de texto livre mapeados para um catálogo fixo (Apartamento, Casa, Terreno, Chácara etc.) & -- \\
+    3. Deduplicação & Anúncios do mesmo imóvel em imobiliárias diferentes agrupados por cidade, tipo, área arredondada, quartos, banheiros, vagas e bairro; preço e áreas pela mediana do grupo & 4.266 imóveis (451 consolidados) \\
+    4. Escopo & Mantidos apenas casas e apartamentos; terrenos e chácaras têm preço ligado à terra, e não à construção & 3.354 imóveis \\
+    5. Campos vazios & Descartados os anúncios sem preço ou sem área; quartos, banheiros e vagas vazios preenchidos com zero & 3.283 (1.896 apartamentos e 1.387 casas) \\
+    6. Mês de referência & Preços levados a agosto de 2026 pelo índice IPCA+INCC (ajuste de até cerca de 2,5\%) & -- \\
+    7. Treino e teste & Divisão de 80\% e 20\% por imóvel, com semente fixa, antes das etapas seguintes & Apartamentos 1.516 e 380; casas 1.109 e 278 \\
+    8. Bairros raros & Bairros com menos de dez imóveis no treino agrupados em ``outros'' & 26 de 49 bairros (apartamentos) e 50 de 78 (casas) \\
+    9. Valores extremos & Variáveis numéricas limitadas aos percentis de 2\% e 98\% do treino & Ex.: de 1 a 4 quartos em apartamentos \\
+    10. Valores atípicos & Removidos do treino os imóveis fora de 1,5 intervalo interquartil do preço ou do preço por m² & Treino com 1.400 apartamentos ($-$116) e 1.039 casas ($-$70) \\
+    11. Histórico simulado & Dez registros por imóvel de treino, um por ano de 2016 a 2025 (seção~\ref{sec:historico}) & Treino com 15.400 e 11.429 linhas \\
+    \hline
+  \end{tabular}
   \fonte{Elaborada pela autora (2026).}
-\end{figure}
+\end{table}
 
-\subsection{TÉCNICA DE ANÁLISE DOS DADOS}
+O teste não passa pela etapa 10, para que o erro seja medido também nos anúncios estranhos. Os resultados principais usam os imóveis de teste dentro dos limites aprendidos no treino (357 apartamentos e 261 casas), e o efeito de manter os demais é mostrado na seção~\ref{sec:modelos}. Para a análise exploratória, em vez das etapas 7 a 11, foram mantidos os 3.242 imóveis com preço entre R\$ 50 mil e R\$ 20 milhões e área entre 20 m² e 2.000 m², para que os erros de cadastro não distorcessem os gráficos.
 
-A análise começou pela estatística descritiva e pela análise exploratória \cite{tukey1977}, que orientaram as decisões de modelagem. Em seguida, casas e apartamentos foram modelados separadamente. Para cada tipo, os dados foram divididos por imóvel em 80\% para treino e 20\% para teste, com semente aleatória fixa, antes de qualquer tratamento. As regras de limpeza foram aprendidas somente no treino: bairros com menos de dez imóveis foram agrupados em ``outros'', as variáveis numéricas foram limitadas aos percentis de 2\% e 98\% e os valores atípicos de preço e de preço por m² foram removidos pelo critério do intervalo interquartil (1,5 vez).
+\subsubsection{Do primeiro modelo ao histórico simulado}\label{sec:historico}
 
-Para estimar a valorização ao longo dos anos, foi construído um índice com a média simples das variações mensais do IPCA e do INCC. A lógica é que o terreno e o imóvel como um todo tendem a acompanhar a inflação geral, enquanto a construção tende a acompanhar o custo de construir. Com esse índice, todos os preços reais foram levados ao mês de referência (agosto de 2026) e, para cada imóvel, foram gerados dez registros simulados, um para junho de cada ano entre 2016 e 2025:
+A preparação foi refeita três vezes, à medida que a modelagem e a avaliação revelavam problemas. Na primeira versão (v1), o modelo de preço foi treinado só com os anúncios reais, e a valorização foi medida pela variação do preço anunciado do mesmo imóvel entre as coletas. As primeiras rodadas, com todos os tipos de imóvel juntos e sem limpeza, tiveram R² próximo de zero, e os modelos lineares chegaram a erros de trilhões de reais por causa dos erros de cadastro; separar casas e apartamentos e remover os valores atípicos melhorou mais o resultado do que trocar de algoritmo. O problema mais sério apareceu na valorização: como 95,9\% dos preços não mudaram entre coletas (seção~\ref{sec:eda}), a taxa medida foi de +0,89\% ao ano para apartamentos e +0,38\% para casas, bem abaixo da inflação, e o modelo não tinha como dizer quanto um imóvel valia antes de 2026.
+
+Na segunda versão (v2), tentou-se aproximar os valores com índices oficiais. Corrigir os preços de treino pelo IPCA mudou cada preço em no máximo 1,2\%, e o erro do modelo de preço praticamente não se alterou, porque a correção não traz informação nova sobre qual imóvel vale mais. Na valorização, a taxa medida passou a ser combinada com um índice de referência, primeiro o IPCA e depois o IVG-R, índice do Banco Central baseado nas avaliações de imóveis financiados, o que elevou a estimativa para algo entre +2,9\% e +3,8\% ao ano. O modelo de preço, porém, continuava sem a dimensão do tempo: estimava o valor de hoje, e o passado era uma conta feita à parte.
+
+A terceira versão (v3), apresentada neste artigo, levou o tempo para dentro dos dados. Como não existem preços passados observados, foi construído um histórico simulado, isto é, um conjunto de dados sintéticos gerado por uma regra explícita. Primeiro, foi criado um índice com a média simples das variações mensais do IPCA e do INCC. A lógica é que o terreno e o imóvel como um todo tendem a acompanhar a inflação geral, enquanto a construção tende a acompanhar o custo de construir. Com esse índice, todos os preços reais foram levados ao mês de referência (agosto de 2026), etapa necessária porque, sem ela, o modelo confundia a diferença entre imóveis anunciados em meses diferentes de 2026 com valorização. Em seguida, para cada imóvel, foram gerados dez registros simulados, um para junho de cada ano entre 2016 e 2025:
 \begin{equation}
 P_{\text{jun}/Y} = \frac{P_{\text{ref}}}{I_{\text{ref}} / I_{\text{jun}/Y}}
 \label{eq:simulacao}
 \end{equation}
-em que $P_{\text{ref}}$ é o preço no mês de referência e $I$ é o nível do índice. Assim, a base de modelagem passou a ter 3.283 linhas reais (as casas e apartamentos com preço e área informados) e 32.830 simuladas, e o ano foi incluído como variável. Os índices são valores oficiais, mas o passado de cada imóvel é uma hipótese: supõe-se que ele tenha acompanhado o índice.
+em que $P_{\text{ref}}$ é o preço no mês de referência e $I$ é o nível do índice. Os registros simulados repetem as características do imóvel real e recebem o ano como variável adicional, como mostra o exemplo da Tabela~\ref{tab:exemplo}. Assim, a base completa passou a ter 3.283 linhas reais e 32.830 simuladas, e cada imóvel de treino entrou no modelo com onze linhas. Os índices são valores oficiais, mas o passado de cada imóvel é uma hipótese: supõe-se que ele tenha acompanhado o índice.
+
+\begin{table}[!htb]
+  \caption{Linhas de um apartamento real na base de modelagem}
+  \label{tab:exemplo}
+  \centering
+  \small
+  \begin{tabular}{lllr}
+    \hline
+    \textbf{Linha} & \textbf{Data} & \textbf{Origem do preço} & \textbf{Preço (R\$)} \\
+    \hline
+    Real & ago/2026 & Anúncio de mar/2026 (R\$ 724.500) levado a ago/2026 & 743.116 \\
+    Simulada & jun/2025 & Equação~\ref{eq:simulacao} & 699.430 \\
+    Simulada & jun/2021 & Equação~\ref{eq:simulacao} & 546.208 \\
+    Simulada & jun/2016 & Equação~\ref{eq:simulacao} & 420.636 \\
+    \hline
+  \end{tabular}
+
+  \footnotesize{Apartamento no Centro com 77 m² privativos, 2 quartos, 1 banheiro e 2 vagas, iguais em todas as linhas.\\As demais linhas simuladas (2017 a 2020 e 2022 a 2024) seguem a mesma regra.}
+  \fonte{Elaborada pela autora (2026).}
+\end{table}
+
+\subsection{TÉCNICA DE ANÁLISE DOS DADOS: MODELAGEM, AVALIAÇÃO E IMPLANTAÇÃO}\label{sec:tecnica}
+
+A análise começou pela estatística descritiva e pela análise exploratória \cite{tukey1977}, cujos resultados (seção~\ref{sec:eda}) orientaram as decisões de modelagem. Casas e apartamentos foram modelados separadamente, com as bases de treino e de teste descritas na Tabela~\ref{tab:preparacao}.
 
 Foram comparados nove algoritmos (Regressão Linear, Ridge, Lasso, Random Forest, Gradient Boosting, XGBoost, CatBoost, rede neural MLP e SVM), cada um com o alvo em preço e em logaritmo do preço, implementados com scikit-learn \cite{pedregosa2011}, XGBoost e CatBoost, e o TabPFN \cite{hollmann2025}, com o alvo em preço, em três versões executadas localmente (v2, 3.5 e 3.5 Fast) e na versão 3.5 executada no servidor do fabricante, por meio de sua API \cite{priorlabs}, totalizando 22 candidatos. O ranking foi feito por validação cruzada de cinco partes agrupada por imóvel, de modo que o preço real e os simulados de um mesmo imóvel ficassem sempre juntos, e o erro foi medido apenas nas linhas reais. O critério de escolha foi o menor MdAPE; em caso de empate (mesmo MdAPE com uma casa decimal), venceu o menor MAE. Entre os candidatos que rodam na própria interface web (Random Forest, CatBoost, XGBoost, Gradient Boosting e Ridge), os três melhores foram combinados em um \textit{ensemble}, com pesos inversamente proporcionais ao MdAPE, que concorreu como mais um candidato. A avaliação final usou o conjunto de teste, que não participou de nenhuma escolha, com MAE, RMSE, R² e MdAPE. O MAPE foi descartado porque erros de cadastro, como uma casa anunciada por ``R\$ 1,35'', geram erros de milhões de por cento.
 
@@ -164,7 +279,7 @@ Por fim, os modelos foram publicados em uma interface web desenvolvida com Strea
 %% ===================================================================
 \section{ANÁLISE DOS DADOS E RESULTADOS}\label{sec:resultados}
 
-\subsection{ANÁLISE EXPLORATÓRIA}
+\subsection{ENTENDIMENTO DOS DADOS: ANÁLISE EXPLORATÓRIA}\label{sec:eda}
 
 Apartamentos (45,6\%) e casas (33,0\%) somaram 78,6\% da base normalizada e foram os dois tipos modelados; terrenos e chácaras ficaram de fora, pois seu preço depende principalmente da terra e não da construção. A Tabela~\ref{tab:precos} resume a distribuição dos preços. As casas custam mais no total, mas os apartamentos custam mais por metro quadrado, já que parte da área das casas é terreno.
 
@@ -187,7 +302,15 @@ Apartamentos (45,6\%) e casas (33,0\%) somaram 78,6\% da base normalizada e fora
   \fonte{Elaborada pela autora (2026).}
 \end{table}
 
-A distribuição do preço é muito assimétrica, com coeficiente de assimetria de 3,5 em apartamentos e 3,9 em casas; em escala logarítmica, ele cai para 0,3 (Figura~\ref{fig:distribuicao}). Por isso, todos os algoritmos foram testados também com o alvo em logaritmo. A correlação de Spearman com o preço foi de 0,86 para a área em apartamentos e de 0,69 em casas, seguida por vagas (0,69 e 0,48) e quartos (0,66 e 0,54). Esses números confirmam, para um conjunto maior de imóveis, o que \textcite{reza2025} encontraram para apartamentos na cidade, e mostram que a área ordena muito melhor o preço de um apartamento do que o de uma casa. O preço por m² não sobe com o número de quartos, o que indica uma relação não linear entre as variáveis e o preço.
+A distribuição do preço é muito assimétrica, com coeficiente de assimetria de 3,5 em apartamentos e 3,9 em casas; em escala logarítmica, ele cai para 0,3 (Figura~\ref{fig:distribuicao}). Por isso, todos os algoritmos foram testados também com o alvo em logaritmo. A correlação de Spearman, que mede se duas variáveis crescem juntas mesmo sem relação linear, foi de 0,86 entre a área e o preço em apartamentos e de 0,69 em casas, seguida por vagas (0,69 e 0,48) e quartos (0,66 e 0,54), como mostra a Figura~\ref{fig:correlacao}. As variáveis de entrada também são correlacionadas entre si, como a área e os quartos (0,79 em apartamentos), ou seja, parte da informação é repetida. Esses números confirmam, para um conjunto maior de imóveis, o que \textcite{reza2025} encontraram para apartamentos na cidade, e mostram que a área ordena muito melhor o preço de um apartamento do que o de uma casa. O preço por m² não sobe com o número de quartos, o que indica uma relação não linear entre as variáveis e o preço.
+
+\begin{figure}[!htb]
+  \caption{Correlação de Spearman entre as variáveis}
+  \label{fig:correlacao}
+  \centering
+  \includegraphics[width=0.9\linewidth]{Figuras/eda_07_correlacoes.png}
+  \fonte{Elaborada pela autora (2026).}
+\end{figure}
 
 \begin{figure}[!htb]
   \caption{Distribuição dos preços de apartamentos e casas}
@@ -207,9 +330,9 @@ O bairro é a segunda informação mais importante. O preço por m² de apartame
   \fonte{Elaborada pela autora (2026).}
 \end{figure}
 
-O comportamento no tempo foi o achado que mais influenciou o trabalho. Comparando o preço do mesmo imóvel entre coletas consecutivas (10.984 comparações), 95,9\% não mudaram, 2,5\% subiram e 1,5\% caíram. Medida apenas pelos anúncios, a valorização foi de +0,89\% ao ano em apartamentos e +0,38\% em casas, muito abaixo da inflação do período. O preço anunciado é definido na entrada do anúncio e raramente reajustado; além disso, os imóveis bem precificados são vendidos e saem da amostra. Esse comportamento motivou a construção do histórico simulado pelo índice IPCA+INCC.
+O comportamento no tempo foi o achado que mais influenciou o trabalho. Comparando o preço do mesmo imóvel entre coletas consecutivas (10.984 comparações), 95,9\% não mudaram, 2,5\% subiram e 1,5\% caíram. Medida apenas pelos anúncios, a valorização foi de +0,89\% ao ano em apartamentos e +0,38\% em casas, muito abaixo da inflação do período. O preço anunciado é definido na entrada do anúncio e raramente reajustado; além disso, os imóveis bem precificados são vendidos e saem da amostra. Esse comportamento motivou a construção do histórico simulado pelo índice IPCA+INCC (seção~\ref{sec:historico}).
 
-\subsection{O ÍNDICE IPCA+INCC}
+\subsection{PREPARAÇÃO DOS DADOS: O ÍNDICE IPCA+INCC}\label{sec:indice}
 
 Nos últimos dez anos, o índice combinado variou em média +5,80\% ao ano, entre +3,60\% em 2017 e +11,95\% em 2021 (Figura~\ref{fig:indice}). Nos últimos cinco anos, a média foi de +5,95\% ao ano, contra +5,30\% do IPCA e +6,60\% do INCC isolados.
 
@@ -223,7 +346,7 @@ Nos últimos dez anos, o índice combinado variou em média +5,80\% ao ano, entr
 
 Antes de adotar o índice, foi testada a hipótese de que a taxa de juros explicaria a valorização. Com 25 anos de dados mensais do Banco Central e três períodos de teste, os modelos com Selic só superaram a média histórica no primeiro período (a partir de 2017); nos dois mais recentes, a média simples de dez anos foi melhor. Por isso, os juros não foram usados na projeção.
 
-\subsection{COMPARAÇÃO DOS MODELOS}
+\subsection{MODELAGEM E AVALIAÇÃO: COMPARAÇÃO DOS MODELOS}\label{sec:modelos}
 
 A Figura~\ref{fig:ranking} apresenta os 22 candidatos e o \textit{ensemble} na ordem do MdAPE da validação cruzada, e a Tabela~\ref{tab:modelos} resume os principais no teste. Em apartamentos, o modelo publicado foi o \textit{ensemble} de Random Forest com alvo em preço e em logaritmo e XGBoost com alvo em logaritmo. Em casas, foi o TabPFN 3.5 pela API, e a reserva é o \textit{ensemble} de Random Forest, CatBoost e XGBoost, todos com alvo em preço. Os pesos ficaram próximos de um terço para cada modelo, porque os três tinham MdAPE quase igual.
 
@@ -282,17 +405,26 @@ Os modelos publicados obtiveram MdAPE de 13,1\% em apartamentos e 18,7\% em casa
 
 A diferença entre os tipos também foi coerente com os dados. Casas reúnem imóveis muito diferentes sob o mesmo rótulo, como sobrados, casas geminadas e casas em terrenos grandes, e a área explica menos o seu preço. Quando os anúncios com erros de cadastro foram mantidos no teste, o R² caiu para 0,613 em apartamentos e 0,372 em casas, o que mostra o peso desses erros na base.
 
-\subsection{VALORIZAÇÃO E PROJEÇÃO}
+\subsection{AVALIAÇÃO: VALORIZAÇÃO E PROJEÇÃO}\label{sec:valorizacao}
 
 Combinando os anúncios (29\%) e o índice (71\%), a valorização estimada foi de +4,33\% ao ano para apartamentos, com faixa de +2,64\% a +8,32\%, e de +4,17\% ao ano para casas, com faixa de +2,47\% a +8,17\%. Como coerência interna, o modelo estimou que os imóveis de teste valiam, em junho de 2021, 74,1\% (apartamentos) e 74,4\% (casas) do valor atual, contra 73,5\% indicados pelo índice; essa comparação mostra que o modelo aprendeu o índice, mas não prova que o passado real tenha sido assim.
 
 Como exemplo, um apartamento de 80 m² privativos e 100 m² de área total no Centro, com dois quartos, dois banheiros e uma vaga, foi estimado em cerca de R\$ 691 mil em agosto de 2026. Com a valorização do bairro (+4,26\% ao ano), ele valeria cerca de R\$ 1,05 milhão em dez anos, entre aproximadamente R\$ 885 mil no cenário pessimista e R\$ 1,53 milhão no otimista.
 
-\subsection{INTERFACE WEB}
+\subsection{IMPLANTAÇÃO: INTERFACE WEB}\label{sec:interface}
 
-Os resultados foram disponibilizados em uma interface web pública, acessível em \url{https://scrapping-estates-ayzubn6w4uizag9pbeh5yq.streamlit.app}. Na aba de estimativa, o usuário informa o tipo, o bairro, a área, os quartos, os banheiros e as vagas, e recebe o valor estimado para hoje, a evolução de 2016 até hoje e a projeção para os próximos anos nos três cenários, além de avisos quando os dados informados estão fora do padrão da base. A interface informa qual modelo fez a estimativa e, no caso das casas, avisa que as características informadas, sem nenhum dado pessoal, são enviadas à API do TabPFN; as estimativas ficam em memória para que consultas repetidas não consumam a cota mensal da API. As demais abas mostram a valorização por bairro, o ranking pelo MdAPE, as tentativas do TabPFN, a explicação de cada modelo com o motivo do seu resultado e o conjunto de dados utilizado, com os imóveis reais e o histórico simulado. Em relação aos protótipos planejados no TCC I, o painel com os coeficientes de cada variável foi substituído pela explicação dos modelos, já que os modelos de árvores e o TabPFN não possuem coeficientes diretamente interpretáveis.
+Os resultados foram disponibilizados em uma interface web pública, acessível em \url{https://scrapping-estates-ayzubn6w4uizag9pbeh5yq.streamlit.app}. Na aba de estimativa, o usuário informa o tipo, o bairro, a área, os quartos, os banheiros e as vagas, e recebe o valor estimado para hoje, a evolução de 2016 até hoje e a projeção para os próximos anos nos três cenários, além de avisos quando os dados informados estão fora do padrão da base. A interface informa qual modelo fez a estimativa e, no caso das casas, avisa que as características informadas, sem nenhum dado pessoal, são enviadas à API do TabPFN; as estimativas ficam em memória para que consultas repetidas não consumam a cota mensal da API. A Figura~\ref{fig:interface} mostra essa aba para o apartamento do exemplo da seção anterior, com o valor de hoje, a projeção e o passado simulado. As demais abas mostram a valorização por bairro, o ranking pelo MdAPE, as tentativas do TabPFN, a explicação de cada modelo com o motivo do seu resultado e o conjunto de dados utilizado, com os imóveis reais e o histórico simulado. Em relação aos protótipos planejados no TCC I, o painel com os coeficientes de cada variável foi substituído pela explicação dos modelos, já que os modelos de árvores e o TabPFN não possuem coeficientes diretamente interpretáveis.
+
+\begin{figure}[!htb]
+  \caption{Aba de estimativa da interface web, para o apartamento do exemplo}
+  \label{fig:interface}
+  \centering
+  \includegraphics[width=0.85\linewidth]{Figuras/interface_estimativa.png}
+  \fonte{Elaborada pela autora (2026).}
+\end{figure}
 
 %% ===================================================================
+\FloatBarrier
 \section{CONCLUSÃO}\label{sec:concl}
 
 Este trabalho mostrou que é possível estimar o valor de casas e apartamentos em Chapecó a partir de anúncios coletados automaticamente, com erro típico de cerca de 13\% para apartamentos e 19\% para casas. Respondendo às questões de pesquisa, o desempenho foi aceitável para apartamentos e moderado para casas; a área e o bairro foram as variáveis mais influentes, seguidas de vagas e quartos; os modelos de árvores e o TabPFN apresentaram o melhor desempenho, com diferenças pequenas entre si, e, entre os que podem ser publicados, venceram o \textit{ensemble} de Random Forest e XGBoost em apartamentos e o TabPFN pela API em casas, enquanto a rede neural e o SVM ficaram entre os piores para o volume de dados disponível.
