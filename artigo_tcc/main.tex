@@ -123,6 +123,12 @@ Para que o erro medido represente o desempenho em imóveis novos, os dados de te
 
 As métricas usuais em regressão são o erro médio absoluto (MAE), que expressa o erro típico em reais; a raiz do erro quadrático médio (RMSE), que penaliza mais os erros grandes; e o coeficiente de determinação (R²), que indica a fração da variação dos preços explicada pelo modelo \cite{james2021}. O erro percentual absoluto médio (MAPE) é intuitivo, mas torna-se instável quando há valores reais muito pequenos, situação comum em bases com erros de cadastro; nesses casos, o erro percentual absoluto mediano (MdAPE) é uma alternativa robusta \cite{hyndman2006}. Para medir a incerteza de uma estimativa, a reamostragem \textit{bootstrap} sorteia repetidamente os dados com reposição e observa a variação do resultado \cite{efron1993}. Já a teoria da credibilidade fornece uma forma de combinar uma estimativa baseada em poucos dados com uma referência mais estável, dando a cada uma um peso proporcional à quantidade de informação disponível \cite{buhlmann2005}.
 
+\subsection{PROCESSO CRISP-DM}
+
+O CRISP-DM (\textit{Cross-Industry Standard Process for Data Mining}) é um modelo de processo para projetos de mineração de dados, independente de ferramentas e de área de aplicação \cite{chapman2000}. Ele organiza o projeto em seis fases. No entendimento do negócio, definem-se os objetivos, os critérios de sucesso, os recursos e as restrições, e esses objetivos são traduzidos em metas técnicas. No entendimento dos dados, faz-se a coleta inicial, a descrição dos dados, a análise exploratória e a verificação da qualidade, com a busca de valores ausentes e de erros. A preparação dos dados, em geral a fase mais demorada, seleciona, limpa, integra e transforma os dados e cria novos atributos, produzindo a base final de modelagem. Na modelagem, escolhem-se os algoritmos e a estratégia de validação e treinam-se os modelos. Na avaliação, verifica-se se os modelos atendem aos objetivos do negócio e se alguma etapa precisa ser revista. Por fim, na implantação, o conhecimento obtido é disponibilizado para uso e documentado \cite{chapman2000,wirth2000}.
+
+O processo é iterativo: o resultado de uma fase pode indicar a necessidade de voltar a uma anterior, como quando a modelagem revela que a preparação dos dados precisa de ajustes. Essa característica, junto com o registro do que foi feito em cada fase, favorece a rastreabilidade e a reprodutibilidade, aspectos importantes em pesquisas científicas \cite{shearer2000,wirth2000}.
+
 %% ===================================================================
 \section{PROCEDIMENTOS METODOLÓGICOS}\label{sec:metod}
 
@@ -130,31 +136,41 @@ As métricas usuais em regressão são o erro médio absoluto (MAE), que express
 
 Quanto à natureza, a pesquisa é aplicada, pois busca resolver um problema prático: estimar o valor de imóveis em um município específico. Quanto à abordagem, é quantitativa, uma vez que se baseia em dados numéricos e em técnicas estatísticas e computacionais. Quanto aos objetivos, é exploratória e descritiva, por investigar um tema pouco estudado no contexto local e descrever os padrões encontrados nos dados \cite{gil2002}. Quanto aos procedimentos, trata-se de pesquisa documental, por usar anúncios publicados na internet e séries oficiais de índices econômicos, e experimental, por comparar modelos sob as mesmas condições controladas \cite{prodanov2013}.
 
-O desenvolvimento seguiu o CRISP-DM (\textit{Cross-Industry Standard Process for Data Mining}), modelo de processo que divide um projeto de mineração de dados em seis fases: entendimento do negócio, entendimento dos dados, preparação dos dados, modelagem, avaliação e implantação \cite{chapman2000,shearer2000}. As fases não são lineares, e o resultado de uma delas pode exigir o retorno a uma anterior. Foi o que aconteceu neste trabalho: a avaliação das primeiras versões mostrou que os anúncios não permitiam medir a valorização, e a preparação dos dados precisou ser refeita. O Quadro~\ref{qua:crisp} relaciona cada fase às atividades realizadas e às seções em que elas são descritas.
+O desenvolvimento seguiu as seis fases do CRISP-DM, como planejado no TCC I. A Figura~\ref{fig:crisp} resume o que foi feito em cada fase. A seta tracejada indica o retorno que ocorreu neste trabalho: a avaliação das primeiras versões mostrou que os anúncios não permitiam medir a valorização, e a preparação dos dados precisou ser refeita até a versão final (seção~\ref{sec:historico}).
+
+\begin{figure}[!htb]
+  \caption{Fases do CRISP-DM aplicadas à pesquisa}
+  \label{fig:crisp}
+  \centering
+  \includegraphics[width=0.95\linewidth]{Figuras/crisp_dm_fases.png}
+  \fonte{Elaborada pela autora (2026), com base em \textcite{chapman2000}.}
+\end{figure}
+
+O Quadro~\ref{qua:crisp} compara, fase a fase, o que foi planejado no TCC I com o que foi realizado, e indica as seções em que cada fase é descrita. As principais mudanças vieram dos próprios dados: o número de imobiliárias cresceu de cinco para oito, o MAPE foi substituído pelo MdAPE por causa dos erros de cadastro, a falta de histórico de preços levou à construção do histórico simulado, e os modelos com melhor desempenho, de árvores e o TabPFN, não têm coeficientes para exibir na interface.
 
 \begin{quadro}[!htb]
-  \caption{Fases do CRISP-DM e atividades realizadas neste trabalho}
+  \caption{Fases do CRISP-DM: planejado no TCC I e realizado}
   \label{qua:crisp}
   \centering
-  \small
-  \begin{tabular}{|p{3.3cm}|p{9.2cm}|p{1.9cm}|}
+  \footnotesize
+  \begin{tabular}{|p{2.2cm}|p{5cm}|p{5.6cm}|p{1.6cm}|}
     \hline
-    \textbf{Fase} & \textbf{Atividades realizadas} & \textbf{Seções} \\
+    \textbf{Fase} & \textbf{Planejado no TCC I} & \textbf{Realizado} & \textbf{Seções} \\
     \hline
-    Entendimento do negócio & Definição do problema, das perguntas de pesquisa, dos critérios de sucesso e das restrições & \ref{sec:negocio} \\
+    Entendimento do negócio & Indicadores de preços para cidades médias e um modelo preditivo de preço & Estimativa do valor atual e do valor ao longo dos anos; critérios de sucesso e restrições & \ref{sec:negocio} \\
     \hline
-    Entendimento dos dados & Coleta por \textit{web scraping}, descrição dos campos, identificação das lacunas e análise exploratória & \ref{sec:coleta} e \ref{sec:eda} \\
+    Entendimento dos dados & Coleta semanal em cinco imobiliárias; variáveis disponíveis e qualidade dos dados & Doze coletas em oito imobiliárias; campos, lacunas e análise exploratória & \ref{sec:coleta} e \ref{sec:eda} \\
     \hline
-    Preparação dos dados & Unificação, padronização, deduplicação, limpeza, divisão em treino e teste e construção do histórico simulado & \ref{sec:preparacao} e \ref{sec:indice} \\
+    Preparação dos dados & Limpeza, filtros, remoção de duplicidades e preço por m² & Onze etapas de preparação e histórico simulado de 2016 a 2025 & \ref{sec:preparacao} e \ref{sec:indice} \\
     \hline
-    Modelagem & Treino de 22 candidatos e de um \textit{ensemble}, com escolha por validação cruzada & \ref{sec:tecnica} e \ref{sec:modelos} \\
+    Modelagem & Regressão Linear, Random Forest, Gradient Boosting e MLP; divisão 80/20; Ridge e Lasso se necessário & Nove algoritmos com dois alvos, TabPFN e \textit{ensemble}; divisão 80/20 e validação cruzada por imóvel & \ref{sec:tecnica} e \ref{sec:modelos} \\
     \hline
-    Avaliação & Medida do erro no teste com preços reais, coerência com o índice e projeção da valorização & \ref{sec:modelos} e \ref{sec:valorizacao} \\
+    Avaliação & MAE, RMSE, MAPE e R² & MAE, RMSE, R² e MdAPE, medidos só nos preços reais; projeção da valorização & \ref{sec:modelos} e \ref{sec:valorizacao} \\
     \hline
-    Implantação & Publicação dos modelos em uma interface web & \ref{sec:interface} \\
+    Implantação & Interface web com a estimativa e os coeficientes das variáveis & Interface pública com estimativa, passado, projeção e explicação dos modelos & \ref{sec:interface} \\
     \hline
   \end{tabular}
-  \fonte{Elaborado pela autora (2026), com base em \textcite{chapman2000}.}
+  \fonte{Elaborado pela autora (2026).}
 \end{quadro}
 
 \subsection{ENTENDIMENTO DO NEGÓCIO}\label{sec:negocio}
