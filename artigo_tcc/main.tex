@@ -146,7 +146,7 @@ O desenvolvimento seguiu as seis fases do CRISP-DM, como planejado no TCC I. A F
   \fonte{Elaborada pela autora (2026), com base em \textcite{chapman2000}.}
 \end{figure}
 
-O Quadro~\ref{qua:crisp} compara, fase a fase, o que foi planejado no TCC I com o que foi realizado, e indica as seções em que cada fase é descrita. O escopo foi ampliado: o TCC I previa estimar apenas o preço de apartamentos, e este trabalho incluiu as casas e a valorização ao longo dos anos, como indica o título da pesquisa. As demais mudanças vieram dos próprios dados: o número de imobiliárias cresceu de cinco para oito; as coletas ficaram em bancos SQLite, sem a migração prevista para PostgreSQL, porque o volume de dados não a exigiu; o MdAPE foi incluído entre as métricas e substituiu o MAPE como critério, por causa dos erros de cadastro; a falta de histórico de preços levou à construção do histórico simulado; e os modelos com melhor desempenho, de árvores e o TabPFN, não têm coeficientes para exibir na interface.
+O Quadro~\ref{qua:crisp} compara, fase a fase, o que foi planejado no TCC I com o que foi realizado, e indica as seções em que cada fase é descrita. O escopo foi ampliado: o TCC I previa estimar apenas o preço de apartamentos, e este trabalho incluiu as casas e a valorização ao longo dos anos, como indica o título da pesquisa. As demais mudanças vieram dos próprios dados: o número de imobiliárias cresceu de cinco para oito; o MdAPE foi incluído entre as métricas e substituiu o MAPE como critério, por causa dos erros de cadastro; a falta de histórico de preços levou à construção do histórico simulado; e os modelos com melhor desempenho, de árvores e o TabPFN, não têm coeficientes para exibir na interface.
 
 \begin{quadro}[!htb]
   \caption{Fases do CRISP-DM: planejado no TCC I e realizado}
@@ -159,7 +159,7 @@ O Quadro~\ref{qua:crisp} compara, fase a fase, o que foi planejado no TCC I com 
     \hline
     Entendimento do negócio & Indicadores de preços para cidades médias; modelo preditivo do preço de apartamentos & Casas e apartamentos; valor atual e ao longo dos anos; critérios de sucesso e restrições & \ref{sec:negocio} \\
     \hline
-    Entendimento dos dados & Coleta semanal por \textit{web scraping} em cinco fontes, com banco PostgreSQL; variáveis e qualidade dos dados & Doze coletas em oito imobiliárias, em bancos SQLite; campos, lacunas e análise exploratória & \ref{sec:coleta} e \ref{sec:eda} \\
+    Entendimento dos dados & Coleta semanal por \textit{web scraping} em cinco fontes; variáveis e qualidade dos dados & Doze coletas em oito imobiliárias; campos, lacunas e análise exploratória & \ref{sec:coleta} e \ref{sec:eda} \\
     \hline
     Preparação dos dados & Limpeza e filtros, remoção de duplicidades, preço por m²; atípicos identificados por \textit{box plot} & Onze etapas, com atípicos removidos pela regra do \textit{box plot} (1,5 IQR); histórico simulado de 2016 a 2025 & \ref{sec:preparacao} e \ref{sec:indice} \\
     \hline
