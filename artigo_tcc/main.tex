@@ -146,7 +146,7 @@ O desenvolvimento seguiu as seis fases do CRISP-DM, como planejado no TCC I. A F
   \fonte{Elaborada pela autora (2026), com base em \textcite{chapman2000}.}
 \end{figure}
 
-O Quadro~\ref{qua:crisp} compara, fase a fase, o que foi planejado no TCC I com o que foi realizado, e indica as seções em que cada fase é descrita. As principais mudanças vieram dos próprios dados: o número de imobiliárias cresceu de cinco para oito, o MAPE foi substituído pelo MdAPE por causa dos erros de cadastro, a falta de histórico de preços levou à construção do histórico simulado, e os modelos com melhor desempenho, de árvores e o TabPFN, não têm coeficientes para exibir na interface.
+O Quadro~\ref{qua:crisp} compara, fase a fase, o que foi planejado no TCC I com o que foi realizado, e indica as seções em que cada fase é descrita. O escopo foi ampliado: o TCC I previa estimar apenas o preço de apartamentos, e este trabalho incluiu as casas e a valorização ao longo dos anos, como indica o título da pesquisa. As demais mudanças vieram dos próprios dados: o número de imobiliárias cresceu de cinco para oito; as coletas ficaram em bancos SQLite, sem a migração prevista para PostgreSQL, porque o volume de dados não a exigiu; o MdAPE foi incluído entre as métricas e substituiu o MAPE como critério, por causa dos erros de cadastro; a falta de histórico de preços levou à construção do histórico simulado; e os modelos com melhor desempenho, de árvores e o TabPFN, não têm coeficientes para exibir na interface.
 
 \begin{quadro}[!htb]
   \caption{Fases do CRISP-DM: planejado no TCC I e realizado}
@@ -157,17 +157,17 @@ O Quadro~\ref{qua:crisp} compara, fase a fase, o que foi planejado no TCC I com 
     \hline
     \textbf{Fase} & \textbf{Planejado no TCC I} & \textbf{Realizado} & \textbf{Seções} \\
     \hline
-    Entendimento do negócio & Indicadores de preços para cidades médias e um modelo preditivo de preço & Estimativa do valor atual e do valor ao longo dos anos; critérios de sucesso e restrições & \ref{sec:negocio} \\
+    Entendimento do negócio & Indicadores de preços para cidades médias; modelo preditivo do preço de apartamentos & Casas e apartamentos; valor atual e ao longo dos anos; critérios de sucesso e restrições & \ref{sec:negocio} \\
     \hline
-    Entendimento dos dados & Coleta semanal em cinco imobiliárias; variáveis disponíveis e qualidade dos dados & Doze coletas em oito imobiliárias; campos, lacunas e análise exploratória & \ref{sec:coleta} e \ref{sec:eda} \\
+    Entendimento dos dados & Coleta semanal por \textit{web scraping} em cinco fontes, com banco PostgreSQL; variáveis e qualidade dos dados & Doze coletas em oito imobiliárias, em bancos SQLite; campos, lacunas e análise exploratória & \ref{sec:coleta} e \ref{sec:eda} \\
     \hline
-    Preparação dos dados & Limpeza, filtros, remoção de duplicidades e preço por m² & Onze etapas de preparação e histórico simulado de 2016 a 2025 & \ref{sec:preparacao} e \ref{sec:indice} \\
+    Preparação dos dados & Limpeza e filtros, remoção de duplicidades, preço por m²; atípicos identificados por \textit{box plot} & Onze etapas, com atípicos removidos pela regra do \textit{box plot} (1,5 IQR); histórico simulado de 2016 a 2025 & \ref{sec:preparacao} e \ref{sec:indice} \\
     \hline
-    Modelagem & Regressão Linear, Random Forest, Gradient Boosting e MLP; divisão 80/20; Ridge e Lasso se necessário & Nove algoritmos com dois alvos, TabPFN e \textit{ensemble}; divisão 80/20 e validação cruzada por imóvel & \ref{sec:tecnica} e \ref{sec:modelos} \\
+    Modelagem & Cinco algoritmos (Regressão Linear, Random Forest, Gradient Boosting, MLP e SVM); divisão 80/20; Ridge e Lasso se necessário & Nove algoritmos com dois alvos, TabPFN e \textit{ensemble}; divisão 80/20 e validação cruzada por imóvel & \ref{sec:tecnica} e \ref{sec:modelos} \\
     \hline
-    Avaliação & MAE, RMSE, MAPE e R² & MAE, RMSE, R² e MdAPE, medidos só nos preços reais; projeção da valorização & \ref{sec:modelos} e \ref{sec:valorizacao} \\
+    Avaliação & MAE, RMSE, MAPE e R², entre outras métricas julgadas relevantes & MAE, RMSE, R² e MdAPE, medidos só nos preços reais; projeção da valorização & \ref{sec:modelos} e \ref{sec:valorizacao} \\
     \hline
-    Implantação & Interface web com a estimativa e os coeficientes das variáveis & Interface pública com estimativa, passado, projeção e explicação dos modelos & \ref{sec:interface} \\
+    Implantação & Interface web com estimativa, intervalo de variação e coeficientes das variáveis & Interface pública com estimativa, erro típico, passado, projeção e explicação dos modelos & \ref{sec:interface} \\
     \hline
   \end{tabular}
   \fonte{Elaborado pela autora (2026).}
@@ -238,7 +238,7 @@ A Tabela~\ref{tab:preparacao} apresenta as etapas da preparação na ordem em qu
     7. Treino e teste & Divisão de 80\% e 20\% por imóvel, com semente fixa, antes das etapas seguintes & Apartamentos 1.516 e 380; casas 1.109 e 278 \\
     8. Bairros raros & Bairros com menos de dez imóveis no treino agrupados em ``outros'' & 26 de 49 bairros (apartamentos) e 50 de 78 (casas) \\
     9. Valores extremos & Variáveis numéricas limitadas aos percentis de 2\% e 98\% do treino & Ex.: de 1 a 4 quartos em apartamentos \\
-    10. Valores atípicos & Removidos do treino os imóveis fora de 1,5 intervalo interquartil do preço ou do preço por m² & Treino com 1.400 apartamentos ($-$116) e 1.039 casas ($-$70) \\
+    10. Valores atípicos & Removidos do treino os imóveis fora de 1,5 intervalo interquartil do preço ou do preço por m² (regra do \textit{box plot}) & Treino com 1.400 apartamentos ($-$116) e 1.039 casas ($-$70) \\
     11. Histórico simulado & Dez registros por imóvel de treino, um por ano de 2016 a 2025 (seção~\ref{sec:historico}) & Treino com 15.400 e 11.429 linhas \\
     \hline
   \end{tabular}

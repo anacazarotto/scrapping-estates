@@ -236,37 +236,53 @@ def crisp_dm():
     """Fases do CRISP-DM (mesmas cores da Figura 1 do TCC I) com o que foi feito em cada uma."""
     from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
+    # Nome da fase, nome em inglês (como na Figura 1 do TCC I) e o que foi feito no TCC II
     fases = [
-        ("1. Entendimento\ndo negócio", "Falta de índice de preços\nem Chapecó; valor hoje\ne ao longo dos anos", "#dae8d4", "#82b366"),
-        ("2. Entendimento\ndos dados", "8 imobiliárias, 12 coletas;\ncampos, lacunas e\nanálise exploratória", "#dae8fc", "#6c8ebf"),
-        ("3. Preparação\ndos dados", "11 etapas de limpeza;\nhistórico simulado\n2016–2025 (v3)", "#fff2cc", "#d6b656"),
-        ("4. Modelagem", "22 candidatos e\nensemble; validação\ncruzada por imóvel", "#f8cecc", "#b85450"),
-        ("5. Avaliação", "MdAPE no teste com\npreços reais; projeção\nda valorização", "#e1d5e7", "#9673a6"),
-        ("6. Implantação", "Interface web pública\n(Streamlit) com\nestimativa e dados", "#f2d9e2", "#b5577a"),
+        ("1. Entendimento\ndo negócio", "Business Understanding",
+         "Indicadores imobiliários;\nvalor hoje e ao longo\ndos anos", "#dae8d4", "#82b366"),
+        ("2. Entendimento\ndos dados", "Data Understanding",
+         "Web scraping em 8\nimobiliárias; campos,\nlacunas e EDA", "#dae8fc", "#6c8ebf"),
+        ("3. Preparação\ndos dados", "Data Preparation",
+         "Limpeza e filtros\n(11 etapas); histórico\nsimulado 2016–2025", "#fff2cc", "#d6b656"),
+        ("4. Modelagem", "Modeling",
+         "Machine learning:\nregressão; 22 candidatos\ne ensemble", "#f8cecc", "#b85450"),
+        ("5. Avaliação", "Evaluation",
+         "MAE, R² e MdAPE;\nvalidação cruzada e\nteste com preços reais", "#e1d5e7", "#9673a6"),
+        ("6. Implantação", "Deployment",
+         "Interface web para o\nusuário final (Streamlit)", "#f2d9e2", "#b5577a"),
     ]
-    fig, ax = plt.subplots(figsize=(6.6, 2.75))
+    fig, ax = plt.subplots(figsize=(6.6, 3.4))
     ax.set_xlim(0, 9)
-    ax.set_ylim(0, 3.5)
+    ax.set_ylim(0, 4.4)
     ax.axis("off")
-    larg, alt = 2.5, 1.35
-    pos = [(0.2, 1.95), (3.25, 1.95), (6.3, 1.95), (6.3, 0.15), (3.25, 0.15), (0.2, 0.15)]
-    for (titulo, texto, fundo, borda), (x, y) in zip(fases, pos):
+    larg, alt = 2.5, 1.8
+    baixo, cima = 0.15, 2.45
+    pos = [(0.2, cima), (3.25, cima), (6.3, cima), (6.3, baixo), (3.25, baixo), (0.2, baixo)]
+    for (titulo, ingles, texto, fundo, borda), (x, y) in zip(fases, pos):
         ax.add_patch(FancyBboxPatch((x, y), larg, alt, boxstyle="round,pad=0.02,rounding_size=0.12",
                                     facecolor=fundo, edgecolor=borda, linewidth=1.2))
-        ax.text(x + larg / 2, y + alt - 0.1, titulo, ha="center", va="top", fontsize=8.5, weight="bold", color=TINTA)
-        ax.text(x + larg / 2, y + 0.1, texto, ha="center", va="bottom", fontsize=7.2, color=TINTA)
+        # Títulos de uma linha descem meia linha para o nome em inglês ficar na mesma altura
+        topo = y + alt - (0.1 if "\n" in titulo else 0.22)
+        ax.text(x + larg / 2, topo, titulo, ha="center", va="top", fontsize=7.8, weight="bold", color=TINTA)
+        ax.text(x + larg / 2, y + alt - 0.62, f"({ingles})", ha="center", va="top", fontsize=7, style="italic",
+                color="#555555")
+        ax.text(x + larg / 2, y + (alt - 0.8) / 2, texto, ha="center", va="center", fontsize=7, color=TINTA,
+                linespacing=1.25)
 
     def seta(a, b, color="#555555", **kw):
         ax.add_patch(FancyArrowPatch(a, b, arrowstyle="-|>", mutation_scale=12, color=color, linewidth=1.1, **kw))
 
-    seta((2.72, 2.62), (3.23, 2.62))
-    seta((5.77, 2.62), (6.28, 2.62))
-    seta((7.55, 1.93), (7.55, 1.52))
-    seta((6.28, 0.82), (5.77, 0.82))
-    seta((3.23, 0.82), (2.72, 0.82))
+    meio_cima, meio_baixo = cima + alt / 2, baixo + alt / 2
+    seta((2.72, meio_cima), (3.23, meio_cima))
+    seta((5.77, meio_cima), (6.28, meio_cima))
+    seta((7.55, cima - 0.02), (7.55, baixo + alt + 0.02))
+    seta((6.28, meio_baixo), (5.77, meio_baixo))
+    seta((3.23, meio_baixo), (2.72, meio_baixo))
     # Retorno da avaliação à preparação: as versões v1 e v2 não mediam a valorização
-    seta((5.3, 1.52), (6.9, 1.93), linestyle="--", connectionstyle="arc3,rad=-0.25", color="#b85450")
-    ax.text(5.15, 1.62, "retorno: v1 → v2 → v3", fontsize=7, color="#b85450", ha="right", style="italic")
+    seta((5.3, baixo + alt + 0.02), (6.9, cima - 0.02), linestyle="--", connectionstyle="arc3,rad=-0.25",
+         color="#b85450")
+    ax.text(5.15, baixo + alt + 0.12, "retorno: v1 → v2 → v3", fontsize=7, color="#b85450", ha="right",
+            style="italic")
     fig.savefig(SAIDA / "crisp_dm_fases.png", dpi=200, bbox_inches="tight")
     plt.close(fig)
 
