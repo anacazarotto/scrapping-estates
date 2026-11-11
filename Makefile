@@ -123,6 +123,21 @@ resultados-v3:
 tabpfn-v3:
 	$(PYTHON) scripts_predict/tabpfn_v3.py --corte 60
 
+# Versão 4 (experimento): histórico simulado com ajuste fuzzy por imóvel (docs/10).
+# Ordem: tabpfn-v4 (API e local, horas) -> modelo-v4 -> resultados-v4 -> comparar-v3-v4.
+modelo-v4:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/modelo_v4.py
+
+resultados-v4:
+	DISABLE_TABPFN=1 $(PYTHON) scripts_predict/resultados_v4.py
+
+tabpfn-v4:
+	TABPFN_VERSIONS=api $(PYTHON) scripts_predict/tabpfn_v4.py
+	$(PYTHON) scripts_predict/tabpfn_v4.py --corte 60
+
+comparar-v3-v4:
+	$(PYTHON) scripts_predict/comparar_v3_v4.py
+
 valorizacao-macro:
 	$(PYTHON) scripts_predict/valorizacao_macro.py
 
