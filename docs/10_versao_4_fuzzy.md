@@ -179,7 +179,87 @@ imóveis. **Conclusão: a v4 não erra menos nem mais que a v3 no preço de hoje
 
 ### Ranking completo da v4 (posição pela validação cruzada)
 
-<!-- RANKING_V4 -->
+Todos os candidatos no protocolo da v4 (`dados/resultados_modelos_v4.json`), na ordem do
+MdAPE na validação cruzada (★ = escolhido). "No site" diz se o modelo pode rodar no
+Streamlit; o TabPFN no computador entra no ranking, mas não pode ir ao site.
+
+**Apartamento**
+
+| Pos. | Modelo | MdAPE CV | MdAPE teste | MAE | RMSE | R² | No site |
+|---:|---|---:|---:|---:|---:|---:|---|
+| 1 | ★ Ensemble: Random Forest (preço) + Random Forest (log) + XGBoost (log) | 12,7% | 12,8% | R$ 123.631 | R$ 177.385 | 0,779 | sim |
+| 2 | Random Forest (preço) | 13,0% | 13,7% | R$ 127.893 | R$ 183.940 | 0,763 | sim |
+| 3 | Random Forest (log) | 13,0% | 13,7% | R$ 129.712 | R$ 189.230 | 0,749 | sim |
+| 4 | TabPFN 3.5 no computador (3.000 linhas, fora do site) | 13,3% | 13,6% | R$ 120.261 | R$ 169.253 | 0,799 | não |
+| 5 | XGBoost (log) | 13,3% | 14,1% | R$ 123.548 | R$ 171.951 | 0,793 | sim |
+| 6 | XGBoost (preço) | 13,6% | 14,9% | R$ 123.569 | R$ 172.653 | 0,791 | sim |
+| 7 | TabPFN 3.5 pela API (todas as linhas) | 13,9% | 13,6% | R$ 118.516 | R$ 168.938 | 0,800 | sim |
+| 8 | TabPFN 2 no computador (3.000 linhas, fora do site) | 13,9% | 15,3% | R$ 137.282 | R$ 192.125 | 0,741 | não |
+| 9 | CatBoost (log) | 14,0% | 14,4% | R$ 122.144 | R$ 172.053 | 0,792 | sim |
+| 10 | TabPFN 3.5 Fast no computador (3.000 linhas, fora do site) | 14,0% | 14,1% | R$ 123.849 | R$ 173.140 | 0,790 | não |
+| 11 | Gradient Boosting (log) | 14,0% | 14,5% | R$ 127.651 | R$ 179.923 | 0,773 | sim |
+| 12 | CatBoost (preço) | 14,4% | 15,5% | R$ 124.653 | R$ 170.420 | 0,796 | sim |
+| 13 | Gradient Boosting (preço) | 14,6% | 15,0% | R$ 126.094 | R$ 173.869 | 0,788 | sim |
+| 14 | Rede Neural (MLP) (log) | 15,2% | 15,1% | R$ 142.191 | R$ 223.711 | 0,649 | não |
+| 15 | SVM (log) | 15,3% | 15,9% | R$ 149.795 | R$ 232.783 | 0,620 | não |
+| 16 | Regressão Linear (log) | 15,4% | 14,9% | R$ 133.402 | R$ 190.339 | 0,746 | não |
+| 17 | Ridge (log) | 15,4% | 14,9% | R$ 133.475 | R$ 190.519 | 0,746 | sim |
+| 18 | Lasso (log) | 15,4% | 15,0% | R$ 133.955 | R$ 191.262 | 0,744 | não |
+| 19 | Rede Neural (MLP) (preço) | 15,9% | 16,2% | R$ 135.460 | R$ 183.203 | 0,765 | não |
+| 20 | Regressão Linear (preço) | 17,7% | 17,9% | R$ 143.567 | R$ 194.826 | 0,734 | não |
+| 21 | Lasso (preço) | 17,7% | 17,9% | R$ 143.663 | R$ 194.868 | 0,734 | não |
+| 22 | Ridge (preço) | 17,7% | 17,8% | R$ 143.629 | R$ 194.851 | 0,734 | sim |
+| 23 | SVM (preço) | 36,8% | 38,8% | R$ 314.605 | R$ 433.556 | −0,318 | não |
+
+**Casa**
+
+| Pos. | Modelo | MdAPE CV | MdAPE teste | MAE | RMSE | R² | No site |
+|---:|---|---:|---:|---:|---:|---:|---|
+| 1 | TabPFN 3.5 no computador (3.000 linhas, fora do site) | 18,4% | 18,1% | R$ 293.516 | R$ 440.651 | 0,559 | não |
+| 2 | ★ TabPFN 3.5 pela API (todas as linhas) | 19,1% | 18,6% | R$ 302.404 | R$ 449.918 | 0,540 | sim |
+| 3 | TabPFN 3.5 Fast no computador (todas as linhas, fora do site) | 19,5% | 19,2% | R$ 306.986 | R$ 464.345 | 0,510 | não |
+| 4 | Ensemble: XGBoost (preço) + Gradient Boosting (preço) + Random Forest (preço) | 19,5% | 18,6% | R$ 302.996 | R$ 444.900 | 0,550 | sim |
+| 5 | XGBoost (preço) | 20,0% | 18,5% | R$ 305.011 | R$ 449.683 | 0,540 | sim |
+| 6 | Gradient Boosting (preço) | 20,1% | 19,6% | R$ 300.438 | R$ 435.158 | 0,570 | sim |
+| 7 | Random Forest (preço) | 20,2% | 19,8% | R$ 324.021 | R$ 482.939 | 0,470 | sim |
+| 8 | TabPFN 2 no computador (3.000 linhas, fora do site) | 20,4% | 19,1% | R$ 305.869 | R$ 448.749 | 0,542 | não |
+| 9 | CatBoost (preço) | 20,6% | 19,5% | R$ 298.988 | R$ 431.045 | 0,578 | sim |
+| 10 | Random Forest (log) | 20,6% | 18,7% | R$ 331.716 | R$ 494.538 | 0,444 | sim |
+| 11 | CatBoost (log) | 21,8% | 19,6% | R$ 321.567 | R$ 470.517 | 0,497 | sim |
+| 12 | XGBoost (log) | 21,9% | 22,3% | R$ 343.504 | R$ 503.389 | 0,424 | sim |
+| 13 | Gradient Boosting (log) | 22,8% | 21,1% | R$ 365.583 | R$ 561.438 | 0,284 | sim |
+| 14 | Regressão Linear (log) | 25,4% | 29,3% | R$ 404.873 | R$ 579.301 | 0,237 | não |
+| 15 | Ridge (log) | 25,6% | 29,7% | R$ 404.069 | R$ 578.631 | 0,239 | sim |
+| 16 | Lasso (log) | 25,8% | 30,0% | R$ 403.183 | R$ 577.793 | 0,241 | não |
+| 17 | Rede Neural (MLP) (preço) | 26,5% | 27,3% | R$ 359.030 | R$ 506.927 | 0,416 | não |
+| 18 | SVM (log) | 26,9% | 21,2% | R$ 416.646 | R$ 796.268 | −0,441 | não |
+| 19 | Regressão Linear (preço) | 27,3% | 29,1% | R$ 362.194 | R$ 507.490 | 0,415 | não |
+| 20 | Lasso (preço) | 27,3% | 29,2% | R$ 362.264 | R$ 507.538 | 0,415 | não |
+| 21 | Ridge (preço) | 27,5% | 29,1% | R$ 362.302 | R$ 507.629 | 0,414 | sim |
+| 22 | SVM (preço) | 44,8% | 43,8% | R$ 536.058 | R$ 755.997 | −0,299 | não |
+| 23 | Rede Neural (MLP) (log) | 45,5% | 34,9% | R$ 722.091 | R$ 1.347.897 | −3,129 | não |
+
+**TabPFN no computador (v2, 3.5 e 3.5 Fast).** Mesmo protocolo da v3
+(`scripts_predict/tabpfn_v4.py`, resultados em `dados/tabpfn_v4/`): tentativas cada vez
+menores (todas as linhas, 10 mil, 3 mil sorteadas), com corte de 60 minutos cada.
+
+| Variante | Casa (v3 → v4) | Apartamento (v3 → v4) |
+|---|---|---|
+| 2 | 3 mil linhas → 3 mil linhas | 3 mil linhas → 3 mil linhas |
+| 3.5 | 3 mil linhas → 3 mil linhas | 3 mil linhas → 3 mil linhas |
+| 3.5 Fast | todas (34 min) → todas (39 min) | todas (55 min) → **3 mil linhas** |
+
+A única diferença é o 3.5 Fast nos apartamentos. Na v3 ele terminou com todas as linhas
+em 55 minutos, perto do corte. Na v4 passou dos 60 minutos e ficou com 3 mil linhas. Isso
+vem da velocidade do computador, não da fuzzy: os dados têm o mesmo tamanho nas duas
+versões. (Durante a tentativa de 10 mil linhas o computador entrou em suspensão; ela foi
+cortada do mesmo jeito.)
+
+O ranking repete o padrão da v3:
+- **Apartamento:** o Ensemble fica em 1º; o melhor TabPFN no computador (3.5, 3 mil
+  linhas) fica em 4º, com 13,3% (na v3, 13,4%).
+- **Casa:** o TabPFN 3.5 no computador fica em 1º (18,4%; na v3, 18,6%), mas não roda no
+  site. Por isso o escolhido é o mesmo modelo 3.5 pela API (19,1%; na v3, 19,2%).
 
 ## 10.5 O passado que o modelo aprendeu
 

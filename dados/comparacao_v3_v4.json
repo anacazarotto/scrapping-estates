@@ -19,7 +19,7 @@
     "media": 5.643604322500941,
     "p90": 6.512291805133064,
     "max": 24.08486593162491,
-    "desvio": 1.1330292295872963,
+    "desvio": 1.1330292295872966,
     "fora": 1,
     "modelo": "Ensemble"
    }
@@ -32,18 +32,18 @@
     "media": 5.549891102631808,
     "p90": 5.83751584095662,
     "max": 6.792703155723601,
-    "desvio": 0.260141740318042,
+    "desvio": 0.2601417403180423,
     "fora": 0,
     "modelo": "Ensemble"
    },
    "v4": {
-    "min": 4.1946283858022015,
+    "min": 4.194628385802224,
     "p10": 4.949919308040807,
-    "mediana": 5.421760121632568,
-    "media": 5.518329372090474,
+    "mediana": 5.4217601216325795,
+    "media": 5.518329372090473,
     "p90": 6.210936288997637,
     "max": 7.258072846107666,
-    "desvio": 0.4996358225763173,
+    "desvio": 0.4996358225763176,
     "fora": 0,
     "modelo": "Ensemble"
    }
@@ -1300,6 +1300,18 @@
   "Casa": [
    {
     "posicao": 1,
+    "modelo": "TabPFN v3.5",
+    "alvo": "preco",
+    "no_site": false,
+    "escolhido": false,
+    "mdape_cv": 18.381211988863004,
+    "mdape_teste": 18.09461561095633,
+    "mae": 293515.74958015984,
+    "rmse": 440650.9076036532,
+    "r2": 0.5587613510527889
+   },
+   {
+    "posicao": 2,
     "modelo": "TabPFN 3.5 (API)",
     "alvo": "preco",
     "no_site": true,
@@ -1311,7 +1323,19 @@
     "r2": 0.5400062942331507
    },
    {
-    "posicao": 2,
+    "posicao": 3,
+    "modelo": "TabPFN v3.5 Fast",
+    "alvo": "preco",
+    "no_site": false,
+    "escolhido": false,
+    "mdape_cv": 19.53771073816542,
+    "mdape_teste": 19.23623011274612,
+    "mae": 306986.2050500358,
+    "rmse": 464345.305210795,
+    "r2": 0.5100335692361783
+   },
+   {
+    "posicao": 4,
     "modelo": "Ensemble",
     "alvo": "XGBoost (preco, peso 0.33) + Gradient Boosting (preco, peso 0.33) + Random Forest (preco, peso 0.33)",
     "no_site": true,
@@ -1323,7 +1347,7 @@
     "r2": 0.5502098390443874
    },
    {
-    "posicao": 3,
+    "posicao": 5,
     "modelo": "XGBoost",
     "alvo": "preco",
     "no_site": true,
@@ -1335,7 +1359,7 @@
     "r2": 0.5404882668960866
    },
    {
-    "posicao": 4,
+    "posicao": 6,
     "modelo": "Gradient Boosting",
     "alvo": "preco",
     "no_site": true,
@@ -1347,19 +1371,31 @@
     "r2": 0.5696930087240627
    },
    {
-    "posicao": 5,
+    "posicao": 7,
     "modelo": "Random Forest",
     "alvo": "preco",
     "no_site": true,
     "escolhido": false,
     "mdape_cv": 20.236392044963743,
-    "mdape_teste": 19.775280824379514,
+    "mdape_teste": 19.775280824379468,
     "mae": 324020.8367437268,
     "rmse": 482939.3959404473,
     "r2": 0.4700078009037203
    },
    {
-    "posicao": 6,
+    "posicao": 8,
+    "modelo": "TabPFN v2",
+    "alvo": "preco",
+    "no_site": false,
+    "escolhido": false,
+    "mdape_cv": 20.401391106030804,
+    "mdape_teste": 19.148417755301303,
+    "mae": 305869.1782350336,
+    "rmse": 448749.18650809396,
+    "r2": 0.5423941616165338
+   },
+   {
+    "posicao": 9,
     "modelo": "CatBoost",
     "alvo": "preco",
     "no_site": true,
@@ -1371,19 +1407,19 @@
     "r2": 0.5777890354182726
    },
    {
-    "posicao": 7,
+    "posicao": 10,
     "modelo": "Random Forest",
     "alvo": "log(preco)",
     "no_site": true,
     "escolhido": false,
     "mdape_cv": 20.63732087914307,
-    "mdape_teste": 18.71162510093288,
-    "mae": 331715.77162843914,
-    "rmse": 494537.8338219823,
-    "r2": 0.44424516128737745
+    "mdape_teste": 18.711625100933308,
+    "mae": 331715.7716284387,
+    "rmse": 494537.833821982,
+    "r2": 0.44424516128737823
    },
    {
-    "posicao": 8,
+    "posicao": 11,
     "modelo": "CatBoost",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1395,7 +1431,7 @@
     "r2": 0.4969233142520473
    },
    {
-    "posicao": 9,
+    "posicao": 12,
     "modelo": "XGBoost",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1407,7 +1443,7 @@
     "r2": 0.42417444162431717
    },
    {
-    "posicao": 10,
+    "posicao": 13,
     "modelo": "Gradient Boosting",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1419,7 +1455,7 @@
     "r2": 0.28371100288663165
    },
    {
-    "posicao": 11,
+    "posicao": 14,
     "modelo": "Regressão Linear Múltipla",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1431,7 +1467,7 @@
     "r2": 0.2374063043484954
    },
    {
-    "posicao": 12,
+    "posicao": 15,
     "modelo": "Ridge",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1443,7 +1479,7 @@
     "r2": 0.23916943913795286
    },
    {
-    "posicao": 13,
+    "posicao": 16,
     "modelo": "Lasso",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1455,7 +1491,7 @@
     "r2": 0.24137192322030565
    },
    {
-    "posicao": 14,
+    "posicao": 17,
     "modelo": "Redes Neurais Artificiais (MLP)",
     "alvo": "preco",
     "no_site": false,
@@ -1467,7 +1503,7 @@
     "r2": 0.4160511631275978
    },
    {
-    "posicao": 15,
+    "posicao": 18,
     "modelo": "Máquinas de Vetores de Suporte (SVM)",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1479,7 +1515,7 @@
     "r2": -0.440796888467446
    },
    {
-    "posicao": 16,
+    "posicao": 19,
     "modelo": "Regressão Linear Múltipla",
     "alvo": "preco",
     "no_site": false,
@@ -1491,7 +1527,7 @@
     "r2": 0.4147519763465417
    },
    {
-    "posicao": 17,
+    "posicao": 20,
     "modelo": "Lasso",
     "alvo": "preco",
     "no_site": false,
@@ -1503,7 +1539,7 @@
     "r2": 0.41464129507073
    },
    {
-    "posicao": 18,
+    "posicao": 21,
     "modelo": "Ridge",
     "alvo": "preco",
     "no_site": true,
@@ -1515,7 +1551,7 @@
     "r2": 0.41443196296971874
    },
    {
-    "posicao": 19,
+    "posicao": 22,
     "modelo": "Máquinas de Vetores de Suporte (SVM)",
     "alvo": "preco",
     "no_site": false,
@@ -1527,7 +1563,7 @@
     "r2": -0.2987466016796183
    },
    {
-    "posicao": 20,
+    "posicao": 23,
     "modelo": "Redes Neurais Artificiais (MLP)",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1546,11 +1582,11 @@
     "alvo": "Random Forest (preco, peso 0.34) + Random Forest (log(preco), peso 0.34) + XGBoost (log(preco), peso 0.33)",
     "no_site": true,
     "escolhido": true,
-    "mdape_cv": 12.744954709310047,
-    "mdape_teste": 12.797555807889886,
-    "mae": 123630.96170343991,
-    "rmse": 177385.0007623239,
-    "r2": 0.7794039430976262
+    "mdape_cv": 12.744954709309974,
+    "mdape_teste": 12.79755580788993,
+    "mae": 123630.96170343993,
+    "rmse": 177385.00076232388,
+    "r2": 0.7794039430976263
    },
    {
     "posicao": 2,
@@ -1558,7 +1594,7 @@
     "alvo": "preco",
     "no_site": true,
     "escolhido": false,
-    "mdape_cv": 12.996169970005955,
+    "mdape_cv": 12.996169970005948,
     "mdape_teste": 13.689580890881262,
     "mae": 127892.52273337572,
     "rmse": 183939.52708812544,
@@ -1570,14 +1606,26 @@
     "alvo": "log(preco)",
     "no_site": true,
     "escolhido": false,
-    "mdape_cv": 13.00900068283058,
-    "mdape_teste": 13.69518373552758,
-    "mae": 129712.36157693689,
-    "rmse": 189229.94869932573,
-    "r2": 0.7489595526360517
+    "mdape_cv": 13.009000682830735,
+    "mdape_teste": 13.695183735527724,
+    "mae": 129712.36157693704,
+    "rmse": 189229.9486993258,
+    "r2": 0.7489595526360515
    },
    {
     "posicao": 4,
+    "modelo": "TabPFN v3.5",
+    "alvo": "preco",
+    "no_site": false,
+    "escolhido": false,
+    "mdape_cv": 13.29220062208803,
+    "mdape_teste": 13.610216608476675,
+    "mae": 120260.80251062471,
+    "rmse": 169253.12711727404,
+    "r2": 0.7991659437484534
+   },
+   {
+    "posicao": 5,
     "modelo": "XGBoost",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1589,7 +1637,7 @@
     "r2": 0.7927120399269756
    },
    {
-    "posicao": 5,
+    "posicao": 6,
     "modelo": "XGBoost",
     "alvo": "preco",
     "no_site": true,
@@ -1601,7 +1649,7 @@
     "r2": 0.7910155028482215
    },
    {
-    "posicao": 6,
+    "posicao": 7,
     "modelo": "TabPFN 3.5 (API)",
     "alvo": "preco",
     "no_site": true,
@@ -1613,7 +1661,19 @@
     "r2": 0.799912268947771
    },
    {
-    "posicao": 7,
+    "posicao": 8,
+    "modelo": "TabPFN v2",
+    "alvo": "preco",
+    "no_site": false,
+    "escolhido": false,
+    "mdape_cv": 13.874162113502454,
+    "mdape_teste": 15.336223010819438,
+    "mae": 137281.63701408205,
+    "rmse": 192125.4261309508,
+    "r2": 0.7412182505897642
+   },
+   {
+    "posicao": 9,
     "modelo": "CatBoost",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1625,7 +1685,19 @@
     "r2": 0.7924665155011561
    },
    {
-    "posicao": 8,
+    "posicao": 10,
+    "modelo": "TabPFN v3.5 Fast",
+    "alvo": "preco",
+    "no_site": false,
+    "escolhido": false,
+    "mdape_cv": 14.044659301960833,
+    "mdape_teste": 14.082490401524591,
+    "mae": 123848.61516763885,
+    "rmse": 173139.92407429533,
+    "r2": 0.789835962881786
+   },
+   {
+    "posicao": 11,
     "modelo": "Gradient Boosting",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1637,7 +1709,7 @@
     "r2": 0.7730452321271828
    },
    {
-    "posicao": 9,
+    "posicao": 12,
     "modelo": "CatBoost",
     "alvo": "preco",
     "no_site": true,
@@ -1649,7 +1721,7 @@
     "r2": 0.7963880040958298
    },
    {
-    "posicao": 10,
+    "posicao": 13,
     "modelo": "Gradient Boosting",
     "alvo": "preco",
     "no_site": true,
@@ -1661,7 +1733,7 @@
     "r2": 0.7880613833670158
    },
    {
-    "posicao": 11,
+    "posicao": 14,
     "modelo": "Redes Neurais Artificiais (MLP)",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1673,7 +1745,7 @@
     "r2": 0.6491353990220119
    },
    {
-    "posicao": 12,
+    "posicao": 15,
     "modelo": "Máquinas de Vetores de Suporte (SVM)",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1685,7 +1757,7 @@
     "r2": 0.6201012209644305
    },
    {
-    "posicao": 13,
+    "posicao": 16,
     "modelo": "Regressão Linear Múltipla",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1697,7 +1769,7 @@
     "r2": 0.7460077418648795
    },
    {
-    "posicao": 14,
+    "posicao": 17,
     "modelo": "Ridge",
     "alvo": "log(preco)",
     "no_site": true,
@@ -1709,7 +1781,7 @@
     "r2": 0.7455272553655441
    },
    {
-    "posicao": 15,
+    "posicao": 18,
     "modelo": "Lasso",
     "alvo": "log(preco)",
     "no_site": false,
@@ -1721,7 +1793,7 @@
     "r2": 0.7435401753487576
    },
    {
-    "posicao": 16,
+    "posicao": 19,
     "modelo": "Redes Neurais Artificiais (MLP)",
     "alvo": "preco",
     "no_site": false,
@@ -1733,7 +1805,7 @@
     "r2": 0.7646970343126918
    },
    {
-    "posicao": 17,
+    "posicao": 20,
     "modelo": "Regressão Linear Múltipla",
     "alvo": "preco",
     "no_site": false,
@@ -1745,7 +1817,7 @@
     "r2": 0.7338921729988641
    },
    {
-    "posicao": 18,
+    "posicao": 21,
     "modelo": "Lasso",
     "alvo": "preco",
     "no_site": false,
@@ -1757,7 +1829,7 @@
     "r2": 0.7337760201945265
    },
    {
-    "posicao": 19,
+    "posicao": 22,
     "modelo": "Ridge",
     "alvo": "preco",
     "no_site": true,
@@ -1769,7 +1841,7 @@
     "r2": 0.7338231875141293
    },
    {
-    "posicao": 20,
+    "posicao": 23,
     "modelo": "Máquinas de Vetores de Suporte (SVM)",
     "alvo": "preco",
     "no_site": false,

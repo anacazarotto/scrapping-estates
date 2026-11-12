@@ -27,18 +27,21 @@ Mesmo critério da v3: menor MdAPE; empate (1 casa decimal) decidido pelo menor 
 
 | Posição | Modelo | Alvo | MdAPE CV | MAE CV | No site |
 |---:|---|---|---:|---:|---|
-| 1 | TabPFN 3.5 (API) ★ (11.429 linhas de treino) | preco | 19.1% | R$ 283.971 | sim |
-| 2 | Ensemble | ensemble | 19.5% | R$ 297.944 | sim |
-| 3 | XGBoost | preco | 20.0% | R$ 305.067 | sim |
-| 4 | Gradient Boosting | preco | 20.1% | R$ 304.548 | sim |
-| 5 | Random Forest | preco | 20.2% | R$ 316.427 | sim |
-| 6 | CatBoost | preco | 20.6% | R$ 297.564 | sim |
-| 7 | Random Forest | log(preco) | 20.6% | R$ 353.112 | sim |
-| 8 | CatBoost | log(preco) | 21.8% | R$ 355.671 | sim |
-| 9 | XGBoost | log(preco) | 21.9% | R$ 372.197 | sim |
-| 10 | Gradient Boosting | log(preco) | 22.8% | R$ 409.701 | sim |
-| 11 | Ridge | log(preco) | 25.6% | R$ 383.536 | sim |
-| 12 | Ridge | preco | 27.5% | R$ 342.477 | sim |
+| 1 | TabPFN v3.5 (3.000 linhas de treino) | preco | 18.4% | R$ 279.270 | não |
+| 2 | TabPFN 3.5 (API) ★ (11.429 linhas de treino) | preco | 19.1% | R$ 283.971 | sim |
+| 3 | TabPFN v3.5 Fast (11.429 linhas de treino) | preco | 19.5% | R$ 288.894 | não |
+| 4 | Ensemble | ensemble | 19.5% | R$ 297.944 | sim |
+| 5 | XGBoost | preco | 20.0% | R$ 305.067 | sim |
+| 6 | Gradient Boosting | preco | 20.1% | R$ 304.548 | sim |
+| 7 | Random Forest | preco | 20.2% | R$ 316.427 | sim |
+| 8 | TabPFN v2 (3.000 linhas de treino) | preco | 20.4% | R$ 305.577 | não |
+| 9 | CatBoost | preco | 20.6% | R$ 297.564 | sim |
+| 10 | Random Forest | log(preco) | 20.6% | R$ 353.112 | sim |
+| 11 | CatBoost | log(preco) | 21.8% | R$ 355.671 | sim |
+| 12 | XGBoost | log(preco) | 21.9% | R$ 372.197 | sim |
+| 13 | Gradient Boosting | log(preco) | 22.8% | R$ 409.701 | sim |
+| 14 | Ridge | log(preco) | 25.6% | R$ 383.536 | sim |
+| 15 | Ridge | preco | 27.5% | R$ 342.477 | sim |
 
 Reserva que roda no site: XGBoost (preco, peso 0.33), Gradient Boosting (preco, peso 0.33), Random Forest (preco, peso 0.33)
 
@@ -47,6 +50,13 @@ Tentativas do TabPFN (`tabpfn_v4.py`):
 | Variante | Linhas de treino | Resultado | Tempo |
 |---|---|---|---:|
 | TabPFN 3.5 (API) | todas | terminou | 1 min |
+| TabPFN v2 | todas | cortado por tempo: não terminou em 60.0 minutos | 60 min |
+| TabPFN v2 | 10000 | pulado: cada parte da validação já treina com 9143 linhas | 0 min |
+| TabPFN v2 | 3000 | terminou | 15 min |
+| TabPFN v3.5 | todas | cortado por tempo: não terminou em 60.0 minutos | 60 min |
+| TabPFN v3.5 | 10000 | pulado: cada parte da validação já treina com 9143 linhas | 0 min |
+| TabPFN v3.5 | 3000 | terminou | 20 min |
+| TabPFN v3.5 Fast | todas | terminou | 39 min |
 
 ### Apartamento
 
@@ -55,15 +65,18 @@ Tentativas do TabPFN (`tabpfn_v4.py`):
 | 1 | Ensemble ★ | ensemble | 12.7% | R$ 126.131 | sim |
 | 2 | Random Forest | preco | 13.0% | R$ 131.838 | sim |
 | 3 | Random Forest | log(preco) | 13.0% | R$ 132.076 | sim |
-| 4 | XGBoost | log(preco) | 13.3% | R$ 125.567 | sim |
-| 5 | XGBoost | preco | 13.6% | R$ 126.818 | sim |
-| 6 | TabPFN 3.5 (API) (15.400 linhas de treino) | preco | 13.9% | R$ 123.259 | sim |
-| 7 | CatBoost | log(preco) | 14.0% | R$ 124.810 | sim |
-| 8 | Gradient Boosting | log(preco) | 14.0% | R$ 126.501 | sim |
-| 9 | CatBoost | preco | 14.4% | R$ 125.280 | sim |
-| 10 | Gradient Boosting | preco | 14.6% | R$ 127.718 | sim |
-| 11 | Ridge | log(preco) | 15.4% | R$ 143.061 | sim |
-| 12 | Ridge | preco | 17.7% | R$ 149.612 | sim |
+| 4 | TabPFN v3.5 (3.000 linhas de treino) | preco | 13.3% | R$ 120.048 | não |
+| 5 | XGBoost | log(preco) | 13.3% | R$ 125.567 | sim |
+| 6 | XGBoost | preco | 13.6% | R$ 126.818 | sim |
+| 7 | TabPFN 3.5 (API) (15.400 linhas de treino) | preco | 13.9% | R$ 123.259 | sim |
+| 8 | TabPFN v2 (3.000 linhas de treino) | preco | 13.9% | R$ 126.672 | não |
+| 9 | CatBoost | log(preco) | 14.0% | R$ 124.810 | sim |
+| 10 | TabPFN v3.5 Fast (3.000 linhas de treino) | preco | 14.0% | R$ 125.148 | não |
+| 11 | Gradient Boosting | log(preco) | 14.0% | R$ 126.501 | sim |
+| 12 | CatBoost | preco | 14.4% | R$ 125.280 | sim |
+| 13 | Gradient Boosting | preco | 14.6% | R$ 127.718 | sim |
+| 14 | Ridge | log(preco) | 15.4% | R$ 143.061 | sim |
+| 15 | Ridge | preco | 17.7% | R$ 149.612 | sim |
 
 Reserva que roda no site: Random Forest (preco, peso 0.34), Random Forest (log(preco), peso 0.34), XGBoost (log(preco), peso 0.33)
 
@@ -72,4 +85,13 @@ Tentativas do TabPFN (`tabpfn_v4.py`):
 | Variante | Linhas de treino | Resultado | Tempo |
 |---|---|---|---:|
 | TabPFN 3.5 (API) | todas | terminou | 1 min |
+| TabPFN v2 | todas | cortado por tempo: não terminou em 60.0 minutos | 60 min |
+| TabPFN v2 | 10000 | cortado por tempo: não terminou em 60.0 minutos | 60 min |
+| TabPFN v2 | 3000 | terminou | 19 min |
+| TabPFN v3.5 | todas | cortado por tempo: não terminou em 60.0 minutos | 60 min |
+| TabPFN v3.5 | 10000 | cortado por tempo: não terminou em 60.0 minutos | 60 min |
+| TabPFN v3.5 | 3000 | terminou | 21 min |
+| TabPFN v3.5 Fast | todas | cortado por tempo: não terminou em 60.0 minutos | 60 min |
+| TabPFN v3.5 Fast | 10000 | cortado por tempo: não terminou em 60.0 minutos | 797 min |
+| TabPFN v3.5 Fast | 3000 | terminou | 7 min |
 
