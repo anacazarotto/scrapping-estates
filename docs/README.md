@@ -11,6 +11,9 @@
 | [7. Resultados e conclusões](07_resultados_e_conclusoes.md) | Principais descobertas, respostas às perguntas, limitações e trabalhos futuros |
 | [8. Versão 2: sugestões do orientador](08_versao_2_orientacao.md) | Idade pelas fotos, TabPFN 3.5, modo avançado, listas suspensas, experimento do preço v2 e valorização v2 com IPCA |
 | [9. Versão 3: histórico simulado e IPCA+INCC](09_versao_3_ipca_incc.md) | Caso real de validação, índice IPCA+INCC, histórico simulado, modelo de preço v3, valorização v3 e estudo dos juros |
+| [10. Versão 4: histórico com lógica fuzzy](10_versao_4_fuzzy.md) | Taxa própria por imóvel com regras fuzzy, comparação com a v3 e recomendação |
+
+A linha do tempo das quatro versões está em [VERSOES.md](../VERSOES.md), e a descrição dos dados publicados, em [dados/LEIAME_DADOS.md](../dados/LEIAME_DADOS.md).
 
 ## Pastas
 

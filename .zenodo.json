@@ -1,0 +1,15 @@
+{
+  "title": "Estimativa e valorização de imóveis em Chapecó/SC: código e dados do TCC",
+  "upload_type": "dataset",
+  "description": "<p>Código e dados do Trabalho de Conclusão de Curso de Sistemas de Informação (UNOESC Chapecó) que compara algoritmos de aprendizado de máquina para estimar o valor atual e projetar a valorização de casas e apartamentos em Chapecó/SC.</p><p>Inclui os 3.283 imóveis reais coletados de anúncios públicos de oito imobiliárias entre março e agosto de 2026 (sem endereço, fotos ou dados pessoais), os históricos simulados de 2016 a 2025 das versões 3 (índice IPCA+INCC) e 4 (índice com ajuste por lógica fuzzy), os resultados de todos os modelos e o código para reproduzi-los. As linhas simuladas são uma hipótese, e não preços observados. A descrição dos dados está em dados/LEIAME_DADOS.md e a linha do tempo das versões em VERSOES.md.</p>",
+  "creators": [
+    {"name": "Cazarotto, Ana Carla Londero", "affiliation": "Universidade do Oeste de Santa Catarina (UNOESC)"}
+  ],
+  "contributors": [
+    {"name": "Pagliari, Álvaro Gianni", "affiliation": "Universidade do Oeste de Santa Catarina (UNOESC)", "type": "Supervisor"}
+  ],
+  "keywords": ["aprendizado de máquina", "mercado imobiliário", "precificação de imóveis", "valorização imobiliária", "web scraping", "Chapecó"],
+  "language": "por",
+  "license": "cc-by-4.0",
+  "access_right": "open"
+}

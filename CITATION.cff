@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Se usar este código ou estes dados, cite-os como abaixo."
+title: "Estimativa e valorização de imóveis em Chapecó/SC: código e dados do TCC"
+type: software
+authors:
+  - family-names: "Cazarotto"
+    given-names: "Ana Carla Londero"
+    affiliation: "Universidade do Oeste de Santa Catarina (UNOESC)"
+date-released: "2026-11-12"
+license: MIT
+keywords:
+  - aprendizado de máquina
+  - mercado imobiliário
+  - precificação de imóveis
+  - valorização imobiliária
+  - web scraping
+  - Chapecó
