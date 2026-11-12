@@ -7,7 +7,7 @@ Cazarotto. Orientador: Prof. Álvaro Gianni Pagliari.
 - **Site:** https://estimativa-imoveis-chapeco.streamlit.app
 - **Linha do tempo das versões (v1 a v4):** [VERSOES.md](VERSOES.md)
 - **Documentação técnica:** [docs/](docs/README.md)
-- **Dados publicados:** [dados/LEIAME_DADOS.md](dados/LEIAME_DADOS.md) (também no Zenodo)
+- **Dados publicados:** [dados/LEIAME_DADOS.md](dados/LEIAME_DADOS.md) (também no Zenodo: [10.5281/zenodo.24149177](https://doi.org/10.5281/zenodo.24149177))
 - **Artigo:** [artigo_tcc/artigo_tcc.pdf](artigo_tcc/artigo_tcc.pdf)
 - **Como citar:** [CITATION.cff](CITATION.cff). Código sob a licença MIT e dados sob CC BY 4.0.
 
