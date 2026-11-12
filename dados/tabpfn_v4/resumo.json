@@ -1,0 +1,167 @@
+{
+ "tentativas": [
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN 3.5 (API)",
+   "linhas": "todas",
+   "status": "ok",
+   "minutos": 0.8478145162264507,
+   "detalhe": "",
+   "em": "2026-11-10T17:40:01"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN 3.5 (API)",
+   "linhas": "todas",
+   "status": "ok",
+   "minutos": 0.7185519377390543,
+   "detalhe": "",
+   "em": "2026-11-10T17:40:46"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN v2",
+   "linhas": "todas",
+   "status": "cortado",
+   "minutos": 59.99676922559738,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-10T23:40:02"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN v2",
+   "linhas": 10000,
+   "status": "pulado",
+   "minutos": 0,
+   "detalhe": "cada parte da validação já treina com 9143 linhas",
+   "em": "2026-11-10T23:40:02"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN v2",
+   "linhas": 3000,
+   "status": "ok",
+   "minutos": 14.978449813524882,
+   "detalhe": "",
+   "em": "2026-11-10T23:55:01"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN v3.5",
+   "linhas": "todas",
+   "status": "cortado",
+   "minutos": 59.99905418157577,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-11T00:55:02"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN v3.5",
+   "linhas": 10000,
+   "status": "pulado",
+   "minutos": 0,
+   "detalhe": "cada parte da validação já treina com 9143 linhas",
+   "em": "2026-11-11T00:55:02"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN v3.5",
+   "linhas": 3000,
+   "status": "ok",
+   "minutos": 19.948985691865285,
+   "detalhe": "",
+   "em": "2026-11-11T01:14:59"
+  },
+  {
+   "tipo": "Casa",
+   "modelo": "TabPFN v3.5 Fast",
+   "linhas": "todas",
+   "status": "ok",
+   "minutos": 38.60112987359365,
+   "detalhe": "",
+   "em": "2026-11-11T01:53:37"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v2",
+   "linhas": "todas",
+   "status": "cortado",
+   "minutos": 60.0009045124054,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-11T02:53:39"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v2",
+   "linhas": 10000,
+   "status": "cortado",
+   "minutos": 60.00145864884059,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-11T03:53:39"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v2",
+   "linhas": 3000,
+   "status": "ok",
+   "minutos": 19.394799399375916,
+   "detalhe": "",
+   "em": "2026-11-11T04:13:03"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v3.5",
+   "linhas": "todas",
+   "status": "cortado",
+   "minutos": 60.000380063056944,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-11T05:13:04"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v3.5",
+   "linhas": 10000,
+   "status": "cortado",
+   "minutos": 60.00065250396729,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-11T06:13:04"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v3.5",
+   "linhas": 3000,
+   "status": "ok",
+   "minutos": 20.711578277746835,
+   "detalhe": "",
+   "em": "2026-11-11T06:33:47"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v3.5 Fast",
+   "linhas": "todas",
+   "status": "cortado",
+   "minutos": 60.0013348420461,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-11T07:33:49"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v3.5 Fast",
+   "linhas": 10000,
+   "status": "cortado",
+   "minutos": 797.1357567946117,
+   "detalhe": "não terminou em 60.0 minutos",
+   "em": "2026-11-11T20:50:57"
+  },
+  {
+   "tipo": "Apartamento",
+   "modelo": "TabPFN v3.5 Fast",
+   "linhas": 3000,
+   "status": "ok",
+   "minutos": 6.549803304672241,
+   "detalhe": "",
+   "em": "2026-11-11T20:57:30"
+  }
+ ],
+ "corte_min": 60.0
+}
