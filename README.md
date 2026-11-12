@@ -4,7 +4,7 @@ TCC de Sistemas de Informação (UNOESC Chapecó): estimativa do valor atual e d
 casas e apartamentos em Chapecó/SC com aprendizado de máquina. Autora: Ana Carla Londero
 Cazarotto. Orientador: Prof. Álvaro Gianni Pagliari.
 
-- **Site:** https://estimativa-imoveis-chapeco.streamlit.app
+- **Site:** https://estimativa-imoveis-chapeco-osmb5nh4j4cpsdr2xzqhfv.streamlit.app
 - **Linha do tempo das versões (v1 a v4):** [VERSOES.md](VERSOES.md)
 - **Documentação técnica:** [docs/](docs/README.md)
 - **Dados publicados:** [dados/LEIAME_DADOS.md](dados/LEIAME_DADOS.md) (também no Zenodo: [10.5281/zenodo.24149177](https://doi.org/10.5281/zenodo.24149177))
@@ -259,8 +259,7 @@ O site usa só os arquivos versionados: `interface/`, `scripts_predict/`,
 
 1. Entre em https://share.streamlit.io com a conta do GitHub.
 2. **Create app** → repositório `anacazarotto/estimativa-imoveis-chapeco`, branch `main`,
-   arquivo principal `interface/app.py`. Em **App URL**, use
-   `estimativa-imoveis-chapeco` (é o endereço citado no artigo).
+   arquivo principal `interface/app.py`.
 3. Em **Advanced settings**, escolha **Python 3.13** (mesma versão usada no treino). O
    site também instala no Python 3.14, padrão do Streamlit Cloud: o CatBoost do site é
    o 1.2.10, que tem pacote para 3.14 e dá as mesmas previsões do 1.2.8 usado no treino.
